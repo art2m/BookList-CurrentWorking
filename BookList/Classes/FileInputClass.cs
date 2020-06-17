@@ -128,11 +128,11 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ReadTextDataFromFile
+        ///     The ReadAuthorNamesFromFile
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" /></param>
         /// <returns>The <see cref="List{string}" /></returns>
-        public static List<string> ReadTextDataFromFile(string filePath)
+        public static List<string> ReadAuthorNamesFromFile(string filePath)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
             var data = new List<string>();

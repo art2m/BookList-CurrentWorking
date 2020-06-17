@@ -189,10 +189,10 @@ namespace BookList.Classes
         /// <summary>
         ///     The GetAuthorFileNamesFromAuthorsList
         /// </summary>
-        public static void GetAuthorFileNamesFromAuthorsList()
+        private static void GetAuthorFileNamesFromAuthorsList()
         {
             var authorNames =
-                FileInputClass.ReadTextDataFromFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
+                FileInputClass.ReadAuthorNamesFromFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
 
             AddAuthorsListToCollection(authorNames);
         }
@@ -330,7 +330,7 @@ namespace BookList.Classes
         /// <param name="authors">The authors<see cref="IEnumerable{string}" /></param>
         private static void AddAuthorsListToCollection(IEnumerable<string> authors)
         {
-            //var authorsList = FileInputClass.ReadTextDataFromFile(fileAuthorsPath);
+            //var authorsList = FileInputClass.ReadAuthorNamesFromFile(fileAuthorsPath);
 
             foreach (var author in authors)
                 if (!AuthorNamesListCollection.ContainsItem(author))

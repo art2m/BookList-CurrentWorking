@@ -94,13 +94,14 @@ namespace BookList.Source
             //
             // txtData
             //
-            this.txtData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular,
+            this.txtData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.0F, System.Drawing.FontStyle.Regular,
                 System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.txtData.Location = new System.Drawing.Point(8, 128);
+            this.txtData.Location = new System.Drawing.Point(8, 122);
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
             this.txtData.ReadOnly = true;
-            this.txtData.Size = new System.Drawing.Size(768, 27);
+            this.txtData.Size = new System.Drawing.Size(768, 34);
+            this.txtData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtData.TabIndex = 9;
             //
             // RawDataMenu

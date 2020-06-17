@@ -46,6 +46,11 @@ namespace BookList.Source
         public FormatBookData()
         {
             this.InitializeComponent();
+
+            this.mnuAuthors.PerformClick();
+            this.SetAllControlsToolTips();
+            this.btnReplace.Enabled = false;
+            this.btnSave.Enabled = false;
         }
 
         private void BookIsASeriesControlSettings()
@@ -230,12 +235,7 @@ namespace BookList.Source
 
         private void OnFormLoad_Event(object sender, EventArgs e)
         {
-            this.mnuAuthors.PerformClick();
 
-            this.SetAllControlsToolTips();
-
-            this.btnReplace.Enabled = false;
-            this.btnSave.Enabled = false;
         }
 
         private void OnMoveFirstButton_Clicked(object sender, EventArgs e)
