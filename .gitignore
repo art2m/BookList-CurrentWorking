@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+.vs/
+.vshistory/
+BookList.sln
+BookList.sln.DotSettings.user
+BookList/bin/Debug/BookList/
+BookList/bin/Release/
+BookListTests/
+Doc/
+packages/
