@@ -1,0 +1,74 @@
+﻿// BookList
+// 
+// BookListMainWindow.cs
+// 
+// Art2M
+// 
+// art2m@live.com
+// 
+// 08  14  2019
+// 
+// 08  13   2019
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+namespace BookList
+{
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+    using Classes;
+    using PropertiesClasses;
+
+    /// <summary>
+    ///     Select operation type to be performed on the records contained in list books.
+    ///     Display all records contained in the list books data.
+    /// </summary>
+    public partial class BookListWindow : Form
+    {
+        private BookListOperationsClass operations = new BookListOperationsClass();
+
+        public BookListWindow()
+        {
+            this.InitializeComponent();
+           
+        }
+
+        private void OnQuitApplicationButton_Clicked(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void OnAuthorsButton_Clicked(object sender, EventArgs e)
+        {
+            this.UpdateAuthorsNamesWithFileNames();
+            //if (!this.operations.CheckBookListStringIsFileName("Kevin-McLaughlin_Craig-Martelle.dat")) return;
+
+
+            
+        }
+
+        private void UpdateAuthorsNamesWithFileNames()
+        {
+            //AuthorsClass.GetAuthorsNameFromFileName(BookListPropertiesClass.CurrentWorkingFileName);
+            var bookList = new BookListOperationsClass();
+
+            bookList.UpdateAuthorNamesFileList()
+
+        }
+
+        private void OnTitlesButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
