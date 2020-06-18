@@ -67,12 +67,11 @@ namespace BookList.Source
             this.RawDataMenu.SuspendLayout();
             this.pnlSeries.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // btnClose
-            //
+            // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Location = new System.Drawing.Point(653, 516);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 36);
@@ -80,89 +79,80 @@ namespace BookList.Source
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.OnCloseRawDataInputButton_Clicked);
-            //
+            // 
             // lblInfo
-            //
+            // 
             this.lblInfo.BackColor = System.Drawing.Color.Yellow;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfo.Location = new System.Drawing.Point(8, 36);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(768, 27);
             this.lblInfo.TabIndex = 8;
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // txtData
-            //
-            this.txtData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.0F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.txtData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtData.Location = new System.Drawing.Point(8, 122);
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
             this.txtData.ReadOnly = true;
             this.txtData.Size = new System.Drawing.Size(768, 34);
-            this.txtData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtData.TabIndex = 9;
-            //
+            this.txtData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // RawDataMenu
-            //
-            this.RawDataMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[]
-            {
-                this.fileToolStripMenuItem,
-                this.BookDataFormatingMenu
-            });
+            // 
+            this.RawDataMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.BookDataFormatingMenu});
             this.RawDataMenu.Location = new System.Drawing.Point(0, 0);
             this.RawDataMenu.Name = "RawDataMenu";
             this.RawDataMenu.Size = new System.Drawing.Size(784, 24);
             this.RawDataMenu.TabIndex = 10;
             this.RawDataMenu.Text = "RawDataMenu";
-            //
+            // 
             // fileToolStripMenuItem
-            //
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
-            {
-                this.mnuClose,
-                this.mnuSave
-            });
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuClose,
+            this.mnuSave});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
-            //
+            // 
             // mnuClose
-            //
+            // 
             this.mnuClose.Name = "mnuClose";
             this.mnuClose.Size = new System.Drawing.Size(164, 22);
             this.mnuClose.Text = "Close";
             this.mnuClose.Click += new System.EventHandler(this.OnCloseMenuItem_Clicked);
-            //
+            // 
             // mnuSave
-            //
+            // 
             this.mnuSave.Name = "mnuSave";
             this.mnuSave.Size = new System.Drawing.Size(164, 22);
             this.mnuSave.Text = "Save All Changes";
             this.mnuSave.Click += new System.EventHandler(this.OnSaveAllChangesMenuItem_Clicked);
-            //
+            // 
             // BookDataFormatingMenu
-            //
-            this.BookDataFormatingMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
-            {
-                this.mnuAuthors
-            });
+            // 
+            this.BookDataFormatingMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuAuthors});
             this.BookDataFormatingMenu.Name = "BookDataFormatingMenu";
             this.BookDataFormatingMenu.Size = new System.Drawing.Size(131, 20);
             this.BookDataFormatingMenu.Text = "Book Data Formating";
-            //
+            // 
             // mnuAuthors
-            //
+            // 
             this.mnuAuthors.Name = "mnuAuthors";
             this.mnuAuthors.Size = new System.Drawing.Size(157, 22);
             this.mnuAuthors.Text = "Display Authors";
             this.mnuAuthors.Click += new System.EventHandler(this.OnDisplayAllAuthorsMenuItem_Clicked);
-            //
+            // 
             // btnFirst
-            //
-            this.btnFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.btnFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFirst.Location = new System.Drawing.Point(8, 169);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(92, 30);
@@ -170,11 +160,10 @@ namespace BookList.Source
             this.btnFirst.Text = "<< First";
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.OnMoveFirstButton_Clicked);
-            //
+            // 
             // btnNext
-            //
-            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext.Location = new System.Drawing.Point(233, 169);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(92, 30);
@@ -182,11 +171,10 @@ namespace BookList.Source
             this.btnNext.Text = "> Next";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.OnMoveNextButton_Clicked);
-            //
+            // 
             // btnPrevious
-            //
-            this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrevious.Location = new System.Drawing.Point(458, 169);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(92, 30);
@@ -194,11 +182,10 @@ namespace BookList.Source
             this.btnPrevious.Text = "< Previous";
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.OnMovePreviousButton_Clicked);
-            //
+            // 
             // btnLast
-            //
-            this.btnLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.btnLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLast.Location = new System.Drawing.Point(683, 169);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(92, 30);
@@ -206,24 +193,22 @@ namespace BookList.Source
             this.btnLast.Text = ">> Last";
             this.btnLast.UseVisualStyleBackColor = true;
             this.btnLast.Click += new System.EventHandler(this.OnMoveLastButton_Clicked);
-            //
+            // 
             // lblReplace
-            //
+            // 
             this.lblReplace.BackColor = System.Drawing.Color.Yellow;
-            this.lblReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReplace.Location = new System.Drawing.Point(9, 412);
             this.lblReplace.Name = "lblReplace";
             this.lblReplace.Size = new System.Drawing.Size(221, 24);
             this.lblReplace.TabIndex = 11;
             this.lblReplace.Text = "Format selected book information";
             this.lblReplace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // btnReplace
-            //
+            // 
             this.btnReplace.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btnReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReplace.Location = new System.Drawing.Point(67, 445);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(110, 36);
@@ -231,36 +216,55 @@ namespace BookList.Source
             this.btnReplace.Text = "Format";
             this.btnReplace.UseVisualStyleBackColor = false;
             this.btnReplace.Click += new System.EventHandler(this.OnFormatBookInformationButton_Clicked);
-            //
+            // 
+            // lblUndoChange
+            // 
+            this.lblUndoChange.BackColor = System.Drawing.Color.Yellow;
+            this.lblUndoChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUndoChange.Location = new System.Drawing.Point(559, 412);
+            this.lblUndoChange.Name = "lblUndoChange";
+            this.lblUndoChange.Size = new System.Drawing.Size(219, 24);
+            this.lblUndoChange.TabIndex = 25;
+            this.lblUndoChange.Text = "Undo last save changes.";
+            this.lblUndoChange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUndo.Location = new System.Drawing.Point(603, 445);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(110, 36);
+            this.btnUndo.TabIndex = 26;
+            this.btnUndo.Text = "Undo changes.";
+            this.btnUndo.UseVisualStyleBackColor = false;
+            // 
             // lblSeries
-            //
+            // 
             this.lblSeries.BackColor = System.Drawing.Color.Yellow;
-            this.lblSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSeries.Location = new System.Drawing.Point(282, 279);
             this.lblSeries.Name = "lblSeries";
             this.lblSeries.Size = new System.Drawing.Size(253, 24);
             this.lblSeries.TabIndex = 16;
             this.lblSeries.Text = "Book Series";
             this.lblSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // lblTitle
-            //
+            // 
             this.lblTitle.BackColor = System.Drawing.Color.Yellow;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(9, 279);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(253, 24);
             this.lblTitle.TabIndex = 15;
             this.lblTitle.Text = "Book Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // btnSeries
-            //
+            // 
             this.btnSeries.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btnSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeries.Location = new System.Drawing.Point(340, 353);
             this.btnSeries.Name = "btnSeries";
             this.btnSeries.Size = new System.Drawing.Size(115, 36);
@@ -268,12 +272,11 @@ namespace BookList.Source
             this.btnSeries.Text = "Book Series";
             this.btnSeries.UseVisualStyleBackColor = false;
             this.btnSeries.Click += new System.EventHandler(this.OnSelectedTextSeriesButton_Clicked);
-            //
+            // 
             // btnTitle
-            //
+            // 
             this.btnTitle.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btnTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTitle.Location = new System.Drawing.Point(67, 353);
             this.btnTitle.Name = "btnTitle";
             this.btnTitle.Size = new System.Drawing.Size(115, 36);
@@ -281,82 +284,74 @@ namespace BookList.Source
             this.btnTitle.Text = "Book Title";
             this.btnTitle.UseVisualStyleBackColor = false;
             this.btnTitle.Click += new System.EventHandler(this.OnSelectedTextTitleButton_Clicked);
-            //
+            // 
             // txtSeries
-            //
-            this.txtSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.txtSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSeries.Location = new System.Drawing.Point(284, 310);
             this.txtSeries.Multiline = true;
             this.txtSeries.Name = "txtSeries";
             this.txtSeries.Size = new System.Drawing.Size(253, 37);
             this.txtSeries.TabIndex = 13;
             this.txtSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            //
+            // 
             // txtTitle
-            //
-            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitle.Location = new System.Drawing.Point(9, 310);
             this.txtTitle.Multiline = true;
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(253, 37);
             this.txtTitle.TabIndex = 12;
             this.txtTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            //
+            // 
             // lblPosition
-            //
+            // 
             this.lblPosition.BackColor = System.Drawing.SystemColors.Info;
-            this.lblPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F,
-                System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPosition.Location = new System.Drawing.Point(8, 89);
             this.lblPosition.Name = "lblPosition";
             this.lblPosition.Size = new System.Drawing.Size(768, 27);
             this.lblPosition.TabIndex = 18;
             this.lblPosition.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // btnSave
-            //
+            // 
             this.btnSave.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(340, 445);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(110, 36);
             this.btnSave.TabIndex = 19;
             this.btnSave.Text = "Save Changes";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.OnSaveAllChangesButton_Clicked);
-            //
+            this.btnSave.Click += new System.EventHandler(this.OnSaveChangesButton_Clicked);
+            // 
             // lblVolume
-            //
+            // 
             this.lblVolume.BackColor = System.Drawing.Color.Yellow;
-            this.lblVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVolume.Location = new System.Drawing.Point(559, 279);
             this.lblVolume.Name = "lblVolume";
             this.lblVolume.Size = new System.Drawing.Size(217, 24);
             this.lblVolume.TabIndex = 20;
             this.lblVolume.Text = "Volume Number";
             this.lblVolume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // txtVolume
-            //
-            this.txtVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            // 
+            this.txtVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtVolume.Location = new System.Drawing.Point(559, 310);
             this.txtVolume.Multiline = true;
             this.txtVolume.Name = "txtVolume";
             this.txtVolume.Size = new System.Drawing.Size(217, 37);
             this.txtVolume.TabIndex = 21;
             this.txtVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtVolume.ReadOnly = false;
-            //
+            // 
             // btnVolume
-            //
+            // 
             this.btnVolume.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btnVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVolume.Location = new System.Drawing.Point(603, 354);
             this.btnVolume.Name = "btnVolume";
             this.btnVolume.Size = new System.Drawing.Size(115, 36);
@@ -364,9 +359,9 @@ namespace BookList.Source
             this.btnVolume.Text = "Volume Number";
             this.btnVolume.UseVisualStyleBackColor = false;
             this.btnVolume.Click += new System.EventHandler(this.OnSelectedTextBookVolumeButton_Clicked);
-            //
+            // 
             // pnlSeries
-            //
+            // 
             this.pnlSeries.BackColor = System.Drawing.Color.Silver;
             this.pnlSeries.Controls.Add(this.rbtnNotSeries);
             this.pnlSeries.Controls.Add(this.rbtnIsSeries);
@@ -374,13 +369,12 @@ namespace BookList.Source
             this.pnlSeries.Name = "pnlSeries";
             this.pnlSeries.Size = new System.Drawing.Size(731, 49);
             this.pnlSeries.TabIndex = 23;
-            //
+            // 
             // rbtnNotSeries
-            //
+            // 
             this.rbtnNotSeries.BackColor = System.Drawing.Color.LemonChiffon;
             this.rbtnNotSeries.Checked = true;
-            this.rbtnNotSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.rbtnNotSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnNotSeries.Location = new System.Drawing.Point(416, 10);
             this.rbtnNotSeries.Name = "rbtnNotSeries";
             this.rbtnNotSeries.Size = new System.Drawing.Size(130, 26);
@@ -389,13 +383,12 @@ namespace BookList.Source
             this.rbtnNotSeries.Text = "Book Not Series";
             this.rbtnNotSeries.UseVisualStyleBackColor = false;
             this.rbtnNotSeries.Click += new System.EventHandler(this.OnBookIsNotSeriesRadioButton_Clicked);
-            //
+            // 
             // rbtnIsSeries
-            //
+            // 
             this.rbtnIsSeries.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
             this.rbtnIsSeries.BackColor = System.Drawing.Color.LemonChiffon;
-            this.rbtnIsSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.rbtnIsSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnIsSeries.Location = new System.Drawing.Point(184, 10);
             this.rbtnIsSeries.Name = "rbtnIsSeries";
             this.rbtnIsSeries.Size = new System.Drawing.Size(130, 26);
@@ -403,43 +396,20 @@ namespace BookList.Source
             this.rbtnIsSeries.Text = "Book Is Series";
             this.rbtnIsSeries.UseVisualStyleBackColor = false;
             this.rbtnIsSeries.Click += new System.EventHandler(this.OnBookIsSeriesRadioButton_Clicked);
-            //
+            // 
             // lblSave
-            //
+            // 
             this.lblSave.BackColor = System.Drawing.Color.Yellow;
-            this.lblSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSave.Location = new System.Drawing.Point(282, 412);
             this.lblSave.Name = "lblSave";
             this.lblSave.Size = new System.Drawing.Size(221, 24);
             this.lblSave.TabIndex = 24;
             this.lblSave.Text = "Save all changes made to file.";
             this.lblSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
-            // lblUndoChange
-            //
-            this.lblUndoChange.BackColor = System.Drawing.Color.Yellow;
-            this.lblUndoChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F,
-                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.lblUndoChange.Location = new System.Drawing.Point(559, 412);
-            this.lblUndoChange.Name = "lblUndoChange";
-            this.lblUndoChange.Size = new System.Drawing.Size(219, 24);
-            this.lblUndoChange.Text = "Undo last save changes.";
-            this.lblUndoChange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
-            // btnUndo
-            //
-            this.btnUndo.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnUndo.Font = new System.Drawing.Font("Micorosoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular,
-                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Location = new System.Drawing.Point(603, 445);
-            this.btnUndo.Size = new System.Drawing.Size(110, 36);
-            this.btnUndo.Text = "Undo changes.";
-            this.btnUndo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // FormatBookData
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;

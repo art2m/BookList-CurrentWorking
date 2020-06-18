@@ -1,19 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Windows.Forms;
-using BookList.Classes;
-using BookList.PropertiesClasses;
+﻿// BookList
+// 
+// FormatBookData.cs
+// 
+// Art2M
+// 
+// art2m@live.com
+// 
+// 06  18  2020
+// 
+// 06  18   2020
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace BookList.Source
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Text;
+    using System.Windows.Forms;
+    using Classes;
+    using PropertiesClasses;
+
     public partial class FormatBookData : Form
     {
-        private const string Value = "Record position ";
-        private const string Str0 = "Authors Name  ";
         private const string Caption = "Select Title name then select series name then volume number.";
         private const string Caption1 = "Move to first book record.";
+        private const string Caption10 = "Book series name is displayed here after selecting.";
+        private const string Caption11 = "The book title name is displayed here after selecting.";
+        private const string Caption12 = "the book volume is displayed here after selecting.";
         private const string Caption2 = "Move to next book record.";
         private const string Caption3 = "Move to previous book record.";
         private const string Caption4 = "Move to last book record.";
@@ -22,24 +46,24 @@ namespace BookList.Source
         private const string Caption7 = "Get the user selected series name.";
         private const string Caption8 = "Get the user selected title name.";
         private const string Caption9 = "Get the user selected volume number.";
-        private const string Caption10 = "Book series name is displayed here after selecting.";
-        private const string Caption11 = "The book title name is displayed here after selecting.";
-        private const string Caption12 = "the book volume is displayed here after selecting.";
+        private const string Str0 = "Authors Name  ";
         private const string V = "The book title and/or book series must not be the same as book volume. ";
         private const string V1 = "The title of the book and the book series must not be the same. ";
+        private const string Value = "Record position ";
 
         /// <summary>
         ///     Back up of the Authors File Names Collection For Restoring Before Changes.
         /// </summary>
         private readonly List<string> _dataCopy = new List<string>();
 
-        private bool _match;
-        private int _index;
-        private int _pos;
-        private int _totalCount;
         private string _filePath = string.Empty;
+        private int _index;
+
+        private bool _match;
+        private int _pos;
         private string _series = string.Empty;
         private string _title = string.Empty;
+        private int _totalCount;
         private string _volume = string.Empty;
 
         public FormatBookData()
@@ -156,6 +180,18 @@ namespace BookList.Source
             this._totalCount = this._dataCopy.Count;
         }
 
+        private void MoveToFirstRecord()
+        {
+            if (this._dataCopy.Count <= 0) return;
+
+            this._index = 0;
+            this.txtData.Text = this._dataCopy[this._index];
+
+            this._pos = this._index + 1;
+
+            this.DisplayRecordCountAndPosition();
+        }
+
         private void NotSeriesFormatTitleOnly()
         {
             var sb = new StringBuilder();
@@ -219,17 +255,6 @@ namespace BookList.Source
             this.btnSave.Enabled = true;
         }
 
-        private void MoveToFirstRecord()
-        {
-            if (this._dataCopy.Count <= 0) return;
-
-            this._index = 0;
-            this.txtData.Text = this._dataCopy[this._index];
-
-            this._pos = this._index + 1;
-
-            this.DisplayRecordCountAndPosition();
-        }
         private void OnMoveFirstButton_Clicked(object sender, EventArgs e)
         {
             if (this._dataCopy.Count <= 0) return;
@@ -288,46 +313,23 @@ namespace BookList.Source
             this.DisplayRecordCountAndPosition();
         }
 
-        /// <summary>
-        /// Save changes to book data.
-        /// if match is true then book title and or book series and or book volume are the same.
-        /// exit as data should not match. if false proceed.
-        /// </summary>
-        /// <param name="sender">Source of the event.</param>
-        /// <param name="e">Instance containing the event data.</param>
-        private void OnSaveAllChangesButton_Clicked(object sender, EventArgs e)
-        {
-            if (this._dataCopy.Count < 1) return;
-
-            if (this._match) return;
-
-            FileOutputClass.WriteAuthorsTitlesToFile(this._filePath, this._dataCopy);
-
-            this._dataCopy.Clear();
-
-            this._match = false;
-        }
 
         private void OnSaveAllChangesMenuItem_Clicked(object sender, EventArgs e)
         {
             this.btnSave.PerformClick();
         }
 
-        private void OnSelectedTextTitleButton_Clicked(object sender, EventArgs e)
+        private void OnSaveChangesButton_Clicked(object sender, EventArgs e)
         {
-            this.GetSelectedTitleText();
+            if (this._dataCopy.Count < 1) return;
 
-            if (string.IsNullOrEmpty(this._title))
-            {
-                this.txtTitle.Text = this.txtTitle.Text = string.Empty;
-            }
+            if (!this._match) return;
 
-            this.txtTitle.Enabled = true;
-            this.txtTitle.Text = this._title;
+            FileOutputClass.WriteAuthorsTitlesToFile(this._filePath, this._dataCopy);
 
-            this.ValidateTitleTextDoesNotMatchSeriesTextAndOrVolumeText();
+            this._dataCopy.Clear();
 
-            this.btnReplace.Enabled = true;
+            this._match = false;
         }
 
         private void OnSelectedTextBookVolumeButton_Clicked(object sender, EventArgs e)
@@ -352,6 +354,23 @@ namespace BookList.Source
             this.txtSeries.Text = this._series;
 
             this.ValidateTitleTextDoesNotMatchSeriesTextAndOrVolumeText();
+        }
+
+        private void OnSelectedTextTitleButton_Clicked(object sender, EventArgs e)
+        {
+            this.GetSelectedTitleText();
+
+            if (string.IsNullOrEmpty(this._title))
+            {
+                this.txtTitle.Text = this.txtTitle.Text = string.Empty;
+            }
+
+            this.txtTitle.Enabled = true;
+            this.txtTitle.Text = this._title;
+
+            this.ValidateTitleTextDoesNotMatchSeriesTextAndOrVolumeText();
+
+            this.btnReplace.Enabled = true;
         }
 
         private void SetAllControlsToolTips()
