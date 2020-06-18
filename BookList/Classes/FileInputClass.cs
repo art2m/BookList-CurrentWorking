@@ -1,15 +1,15 @@
 ﻿// BookList
-// 
+//
 // FileInputClass.cs
-// 
+//
 // Art2M
-// 
+//
 // art2m@live.com
-// 
+//
 // 11  04  2019
-// 
+//
 // 10  26   2019
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or

@@ -30,7 +30,7 @@ namespace BookList.Source
         {
             BookListPropertiesClass.AuthorsNameCurrent = this.lblAuthor.Text;
             BookInfoCollection.ClearCollection();
-            BookInfoCollection.AddItem(BookListPropertiesClass.AuthorsNameCurrent);
+           // BookInfoCollection.AddItem(BookListPropertiesClass.AuthorsNameCurrent);
             //MyMessagesClass.ShowInformationMessageBox(BookListPropertiesClass.CurrentWorkingFileName,
             //   "Testing", "fum");
 

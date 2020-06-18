@@ -473,7 +473,6 @@ namespace BookList.Source
             this.Name = "FormatBookData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Format Data For Adding To Books Read Collection.";
-            this.Load += new System.EventHandler(this.OnFormLoad_Event);
             this.RawDataMenu.ResumeLayout(false);
             this.RawDataMenu.PerformLayout();
             this.pnlSeries.ResumeLayout(false);

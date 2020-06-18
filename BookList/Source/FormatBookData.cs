@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 using BookList.Classes;
-using BookList.Collections;
 using BookList.PropertiesClasses;
 
 namespace BookList.Source
@@ -34,7 +33,7 @@ namespace BookList.Source
         /// </summary>
         private readonly List<string> _dataCopy = new List<string>();
 
-        private bool _match = false;
+        private bool _match;
         private int _index;
         private int _pos;
         private int _totalCount;
@@ -73,16 +72,6 @@ namespace BookList.Source
             this.txtVolume.Enabled = false;
         }
 
-        /// <summary>
-        /// Check string is not null or empty.
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns>True if string is not null or empty else false.</returns>
-        private bool CheckStringNotEmptyNotNull(string val)
-        {
-            return string.IsNullOrEmpty(val);
-        }
-
         private void DisplayRecordCountAndPosition()
         {
             var sb = new StringBuilder(Value);
@@ -119,16 +108,11 @@ namespace BookList.Source
         {
             var dirPath = BookListPropertiesClass.PathToAuthorsDirectory;
 
-            if (!AuthorsFileNamesCollection.ContainsItem(BookListPropertiesClass.AuthorsNameCurrent)) return;
-
-            var num = AuthorsFileNamesCollection.GetItemIndex(BookListPropertiesClass.AuthorsNameCurrent);
-
-            var fileName = AuthorsFileNamesCollection.GetItemAt(num);
-
             Debug.Assert(dirPath != null, nameof(dirPath) + " != null");
-            this._filePath = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(dirPath, fileName);
+            this._filePath = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(dirPath,
+                BookListPropertiesClass.AuthorsNameCurrent);
 
-            this.GetAuthorsName(fileName);
+            this.GetAuthorsName(BookListPropertiesClass.AuthorsNameCurrent);
         }
 
         private void IsSeriesFormatBookInformation()
@@ -217,7 +201,9 @@ namespace BookList.Source
 
             this.LoadUnformattedData();
 
-            this.btnFirst.PerformClick();
+            this.MoveToFirstRecord();
+
+            // this.btnFirst.PerformClick();
         }
 
         private void OnFormatBookInformationButton_Clicked(object sender, EventArgs e)
@@ -233,14 +219,20 @@ namespace BookList.Source
             this.btnSave.Enabled = true;
         }
 
-        private void OnFormLoad_Event(object sender, EventArgs e)
+        private void MoveToFirstRecord()
         {
+            if (this._dataCopy.Count <= 0) return;
 
+            this._index = 0;
+            this.txtData.Text = this._dataCopy[this._index];
+
+            this._pos = this._index + 1;
+
+            this.DisplayRecordCountAndPosition();
         }
-
         private void OnMoveFirstButton_Clicked(object sender, EventArgs e)
         {
-            if (this._dataCopy.Count == 0) return;
+            if (this._dataCopy.Count <= 0) return;
 
             this._index = 0;
             this.txtData.Text = this._dataCopy[this._index];
@@ -298,7 +290,7 @@ namespace BookList.Source
 
         /// <summary>
         /// Save changes to book data.
-        /// if match is true then book title and or book series ando or book volume are the same.
+        /// if match is true then book title and or book series and or book volume are the same.
         /// exit as data should not match. if false proceed.
         /// </summary>
         /// <param name="sender">Source of the event.</param>

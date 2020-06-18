@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using BookList.Collections;
 
 namespace BookList.Classes
@@ -17,7 +18,10 @@ namespace BookList.Classes
         public static List<string> AddToBackUpList(List<string> bkUpList)
         {
             for (var index = 0; index < BookInfoCollection.ItemsCount(); index++)
+            {
                 bkUpList.Add(BookInfoCollection.GetItemAt(index));
+                Debug.WriteLine(BookInfoCollection.GetItemAt(index));
+            }
 
             return bkUpList;
         }
