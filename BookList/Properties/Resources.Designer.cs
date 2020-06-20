@@ -19,12 +19,12 @@ namespace BookList.Properties
     internal class Resources
     {
         /// <summary>
-        /// Defines the resourceMan
+        /// Defines the resourceMan.
         /// </summary>
         private static global::System.Resources.ResourceManager resourceMan;
 
         /// <summary>
-        /// Defines the resourceCulture
+        /// Defines the resourceCulture.
         /// </summary>
         private static global::System.Globalization.CultureInfo resourceCulture;
 
@@ -38,7 +38,7 @@ namespace BookList.Properties
 
         /// <summary>
         /// Gets the ResourceManager
-        /// Returns the cached ResourceManager instance used by this class.
+        /// Returns the cached ResourceManager instance used by this class..
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager
@@ -57,7 +57,7 @@ namespace BookList.Properties
         /// <summary>
         /// Gets or sets the Culture
         /// Overrides the current thread's CurrentUICulture property for all
-        ///   resource lookups using this strongly typed resource class.
+        ///   resource lookups using this strongly typed resource class..
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture

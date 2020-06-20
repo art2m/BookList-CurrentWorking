@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BookList.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="JetBrains.Annotations, Version=2019.1.3.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
       <HintPath>..\packages\JetBrains.Annotations.2019.1.3\lib\net20\JetBrains.Annotations.dll</HintPath>
@@ -69,7 +72,13 @@
     <Compile Include="Collections\UnformattedDataCollection.cs" />
     <Compile Include="Collections\BookInfoCollection.cs" />
     <Compile Include="Interfaces\IMyCollection.cs" />
+    <Compile Include="MyStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="PropertiesClasses\BookListPropertiesClass.cs" />
+    <Compile Include="PropertiesClasses\FormatBookDataProperties.cs" />
     <Compile Include="Source\AdditionOfBookAuthors.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +127,12 @@
     <Compile Include="Source\FormatBookData.Designer.cs">
       <DependentUpon>FormatBookData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Source\FormatUnformattedBookData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\FormatUnformattedBookData.Designer.cs">
+      <DependentUpon>FormatUnformattedBookData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Source\SearchOfBookAuthors.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +159,11 @@
     <Compile Include="Source\SearchOfBookTitles.Designer.cs">
       <DependentUpon>SearchOfBookTitles.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MyStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -165,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\BookListMainWindow.resx">
       <DependentUpon>BookListMainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\FormatUnformattedBookData.resx">
+      <DependentUpon>FormatUnformattedBookData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\SearchOfBookAuthors.resx">
       <DependentUpon>SearchOfBookAuthors.cs</DependentUpon>

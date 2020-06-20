@@ -1,119 +1,121 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using BookList.PropertiesClasses;
-using JetBrains.Annotations;
-
-namespace BookList.Classes
+﻿namespace BookList.Classes
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+
+    using BookList.PropertiesClasses;
+
+    using JetBrains.Annotations;
+
     /// <summary>
-    ///     Class that contains code to create directories and files.
+    /// Class that contains code to create directories and files.
     /// </summary>
     public static class DirectoryFileOperationsClass
     {
         /// <summary>
-        ///     Defines the V
+        /// Defines the V.
         /// </summary>
         private const string V = "Encountered Error when combining directory paths or creating directory.";
 
         /// <summary>
-        ///     Defines the V1
+        /// Defines the V1.
         /// </summary>
         private const string V1 = "You do not have necessary security rating to perform this operation.";
 
         /// <summary>
-        ///     Defines the V2
+        /// Defines the V2.
         /// </summary>
         private const string V2 = "The directory path is to long.";
 
         /// <summary>
-        ///     Defines the V3
+        /// Defines the V3.
         /// </summary>
         private const string V3 = "Unable to locate the directory.";
 
         /// <summary>
-        ///     Defines the V4
+        /// Defines the V4.
         /// </summary>
         private const string V4 = "Not supported for this platform.";
 
         /// <summary>
-        ///     Defines the V5
+        /// Defines the V5.
         /// </summary>
         private const string V5 = "Encountered error while creating directory.";
 
         /// <summary>
-        ///     Defines the V6
+        /// Defines the V6.
         /// </summary>
         private const string V6 = "Encountered Error when combining directory paths or creating directory.";
 
         /// <summary>
-        ///     Defines the V7
+        /// Defines the V7.
         /// </summary>
         private const string V7 = "You do not have necessary security rating to perform this operation.";
 
         /// <summary>
-        ///     Defines the V8
+        /// Defines the V8.
         /// </summary>
         private const string V8 = "The directory path is to long.";
 
         /// <summary>
-        ///     Defines the V9
+        /// Defines the V9.
         /// </summary>
         private const string V9 = "Unable to locate the directory.";
 
         /// <summary>
-        ///     Defines the V10
+        /// Defines the V10.
         /// </summary>
         private const string V10 = "Not supported for this platform.";
 
         /// <summary>
-        ///     Defines the V11
+        /// Defines the V11.
         /// </summary>
         private const string V11 = "Encountered error while creating directory.";
 
         /// <summary>
-        ///     Defines the V12
+        /// Defines the V12.
         /// </summary>
         private const string V12 = "One or both of the path strings is null.";
 
         /// <summary>
-        ///     Defines the V13
+        /// Defines the V13.
         /// </summary>
         private const string V13 = "Possible invalid characters in path string.";
 
         /// <summary>
-        ///     Defines the V14
+        /// Defines the V14.
         /// </summary>
         private const string V14 = "Encountered Error when combining directory paths or creating directory.";
 
         /// <summary>
-        ///     Defines the V15
+        /// Defines the V15.
         /// </summary>
         private const string V15 = "You do not have necessary security rating to perform this operation.";
 
         /// <summary>
-        ///     Defines the V16
+        /// Defines the V16.
         /// </summary>
         private const string V16 = "The directory path is to long.";
 
         /// <summary>
-        ///     Defines the V17
+        /// Defines the V17.
         /// </summary>
         private const string V17 = "Unable to locate the directory.";
 
         /// <summary>
-        ///     Defines the V18
+        /// Defines the V18.
         /// </summary>
         private const string V18 = "Not supported for this platform.";
 
         /// <summary>
-        ///     Defines the V19
+        /// Defines the V19.
         /// </summary>
         private const string V19 = "Encountered error while creating directory.";
 
         /// <summary>
-        ///     Initializes static members of the <see cref="DirectoryFileOperationsClass" /> class.
+        /// Initializes static members of the <see cref="DirectoryFileOperationsClass"/> class.
         /// </summary>
         static DirectoryFileOperationsClass()
         {
@@ -125,11 +127,11 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CombineDirectoryPathFileNameCheckCreateFile
+        /// The CombineDirectoryPathFileNameCheckCreateFile.
         /// </summary>
-        /// <param name="dirPath">The dirPath<see cref="string" /></param>
-        /// <param name="fileName">The fileName<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="dirPath">The dirPath<see cref="string" />.</param>
+        /// <param name="fileName">The fileName<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public static string CombineDirectoryPathFileNameCheckCreateFile([NotNull] string dirPath, string fileName)
         {
             try
@@ -208,11 +210,11 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CombineDirectoryPathWithFileName
+        /// The CombineDirectoryPathWithFileName.
         /// </summary>
-        /// <param name="dirPath">The dirPath<see cref="string" /></param>
-        /// <param name="fileName">The fileName<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="dirPath">The dirPath<see cref="string" />.</param>
+        /// <param name="fileName">The fileName<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public static string CombineDirectoryPathWithFileName([NotNull] string dirPath, [NotNull] string fileName)
         {
             try
@@ -284,7 +286,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Combine two strings to get complete path to directory First Directory must
+        /// Combine two strings to get complete path to directory First Directory must
         ///     all ready exist.  Check to see if directory path exists if so return path string. else
         ///     create new directory.
         /// </summary>
@@ -326,10 +328,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CheckDirectoryExistsCreateDirectory
+        /// The CheckDirectoryExistsCreateDirectory.
         /// </summary>
-        /// <param name="dirPath">The dirPath<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="dirPath">The dirPath<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public static string CheckDirectoryExistsCreateDirectory([NotNull] string dirPath)
         {
             try
@@ -402,9 +404,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetPathToSpecialDirectoryAppDataLocal
+        /// The GetPathToSpecialDirectoryAppDataLocal.
         /// </summary>
-        /// <returns>The <see cref="string" /></returns>
+        /// <returns>The <see cref="string" />.</returns>
         public static string GetPathToSpecialDirectoryAppDataLocal()
         {
             var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -415,10 +417,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CreateNewFile
+        /// The CreateNewFile.
         /// </summary>
-        /// <param name="filePath">The filePath<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="filePath">The filePath<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool CreateNewFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath.Trim())) return false;

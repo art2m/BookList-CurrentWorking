@@ -21,21 +21,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-
 namespace BookList.Classes
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
-    ///     Defines the <see cref="AuthorsTextOperations" />
+    /// Defines the <see cref="AuthorsTextOperations" />.
     /// </summary>
     public class AuthorsTextOperations
     {
         /// <summary>
-        ///     The AddDashToAuthorName
+        /// The AddDashToAuthorName.
         /// </summary>
-        /// <param name="author">The author<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="author">The author<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public string AddDashToAuthorName(string author)
         {
             var authorName = string.Empty;
@@ -46,10 +46,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The AddFileExtension
+        /// The AddFileExtension.
         /// </summary>
-        /// <param name="author">The author<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="author">The author<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public string AddFileExtension(string author)
         {
             const string Ext = ".dat";
@@ -58,11 +58,11 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The AddUnderscoreBetweenAuthorNames
+        /// The AddUnderscoreBetweenAuthorNames.
         /// </summary>
-        /// <param name="nameFirst">The nameFirst<see cref="string" /></param>
-        /// <param name="nameSecond">The nameSecond<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="nameFirst">The nameFirst<see cref="string" />.</param>
+        /// <param name="nameSecond">The nameSecond<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public string AddUnderscoreBetweenAuthorNames(string nameFirst, string nameSecond)
         {
             var fileName = string.Concat(nameFirst, "_");
@@ -71,10 +71,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The BookAuthorName
+        /// The BookAuthorName.
         /// </summary>
-        /// <param name="author">The author<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="author">The author<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public string BookAuthorName(string author)
         {
             if (string.IsNullOrEmpty(author.Trim())) return string.Empty;
@@ -85,11 +85,11 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The BookAuthorName
+        /// The BookAuthorName.
         /// </summary>
-        /// <param name="authorFirst">The authorFirst<see cref="string" /></param>
-        /// <param name="authorSecond">The authorSecond<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="authorFirst">The authorFirst<see cref="string" />.</param>
+        /// <param name="authorSecond">The authorSecond<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public string BookAuthorName(string authorFirst, string authorSecond)
         {
             if (string.IsNullOrEmpty(authorFirst.Trim())) return string.Empty;
@@ -107,12 +107,12 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The BookAuthorName
+        /// The BookAuthorName.
         /// </summary>
-        /// <param name="authorFirst">The authorFirst<see cref="string" /></param>
-        /// <param name="authorSecond">The authorSecond<see cref="string" /></param>
-        /// <param name="authorThird">The authorThird<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="authorFirst">The authorFirst<see cref="string" />.</param>
+        /// <param name="authorSecond">The authorSecond<see cref="string" />.</param>
+        /// <param name="authorThird">The authorThird<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public string BookAuthorName(string authorFirst, string authorSecond, string authorThird)
         {
             if (string.IsNullOrEmpty(authorFirst)) return string.Empty;
@@ -135,20 +135,20 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CheckForMultipleAuthors
+        /// The CheckForMultipleAuthors.
         /// </summary>
-        /// <param name="author">The author<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="author">The author<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public bool CheckForMultipleAuthors(string author)
         {
             return author.Contains("_");
         }
 
         /// <summary>
-        ///     The GetAuthorNameFromFileName
+        /// The GetAuthorNameFromFileName.
         /// </summary>
-        /// <param name="fileName">The fileName<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="fileName">The fileName<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public string GetAuthorNameFromFileName(string fileName)
         {
             var name = SplitFileNameFormFileExtension(fileName);
@@ -161,10 +161,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetTheIndexOfAuthorNamesSeparator
+        /// The GetTheIndexOfAuthorNamesSeparator.
         /// </summary>
-        /// <param name="name">The name<see cref="string" /></param>
-        /// <returns>The <see cref="int" /></returns>
+        /// <param name="name">The name<see cref="string" />.</param>
+        /// <returns>The <see cref="int" />.</returns>
         public int GetTheIndexOfAuthorNamesSeparator(string name)
         {
             var index = name.IndexOf("_", StringComparison.Ordinal);
@@ -173,10 +173,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ReplaceFirstLatNameSeparatorWithSpace
+        /// The ReplaceFirstLatNameSeparatorWithSpace.
         /// </summary>
-        /// <param name="name">The name<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="name">The name<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public static string ReplaceFirstLatNameSeparatorWithSpace(string name)
         {
             var temp = new char();
@@ -201,11 +201,11 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The SplitAuthorsAtSeperator
+        /// The SplitAuthorsAtSeperator.
         /// </summary>
-        /// <param name="index">The index<see cref="int" /></param>
-        /// <param name="names">The names<see cref="string" /></param>
-        /// <returns>The <see cref="List{string}" /></returns>
+        /// <param name="index">The index<see cref="int" />.</param>
+        /// <param name="names">The names<see cref="string" />.</param>
+        /// <returns>The <see cref="List{string}" />.</returns>
         public List<string> SplitAuthorsAtSeperator(int index, string names)
         {
             var authorsNames = new List<string>();
@@ -218,10 +218,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The SplitFileNameFormFileExtension
+        /// The SplitFileNameFormFileExtension.
         /// </summary>
-        /// <param name="fileName">The fileName<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="fileName">The fileName<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public static string SplitFileNameFormFileExtension(string fileName)
         {
             var temp = fileName.Split('.');
@@ -230,10 +230,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The SplitMultipleAuthors
+        /// The SplitMultipleAuthors.
         /// </summary>
-        /// <param name="authors">The authors<see cref="string" /></param>
-        /// <returns>The <see cref="List{string}" /></returns>
+        /// <param name="authors">The authors<see cref="string" />.</param>
+        /// <returns>The <see cref="List{string}" />.</returns>
         public List<string> SplitMultipleAuthors(string authors)
         {
             var authorNames = new List<string>();
@@ -255,7 +255,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The SplitStringAtStartOfBookTitle
+        /// The SplitStringAtStartOfBookTitle.
         /// </summary>
         public static void SplitStringAtStartOfBookTitle()
         {

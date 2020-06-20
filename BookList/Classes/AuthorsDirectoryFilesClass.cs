@@ -1,58 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using BookList.Collections;
-using BookList.PropertiesClasses;
-using JetBrains.Annotations;
-
-namespace BookList.Classes
+﻿namespace BookList.Classes
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+
+    using BookList.Collections;
+    using BookList.PropertiesClasses;
+
+    using JetBrains.Annotations;
+
     /// <summary>
-    ///     Defines the <see cref="AuthorsDirectoryFilesClass" />
+    /// Defines the <see cref="AuthorsDirectoryFilesClass" />.
     /// </summary>
     public static class AuthorsDirectoryFilesClass
     {
         /// <summary>
-        ///     Defines the Str0
+        /// Defines the Str0.
         /// </summary>
         private const string Str0 = "This Author file all ready exists. ";
 
         /// <summary>
-        ///     Defines the Str01
+        /// Defines the Str01.
         /// </summary>
         private const string Str01 = "Unable to locate this file. ";
 
         /// <summary>
-        ///     Defines the V
+        /// Defines the V.
         /// </summary>
         private const string V = "Encountered Error when creating new author file.";
 
         /// <summary>
-        ///     Defines the V1
+        /// Defines the V1.
         /// </summary>
         private const string V1 = "You do not have necessary security rating to perform this operation.";
 
         /// <summary>
-        ///     Defines the V2
+        /// Defines the V2.
         /// </summary>
         private const string V2 = "The file path is to long.";
 
         /// <summary>
-        ///     Defines the V3
+        /// Defines the V3.
         /// </summary>
         private const string V3 = "Not supported for this platform.";
 
         /// <summary>
-        ///     Defines the V4
+        /// Defines the V4.
         /// </summary>
         private const string V4 = "Encountered file path error while creating this file";
 
         /// <summary>
-        ///     The CheckIfAuthorsFileAllReadyExists
+        /// The CheckIfAuthorsFileAllReadyExists.
         /// </summary>
-        /// <param name="filePath">The filePath<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="filePath">The filePath<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool CheckIfAuthorsFileAllReadyExists(string filePath)
         {
             if (!File.Exists(filePath)) return false;
@@ -64,10 +66,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CheckNewEmptyAuthorsFileWasCreated
+        /// The CheckNewEmptyAuthorsFileWasCreated.
         /// </summary>
-        /// <param name="filePath">The filePath<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="filePath">The filePath<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool CheckNewEmptyAuthorsFileWasCreated(string filePath)
         {
             if (File.Exists(filePath)) return true;
@@ -78,10 +80,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CreateEmptyAuthorNameFile
+        /// The CreateEmptyAuthorNameFile.
         /// </summary>
-        /// <param name="filePath">The filePath<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="filePath">The filePath<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool CreateEmptyAuthorNameFile(string filePath)
         {
             try
@@ -153,7 +155,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetAllAuthorFilePathsContainedInAuthorDirectory
+        /// The GetAllAuthorFilePathsContainedInAuthorDirectory.
         /// </summary>
         public static void GetAllAuthorFilePathsContainedInAuthorDirectory()
         {
@@ -164,10 +166,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetAllFileNamesContainedInAuthorsDirectory
+        /// The GetAllFileNamesContainedInAuthorsDirectory.
         /// </summary>
-        /// <param name="dirPath">The dirPath<see cref="string" /></param>
-        /// <returns>The <see cref="List{string}" /></returns>
+        /// <param name="dirPath">The dirPath<see cref="string" />.</param>
+        /// <returns>The <see cref="List{string}" />.</returns>
         public static List<string> GetAllFileNamesContainedInAuthorsDirectory([NotNull] string dirPath)
         {
             var fileArray = Directory.GetFiles(dirPath, "*.dat");
@@ -177,7 +179,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Make the List of author names match the FileNames.
+        /// Make the List of author names match the FileNames.
         /// </summary>
         public static void GetAuthorFileNamesAddToAuthorsNamesList()
         {
@@ -187,7 +189,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetAuthorFileNamesFromAuthorsList
+        /// The GetAuthorFileNamesFromAuthorsList.
         /// </summary>
         private static void GetAuthorFileNamesFromAuthorsList()
         {
@@ -198,7 +200,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetPathToAuthorsDirectory
+        /// The GetPathToAuthorsDirectory.
         /// </summary>
         /// <returns>The <see cref="string" />returns path to authors directory.</returns>
         public static string GetPathToAuthorsDirectory()
@@ -221,9 +223,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetPathToAuthorsFileNamesList
+        /// The GetPathToAuthorsFileNamesList.
         /// </summary>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool GetPathToAuthorsFileNamesList()
         {
             var dirBookListName = BookListPropertiesClass.NameOfTopLevelDirectory;
@@ -243,7 +245,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The SetAllDirectoryPaths
+        /// The SetAllDirectoryPaths.
         /// </summary>
         public static void SetAllDirectoryPaths()
         {
@@ -278,7 +280,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The SetAllFilePaths
+        /// The SetAllFilePaths.
         /// </summary>
         public static void SetAllFilePaths()
         {
@@ -297,7 +299,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The UpdateAuthorsNamesWithFileNames
+        /// The UpdateAuthorsNamesWithFileNames.
         /// </summary>
         public static void UpdateAuthorsNamesWithFileNames()
         {
@@ -310,9 +312,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The AddAuthorFileNamesToCollection
+        /// The AddAuthorFileNamesToCollection.
         /// </summary>
-        /// <param name="fileName">The fileName<see cref="string" /></param>
+        /// <param name="fileName">The fileName<see cref="string" />.</param>
         private static void AddAuthorFileNamesToCollection(string fileName)
         {
             fileName = fileName.Trim();
@@ -325,9 +327,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The AddAuthorsListToCollection
+        /// The AddAuthorsListToCollection.
         /// </summary>
-        /// <param name="authors">The authors<see cref="IEnumerable{string}" /></param>
+        /// <param name="authors">The authors<see cref="IEnumerable{string}" />.</param>
         private static void AddAuthorsListToCollection(IEnumerable<string> authors)
         {
             //var authorsList = FileInputClass.ReadAuthorNamesFromFile(fileAuthorsPath);
@@ -338,9 +340,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetAuthorFileNameFromPath
+        /// The GetAuthorFileNameFromPath.
         /// </summary>
-        /// <param name="authorFilePaths">The authorFilePaths<see cref="IEnumerable{string}" /></param>
+        /// <param name="authorFilePaths">The authorFilePaths<see cref="IEnumerable{string}" />.</param>
         private static void GetAuthorFileNameFromPath(IEnumerable<string> authorFilePaths)
         {
             AuthorsFileNamesCollection.ClearCollection();

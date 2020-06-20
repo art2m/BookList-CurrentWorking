@@ -1,23 +1,24 @@
-using System;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-
 namespace BookList.Collections
 {
+    using System;
+    using System.Collections.Generic;
+
+    using JetBrains.Annotations;
+
     /// <summary>
-    ///     Defines the <see cref="UnformattedDataCollection" />
+    /// Defines the <see cref="UnformattedDataCollection" />.
     /// </summary>
     public static class UnformattedDataCollection
     {
         /// <summary>
-        ///     Defines the RawData
+        /// Defines the RawData.
         /// </summary>
         private static readonly List<string> RawData = new List<string>();
 
         /// <summary>
-        ///     The AddItem
+        /// The AddItem.
         /// </summary>
-        /// <param name="value">The value<see cref="string" /></param>
+        /// <param name="value">The value<see cref="string" />.</param>
         public static void AddItem([NotNull] string value)
         {
             value = value.Trim();
@@ -29,7 +30,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The ClearCollection
+        /// The ClearCollection.
         /// </summary>
         public static void ClearCollection()
         {
@@ -37,19 +38,19 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The ContainsItem
+        /// The ContainsItem.
         /// </summary>
-        /// <param name="value">The value<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="value">The value<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool ContainsItem([NotNull] string value)
         {
             return RawData.Contains(value);
         }
 
         /// <summary>
-        ///     The GetAllItems
+        /// The GetAllItems.
         /// </summary>
-        /// <returns>The <see cref="string[]" /></returns>
+        /// <returns>The <see cref="string[]" />.</returns>
         public static string[] GetAllItems()
         {
             var count = RawData.Count;
@@ -69,49 +70,49 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The GetItemAt
+        /// The GetItemAt.
         /// </summary>
-        /// <param name="index">The index<see cref="int" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="index">The index<see cref="int" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public static string GetItemAt(int index)
         {
             return RawData[index];
         }
 
         /// <summary>
-        ///     The GetItemIndex
+        /// The GetItemIndex.
         /// </summary>
-        /// <param name="value">The value<see cref="string" /></param>
-        /// <returns>The <see cref="int" /></returns>
+        /// <param name="value">The value<see cref="string" />.</param>
+        /// <returns>The <see cref="int" />.</returns>
         public static int GetItemIndex(string value)
         {
             return RawData.IndexOf(value);
         }
 
         /// <summary>
-        ///     The GetItemsCount
+        /// The GetItemsCount.
         /// </summary>
-        /// <returns>The <see cref="int" /></returns>
+        /// <returns>The <see cref="int" />.</returns>
         public static int GetItemsCount()
         {
             return RawData.Count;
         }
 
         /// <summary>
-        ///     The RemoveItem
+        /// The RemoveItem.
         /// </summary>
-        /// <param name="value">The value<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="value">The value<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool RemoveItem(string value)
         {
             return RawData.Remove(value);
         }
 
         /// <summary>
-        ///     The RemoveItemAt
+        /// The RemoveItemAt.
         /// </summary>
-        /// <param name="index">The index<see cref="int" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="index">The index<see cref="int" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool RemoveItemAt(int index)
         {
             // Get item to be removed for check that it is gone.
@@ -124,7 +125,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The SortCollection
+        /// The SortCollection.
         /// </summary>
         public static void SortCollection()
         {

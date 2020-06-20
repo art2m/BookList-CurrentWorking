@@ -1,50 +1,56 @@
-﻿using System.Windows.Forms;
-
-namespace BookList.Classes
+﻿namespace BookList.Classes
 {
+    using System.Windows.Forms;
+
     /// <summary>
-    ///     Defines the <see cref="MyMessagesClass" />
+    /// Defines the <see cref="MyMessagesClass" />.
     /// </summary>
     public static class MyMessagesClass
     {
         /// <summary>
-        ///     Gets or sets the ErrorMessage
-        ///     The error message to be displayed.
+        /// Gets or sets the ErrorMessage
+        /// Gets or sets the ErrorMessage
+        ///     The error message to be displayed..
         /// </summary>
         public static string ErrorMessage { get; set; }
 
         /// <summary>
-        ///     Gets or sets the InformationMessage
-        ///     The information message to be displayed.
+        /// Gets or sets the InformationMessage
+        /// Gets or sets the InformationMessage
+        ///     The information message to be displayed..
         /// </summary>
         public static string InformationMessage { get; set; }
 
         /// <summary>
-        ///     Gets or sets the NameOfClass
-        ///     Contains the name of the class where the message box was called from.
+        /// Gets or sets the NameOfClass
+        /// Gets or sets the NameOfClass
+        ///     Contains the name of the class where the message box was called from..
         /// </summary>
         public static string NameOfClass { get; set; }
 
         /// <summary>
-        ///     Gets or sets the NameOfMethod
-        ///     Contains the name of the method where the message box is called from.
+        /// Gets or sets the NameOfMethod
+        /// Gets or sets the NameOfMethod
+        ///     Contains the name of the method where the message box is called from..
         /// </summary>
         public static string NameOfMethod { get; set; }
 
         /// <summary>
-        ///     Gets or sets the QuestionMessage
-        ///     Contains the question to ask the user.
+        /// Gets or sets the QuestionMessage
+        /// Gets or sets the QuestionMessage
+        ///     Contains the question to ask the user..
         /// </summary>
         public static string QuestionMessage { get; set; }
 
         /// <summary>
-        ///     Gets or sets the WarningMessage
-        ///     Contains the warning message to be displayed.
+        /// Gets or sets the WarningMessage
+        /// Gets or sets the WarningMessage
+        ///     Contains the warning message to be displayed..
         /// </summary>
         public static string WarningMessage { get; set; }
 
         /// <summary>
-        ///     Shows the error message.
+        /// Shows the error message.
         /// </summary>
         /// <param name="msg">The error message to be displayed.</param>
         /// <param name="methodName">Name of the method.</param>
@@ -55,7 +61,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Display error message box with message, class name and method name.
+        /// Display error message box with message, class name and method name.
         /// </summary>
         /// <param name="msg">The error message to be displayed.</param>
         /// <param name="className">The class name.</param>
@@ -69,7 +75,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Display error message box with class name, method name and message.
+        /// Display error message box with class name, method name and message.
         /// </summary>
         public static void ShowErrorMessageBox()
         {
@@ -80,7 +86,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Shows the information message.
+        /// Shows the information message.
         /// </summary>
         /// <param name="msg">The Information message to be displayed.</param>
         /// <param name="methodName">The name of the method.</param>
@@ -91,7 +97,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Shows the information message box.
+        /// Shows the information message box.
         /// </summary>
         /// <param name="msg">The Information message to be displayed.</param>
         /// <param name="className">The name of the class.</param>
@@ -105,7 +111,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Display information message box with method name and message.
+        /// Display information message box with method name and message.
         /// </summary>
         public static void ShowInformationMessageBox()
         {
@@ -117,7 +123,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Shows the question message.
+        /// Shows the question message.
         /// </summary>
         /// <param name="msg">The question message to be displayed.</param>
         /// <param name="methodName">The name of the method.</param>
@@ -129,7 +135,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Display question message box with method name and message.
+        /// Display question message box with method name and message.
         /// </summary>
         /// <returns>Return yes or no answer to the question.</returns>
         public static DialogResult ShowQuestionMessageBox()
@@ -139,7 +145,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Shows the warning message.
+        /// Shows the warning message.
         /// </summary>
         /// <param name="msg">The warning message to be displayed.</param>
         /// <param name="methodName">The name of the method.</param>
@@ -150,7 +156,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Shows the warning message box.
+        /// Shows the warning message box.
         /// </summary>
         /// <param name="msg">The warning message to be displayed.</param>
         /// <param name="className">Name of the class.</param>
@@ -164,7 +170,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Display warning message box with method name and message.
+        /// Display warning message box with method name and message.
         /// </summary>
         public static void ShowWarningMessageBox()
         {

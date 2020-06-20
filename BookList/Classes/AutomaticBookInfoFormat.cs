@@ -21,43 +21,55 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using BookList.Collections;
-
 namespace BookList.Classes
 {
+    using System;
+    using System.Collections.Generic;
+
+    using BookList.Collections;
+
     /// <summary>
-    ///     Defines the <see cref="AutomaticBookInfoFormat" />
+    /// Defines the <see cref="AutomaticBookInfoFormat" />.
     /// </summary>
     public class AutomaticBookInfoFormat
     {
+        /// <summary>
+        /// The AutoformattingNonSeriesBookInformation.
+        /// </summary>
         public void AutoformattingNonSeriesBookInformation()
         {
             this.GetListOfSeriesReadForThisAuthor();
             this.GetListOfBooksContainedInSeries();
         }
 
+        /// <summary>
+        /// The GetListOfSeriesReadForThisAuthor.
+        /// </summary>
         private void GetListOfSeriesReadForThisAuthor()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The GetListOfBooksContainedInSeries.
+        /// </summary>
         private void GetListOfBooksContainedInSeries()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The AutoformattingSeriesBookInformation.
+        /// </summary>
         public void AutoformattingSeriesBookInformation()
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        ///     The CheckIfBookIsSeries
+        /// The CheckIfBookIsSeries.
         /// </summary>
-        /// <param name="bookInfo">The bookInfo<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="bookInfo">The bookInfo<see cref="string" />.</param>
         private void CheckIfBookIsSeries(string bookInfo)
         {
             var book = bookInfo.ToUpper();
@@ -81,26 +93,28 @@ namespace BookList.Classes
             }
         }
 
-
-        /// ********************************************************************************
         /// <summary>
-        ///     Entry point for formatting the book info data.
+        /// Entry point for formatting the book info data.
         /// </summary>
         /// <param name="unformatted">List containing all the books read by this author.</param>
-        /// <returns></returns>
-        /// <created>art2m,12/21/2019</created>
-        /// <changed>art2m,12/21/2019</changed>
-        /// ********************************************************************************
         public void FormatUnformattedBookInformation(List<string> unformatted)
         {
             foreach (var bookInfo in unformatted) this.CheckIfBookIsSeries(bookInfo);
         }
 
+        /// <summary>
+        /// The SaveBookAsNonSeries.
+        /// </summary>
+        /// <param name="book">The book<see cref="string"/>.</param>
         private void SaveBookAsNonSeries(string book)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The SaveBookInfoAsSeries.
+        /// </summary>
+        /// <param name="book">The book<see cref="string"/>.</param>
         private void SaveBookInfoAsSeries(string book)
         {
             BookSeriesCollection.AddItem(book);

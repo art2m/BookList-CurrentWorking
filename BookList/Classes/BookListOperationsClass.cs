@@ -21,20 +21,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using BookList.PropertiesClasses;
-
 namespace BookList.Classes
 {
+    using BookList.PropertiesClasses;
+
     /// <summary>
-    ///     Defines the <see cref="BookListOperationsClass" />
+    /// Defines the <see cref="BookListOperationsClass" />.
     /// </summary>
     public class BookListOperationsClass
     {
         /// <summary>
-        ///     The CheckBookListStringIsFileName
+        /// The CheckBookListStringIsFileName.
         /// </summary>
-        /// <param name="value">The value<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="value">The value<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public bool CheckBookListStringIsFileName(string value)
         {
             if (value.Contains("***")) return false;
@@ -44,10 +44,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetFileNameFromString
+        /// The GetFileNameFromString.
         /// </summary>
-        /// <param name="value">The value<see cref="string" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="value">The value<see cref="string" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         private string GetFileNameFromString(string value)
         {
             var fileName = string.Empty;

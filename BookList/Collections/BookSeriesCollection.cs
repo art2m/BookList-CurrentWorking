@@ -21,19 +21,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-
 namespace BookList.Collections
-
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
-    ///     Collection class to hold all series books found in authors file.
+    /// Collection class to hold all series books found in authors file.
     /// </summary>
     public static class BookSeriesCollection
     {
+        /// <summary>
+        /// Defines the SeriesList.
+        /// </summary>
         private static readonly List<string> SeriesList = new List<string>();
 
+        /// <summary>
+        /// The AddItem.
+        /// </summary>
+        /// <param name="item">The item<see cref="string"/>.</param>
         public static void AddItem(string item)
         {
             if (ContainsItem(item)) return;
@@ -41,25 +47,28 @@ namespace BookList.Collections
             SeriesList.Add(item);
         }
 
+        /// <summary>
+        /// The ClearCollection.
+        /// </summary>
         public static void ClearCollection()
         {
             SeriesList.Clear();
         }
 
-        /// ********************************************************************************
         /// <summary>
-        ///     Check to see if item is all ready in the list.
+        /// Check to see if item is all ready in the list.
         /// </summary>
         /// <param name="value">The item to check if contained in the list.</param>
         /// <returns>true if in list else false.</returns>
-        /// <created>art2m,12/21/2019</created>
-        /// <changed>art2m,12/21/2019</changed>
-        /// ********************************************************************************
         public static bool ContainsItem(string value)
         {
             return SeriesList.Contains(value);
         }
 
+        /// <summary>
+        /// The GetAllItems.
+        /// </summary>
+        /// <returns>The <see cref="string[]"/>.</returns>
         public static string[] GetAllItems()
         {
             var count = SeriesList.Count;
@@ -78,26 +87,50 @@ namespace BookList.Collections
             return bookInfo;
         }
 
+        /// <summary>
+        /// The GetItemAt.
+        /// </summary>
+        /// <param name="index">The index<see cref="int"/>.</param>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetItemAt(int index)
         {
             return SeriesList[index];
         }
 
+        /// <summary>
+        /// The GetItemIndex.
+        /// </summary>
+        /// <param name="value">The value<see cref="string"/>.</param>
+        /// <returns>The <see cref="int"/>.</returns>
         public static int GetItemIndex(string value)
         {
             return SeriesList.IndexOf(value);
         }
 
+        /// <summary>
+        /// The GetItemsCount.
+        /// </summary>
+        /// <returns>The <see cref="int"/>.</returns>
         public static int GetItemsCount()
         {
             return SeriesList.Count;
         }
 
+        /// <summary>
+        /// The RemoveItem.
+        /// </summary>
+        /// <param name="value">The value<see cref="string"/>.</param>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool RemoveItem(string value)
         {
             return SeriesList.Remove(value);
         }
 
+        /// <summary>
+        /// The RemoveItemAt.
+        /// </summary>
+        /// <param name="index">The index<see cref="int"/>.</param>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool RemoveItemAt(int index)
         {
             // Get item to be removed for check that it is gone.
@@ -109,6 +142,9 @@ namespace BookList.Collections
             return !ContainsItem(item);
         }
 
+        /// <summary>
+        /// The SortCollection.
+        /// </summary>
         public static void SortCollection()
         {
             SeriesList.Sort();

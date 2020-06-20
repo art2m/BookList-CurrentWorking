@@ -1,16 +1,17 @@
-﻿using System;
-using System.Windows.Forms;
-using BookList.Source;
-
-namespace BookList
+﻿namespace BookList
 {
+    using System;
+    using System.Windows.Forms;
+
+    using BookList.Source;
+
     /// <summary>
-    ///     Defines the <see cref="Program" />
+    /// Defines the <see cref="Program" />.
     /// </summary>
     internal static class Program
     {
         /// <summary>
-        ///     The main entry point for the application.
+        /// The main entry point for the application.
         /// </summary>
         [STAThread]
         private static void Main()

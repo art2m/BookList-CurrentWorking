@@ -21,24 +21,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace BookList.Collections
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
-    ///     Defines the <see cref="AuthorTitlesDictionaryCollection" />
+    /// Defines the <see cref="AuthorTitlesDictionaryCollection" />.
     /// </summary>
     public static class AuthorTitlesDictionaryCollection
     {
         /// <summary>
-        ///     Defines the DicData
+        /// Defines the DicData.
         /// </summary>
         private static readonly Dictionary<string, List<string>> DicData = new Dictionary<string, List<string>>();
 
         /// <summary>
-        ///     Adds the items.
+        /// Adds the items.
         /// </summary>
         /// <param name="author">The author key.</param>
         /// <param name="titles">The titles for each author key.</param>
@@ -48,7 +48,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Clears the collection.
+        /// Clears the collection.
         /// </summary>
         public static void ClearCollection()
         {
@@ -56,21 +56,21 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Determines whether [contains key item] [the specified author].
+        /// Determines whether [contains key item] [the specified author].
         /// </summary>
         /// <param name="author">The author.</param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool ContainsKeyItem(string author)
         {
             return DicData.ContainsKey(author);
         }
 
         /// <summary>
-        ///     Determines whether [contains value item] [the specified author].
+        /// Determines whether [contains value item] [the specified author].
         /// </summary>
         /// <param name="author">The author.</param>
         /// <param name="title">The title.</param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool ContainsValueItem(string author, string title)
         {
             var keyList = new List<string>(DicData.Keys);
@@ -87,7 +87,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Get the index of this  item.
+        /// Get the index of this  item.
         /// </summary>
         /// <param name="author">The item to get the index of.</param>
         /// <returns>the index or else -1.</returns>
@@ -108,7 +108,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Gets the value at key.
+        /// Gets the value at key.
         /// </summary>
         /// <param name="author">The author.</param>
         /// <returns>List of titles for this author.</returns>
@@ -126,18 +126,18 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Get the count of Key items contained in the collection.
+        /// Get the count of Key items contained in the collection.
         /// </summary>
-        /// <returns>The <see cref="int" /></returns>
+        /// <returns>The <see cref="int" />.</returns>
         public static int ItemsCount()
         {
             return DicData.Count;
         }
 
         /// <summary>
-        ///     Remove the item at selected index.
+        /// Remove the item at selected index.
         /// </summary>
-        /// <param name="author">The author</param>
+        /// <param name="author">The author.</param>
         /// <returns>True if item is removed else false.</returns>
         public static bool RemoveKeyValue(string author)
         {
@@ -147,7 +147,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Removes the value at key.
+        /// Removes the value at key.
         /// </summary>
         /// <param name="author">The author.</param>
         /// <param name="title">The title.</param>

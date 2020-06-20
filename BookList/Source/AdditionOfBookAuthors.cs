@@ -21,20 +21,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.IO;
-using System.Windows.Forms;
-using BookList.Classes;
-
 namespace BookList.Source
 {
+    using BookList.Classes;
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+
     /// <summary>
-    ///     Defines the <see cref="AdditionOfBookAuthors" />
+    /// Defines the <see cref="AdditionOfBookAuthors" />.
     /// </summary>
     public partial class AdditionOfBookAuthors : Form
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AdditionOfBookAuthors" /> class.
+        /// Initializes a new instance of the <see cref="AdditionOfBookAuthors"/> class.
         /// </summary>
         public AdditionOfBookAuthors()
         {
@@ -42,7 +42,7 @@ namespace BookList.Source
         }
 
         /// <summary>
-        ///     The OnAddNewBookRecordButton_Clicked
+        /// The OnAddNewBookRecordButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
@@ -55,18 +55,17 @@ namespace BookList.Source
         }
 
         /// <summary>
-        ///     The OnCancelOperationButton_Clicked
+        /// The OnCancelOperationButton_Clicked.
         /// </summary>
-        /// <param name="sender">The sender<see cref="object" /></param>
-        /// <param name="e">The e<see cref="EventArgs" /></param>
+        /// <param name="sender">The sender<see cref="object" />.</param>
+        /// <param name="e">The e<see cref="EventArgs" />.</param>
         private void OnCancelOperationButton_Clicked(object sender, EventArgs e)
         {
             this.btnAdd.PerformClick();
         }
 
-
         /// <summary>
-        ///     The OnCloseAddingNewAuthorButton_Close
+        /// The OnCloseAddingNewAuthorButton_Close.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
@@ -76,7 +75,7 @@ namespace BookList.Source
         }
 
         /// <summary>
-        ///     The OnOneAuthorRadioButton_Clicked
+        /// The OnOneAuthorRadioButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
@@ -92,7 +91,7 @@ namespace BookList.Source
         }
 
         /// <summary>
-        ///     The OnSaveRecordButton_Clicked
+        /// The OnSaveRecordButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
@@ -126,7 +125,7 @@ namespace BookList.Source
         }
 
         /// <summary>
-        ///     The OnThreeAuthorsRadioButton_Clicked
+        /// The OnThreeAuthorsRadioButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
@@ -142,7 +141,7 @@ namespace BookList.Source
         }
 
         /// <summary>
-        ///     The OnTwoAuthorsRadioButton_Clicked
+        /// The OnTwoAuthorsRadioButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>

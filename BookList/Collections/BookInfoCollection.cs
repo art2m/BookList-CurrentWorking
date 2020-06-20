@@ -21,25 +21,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-
 namespace BookList.Collections
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
-    ///     This contains the titles of all books read.
+    /// This contains the titles of all books read.
     /// </summary>
     public static class BookInfoCollection
     {
         /// <summary>
-        ///     Defines the WordsList
+        /// Defines the WordsList.
         /// </summary>
         private static readonly List<string> WordsList = new List<string>();
 
         /// <summary>
-        ///     The AddItem
+        /// The AddItem.
         /// </summary>
-        /// <param name="word">The word<see cref="string" /></param>
+        /// <param name="word">The word<see cref="string" />.</param>
         public static void AddItem(string word)
         {
             if (ContainsItem(word))
@@ -51,7 +51,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The ClearCollection
+        /// The ClearCollection.
         /// </summary>
         public static void ClearCollection()
         {
@@ -59,19 +59,19 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The ContainsItem
+        /// The ContainsItem.
         /// </summary>
-        /// <param name="word">The word<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="word">The word<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool ContainsItem(string word)
         {
             return WordsList.Contains(word);
         }
 
         /// <summary>
-        ///     The GetAllItems
+        /// The GetAllItems.
         /// </summary>
-        /// <returns>The <see cref="string[]" /></returns>
+        /// <returns>The <see cref="string[]" />.</returns>
         public static string[] GetAllItems()
         {
             var count = WordsList.Count;
@@ -91,49 +91,49 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The GetItemAt
+        /// The GetItemAt.
         /// </summary>
-        /// <param name="index">The index<see cref="int" /></param>
-        /// <returns>The <see cref="string" /></returns>
+        /// <param name="index">The index<see cref="int" />.</param>
+        /// <returns>The <see cref="string" />.</returns>
         public static string GetItemAt(int index)
         {
             return WordsList[index];
         }
 
         /// <summary>
-        ///     The GetItemIndex
+        /// The GetItemIndex.
         /// </summary>
-        /// <param name="word">The word<see cref="string" /></param>
-        /// <returns>The <see cref="int" /></returns>
+        /// <param name="word">The word<see cref="string" />.</param>
+        /// <returns>The <see cref="int" />.</returns>
         public static int GetItemIndex(string word)
         {
             return WordsList.IndexOf(word);
         }
 
         /// <summary>
-        ///     The ItemsCount
+        /// The ItemsCount.
         /// </summary>
-        /// <returns>The <see cref="int" /></returns>
+        /// <returns>The <see cref="int" />.</returns>
         public static int ItemsCount()
         {
             return WordsList.Count;
         }
 
         /// <summary>
-        ///     The RemoveItem
+        /// The RemoveItem.
         /// </summary>
-        /// <param name="word">The word<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="word">The word<see cref="string" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool RemoveItem(string word)
         {
             return WordsList.Remove(word);
         }
 
         /// <summary>
-        ///     The RemoveItemAt
+        /// The RemoveItemAt.
         /// </summary>
-        /// <param name="index">The index<see cref="int" /></param>
-        /// <returns>The <see cref="bool" /></returns>
+        /// <param name="index">The index<see cref="int" />.</param>
+        /// <returns>The <see cref="bool" />.</returns>
         public static bool RemoveItemAt(int index)
         {
             // Get item to be removed for check that it is gone.
@@ -146,7 +146,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The SortCollection
+        /// The SortCollection.
         /// </summary>
         public static void SortCollection()
         {

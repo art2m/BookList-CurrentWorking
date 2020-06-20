@@ -197,3 +197,5 @@ C:\Users\art2m_000\Documents\RiderWorking\BookList-CurrentWorking\BookList\obj\D
 C:\Users\art2m_000\Documents\RiderWorking\BookList-CurrentWorking\BookList\obj\Debug\BookList.csproj.CopyComplete
 C:\Users\art2m_000\Documents\RiderWorking\BookList-CurrentWorking\BookList\obj\Debug\BookList.exe
 C:\Users\art2m_000\Documents\RiderWorking\BookList-CurrentWorking\BookList\obj\Debug\BookList.pdb
+C:\Users\art2m_000\Documents\RiderWorking\BookList-CurrentWorking\BookList\obj\Debug\BookList.MyStrings.resources
+C:\Users\art2m_000\Documents\RiderWorking\BookList-CurrentWorking\BookList\obj\Debug\BookList.Source.FormatUnformattedBookData.resources

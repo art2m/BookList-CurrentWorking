@@ -21,102 +21,103 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using BookList.Collections;
-
 namespace BookList.Classes
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+
+    using BookList.Collections;
+
     /// <summary>
-    ///     Defines the <see cref="FileInputClass" />
+    /// Defines the <see cref="FileInputClass" />.
     /// </summary>
     public static class FileInputClass
     {
         /// <summary>
-        ///     Defines the V
+        /// Defines the V.
         /// </summary>
         private const string V = "Not enough memory to continue. Try closing other windows.";
 
         /// <summary>
-        ///     Defines the V1
+        /// Defines the V1.
         /// </summary>
         private const string V1 = "The file path value is a null string. ";
 
         /// <summary>
-        ///     Defines the V2
+        /// Defines the V2.
         /// </summary>
         private const string V2 = "The file path value is an empty string.";
 
         /// <summary>
-        ///     Defines the V3
+        /// Defines the V3.
         /// </summary>
         private const string V3 = "Unable to locate this file. ";
 
         /// <summary>
-        ///     Defines the V4
+        /// Defines the V4.
         /// </summary>
         private const string V4 = "Unable to locate the directory.";
 
         /// <summary>
-        ///     Defines the V5
+        /// Defines the V5.
         /// </summary>
         private const string V5 = "File path has invalid characters in it.";
 
         /// <summary>
-        ///     Defines the V6
+        /// Defines the V6.
         /// </summary>
         private const string V6 = "The file path value is a null string. ";
 
         /// <summary>
-        ///     Defines the V7
+        /// Defines the V7.
         /// </summary>
         private const string V7 = "The file path value is an empty string.";
 
         /// <summary>
-        ///     Defines the V8
+        /// Defines the V8.
         /// </summary>
         private const string V8 = "Unable to locate this file. ";
 
         /// <summary>
-        ///     Defines the V9
+        /// Defines the V9.
         /// </summary>
         private const string V9 = "Unable to locate the directory.";
 
         /// <summary>
-        ///     Defines the V10
+        /// Defines the V10.
         /// </summary>
         private const string V10 = "File path has invalid characters in it.";
 
         /// <summary>
-        ///     Defines the V11
+        /// Defines the V11.
         /// </summary>
         private const string V11 = "The file path value is a null string. ";
 
         /// <summary>
-        ///     Defines the V12
+        /// Defines the V12.
         /// </summary>
         private const string V12 = "The file path value is an empty string.";
 
         /// <summary>
-        ///     Defines the V13
+        /// Defines the V13.
         /// </summary>
         private const string V13 = "Unable to locate this file. ";
 
         /// <summary>
-        ///     Defines the V14
+        /// Defines the V14.
         /// </summary>
         private const string V14 = "Unable to locate the directory.";
 
         /// <summary>
-        ///     Defines the V15
+        /// Defines the V15.
         /// </summary>
         private const string V15 = "File path has invalid characters in it.";
 
         /// <summary>
-        ///     Initializes static members of the <see cref="FileInputClass" /> class.
+        /// Initializes static members of the <see cref="FileInputClass"/> class.
         /// </summary>
         static FileInputClass()
         {
@@ -128,10 +129,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ReadAuthorNamesFromFile
+        /// The ReadAuthorNamesFromFile.
         /// </summary>
-        /// <param name="filePath">The filePath<see cref="string" /></param>
-        /// <returns>The <see cref="List{string}" /></returns>
+        /// <param name="filePath">The filePath<see cref="string" />.</param>
+        /// <returns>The <see cref="List{string}" />.</returns>
         public static List<string> ReadAuthorNamesFromFile(string filePath)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
@@ -208,9 +209,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ReadTitlesFromFile
+        /// The ReadTitlesFromFile.
         /// </summary>
-        /// <param name="filePath">The filePath<see cref="string" /></param>
+        /// <param name="filePath">The filePath<see cref="string" />.</param>
         public static void ReadTitlesFromFile(string filePath)
         {
             try
@@ -265,9 +266,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ReadUnformattedDataFromFile
+        /// The ReadUnformattedDataFromFile.
         /// </summary>
-        /// <param name="filePath">The filePath<see cref="string" /></param>
+        /// <param name="filePath">The filePath<see cref="string" />.</param>
         public static void ReadUnformattedDataFromFile(string filePath)
         {
             try

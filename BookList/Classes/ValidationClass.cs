@@ -1,22 +1,22 @@
-﻿// //-----------------------------------------------------------------------------------------------------------------------------------
+﻿// //------------------------------------------------------------------------------------------------------------------
 // <copyright file="None">
-// 
+//
 // Company copyright tag.
-// 
+//
 //  </copyright>
-// 
+//
 // Art2MSpell
-// 
+//
 // ValidationClass.cs
-// 
+//
 // art2m
-// 
+//
 // art2m@live.com
-// 
+//
 // 05  10  2019
-// 
+//
 // 05  08   2019
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -27,131 +27,27 @@
 // GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// //-----------------------------------------------------------------------------------------------------------------------------------
-
-using System;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Text;
-using JetBrains.Annotations;
+// //------------------------------------------------------------------------------------------------------------------
 
 namespace BookList.Classes
 {
+    using System;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.IO;
+    using System.Reflection;
+    using System.Security;
+    using System.Text;
+    using JetBrains.Annotations;
+    using PropertiesClasses;
+
     /// <summary>
-    ///     Validates data.
+    /// Validates data.
     /// </summary>
     public static class ValidationClass
     {
         /// <summary>
-        ///     Defines the Value
-        /// </summary>
-        private const string Value = "The file name cannot be a null value.";
-
-        /// <summary>
-        ///     Defines the Value1
-        /// </summary>
-        private const string Value1 = "The file name contains invalid characters. Exiting operation:";
-
-        /// <summary>
-        ///     Defines the Value2
-        /// </summary>
-        private const string Value2 = "The string cannot be a null value.";
-
-        /// <summary>
-        ///     Defines the Value3
-        /// </summary>
-        private const string Value3 = "The path name contains invalid characters. Exiting operation:";
-
-        /// <summary>
-        ///     Defines the Value4
-        /// </summary>
-        private const string Value4 = "The directory path cannot be a null value.";
-
-        /// <summary>
-        ///     Defines the Value5
-        /// </summary>
-        private const string Value5 = "Unable to locate file for this path. Exiting operation: ";
-
-        /// <summary>
-        ///     Defines the Value6
-        /// </summary>
-        private const string Value6 = "Invalid directory path.";
-
-        /// <summary>
-        ///     Defines the Value7
-        /// </summary>
-        private const string Value7 = "The file path cannot be a null value.";
-
-        /// <summary>
-        ///     Defines the Value8
-        /// </summary>
-        private const string Value8 = "The path is too long. exiting operation.";
-
-        /// <summary>
-        ///     Defines the Value9
-        /// </summary>
-        private const string Value9 = "You do not have required permissions. ";
-
-        /// <summary>
-        ///     Defines the Value10
-        /// </summary>
-        private const string Value10 = "The path cannot be null.";
-
-        /// <summary>
-        ///     Defines the Value11
-        /// </summary>
-        private const string Value11 = "Contains a colon that is not part of the path.";
-
-        /// <summary>
-        ///     Defines the Value12
-        /// </summary>
-        private const string Value12 = "The specified path or filename exceeds Maximum Length.";
-
-        /// <summary>
-        ///     Defines the V
-        /// </summary>
-        private const string V = "Invalid character in string:  ";
-
-        /// <summary>
-        ///     Defines the Value13
-        /// </summary>
-        private const string Value13 = "This value cannot be an empty string.";
-
-        /// <summary>
-        ///     Defines the Value14
-        /// </summary>
-        private const string Value14 = "Invalid character in string:";
-
-        /// <summary>
-        ///     Defines the Value16
-        /// </summary>
-        private const string Value16 = "The value cannot be null.";
-
-        /// <summary>
-        ///     Defines the Value15
-        /// </summary>
-        private const string Value15 = "Check to see if space in word or if two words are entered.";
-
-        /// <summary>
-        ///     Defines the Value17
-        /// </summary>
-        private const string Value17 = "Spaces and double words are not allowed.";
-
-        /// <summary>
-        ///     Defines the Value18
-        /// </summary>
-        private const string Value18 = "The value is not valid. It is empty or null.";
-
-        /// <summary>
-        ///     Defines the V1
-        /// </summary>
-        private const string V1 = "This value can not be null. ";
-
-        /// <summary>
-        ///     Initializes static members of the <see cref="ValidationClass" /> class.
+        /// Initializes static members of the <see cref="ValidationClass"/> class.
         /// </summary>
         static ValidationClass()
         {
@@ -163,7 +59,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CheckForInvalidFileNameCharacters
+        /// The CheckForInvalidFileNameCharacters.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>true if no invalid characters in file name else false.</returns>
@@ -192,7 +88,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value);
+                sb.AppendLine("The file name cannot be a null value.");
                 sb.AppendLine(ex.ToString());
 
                 MyMessagesClass.ErrorMessage = sb.ToString();
@@ -204,7 +100,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value1);
+                sb.AppendLine("The file name contains invalid characters. Exiting operation:");
                 sb.AppendLine(fileName);
                 sb.AppendLine(ex.ToString());
 
@@ -216,7 +112,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The CheckForInvalidPathCharacters
+        /// The CheckForInvalidPathCharacters.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>If no invalid path characters return true else false.</returns>
@@ -245,7 +141,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value2);
+                sb.AppendLine("The string cannot be a null value.");
                 sb.AppendLine(ex.ToString());
 
                 MyMessagesClass.ErrorMessage = sb.ToString();
@@ -257,7 +153,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value3);
+                sb.AppendLine("The path name contains invalid characters. Exiting operation:");
                 sb.AppendLine(value);
                 sb.AppendLine(ex.ToString());
 
@@ -272,7 +168,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ValidateDirectoryExists
+        /// The ValidateDirectoryExists.
         /// </summary>
         /// <param name="dirPath">The directory path.</param>
         /// <returns>If directory exists then true else false.</returns>
@@ -293,7 +189,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value4);
+                sb.AppendLine("The directory path cannot be a null value.");
                 sb.AppendLine(dirPath);
                 sb.AppendLine(ex.ToString());
 
@@ -306,7 +202,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value6);
+                sb.AppendLine("Invalid directory path.");
                 sb.AppendLine(dirPath);
                 sb.AppendLine(ex.ToString());
 
@@ -321,10 +217,10 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Validates the file exits.
+        /// Validates the file exits.
         /// </summary>
         /// <param name="filePath">The file path.</param>
-        /// <returns></returns>
+        /// <returns>.</returns>
         public static bool ValidateFileExits([NotNull] string filePath)
         {
             if (filePath == null) throw new ArgumentNullException(nameof(filePath));
@@ -342,7 +238,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value7);
+                sb.AppendLine("The file path cannot be a null value.");
                 sb.AppendLine(ex.ToString());
 
                 MyMessagesClass.ErrorMessage = sb.ToString();
@@ -354,7 +250,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value5);
+                sb.AppendLine("Unable to locate file for this path. Exiting operation: ");
                 sb.AppendLine(filePath);
                 sb.AppendLine(ex.ToString());
 
@@ -367,7 +263,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ValidatePathToLong
+        /// The ValidatePathToLong.
         /// </summary>
         /// <param name="value">The path to be checked.</param>
         /// <returns>true if path OK else false.</returns>
@@ -387,7 +283,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value8);
+                sb.AppendLine("The path is too long. exiting operation.");
                 sb.AppendLine(value);
                 sb.AppendLine(ex.ToString());
 
@@ -403,7 +299,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value9);
+                sb.AppendLine("You do not have required permissions. ");
                 sb.AppendLine(value);
                 sb.AppendLine(ex.ToString());
 
@@ -416,7 +312,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value10);
+                sb.AppendLine("The path cannot be null.");
                 sb.AppendLine(ex.ToString());
                 MyMessagesClass.ShowErrorMessageBox();
 
@@ -426,7 +322,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value11);
+                sb.AppendLine("Contains a colon that is not part of the path.");
                 sb.AppendLine(value);
                 sb.AppendLine(ex.ToString());
 
@@ -439,7 +335,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value12);
+                sb.AppendLine("The specified path or filename exceeds Maximum Length.");
                 sb.AppendLine(ex.ToString());
 
                 MyMessagesClass.ErrorMessage = sb.ToString();
@@ -450,7 +346,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Check that there are only letters in the spelling word.
+        /// Check that there are only letters in the spelling word.
         /// </summary>
         /// <param name="value">The spelling word to be checked.</param>
         /// <returns>True if only letters in the spelling word else false.</returns>
@@ -471,7 +367,7 @@ namespace BookList.Classes
                         continue;
                     }
 
-                    MyMessagesClass.ErrorMessage = V + letter;
+                    MyMessagesClass.ErrorMessage = "Invalid character in string:  " + letter;
                     val = letter.ToString();
 
                     throw new NotSupportedException();
@@ -483,7 +379,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value14);
+                sb.AppendLine("Invalid character in string:");
                 sb.AppendLine(val);
                 sb.AppendLine(ex.ToString());
 
@@ -498,7 +394,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Validate string is not empty.
+        /// Validate string is not empty.
         /// </summary>
         /// <param name="value">The string to be checked.</param>
         /// <returns>True if string not empty string else false.</returns>
@@ -518,7 +414,7 @@ namespace BookList.Classes
             catch (ArgumentNullException ex)
             {
                 var sb = new StringBuilder();
-                sb.AppendLine(Value16);
+                sb.AppendLine("The value cannot be null.");
                 sb.AppendLine(ex.ToString());
 
                 MyMessagesClass.ErrorMessage = sb.ToString();
@@ -530,7 +426,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value13);
+                sb.AppendLine("This value cannot be an empty string.");
                 sb.AppendLine(value);
                 sb.AppendLine(ex.ToString());
 
@@ -545,7 +441,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Check for space in value this will means either space in word that does not belong or
+        /// Check for space in value this will means either space in word that does not belong or
         ///     two words instead of one spelling word.
         /// </summary>
         /// <param name="value">The spelling word to validate.</param>
@@ -571,7 +467,7 @@ namespace BookList.Classes
             {
                 var sb = new StringBuilder();
 
-                sb.AppendLine(Value16);
+                sb.AppendLine("The value cannot be null.");
                 sb.AppendLine(ex.ToString());
 
                 MyMessagesClass.ErrorMessage = sb.ToString();
@@ -583,8 +479,8 @@ namespace BookList.Classes
             catch (NotSupportedException ex)
             {
                 var sb = new StringBuilder();
-                sb.AppendLine(Value15);
-                sb.AppendLine(Value17);
+                sb.AppendLine("Check to see if space in word or if two words are entered.");
+                sb.AppendLine("Spaces and double words are not allowed.");
                 sb.AppendLine(value);
                 sb.AppendLine(ex.ToString());
 
@@ -599,7 +495,7 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The ValidateStringValueNotNullNotWhiteSpace
+        /// The ValidateStringValueNotNullNotWhiteSpace.
         /// </summary>
         /// <param name="value">The string to be checked.</param>
         /// <returns>True if string is not empty and has length.</returns>
@@ -621,7 +517,7 @@ namespace BookList.Classes
             catch (NotSupportedException ex)
             {
                 var sb = new StringBuilder();
-                sb.AppendLine(Value18);
+                sb.AppendLine("The value is not valid. It is empty or null.");
                 sb.AppendLine(value);
                 sb.AppendLine(ex.ToString());
 
@@ -635,25 +531,20 @@ namespace BookList.Classes
             }
         }
 
-        /// <summary>
-        ///     The ValidateStringValueIsNotNull
-        /// </summary>
-        /// <param name="value">The value<see cref="string" /></param>
-        /// <returns>The <see cref="bool" /></returns>
-        public static bool ValidateStringValueIsNotNull(string value)
+        public static bool ValidateSeriesVolumeTextDoesNotMatch()
         {
-            try
-            {
-                if (value == null) throw new ArgumentNullException();
+            return FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.NameOfBookSeries);
+        }
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MyMessagesClass.ErrorMessage = V1 + ex;
-                MyMessagesClass.ShowErrorMessageBox();
-                return false;
-            }
+        public static bool ValidateTitleSeriesTextDoesNotMatch()
+        {
+            // Returns false not the same else true they are the same.
+            return FormatBookDataProperties.ContainsBookTitle.Equals(FormatBookDataProperties.NameOfBookSeries);
+        }
+
+        public static bool ValidateTitleVolumeTextDoesNotMatch()
+        {
+            return FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.ContainsBookTitle);
         }
     }
 }
