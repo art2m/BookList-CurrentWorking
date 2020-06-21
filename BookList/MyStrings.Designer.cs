@@ -61,6 +61,15 @@ namespace BookList {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Author for book. If multiple authors for this book press add button to add next author..
+        /// </summary>
+        internal static string lblInfoAddAuthor {
+            get {
+                return ResourceManager.GetString("lblInfoAddAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select book series name in the text box then press Book Series button..
         /// </summary>
         internal static string SelectSeries {

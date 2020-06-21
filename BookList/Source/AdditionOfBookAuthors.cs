@@ -39,6 +39,7 @@ namespace BookList.Source
         public AdditionOfBookAuthors()
         {
             this.InitializeComponent();
+            this.SetInitialControlsState();
         }
 
         /// <summary>
@@ -48,10 +49,9 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnAddNewBookRecordButton_Clicked(object sender, EventArgs e)
         {
-            this.txtFirstAuthor.Text = string.Empty;
-            this.txtSecondAuthor.Text = string.Empty;
-            this.txtThirdAuthor.Text = string.Empty;
-            this.txtFirstAuthor.Focus();
+            this.txtAuthor.Enabled = true;
+            this.txtAuthor.Text = string.Empty;
+            this.txtAuthor.Focus();
         }
 
         /// <summary>
@@ -74,21 +74,6 @@ namespace BookList.Source
             this.Close();
         }
 
-        /// <summary>
-        /// The OnOneAuthorRadioButton_Clicked.
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
-        /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
-        private void OnOneAuthorRadioButton_Clicked(object sender, EventArgs e)
-        {
-            this.lblFirstAuthor.Enabled = true;
-            this.lblSecondAuthor.Enabled = false;
-            this.lblThirdAuthor.Enabled = false;
-
-            this.txtFirstAuthor.Enabled = true;
-            this.txtSecondAuthor.Enabled = false;
-            this.txtThirdAuthor.Enabled = false;
-        }
 
         /// <summary>
         /// The OnSaveRecordButton_Clicked.
@@ -100,21 +85,8 @@ namespace BookList.Source
             var dirAuthors = AuthorsDirectoryFilesClass.GetPathToAuthorsDirectory();
 
             var authorOp = new AuthorsTextOperations();
-            var fileName = string.Empty;
 
-            if (this.rbtnOneAuthor.Checked)
-            {
-                fileName = authorOp.BookAuthorName(this.txtFirstAuthor.Text);
-            }
-            else if (this.rbtnTwoAuthors.Checked)
-            {
-                fileName = authorOp.BookAuthorName(this.txtFirstAuthor.Text, this.txtSecondAuthor.Text);
-            }
-            else if (this.rbtnThreeAuthors.Checked)
-            {
-                fileName = authorOp.BookAuthorName(this.txtFirstAuthor.Text, this.txtSecondAuthor.Text, this
-                    .txtThirdAuthor.Text);
-            }
+            var fileName = authorOp.BookAuthorName(this.txtAuthor.Text);
 
             if (string.IsNullOrEmpty(fileName)) return;
             if (!Directory.Exists(dirAuthors)) return;
@@ -124,36 +96,13 @@ namespace BookList.Source
             DirectoryFileOperationsClass.CreateNewFile(filePath);
         }
 
-        /// <summary>
-        /// The OnThreeAuthorsRadioButton_Clicked.
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
-        /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
-        private void OnThreeAuthorsRadioButton_Clicked(object sender, EventArgs e)
+        private void SetInitialControlsState()
         {
-            this.lblFirstAuthor.Enabled = true;
-            this.lblSecondAuthor.Enabled = true;
-            this.lblThirdAuthor.Enabled = true;
-
-            this.txtFirstAuthor.Enabled = true;
-            this.txtSecondAuthor.Enabled = true;
-            this.txtThirdAuthor.Enabled = true;
-        }
-
-        /// <summary>
-        /// The OnTwoAuthorsRadioButton_Clicked.
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
-        /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
-        private void OnTwoAuthorsRadioButton_Clicked(object sender, EventArgs e)
-        {
-            this.lblFirstAuthor.Enabled = true;
-            this.lblSecondAuthor.Enabled = true;
-            this.lblThirdAuthor.Enabled = false;
-
-            this.txtFirstAuthor.Enabled = true;
-            this.txtSecondAuthor.Enabled = true;
-            this.txtThirdAuthor.Enabled = false;
+            this.btnAdd.Enabled = true;
+            this.btnSave.Enabled = false;
+            this.btnCancel.Enabled = false;
+            this.txtAuthor.Enabled = false;
+            this.lblInfo.Text = MyStrings.lblInfoAddAuthor;
         }
     }
 }

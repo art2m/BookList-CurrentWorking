@@ -237,25 +237,27 @@ namespace BookList.Source
 
         private void SetAllControlsToolTips()
         {
-            var tTip = new ToolTip();
+            using (var tTip = new ToolTip() )
 
-            tTip.SetToolTip(this.txtBookInfo, FormatBookDataProperties.TipTxtData);
+            {
+                tTip.SetToolTip(this.txtBookInfo, FormatBookDataProperties.TipTxtData);
 
-            tTip.SetToolTip(this.btnFormat, FormatBookDataProperties.TipBtnReplace);
+                tTip.SetToolTip(this.btnFormat, FormatBookDataProperties.TipBtnReplace);
 
-            tTip.SetToolTip(this.btnSave, FormatBookDataProperties.TipBtnSave);
+                tTip.SetToolTip(this.btnSave, FormatBookDataProperties.TipBtnSave);
 
-            tTip.SetToolTip(this.btnSeries, FormatBookDataProperties.TipBtnSeries);
+                tTip.SetToolTip(this.btnSeries, FormatBookDataProperties.TipBtnSeries);
 
-            tTip.SetToolTip(this.btnTitle, FormatBookDataProperties.TipBtnTitle);
+                tTip.SetToolTip(this.btnTitle, FormatBookDataProperties.TipBtnTitle);
 
-            tTip.SetToolTip(this.btnVolume, FormatBookDataProperties.TipBtnVolume);
+                tTip.SetToolTip(this.btnVolume, FormatBookDataProperties.TipBtnVolume);
 
-            tTip.SetToolTip(this.txtSeries, FormatBookDataProperties.TipTxtSeries);
+                tTip.SetToolTip(this.txtSeries, FormatBookDataProperties.TipTxtSeries);
 
-            tTip.SetToolTip(this.txtTitle, FormatBookDataProperties.TipTxtTitle);
+                tTip.SetToolTip(this.txtTitle, FormatBookDataProperties.TipTxtTitle);
 
-            tTip.SetToolTip(this.txtVolume, FormatBookDataProperties.TipTxtVolume);
+                tTip.SetToolTip(this.txtVolume, FormatBookDataProperties.TipTxtVolume);
+            }
         }
 
         private void SetInitialControlState()

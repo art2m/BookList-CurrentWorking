@@ -63,7 +63,6 @@ namespace BookList.Source
             this.btnExisting.Enabled = true;
             this.btnNew.Enabled = true;
             this.btnSave.Enabled = false;
-            this.txtAuthor.ReadOnly = true;
             this.txtSeries.Enabled = false;
             this.txtTitle.Enabled = false;
             this.txtVolume.Enabled = false;
@@ -82,7 +81,7 @@ namespace BookList.Source
                 dlg.ShowDialog();
             }
 
-            this.txtAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent.Trim();
+            this.lblAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent.Trim();
             this.SetAddingNewBookControlsState();
         }
 
@@ -99,7 +98,7 @@ namespace BookList.Source
                 win.ShowDialog();
             }
 
-            this.txtAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent;
+            this.lblAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent;
             this.SetAddingNewBookControlsState();
         }
 
@@ -112,7 +111,7 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="System.EventArgs" />Instance containing the event data.</param>
         private void OnAddNewBookRecordButton_Clicked(object sender, EventArgs e)
         {
-            if (this.txtAuthor.Text.Trim().Length == 0) return;
+            if (string.IsNullOrEmpty(BookListPropertiesClass.AuthorsNameCurrent)) return;
 
             this.txtTitle.Enabled = true;
             this.txtTitle.Focus();
@@ -136,8 +135,6 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="System.EventArgs" />Instance containing the event data.</param>
         private void OnCancelOperationButton_Clicked(object sender, EventArgs e)
         {
-            this.txtAuthor.Enabled = false;
-            this.txtAuthor.Text = string.Empty;
             this.txtSeries.Enabled = false;
             this.txtSeries.Text = string.Empty;
             this.txtTitle.Enabled = false;
@@ -195,7 +192,8 @@ namespace BookList.Source
 
             if (!this.chkSeries.Checked)
             {
-                FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath, this.txtAuthor.Text);
+                FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath,
+                    BookListPropertiesClass.AuthorsNameCurrent);
                 return;
             }
 

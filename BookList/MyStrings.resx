@@ -133,4 +133,8 @@
     <value>Select the volume and number from the text box. Then press the Volume Number button.</value>
     <comment>Select the voulme and number from the text box txtInfo.</comment>
   </data>
+  <data name="lblInfoAddAuthor" xml:space="preserve">
+    <value>Add Author for book. If multiple authors for this book press add button to add next author.</value>
+    <comment>lblInfo.Text tell user how to add author and add more than one author</comment>
+  </data>
 </root>
