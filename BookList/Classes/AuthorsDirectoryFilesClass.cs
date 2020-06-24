@@ -4,10 +4,8 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-
     using BookList.Collections;
     using BookList.PropertiesClasses;
-
     using JetBrains.Annotations;
 
     /// <summary>
@@ -193,10 +191,9 @@
         /// </summary>
         private static void GetAuthorFileNamesFromAuthorsList()
         {
-            var authorNames =
-                FileInputClass.ReadAuthorNamesFromFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
+            FileInputClass.ReadAuthorsNamesFromFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
 
-            AddAuthorsListToCollection(authorNames);
+            AuthorNamesListCollection.SortCollection();
         }
 
         /// <summary>

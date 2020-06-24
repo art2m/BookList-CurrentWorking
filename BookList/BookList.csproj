@@ -69,6 +69,7 @@
     <Compile Include="Collections\AuthorsFileNamesCollection.cs" />
     <Compile Include="Collections\AuthorTitlesDictionaryCollection.cs" />
     <Compile Include="Collections\BookSeriesCollection.cs" />
+    <Compile Include="Collections\UnformattedDataBackUpCollection.cs" />
     <Compile Include="Collections\UnformattedDataCollection.cs" />
     <Compile Include="Collections\BookInfoCollection.cs" />
     <Compile Include="Interfaces\IMyCollection.cs" />

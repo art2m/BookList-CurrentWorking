@@ -192,8 +192,7 @@ namespace BookList.Source
 
             if (!this.chkSeries.Checked)
             {
-                FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath,
-                    BookListPropertiesClass.AuthorsNameCurrent);
+                FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath);
                 return;
             }
 
@@ -204,7 +203,7 @@ namespace BookList.Source
             sb.Append(")");
             sb.Append(volume);
             var bookInfo = sb.ToString();
-            FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath, bookInfo);
+            FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath);
         }
 
         /// <summary>

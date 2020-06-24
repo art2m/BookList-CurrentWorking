@@ -6,7 +6,6 @@ namespace BookList.Classes
     using System.IO;
     using System.Reflection;
     using System.Security;
-
     using BookList.Collections;
 
     /// <summary>
@@ -14,41 +13,6 @@ namespace BookList.Classes
     /// </summary>
     public static class FileOutputClass
     {
-        /// <summary>
-        /// Defines the V7.
-        /// </summary>
-        private const string V7 = "You do not have access writes for this operation.";
-
-        /// <summary>
-        /// Defines the V1.
-        /// </summary>
-        private const string V1 = "The path variable contains a null string. ";
-
-        /// <summary>
-        /// Defines the V2.
-        /// </summary>
-        private const string V2 = "The file path value is a null string. ";
-
-        /// <summary>
-        /// Defines the V3.
-        /// </summary>
-        private const string V3 = "Unable to locate the directory.";
-
-        /// <summary>
-        /// Defines the V4.
-        /// </summary>
-        private const string V4 = "the file path is to long.";
-
-        /// <summary>
-        /// Defines the V5.
-        /// </summary>
-        private const string V5 = "The operation has caused a security violation.";
-
-        /// <summary>
-        /// Defines the V6.
-        /// </summary>
-        private const string V6 = "File path has invalid characters in it. ";
-
         /// <summary>
         /// Write spelling words list to file.
         /// </summary>
@@ -61,14 +25,16 @@ namespace BookList.Classes
                 using (var streamWriter = new StreamWriter(filePath, false))
                 {
                     for (var index = 0; index < AuthorNamesListCollection.ItemsCount(); index++)
+                    {
                         streamWriter.WriteLine(AuthorNamesListCollection.GetItemAt(index));
+                    }
                 }
 
                 return true;
             }
             catch (UnauthorizedAccessException ex)
             {
-                MyMessagesClass.ErrorMessage = V7;
+                MyMessagesClass.ErrorMessage = "You do not have access writes for this operation.";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -76,7 +42,7 @@ namespace BookList.Classes
             }
             catch (ArgumentNullException ex)
             {
-                MyMessagesClass.ErrorMessage = V1 + filePath;
+                MyMessagesClass.ErrorMessage = $"The path variable contains a null string. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -84,7 +50,7 @@ namespace BookList.Classes
             }
             catch (ArgumentException ex)
             {
-                MyMessagesClass.ErrorMessage = V2 + filePath;
+                MyMessagesClass.ErrorMessage = $"The file path value is a null string. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -92,7 +58,7 @@ namespace BookList.Classes
             }
             catch (DirectoryNotFoundException ex)
             {
-                MyMessagesClass.ErrorMessage = V3;
+                MyMessagesClass.ErrorMessage = "Unable to locate the directory.";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -100,7 +66,7 @@ namespace BookList.Classes
             }
             catch (PathTooLongException ex)
             {
-                MyMessagesClass.ErrorMessage = V4;
+                MyMessagesClass.ErrorMessage = "the file path is to long.";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -108,13 +74,13 @@ namespace BookList.Classes
             }
             catch (SecurityException ex)
             {
-                MyMessagesClass.ErrorMessage = V5;
+                MyMessagesClass.ErrorMessage = "The operation has caused a security violation.";
 
                 Debug.WriteLine(ex.ToString());
             }
             catch (IOException ex)
             {
-                MyMessagesClass.ErrorMessage = V6 + filePath;
+                MyMessagesClass.ErrorMessage = $"File path has invalid characters in it. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -128,9 +94,8 @@ namespace BookList.Classes
         /// If adding new user  then write there name to the Art2MSpell user names file.
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" />.</param>
-        /// <param name="data">The data<see cref="List{string}" />.</param>
         /// <returns>True if write successful else false.</returns>
-        public static bool WriteAuthorsTitlesToFile(string filePath, List<string> data)
+        public static bool WriteAuthorsTitlesToFile(string filePath)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
@@ -139,14 +104,17 @@ namespace BookList.Classes
                 // Append line to the file.
                 using (var writer = new StreamWriter(filePath, false))
                 {
-                    foreach (var item in data) writer.WriteLine(item);
+                    for (var i = 0; i < UnformattedDataCollection.GetItemsCount(); i++)
+                    {
+                        writer.WriteLine(UnformattedDataCollection.GetItemAt(i));
+                    }
 
                     return true;
                 }
             }
             catch (UnauthorizedAccessException ex)
             {
-                MyMessagesClass.ErrorMessage = V7;
+                MyMessagesClass.ErrorMessage = "You do not have access writes for this operation.";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -154,7 +122,7 @@ namespace BookList.Classes
             }
             catch (ArgumentNullException ex)
             {
-                MyMessagesClass.ErrorMessage = V1 + filePath;
+                MyMessagesClass.ErrorMessage = $"The path variable contains a null string. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -162,7 +130,7 @@ namespace BookList.Classes
             }
             catch (ArgumentException ex)
             {
-                MyMessagesClass.ErrorMessage = V2 + filePath;
+                MyMessagesClass.ErrorMessage = $"The file path value is a null string. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -170,7 +138,7 @@ namespace BookList.Classes
             }
             catch (DirectoryNotFoundException ex)
             {
-                MyMessagesClass.ErrorMessage = V3;
+                MyMessagesClass.ErrorMessage = "Unable to locate the directory.";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -178,7 +146,7 @@ namespace BookList.Classes
             }
             catch (PathTooLongException ex)
             {
-                MyMessagesClass.ErrorMessage = V4;
+                MyMessagesClass.ErrorMessage = "the file path is to long.";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -186,13 +154,13 @@ namespace BookList.Classes
             }
             catch (SecurityException ex)
             {
-                MyMessagesClass.ErrorMessage = V5;
+                MyMessagesClass.ErrorMessage = "The operation has caused a security violation.";
 
                 Debug.WriteLine(ex.ToString());
             }
             catch (IOException ex)
             {
-                MyMessagesClass.ErrorMessage = V6 + filePath;
+                MyMessagesClass.ErrorMessage = $"File path has invalid characters in it. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
@@ -209,72 +177,83 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="filePath">.</param>
         /// <param name="bookInfo">.</param>
-        public static void WriteBookTitleSeriesVolumeNamesToAuthorsFile(string filePath, string bookInfo)
+        public static bool WriteBookTitleSeriesVolumeNamesToAuthorsFile(string filePath)
         {
             try
             {
-                if (string.IsNullOrEmpty(filePath)) return;
-                if (string.IsNullOrEmpty(bookInfo)) return;
-                if (!File.Exists(filePath)) return;
+                if (string.IsNullOrEmpty(filePath)) return false;
+                if (!File.Exists(filePath)) return false;
 
                 using (var writer = new StreamWriter(filePath, true))
                 {
-                    writer.WriteLine(bookInfo);
+                    for (var i = 0; i < UnformattedDataCollection.GetItemsCount(); i++)
+                    {
+                        writer.WriteLine(UnformattedDataCollection.GetItemAt(i));
+                    }
                 }
+
+                return true;
             }
             catch (UnauthorizedAccessException ex)
             {
-                MyMessagesClass.ErrorMessage = V7;
+                MyMessagesClass.ErrorMessage = "You do not have access writes for this operation.";
 
                 Debug.WriteLine(ex.ToString());
 
                 MyMessagesClass.ShowErrorMessageBox();
+                return false;
             }
             catch (ArgumentNullException ex)
             {
-                MyMessagesClass.ErrorMessage = V1 + filePath;
+                MyMessagesClass.ErrorMessage = $"The path variable contains a null string. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
                 MyMessagesClass.ShowErrorMessageBox();
+                return false;
             }
             catch (ArgumentException ex)
             {
-                MyMessagesClass.ErrorMessage = V2 + filePath;
+                MyMessagesClass.ErrorMessage = $"The file path value is a null string. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
                 MyMessagesClass.ShowErrorMessageBox();
+                return false;
             }
             catch (DirectoryNotFoundException ex)
             {
-                MyMessagesClass.ErrorMessage = V3;
+                MyMessagesClass.ErrorMessage = "Unable to locate the directory.";
 
                 Debug.WriteLine(ex.ToString());
 
                 MyMessagesClass.ShowErrorMessageBox();
+                return false;
             }
             catch (PathTooLongException ex)
             {
-                MyMessagesClass.ErrorMessage = V4;
+                MyMessagesClass.ErrorMessage = "the file path is to long.";
 
                 Debug.WriteLine(ex.ToString());
 
                 MyMessagesClass.ShowErrorMessageBox();
+                return false;
             }
             catch (SecurityException ex)
             {
-                MyMessagesClass.ErrorMessage = V5;
+                MyMessagesClass.ErrorMessage = "The operation has caused a security violation.";
 
                 Debug.WriteLine(ex.ToString());
+                return false;
             }
             catch (IOException ex)
             {
-                MyMessagesClass.ErrorMessage = V6 + filePath;
+                MyMessagesClass.ErrorMessage = $"File path has invalid characters in it. {filePath}";
 
                 Debug.WriteLine(ex.ToString());
 
                 MyMessagesClass.ShowErrorMessageBox();
+                return false;
             }
         }
     }

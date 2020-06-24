@@ -17,6 +17,8 @@ namespace BookList.Source
         {
             AuthorNamesListCollection.ClearCollection();
 
+            this.lstAuthor.Sorted = true;
+
             for (var index = 0; index < AuthorsFileNamesCollection.ItemsCount(); index++)
                 this.lstAuthor.Items.Add(AuthorsFileNamesCollection.GetItemAt(index));
         }

@@ -2,7 +2,6 @@ namespace BookList.Classes
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-
     using BookList.Collections;
 
     /// <summary>
@@ -10,21 +9,14 @@ namespace BookList.Classes
     /// </summary>
     public class DataStorageOperationsClass
     {
-        /// <summary>
-        /// Backup AuthorsFileNamesCollection So if becomes corrupt while making changes to it.
-        ///     or the user changes there mind it can be restored.
-        /// </summary>
-        /// <param name="bkUpList">The backup list.</param>
-        /// <returns>The <see cref="List{string}" />.</returns>
-        public static List<string> AddToBackUpList(List<string> bkUpList)
+       
+        public void AddToBackUpList()
         {
-            for (var index = 0; index < BookInfoCollection.ItemsCount(); index++)
+            for (var index = 0; index < UnformattedDataCollection.GetItemsCount(); index++)
             {
-                bkUpList.Add(BookInfoCollection.GetItemAt(index));
-                Debug.WriteLine(BookInfoCollection.GetItemAt(index));
+                UnformattedDataBackUpCollection.AddItem(UnformattedDataCollection.GetItemAt(index));
+                Debug.WriteLine(UnformattedDataCollection.GetItemAt(index));
             }
-
-            return bkUpList;
         }
     }
 }

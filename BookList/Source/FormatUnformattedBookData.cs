@@ -1,15 +1,15 @@
 ﻿// BookList
-// 
+//
 // FormatUnformattedBookData.cs
-// 
+//
 // Art2M
-// 
+//
 // art2m@live.com
-// 
-// 06  19  2020
-// 
-// 06  19   2020
-// 
+//
+// 06  22  2020
+//
+// 06  22   2020
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -21,28 +21,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Text;
+using System.Windows.Forms;
+using BookList.Classes;
+using BookList.Collections;
+using BookList.PropertiesClasses;
+
 namespace BookList.Source
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Windows.Forms;
-    using Classes;
-    using PropertiesClasses;
-
     public partial class FormatUnformattedBookData : Form
     {
-        /// <summary>
-        ///     Back up of the Authors File Names Collection For Restoring Before Changes.
-        /// </summary>
-        private readonly List<string> _dataCopy = new List<string>();
-
         public FormatUnformattedBookData()
         {
             this.InitializeComponent();
             this.SetAllControlsToolTips();
             this.SetInitialControlState();
-            
         }
 
         private void BookIsASeriesControlSettings()
@@ -72,7 +66,7 @@ namespace BookList.Source
             this.btnFormat.Enabled = false;
             this.btnSave.Enabled = false;
             this.btnSeries.Enabled = false;
-            this.btnTitle.Enabled = true;
+            this.btnTitle.Enabled = false;
             this.btnUndo.Enabled = true;
             this.btnVolume.Enabled = false;
             this.txtSeries.Enabled = false;
@@ -80,9 +74,9 @@ namespace BookList.Source
             this.txtVolume.Enabled = false;
         }
 
-        private void GetSelectedTitleText()
+        private void GetSelectedBookVolumeText()
         {
-            FormatBookDataProperties.ContainsBookTitle = this.txtBookInfo.SelectedText.Trim();
+            FormatBookDataProperties.BookSeriesVolumeNumber = this.txtBookInfo.SelectedText.Trim();
         }
 
         private void GetSelectedSeriesText()
@@ -90,9 +84,9 @@ namespace BookList.Source
             FormatBookDataProperties.NameOfBookSeries = this.txtBookInfo.SelectedText.Trim();
         }
 
-        private void GetSelectedBookVolumeText()
+        private void GetSelectedTitleText()
         {
-            FormatBookDataProperties.BookSeriesVolumeNumber = this.txtBookInfo.SelectedText.Trim();
+            FormatBookDataProperties.ContainsBookTitle = this.txtBookInfo.SelectedText.Trim();
         }
 
         private void IsSeriesFormatBookInformation()
@@ -109,8 +103,8 @@ namespace BookList.Source
 
             this.txtBookInfo.Text = sb.ToString();
 
-            this._dataCopy.RemoveAt(FormatBookDataProperties.BookTitleRecordsCount);
-            this._dataCopy.Add(sb.ToString());
+            UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            UnformattedDataCollection.AddItem(sb.ToString());
 
             this.txtSeries.Text = string.Empty;
             this.txtTitle.Text = string.Empty;
@@ -125,8 +119,9 @@ namespace BookList.Source
             sb.Append(FormatBookDataProperties.ContainsBookTitle);
 
             this.txtBookInfo.Text = FormatBookDataProperties.ContainsBookTitle;
-            this._dataCopy.RemoveAt(FormatBookDataProperties.BookTitleRecordsCount);
-            this._dataCopy.Add(sb.ToString());
+            UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            UnformattedDataCollection.AddItem(sb.ToString());
+            UnformattedDataCollection.SortCollection();
 
             this.txtTitle.Text = string.Empty;
         }
@@ -160,11 +155,13 @@ namespace BookList.Source
 
         private void OnFormatBookInformationButton_Click(object sender, EventArgs e)
         {
-            if (this._dataCopy.Count < 1) return;
+            if (UnformattedDataCollection.GetItemsCount() < 1) return;
 
             if (!FormatBookDataProperties.BookIsSeries)
             {
                 this.NotSeriesFormatTitleOnly();
+                this.btnSave.Enabled = true;
+                return;
             }
 
             this.IsSeriesFormatBookInformation();
@@ -173,18 +170,26 @@ namespace BookList.Source
 
         private void OnSaveChangesButton_Click(object sender, EventArgs e)
         {
-            if (this._dataCopy.Count < 1) return;
+            if (UnformattedDataCollection.GetItemsCount() < 1) return;
 
-            if (FileOutputClass.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile,
-                this._dataCopy))
+            if (FormatBookDataProperties.BookIsSeries)
+            {
+                if (!FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
+                    .PathToCurrentAuthorsFile))
+                {
+                    var myMsg = "Failed to complete save. Check over data and try again.";
+                    MyMessagesClass.ShowErrorMessage(myMsg, "OnSaveChangesButton_Click");
+                    return;
+                }
+            }
+
+            if (!FileOutputClass.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
             {
                 var myMsg = "Failed to complete save. Check over data and try again.";
                 MyMessagesClass.ShowErrorMessage(myMsg, "OnSaveChangesButton_Click");
+                return;
             }
 
-            this._dataCopy.Clear();
-
-            FormatBookDataProperties.BookIsSeries = false;
             this.ControlsStateAfterSuccessfulSave();
         }
 
@@ -207,6 +212,11 @@ namespace BookList.Source
 
             this.lblInfo.Text = MyStrings.SelectVolumeNumber;
             this.btnVolume.Enabled = true;
+        }
+
+        private void OnUndoChangesButton_Click(object sender, EventArgs e)
+        {
+            // TODO Need to add code for undoing Changes.
         }
 
         private void OnVolumeNumberButton_Click(object sender, EventArgs e)
@@ -237,7 +247,7 @@ namespace BookList.Source
 
         private void SetAllControlsToolTips()
         {
-            using (var tTip = new ToolTip() )
+            using (var tTip = new ToolTip())
 
             {
                 tTip.SetToolTip(this.txtBookInfo, FormatBookDataProperties.TipTxtData);

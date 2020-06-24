@@ -1,15 +1,15 @@
 ﻿// BookList
-// 
+//
 // FormatBookData.cs
-// 
+//
 // Art2M
-// 
+//
 // art2m@live.com
-// 
+//
 // 06  19  2020
-// 
+//
 // 06  19   2020
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -20,6 +20,8 @@
 // GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using BookList.Collections;
 
 namespace BookList.Source
 {
@@ -33,11 +35,6 @@ namespace BookList.Source
 
     public partial class FormatBookData : Form
     {
-        /// <summary>
-        ///     Back up of the Authors File Names Collection For Restoring Before Changes.
-        /// </summary>
-        private readonly List<string> _dataCopy = new List<string>();
-
         public FormatBookData()
         {
             this.InitializeComponent();
@@ -80,23 +77,73 @@ namespace BookList.Source
 
         private void LoadUnformattedData()
         {
+            var dataOp = new DataStorageOperationsClass();
+
             this.GetUnformattedDataFrom();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.PathToCurrentAuthorsFile)) return;
 
             FileInputClass.ReadTitlesFromFile(FormatBookDataProperties.PathToCurrentAuthorsFile);
 
-            DataStorageOperationsClass.AddToBackUpList(this._dataCopy);
+            dataOp.AddToBackUpList();
 
-            FormatBookDataProperties.RecordsTotalCount = this._dataCopy.Count;
+            FormatBookDataProperties.RecordsTotalCount = UnformattedDataCollection.GetItemsCount();
         }
 
         private void MoveToFirstRecord()
         {
-            if (this._dataCopy.Count <= 0) return;
+            if (UnformattedDataCollection.GetItemsCount() <= 0) return;
 
             FormatBookDataProperties.BookTitleRecordsCount = 0;
-            this.txtData.Text = this._dataCopy[FormatBookDataProperties.BookTitleRecordsCount];
+            this.txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+
+            FormatBookDataProperties.CurrentPositionInTitlesRecords =
+                FormatBookDataProperties.BookTitleRecordsCount + 1;
+
+            this.DisplayRecordCountAndPosition();
+        }
+
+        private void MoveToLastRecord()
+        {
+            if (UnformattedDataCollection.GetItemsCount() == 0) return;
+
+            if (FormatBookDataProperties.BookTitleRecordsCount + 1 > UnformattedDataCollection.GetItemsCount()) return;
+
+            FormatBookDataProperties.BookTitleRecordsCount = UnformattedDataCollection.GetItemsCount() - 1;
+
+            this.txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+
+            FormatBookDataProperties.CurrentPositionInTitlesRecords = UnformattedDataCollection.GetItemsCount();
+
+            this.DisplayRecordCountAndPosition();
+        }
+
+        private void MoveToNextRecord()
+        {
+            if (UnformattedDataCollection.GetItemsCount() == 0) return;
+
+            // pos zero based.
+            if (FormatBookDataProperties.BookTitleRecordsCount + 1 >= UnformattedDataCollection.GetItemsCount()) return;
+
+            FormatBookDataProperties.BookTitleRecordsCount++;
+
+            this.txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+
+            FormatBookDataProperties.CurrentPositionInTitlesRecords =
+                FormatBookDataProperties.BookTitleRecordsCount + 1;
+
+            this.DisplayRecordCountAndPosition();
+        }
+
+        private void MoveToPreviousRecord()
+        {
+            if (UnformattedDataCollection.GetItemsCount() == 0) return;
+
+            if (FormatBookDataProperties.BookTitleRecordsCount == 0) return;
+
+            FormatBookDataProperties.BookTitleRecordsCount--;
+
+            this.txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
 
             FormatBookDataProperties.CurrentPositionInTitlesRecords =
                 FormatBookDataProperties.BookTitleRecordsCount + 1;
@@ -152,67 +199,29 @@ namespace BookList.Source
             {
                 dlg.ShowDialog();
             }
+
+            this.btnFirst.PerformClick();
         }
 
         private void OnMoveFirstButton_Clicked(object sender, EventArgs e)
         {
-            if (this._dataCopy.Count <= 0) return;
-
-            FormatBookDataProperties.BookTitleRecordsCount = 0;
-            this.txtData.Text = this._dataCopy[FormatBookDataProperties.BookTitleRecordsCount];
-
-            FormatBookDataProperties.CurrentPositionInTitlesRecords =
-                FormatBookDataProperties.BookTitleRecordsCount + 1;
-
-            this.DisplayRecordCountAndPosition();
+            this.MoveToFirstRecord();
         }
+
 
         private void OnMoveLastButton_Clicked(object sender, EventArgs e)
         {
-            if (this._dataCopy.Count == 0) return;
-
-            if (FormatBookDataProperties.BookTitleRecordsCount + 1 > this._dataCopy.Count) return;
-
-            FormatBookDataProperties.BookTitleRecordsCount = this._dataCopy.Count - 1;
-
-            this.txtData.Text = this._dataCopy[FormatBookDataProperties.BookTitleRecordsCount];
-
-            FormatBookDataProperties.CurrentPositionInTitlesRecords = this._dataCopy.Count;
-
-            this.DisplayRecordCountAndPosition();
+            this.MoveToLastRecord();
         }
 
         private void OnMoveNextButton_Clicked(object sender, EventArgs e)
         {
-            if (this._dataCopy.Count == 0) return;
-
-            // pos zero based.
-            if (FormatBookDataProperties.BookTitleRecordsCount + 1 >= this._dataCopy.Count) return;
-
-            FormatBookDataProperties.BookTitleRecordsCount++;
-
-            this.txtData.Text = this._dataCopy[FormatBookDataProperties.BookTitleRecordsCount];
-
-            FormatBookDataProperties.CurrentPositionInTitlesRecords =
-                FormatBookDataProperties.BookTitleRecordsCount + 1;
-
-            this.DisplayRecordCountAndPosition();
+            this.MoveToNextRecord();
         }
 
         private void OnMovePreviousButton_Clicked(object sender, EventArgs e)
         {
-            if (this._dataCopy.Count == 0) return;
-
-            if (FormatBookDataProperties.BookTitleRecordsCount == 0) return;
-
-            FormatBookDataProperties.BookTitleRecordsCount--;
-
-            this.txtData.Text = this._dataCopy[FormatBookDataProperties.BookTitleRecordsCount];
-
-            FormatBookDataProperties.CurrentPositionInTitlesRecords =
-                FormatBookDataProperties.BookTitleRecordsCount + 1;
-
-            this.DisplayRecordCountAndPosition();
+            this.MoveToPreviousRecord();
         }
 
 

@@ -28,7 +28,6 @@ namespace BookList.Classes
     using System.Diagnostics;
     using System.IO;
     using System.Reflection;
-
     using BookList.Collections;
 
     /// <summary>
@@ -129,6 +128,76 @@ namespace BookList.Classes
         }
 
         /// <summary>
+        /// Read all authors names from authors list. Used to find the Authors file.
+        /// </summary>
+        /// <param name="filePath">The file path to the Authors List.</param>
+        public static void ReadAuthorsNamesFromFile(string filePath)
+        {
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            AuthorNamesListCollection.ClearCollection();
+
+            try
+            {
+                var isFile = File.Exists(filePath);
+
+                using (var sr = new StreamReader(filePath))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null) AuthorNamesListCollection.AddItem(line);
+                }
+
+
+            }
+            catch (OutOfMemoryException ex)
+            {
+                MyMessagesClass.ErrorMessage = V;
+
+                Debug.WriteLine(ex.ToString());
+
+                MyMessagesClass.ShowErrorMessageBox();
+            }
+            catch (ArgumentNullException ex)
+            {
+                MyMessagesClass.ErrorMessage = V1 + filePath;
+
+                Debug.WriteLine(ex.ToString());
+
+                MyMessagesClass.ShowErrorMessageBox();
+            }
+            catch (ArgumentException ex)
+            {
+                MyMessagesClass.ErrorMessage = V2;
+
+                Debug.WriteLine(ex.ToString());
+                MyMessagesClass.ShowErrorMessageBox();
+            }
+            catch (FileNotFoundException ex)
+            {
+                MyMessagesClass.ErrorMessage = V3 + filePath;
+
+                Debug.WriteLine(ex.ToString());
+
+                MyMessagesClass.ShowErrorMessageBox();
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                MyMessagesClass.ErrorMessage = V4;
+
+                Debug.WriteLine(ex.ToString());
+                MyMessagesClass.ShowErrorMessageBox();
+            }
+            catch (IOException ex)
+            {
+                MyMessagesClass.ErrorMessage = V5;
+
+                Debug.WriteLine(ex.ToString());
+
+                MyMessagesClass.ShowErrorMessageBox();
+            }
+        }
+
+        /// <summary>
         /// The ReadAuthorNamesFromFile.
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" />.</param>
@@ -222,7 +291,7 @@ namespace BookList.Classes
                 {
                     string line;
 
-                    while ((line = sr.ReadLine()) != null) BookInfoCollection.AddItem(line);
+                    while ((line = sr.ReadLine()) != null) UnformattedDataCollection.AddItem(line);
                 }
             }
             catch (ArgumentNullException ex)

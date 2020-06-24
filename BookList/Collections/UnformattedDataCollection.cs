@@ -2,11 +2,11 @@ namespace BookList.Collections
 {
     using System;
     using System.Collections.Generic;
-
     using JetBrains.Annotations;
 
     /// <summary>
     /// Defines the <see cref="UnformattedDataCollection" />.
+    /// Used By FormattedBookData.cs To hold All The book Data that has not been formatted yet.
     /// </summary>
     public static class UnformattedDataCollection
     {

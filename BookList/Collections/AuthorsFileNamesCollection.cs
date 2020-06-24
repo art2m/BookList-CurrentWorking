@@ -6,7 +6,7 @@ namespace BookList.Collections
     /// <summary>
     /// Defines the <see cref="AuthorsFileNamesCollection" />.
     /// </summary>
-    public class AuthorsFileNamesCollection
+    public static class AuthorsFileNamesCollection
     {
         /// <summary>
         /// Contains collection of Book titles..
