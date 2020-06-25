@@ -22,6 +22,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 using BookList.Classes;
@@ -41,6 +42,8 @@ namespace BookList.Source
 
         private void BookIsASeriesControlSettings()
         {
+            this.btnFormat.Enabled = false;
+            this.btnSave.Enabled = false;
             this.btnSeries.Enabled = false;
             this.btnTitle.Enabled = true;
             this.btnUndo.Enabled = false;
@@ -52,6 +55,8 @@ namespace BookList.Source
 
         private void BookIsNotASeriesControlSettings()
         {
+            this.btnFormat.Enabled = false;
+            this.btnSave.Enabled = false;
             this.btnSeries.Enabled = false;
             this.btnTitle.Enabled = true;
             this.btnUndo.Enabled = false;
@@ -106,9 +111,6 @@ namespace BookList.Source
             UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
             UnformattedDataCollection.AddItem(sb.ToString());
 
-            this.txtSeries.Text = string.Empty;
-            this.txtTitle.Text = string.Empty;
-            this.txtVolume.Text = string.Empty;
             FormatBookDataProperties.NameOfBookSeries = string.Empty;
             FormatBookDataProperties.ContainsBookTitle = string.Empty;
         }
@@ -117,6 +119,7 @@ namespace BookList.Source
         {
             var sb = new StringBuilder();
             sb.Append(FormatBookDataProperties.ContainsBookTitle);
+            sb.Append("*");
 
             this.txtBookInfo.Text = FormatBookDataProperties.ContainsBookTitle;
             UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
@@ -128,6 +131,9 @@ namespace BookList.Source
 
         private void OnBookTitleButton_Click(object sender, EventArgs e)
         {
+            var len = this.txtTitle.SelectionLength;
+            if (len <= 0) return;
+
             this.GetSelectedTitleText();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.ContainsBookTitle))
@@ -138,7 +144,8 @@ namespace BookList.Source
             this.txtTitle.Enabled = true;
             this.txtTitle.Text = FormatBookDataProperties.ContainsBookTitle;
 
-            //this.btnFormat.Enabled = true;
+            if (!FormatBookDataProperties.BookIsSeries) this.btnFormat.Enabled = true;
+
             this.btnSeries.Enabled = true;
 
             if (FormatBookDataProperties.BookIsSeries)
@@ -157,6 +164,8 @@ namespace BookList.Source
         {
             if (UnformattedDataCollection.GetItemsCount() < 1) return;
 
+            if (string.IsNullOrEmpty(this.txtTitle.Text.Trim())) return;
+
             if (!FormatBookDataProperties.BookIsSeries)
             {
                 this.NotSeriesFormatTitleOnly();
@@ -171,9 +180,12 @@ namespace BookList.Source
         private void OnSaveChangesButton_Click(object sender, EventArgs e)
         {
             if (UnformattedDataCollection.GetItemsCount() < 1) return;
+            if (string.IsNullOrEmpty(this.txtTitle.Text.Trim())) return;
+
 
             if (FormatBookDataProperties.BookIsSeries)
             {
+                if (!ValidationClass.ValidateBookSeriesIsFormatted(this.txtBookInfo.Text)) return;
                 if (!FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
                     .PathToCurrentAuthorsFile))
                 {
@@ -182,6 +194,8 @@ namespace BookList.Source
                     return;
                 }
             }
+
+            if (!ValidationClass.ValidateBookNotSeriesIsFormatted(this.txtBookInfo.Text)) return;
 
             if (!FileOutputClass.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
             {
@@ -195,6 +209,9 @@ namespace BookList.Source
 
         private void OnSeriesButton_Click(object sender, EventArgs e)
         {
+            var len = this.txtSeries.SelectionLength;
+            if (len <= 0) return;
+
             this.GetSelectedSeriesText();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.NameOfBookSeries)) return;
@@ -221,6 +238,9 @@ namespace BookList.Source
 
         private void OnVolumeNumberButton_Click(object sender, EventArgs e)
         {
+            var len = this.txtVolume.SelectionLength;
+            if (len <= 0) return;
+
             this.GetSelectedBookVolumeText();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.BookSeriesVolumeNumber)) return;
@@ -283,6 +303,7 @@ namespace BookList.Source
             }
 
             this.txtBookInfo.Text = FormatBookDataProperties.UnformattedBookInformation;
+            this.btnSave.DialogResult = DialogResult.OK;
         }
     }
 }

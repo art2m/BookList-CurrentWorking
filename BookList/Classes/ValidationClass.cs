@@ -168,6 +168,36 @@ namespace BookList.Classes
         }
 
         /// <summary>
+        /// Validate if book is formatted all ready.
+        /// So user can pick another book to be formatted.
+        /// </summary>
+        /// <param name="bookInfo">The string containing book title to be formatted.</param>
+        /// <returns>True if book is formatted else false.</returns>
+        public static bool ValidateBookNotSeriesIsFormatted(string bookInfo)
+        {
+            if (!bookInfo.Contains("*"))
+            {
+                return false;
+            }
+
+            const string msg = "This book title is all ready formatted.";
+            MyMessagesClass.ShowInformationMessage(msg, "ValidateBookNotSeriesIsFormatted.");
+            return true;
+        }
+
+        public static bool ValidateBookSeriesIsFormatted(string bookInfo)
+        {
+            if (!bookInfo.Contains("(") && !bookInfo.Contains(")"))
+            {
+                return false;
+            }
+
+            const string msg = "This book info is all ready formatted.";
+            MyMessagesClass.ShowInformationMessage(msg, "ValidateBookSeriesIsFormatted.");
+            return true;
+        }
+
+        /// <summary>
         /// The ValidateDirectoryExists.
         /// </summary>
         /// <param name="dirPath">The directory path.</param>
@@ -343,6 +373,11 @@ namespace BookList.Classes
 
                 return false;
             }
+        }
+
+        public static bool ValidateSeriesVolumeTextDoesNotMatch()
+        {
+            return FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.NameOfBookSeries);
         }
 
         /// <summary>
@@ -529,11 +564,6 @@ namespace BookList.Classes
 
                 return false;
             }
-        }
-
-        public static bool ValidateSeriesVolumeTextDoesNotMatch()
-        {
-            return FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.NameOfBookSeries);
         }
 
         public static bool ValidateTitleSeriesTextDoesNotMatch()

@@ -35,6 +35,7 @@ namespace BookList.Source
 
     public partial class FormatBookData : Form
     {
+        private DialogResult _result;
         public FormatBookData()
         {
             this.InitializeComponent();
@@ -173,9 +174,12 @@ namespace BookList.Source
 
         private void OnDisplayAllAuthorsMenuItem_Clicked(object sender, EventArgs e)
         {
-            using (var dlg = new AuthorsListing())
+            if (this._result != DialogResult.OK)
             {
-                dlg.ShowDialog();
+                using (var dlg = new AuthorsListing())
+                {
+                    dlg.ShowDialog();
+                }
             }
 
             if (string.IsNullOrEmpty(BookListPropertiesClass.AuthorsNameCurrent)) return;
@@ -193,15 +197,26 @@ namespace BookList.Source
 
             if (string.IsNullOrEmpty(temp)) return;
 
+            if (FormatBookDataProperties.BookIsSeries)
+            {
+                if (ValidationClass.ValidateBookSeriesIsFormatted(this.txtData.Text)) return;
+            }
+            else if (!FormatBookDataProperties.BookIsSeries)
+            {
+                if (ValidationClass.ValidateBookNotSeriesIsFormatted(this.txtData.Text)) return;
+            }
+
             FormatBookDataProperties.UnformattedBookInformation = temp;
 
             using (var dlg = new FormatUnformattedBookData())
             {
-                dlg.ShowDialog();
+                this._result = dlg.ShowDialog();
             }
 
+            if (this._result == DialogResult.OK) ReloadBookTitles();
             this.btnFirst.PerformClick();
         }
+
 
         private void OnMoveFirstButton_Clicked(object sender, EventArgs e)
         {
@@ -224,6 +239,10 @@ namespace BookList.Source
             this.MoveToPreviousRecord();
         }
 
+        private void ReloadBookTitles()
+        {
+            this.mnuAuthors.PerformClick();
+        }
 
         private void SetAllControlsToolTips()
         {
