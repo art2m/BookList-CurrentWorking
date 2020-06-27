@@ -67,7 +67,7 @@
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="pathString" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
               <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
@@ -84,7 +84,7 @@
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="pathString" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
               <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
@@ -96,7 +96,7 @@
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="pathString" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
               <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
@@ -106,35 +106,35 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
+    <pathString>text/microsoft-resx</pathString>
   </resheader>
   <resheader name="version">
-    <value>2.0</value>
+    <pathString>2.0</pathString>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <pathString>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</pathString>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <pathString>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</pathString>
   </resheader>
   <data name="TTipTxtData" xml:space="preserve">
-    <value>Select Title name then select series name then volume number.</value>
+    <pathString>Select Title name then select series name then volume number.</pathString>
     <comment>TxtDat. text box tool tip caption, FormatBookData.cs</comment>
   </data>
   <data name="selectTitle" xml:space="preserve">
-    <value>Select book title name in text box then press Book Title button.</value>
+    <pathString>Select book title name in text box then press Book Title button.</pathString>
     <comment>Used in lblInfo to Tell user to select title portion of name from txtBookInfo text box. </comment>
   </data>
   <data name="SelectSeries" xml:space="preserve">
-    <value>Select book series name in the text box then press Book Series button.</value>
+    <pathString>Select book series name in the text box then press Book Series button.</pathString>
     <comment>Used With lblInfo text to tell user to select the series name part of test in text box.</comment>
   </data>
   <data name="SelectVolumeNumber" xml:space="preserve">
-    <value>Select the volume and number from the text box. Then press the Volume Number button.</value>
+    <pathString>Select the volume and number from the text box. Then press the Volume Number button.</pathString>
     <comment>Select the voulme and number from the text box txtInfo.</comment>
   </data>
   <data name="lblInfoAddAuthor" xml:space="preserve">
-    <value>Add Author for book. If multiple authors for this book press add button to add next author.</value>
+    <pathString>Add Author for book. If multiple authors for this book press add button to add next author.</pathString>
     <comment>lblInfo.Text tell user how to add author and add more than one author</comment>
   </data>
 </root>

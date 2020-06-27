@@ -411,7 +411,7 @@
         {
             var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-            if (!ValidationClass.ValidateStringValueNotNullNotWhiteSpace(dirPath)) return string.Empty;
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirPath)) return string.Empty;
 
             return !ValidationClass.ValidateDirectoryExists(dirPath) ? string.Empty : dirPath;
         }

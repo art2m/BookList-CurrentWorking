@@ -54,7 +54,7 @@ namespace BookList.Classes
 
             fileName = value.Replace("*", "");
 
-            if (!ValidationClass.ValidateStringValueNotNullNotWhiteSpace(fileName)) return fileName;
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(fileName)) return fileName;
 
             BookListPropertiesClass.CurrentWorkingFileName = fileName;
             return fileName;

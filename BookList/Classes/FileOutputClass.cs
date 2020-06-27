@@ -13,13 +13,26 @@ namespace BookList.Classes
     /// </summary>
     public static class FileOutputClass
     {
+        static FileOutputClass()
+        {
+            var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
+            if (declaringType != null)
+            {
+                MyMessagesClass.NameOfClass = declaringType.Name;
+            }
+        }
+
         /// <summary>
-        /// Write spelling words list to file.
+        /// Write arthur names to file.
         /// </summary>
         /// <param name="filePath">Path to write file to.</param>
         /// <returns>True if file is written else false.</returns>
         public static bool WriteArthurFileNamesToListFile(string filePath)
         {
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return false;
+            if (!ValidationClass.ValidateFileExits(filePath)) return false;
+            if (!ValidationClass.CheckForInvalidPathCharacters(filePath)) return false;
+
             try
             {
                 using (var streamWriter = new StreamWriter(filePath, false))
@@ -40,30 +53,6 @@ namespace BookList.Classes
 
                 MyMessagesClass.ShowErrorMessageBox();
             }
-            catch (ArgumentNullException ex)
-            {
-                MyMessagesClass.ErrorMessage = $"The path variable contains a null string. {filePath}";
-
-                Debug.WriteLine(ex.ToString());
-
-                MyMessagesClass.ShowErrorMessageBox();
-            }
-            catch (ArgumentException ex)
-            {
-                MyMessagesClass.ErrorMessage = $"The file path value is a null string. {filePath}";
-
-                Debug.WriteLine(ex.ToString());
-
-                MyMessagesClass.ShowErrorMessageBox();
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MyMessagesClass.ErrorMessage = "Unable to locate the directory.";
-
-                Debug.WriteLine(ex.ToString());
-
-                MyMessagesClass.ShowErrorMessageBox();
-            }
             catch (PathTooLongException ex)
             {
                 MyMessagesClass.ErrorMessage = "the file path is to long.";
@@ -77,14 +66,6 @@ namespace BookList.Classes
                 MyMessagesClass.ErrorMessage = "The operation has caused a security violation.";
 
                 Debug.WriteLine(ex.ToString());
-            }
-            catch (IOException ex)
-            {
-                MyMessagesClass.ErrorMessage = $"File path has invalid characters in it. {filePath}";
-
-                Debug.WriteLine(ex.ToString());
-
-                MyMessagesClass.ShowErrorMessageBox();
             }
 
             return false;

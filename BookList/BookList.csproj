@@ -64,6 +64,7 @@
     <Compile Include="Classes\FileOutputClass.cs" />
     <Compile Include="Classes\MyMessagesClass.cs" />
     <Compile Include="Classes\FileInputClass.cs" />
+    <Compile Include="Classes\UnformattedBookOperations.cs" />
     <Compile Include="Classes\ValidationClass.cs" />
     <Compile Include="Collections\AuthorNamesListCollection.cs" />
     <Compile Include="Collections\AuthorsFileNamesCollection.cs" />

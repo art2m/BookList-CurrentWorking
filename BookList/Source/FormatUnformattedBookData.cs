@@ -23,6 +23,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using BookList.Classes;
@@ -38,6 +39,18 @@ namespace BookList.Source
             this.InitializeComponent();
             this.SetAllControlsToolTips();
             this.SetInitialControlState();
+
+            var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
+            if (declaringType != null)
+            {
+                MyMessagesClass.NameOfClass = declaringType.Name;
+            }
+
+            //  TODO: try to select series info programatically put in correct text box.
+            // TODO: try to select title info programatically if not a series put in text box.
+            // TODO: add button user can select if book info not right.
+            // TODO: add text to lblInfo on how user can make selection manually.
+            // TODO: Allow user to edit title, series and volume text boxes to fix missing or invalid data.
         }
 
         private void BookIsASeriesControlSettings()
@@ -115,6 +128,31 @@ namespace BookList.Source
             FormatBookDataProperties.ContainsBookTitle = string.Empty;
         }
 
+        /// <summary>
+        ///  Try to find the name of book series then place it into the series text box.
+        /// </summary>
+        private void LocateSeriesName()
+        {
+            // TODO: Check  collection  for book with same part of name  to try to find books in series.
+            // TODO: Once located then put that portion into the series box.
+            //BookListPropertiesClass.AuthorsNameCurrent;
+            var bookInfo = this.txtBookInfo.Text.Trim();
+        }
+
+        /// <summary>
+        /// Try to find the book title then place it into the title text box.
+        /// </summary>
+        private void LocateTitleName()
+        {
+        }
+
+        /// <summary>
+        /// Try to find the book volume number then place it into the volume number text box.
+        /// </summary>
+        private void LocateVolumeNumber()
+        {
+        }
+
         private void NotSeriesFormatTitleOnly()
         {
             var sb = new StringBuilder();
@@ -179,6 +217,8 @@ namespace BookList.Source
 
         private void OnSaveChangesButton_Click(object sender, EventArgs e)
         {
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
             if (UnformattedDataCollection.GetItemsCount() < 1) return;
             if (string.IsNullOrEmpty(this.txtTitle.Text.Trim())) return;
 
@@ -189,8 +229,8 @@ namespace BookList.Source
                 if (!FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
                     .PathToCurrentAuthorsFile))
                 {
-                    var myMsg = "Failed to complete save. Check over data and try again.";
-                    MyMessagesClass.ShowErrorMessage(myMsg, "OnSaveChangesButton_Click");
+                    MyMessagesClass.ErrorMessage = "Failed to complete save. Check over data and try again.";
+                    MyMessagesClass.ShowErrorMessageBox();
                     return;
                 }
             }
@@ -199,8 +239,8 @@ namespace BookList.Source
 
             if (!FileOutputClass.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
             {
-                var myMsg = "Failed to complete save. Check over data and try again.";
-                MyMessagesClass.ShowErrorMessage(myMsg, "OnSaveChangesButton_Click");
+                MyMessagesClass.ErrorMessage = "Failed to complete save. Check over data and try again.";
+                MyMessagesClass.ShowErrorMessageBox();
                 return;
             }
 
@@ -222,8 +262,8 @@ namespace BookList.Source
             // If the title and series name match then exit operation.
             if (ValidationClass.ValidateTitleSeriesTextDoesNotMatch())
             {
-                var myMsg = "The book title name can not be the same as the book series name.";
-                MyMessagesClass.ShowErrorMessage(myMsg, "OnSeriesButton_Clicked");
+                MyMessagesClass.ErrorMessage = "The book title name can not be the same as the book series name.";
+                MyMessagesClass.ShowErrorMessageBox();
                 return;
             }
 
@@ -250,15 +290,15 @@ namespace BookList.Source
 
             if (ValidationClass.ValidateTitleVolumeTextDoesNotMatch())
             {
-                var myMsg = "The book title name can not be the same as the book volume.";
-                MyMessagesClass.ShowErrorMessage(myMsg, "OnVolumeNumberButton_Click");
+                MyMessagesClass.ErrorMessage = "The book title name can not be the same as the book volume.";
+                MyMessagesClass.ShowErrorMessageBox();
                 return;
             }
 
             if (ValidationClass.ValidateSeriesVolumeTextDoesNotMatch())
             {
-                var myMsg = "The book series name can not be the same as the book volume.";
-                MyMessagesClass.ShowErrorMessage(myMsg, "OnVolumeNumberButton_click");
+                MyMessagesClass.ErrorMessage = "The book series name can not be the same as the book volume.";
+                MyMessagesClass.ShowErrorMessageBox();
                 return;
             }
 

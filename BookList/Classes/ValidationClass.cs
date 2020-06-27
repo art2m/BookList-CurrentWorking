@@ -29,18 +29,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // //------------------------------------------------------------------------------------------------------------------
 
+using System.Diagnostics.Contracts;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using BookList.PropertiesClasses;
+using JetBrains.Annotations;
+
 namespace BookList.Classes
 {
-    using System;
-    using System.Diagnostics;
-    using System.Diagnostics.Contracts;
-    using System.IO;
-    using System.Reflection;
-    using System.Security;
-    using System.Text;
-    using JetBrains.Annotations;
-    using PropertiesClasses;
-
     /// <summary>
     /// Validates data.
     /// </summary>
@@ -59,112 +56,44 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        /// The CheckForInvalidFileNameCharacters.
+        /// Check for invalid file name characters.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <returns>true if no invalid characters in file name else false.</returns>
+        /// <param name="fileName">File name to check.</param>
+        /// <returns>True if no invalid characters in file name else false.</returns>
         public static bool CheckForInvalidFileNameCharacters([NotNull] string fileName)
         {
-            if (fileName == null) throw new ArgumentNullException(nameof(fileName));
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (!ValidateStringValueNotNullNotEmpty(fileName)) return false;
 
             // Get a list of invalid file characters.
             var invalidFileChars = Path.GetInvalidFileNameChars();
 
-            try
-            {
-                foreach (var item in invalidFileChars)
-                {
-                    var index = fileName.IndexOf(item);
 
-                    if (index != -1)
-                    {
-                        throw new NotSupportedException();
-                    }
-                }
-
-                return true;
-            }
-            catch (ArgumentNullException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The file name cannot be a null value.");
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (NotSupportedException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The file name contains invalid characters. Exiting operation:");
-                sb.AppendLine(fileName);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
+            if (invalidFileChars.Select(item => fileName.IndexOf(item)).All(index => index == -1)) return true;
+            MyMessagesClass.ErrorMessage = "There is an invalid character in the file name.";
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
 
         /// <summary>
-        /// The CheckForInvalidPathCharacters.
+        /// Check for invalid path characters.
         /// </summary>
-        /// <param name="value">The value.</param>
+        /// <param name="pathString">The path string to check for invalid path characters.</param>
         /// <returns>If no invalid path characters return true else false.</returns>
-        public static bool CheckForInvalidPathCharacters([NotNull] string value)
+        public static bool CheckForInvalidPathCharacters([NotNull] string pathString)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (!ValidateStringValueNotNullNotEmpty(pathString)) return false;
 
             var invalidPathChars = Path.GetInvalidPathChars();
 
-            try
-            {
-                // var charValue = value.ToCharArray();
-                foreach (var item in invalidPathChars)
-                {
-                    var index = value.IndexOf(item);
-
-                    if (index != -1)
-                    {
-                        throw new NotSupportedException();
-                    }
-                }
-
-                return true;
-            }
-            catch (ArgumentNullException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The string cannot be a null value.");
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (NotSupportedException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The path name contains invalid characters. Exiting operation:");
-                sb.AppendLine(value);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(sb.ToString());
-
-                return false;
-            }
+            // var charValue = pathString.ToCharArray();
+            if (invalidPathChars.Select(item => pathString.IndexOf(item)).All(index => index == -1)) return true;
+            MyMessagesClass.ErrorMessage = "The path name contains invalid characters. Exiting operation:";
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
 
         /// <summary>
@@ -175,75 +104,45 @@ namespace BookList.Classes
         /// <returns>True if book is formatted else false.</returns>
         public static bool ValidateBookNotSeriesIsFormatted(string bookInfo)
         {
-            if (!bookInfo.Contains("*"))
-            {
-                return false;
-            }
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            const string msg = "This book title is all ready formatted.";
-            MyMessagesClass.ShowInformationMessage(msg, "ValidateBookNotSeriesIsFormatted.");
-            return true;
-        }
-
-        public static bool ValidateBookSeriesIsFormatted(string bookInfo)
-        {
-            if (!bookInfo.Contains("(") && !bookInfo.Contains(")"))
-            {
-                return false;
-            }
-
-            const string msg = "This book info is all ready formatted.";
-            MyMessagesClass.ShowInformationMessage(msg, "ValidateBookSeriesIsFormatted.");
-            return true;
+            if (bookInfo.Contains("*")) return true;
+            MyMessagesClass.ErrorMessage = "This book title is all ready formatted.";
+            MyMessagesClass.ShowInformationMessageBox();
+            return false;
         }
 
         /// <summary>
-        /// The ValidateDirectoryExists.
+        /// Check for parentheses around the book series name. If founc
+        /// the book is formated correctly.
+        /// </summary>
+        /// <param name="bookInfo">Contains the series name to check for formatted.</param>
+        /// <returns>True if formatted else false.</returns>
+        public static bool ValidateBookSeriesIsFormatted(string bookInfo)
+        {
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (bookInfo.Contains("(") || bookInfo.Contains(")")) return true;
+            MyMessagesClass.ErrorMessage = "This book info is all ready formatted.";
+            MyMessagesClass.ShowInformationMessageBox();
+            return false;
+        }
+
+        /// <summary>
+        /// Validate that dirPath contains a valid directory path.
         /// </summary>
         /// <param name="dirPath">The directory path.</param>
         /// <returns>If directory exists then true else false.</returns>
         public static bool ValidateDirectoryExists([NotNull] string dirPath)
         {
-            if (dirPath == null) throw new ArgumentNullException(nameof(dirPath));
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            try
-            {
-                if (!Directory.Exists(dirPath))
-                {
-                    throw new DirectoryNotFoundException();
-                }
+            if (ValidateStringValueNotNullNotEmpty(dirPath)) return false;
 
-                return true;
-            }
-            catch (ArgumentNullException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The directory path cannot be a null value.");
-                sb.AppendLine(dirPath);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("Invalid directory path.");
-                sb.AppendLine(dirPath);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(sb.ToString());
-
-                return false;
-            }
+            if (Directory.Exists(dirPath)) return true;
+            MyMessagesClass.ErrorMessage = "This Directory path does not exist:  " + dirPath;
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
 
         /// <summary>
@@ -253,131 +152,39 @@ namespace BookList.Classes
         /// <returns>.</returns>
         public static bool ValidateFileExits([NotNull] string filePath)
         {
-            if (filePath == null) throw new ArgumentNullException(nameof(filePath));
-
-            try
+            string msg;
+            if (string.IsNullOrEmpty(filePath))
             {
-                if (!File.Exists(filePath))
-                {
-                    throw new FileNotFoundException();
-                }
-
-                return true;
-            }
-            catch (ArgumentNullException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The file path cannot be a null value.");
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
+                MyMessagesClass.ErrorMessage =
+                    "The file path cannot be a null pathString or an empty string." + filePath;
                 MyMessagesClass.ShowErrorMessageBox();
-
                 return false;
             }
-            catch (FileNotFoundException ex)
-            {
-                var sb = new StringBuilder();
 
-                sb.AppendLine("Unable to locate file for this path. Exiting operation: ");
-                sb.AppendLine(filePath);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(sb.ToString());
-                return false;
-            }
+            if (File.Exists(filePath)) return true;
+            MyMessagesClass.ErrorMessage = "Unable to locate file for this path. Exiting operation: " + filePath;
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
 
         /// <summary>
-        /// The ValidatePathToLong.
+        /// Validates series name does not match volume number. User could have selected same name
+        /// for volume or series.
         /// </summary>
-        /// <param name="value">The path to be checked.</param>
-        /// <returns>true if path OK else false.</returns>
-        public static bool ValidatePathToLong([NotNull] string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
-
-            try
-            {
-                Path.GetFullPath(value);
-
-                return true;
-            }
-            catch (PathTooLongException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The path is too long. exiting operation.");
-                sb.AppendLine(value);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return false;
-            }
-            catch (SecurityException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("You do not have required permissions. ");
-                sb.AppendLine(value);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (ArgumentNullException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The path cannot be null.");
-                sb.AppendLine(ex.ToString());
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (NotSupportedException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("Contains a colon that is not part of the path.");
-                sb.AppendLine(value);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (ArgumentException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("The specified path or filename exceeds Maximum Length.");
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-        }
-
+        /// <returns>True if the series name does not match volume info. else false.</returns>
         public static bool ValidateSeriesVolumeTextDoesNotMatch()
         {
-            return FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.NameOfBookSeries);
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (!FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.NameOfBookSeries))
+            {
+                return true;
+            }
+
+            MyMessagesClass.ErrorMessage =
+                "The book series number is not valid. It is the same as the name of the book series.";
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
 
         /// <summary>
@@ -385,196 +192,99 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="value">The spelling word to be checked.</param>
         /// <returns>True if only letters in the spelling word else false.</returns>
-        public static bool ValidateSpellingWordHasLettersOnly(string value)
+        public static bool ValidatestringHasLettersOnly(string value)
         {
             Contract.Requires(!string.IsNullOrEmpty(value));
 
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            var val = string.Empty;
 
-            try
+            if (!(from letter in value
+                where !char.IsLetter(letter)
+                select letter.ToString()
+                into val
+                select "Invalid character in string:  " + val).Any())
             {
-                foreach (var letter in value)
-                {
-                    if (char.IsLetter(letter))
-                    {
-                        continue;
-                    }
-
-                    MyMessagesClass.ErrorMessage = "Invalid character in string:  " + letter;
-                    val = letter.ToString();
-
-                    throw new NotSupportedException();
-                }
-
                 return true;
             }
-            catch (NotSupportedException ex)
-            {
-                var sb = new StringBuilder();
 
-                sb.AppendLine("Invalid character in string:");
-                sb.AppendLine(val);
-                sb.AppendLine(ex.ToString());
+            MyMessagesClass.ErrorMessage = "Fond character that is not a valid letter.";
+            MyMessagesClass.ShowErrorMessageBox();
 
-                Debug.WriteLine(sb.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
+            return false;
         }
 
-        /// <summary>
-        /// Validate string is not empty.
-        /// </summary>
-        /// <param name="value">The string to be checked.</param>
-        /// <returns>True if string not empty string else false.</returns>
-        public static bool ValidateStringHasLength([NotNull] string value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-
-            try
-            {
-                if (value.Length == 0)
-                {
-                    throw new NotSupportedException();
-                }
-
-                return true;
-            }
-            catch (ArgumentNullException ex)
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("The value cannot be null.");
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (NotSupportedException ex)
-            {
-                var sb = new StringBuilder();
-
-                sb.AppendLine("This value cannot be an empty string.");
-                sb.AppendLine(value);
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(sb.ToString());
-
-                return false;
-            }
-        }
 
         /// <summary>
-        /// Check for space in value this will means either space in word that does not belong or
+        /// Check for space in pathString this will means either space in word that does not belong or
         ///     two words instead of one spelling word.
         /// </summary>
         /// <param name="value">The spelling word to validate.</param>
         /// <returns>True if no space is found else false.</returns>
         public static bool ValidateStringOneWord([NotNull] string value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            try
-            {
-                var index = value.IndexOf(' ');
+            if (!ValidateStringValueNotNullNotEmpty(value)) return false;
 
-                if (index > -1)
-                {
-                    throw new NotSupportedException();
-                }
 
-                return true;
-            }
-            catch (ArgumentNullException ex)
-            {
-                var sb = new StringBuilder();
+            var index = value.IndexOf(' ');
 
-                sb.AppendLine("The value cannot be null.");
-                sb.AppendLine(ex.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
-            catch (NotSupportedException ex)
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("Check to see if space in word or if two words are entered.");
-                sb.AppendLine("Spaces and double words are not allowed.");
-                sb.AppendLine(value);
-                sb.AppendLine(ex.ToString());
-
-                Debug.WriteLine(sb.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
+            if (index <= -1) return true;
+            MyMessagesClass.ErrorMessage = "This string contains more than one word. must contain only one word.";
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
 
         /// <summary>
-        /// The ValidateStringValueNotNullNotWhiteSpace.
+        /// The ValidateStringValueNotNullNotEmpty.
         /// </summary>
         /// <param name="value">The string to be checked.</param>
         /// <returns>True if string is not empty and has length.</returns>
-        public static bool ValidateStringValueNotNullNotWhiteSpace([NotNull] string value)
+        public static bool ValidateStringValueNotNullNotEmpty([NotNull] string value)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
             value = value.Trim();
 
-            try
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new NotSupportedException();
-                }
+            if (!string.IsNullOrEmpty(value)) return true;
+            MyMessagesClass.ErrorMessage = "The pathString is not valid. It is a null or empty string.";
+            MyMessagesClass.ShowErrorMessageBox();
 
-                return true;
-            }
-            catch (NotSupportedException ex)
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("The value is not valid. It is empty or null.");
-                sb.AppendLine(value);
-                sb.AppendLine(ex.ToString());
-
-                Debug.WriteLine(sb.ToString());
-
-                MyMessagesClass.ErrorMessage = sb.ToString();
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return false;
-            }
+            return false;
         }
 
+        /// <summary>
+        /// This checks to be sure the title name does not match the series name.
+        /// </summary>
+        /// <returns>True if the title name does not match the series name else false. </returns>
         public static bool ValidateTitleSeriesTextDoesNotMatch()
         {
-            // Returns false not the same else true they are the same.
-            return FormatBookDataProperties.ContainsBookTitle.Equals(FormatBookDataProperties.NameOfBookSeries);
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (!FormatBookDataProperties.ContainsBookTitle.Equals(FormatBookDataProperties.NameOfBookSeries))
+            {
+                return true;
+            }
+
+            MyMessagesClass.ErrorMessage = "The title of the book can not be the same as the series name.";
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
 
         public static bool ValidateTitleVolumeTextDoesNotMatch()
         {
-            return FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.ContainsBookTitle);
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (!FormatBookDataProperties.BookSeriesVolumeNumber.Equals(
+                FormatBookDataProperties.ContainsBookTitle))
+            {
+                return true;
+            }
+
+            MyMessagesClass.ErrorMessage = "The title cannot match the volume number text.";
+            MyMessagesClass.ShowErrorMessageBox();
+            return false;
         }
     }
 }
