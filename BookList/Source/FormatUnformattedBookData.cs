@@ -259,6 +259,10 @@ namespace BookList.Source
 
         private void OnSaveChangesButton_Click(object sender, EventArgs e)
         {
+            var fileOutput = new FileOutputClass();
+
+            var validate = new ValidationClass();
+
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
             if (UnformattedDataCollection.GetItemsCount() < 1) return;
@@ -266,8 +270,8 @@ namespace BookList.Source
 
             if (FormatBookDataProperties.BookIsSeries)
             {
-                if (!ValidationClass.ValidateBookSeriesIsFormatted(this.txtBookInfo.Text)) return;
-                if (!FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
+                if (!validate.ValidateBookSeriesIsFormatted(this.txtBookInfo.Text)) return;
+                if (!fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
                     .PathToCurrentAuthorsFile))
                 {
                     MyMessagesClass.ErrorMessage = "Failed to complete save. Check over data and try again.";
@@ -276,9 +280,9 @@ namespace BookList.Source
                 }
             }
 
-            if (!ValidationClass.ValidateBookNotSeriesIsFormatted(this.txtBookInfo.Text)) return;
+            if (!validate.ValidateBookNotSeriesIsFormatted(this.txtBookInfo.Text)) return;
 
-            if (!FileOutputClass.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
+            if (!fileOutput.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
             {
                 MyMessagesClass.ErrorMessage = "Failed to complete save. Check over data and try again.";
                 MyMessagesClass.ShowErrorMessageBox();
@@ -290,6 +294,8 @@ namespace BookList.Source
 
         private void OnSeriesButton_Click(object sender, EventArgs e)
         {
+            var validate = new ValidationClass();
+
             var len = this.txtSeries.SelectionLength;
             if (len <= 0) return;
 
@@ -301,7 +307,7 @@ namespace BookList.Source
             this.txtSeries.Text = FormatBookDataProperties.NameOfBookSeries;
 
             // If the title and series name match then exit operation.
-            if (ValidationClass.ValidateTitleSeriesTextDoesNotMatch())
+            if (validate.ValidateTitleSeriesTextDoesNotMatch())
             {
                 MyMessagesClass.ErrorMessage = "The book title name can not be the same as the book series name.";
                 MyMessagesClass.ShowErrorMessageBox();
@@ -319,6 +325,8 @@ namespace BookList.Source
 
         private void OnVolumeNumberButton_Click(object sender, EventArgs e)
         {
+            var validate = new ValidationClass();
+
             var len = this.txtVolume.SelectionLength;
             if (len <= 0) return;
 
@@ -329,14 +337,14 @@ namespace BookList.Source
             this.txtVolume.Enabled = true;
             this.txtVolume.Text = FormatBookDataProperties.BookSeriesVolumeNumber;
 
-            if (ValidationClass.ValidateTitleVolumeTextDoesNotMatch())
+            if (validate.ValidateTitleVolumeTextDoesNotMatch())
             {
                 MyMessagesClass.ErrorMessage = "The book title name can not be the same as the book volume.";
                 MyMessagesClass.ShowErrorMessageBox();
                 return;
             }
 
-            if (ValidationClass.ValidateSeriesVolumeTextDoesNotMatch())
+            if (validate.ValidateSeriesVolumeTextDoesNotMatch())
             {
                 MyMessagesClass.ErrorMessage = "The book series name can not be the same as the book volume.";
                 MyMessagesClass.ShowErrorMessageBox();

@@ -33,12 +33,14 @@ namespace BookList.Classes
     /// <summary>
     /// Defines the <see cref="FileInputClass" />.
     /// </summary>
-    public static class FileInputClass
+    public  class FileInputClass
     {
+        private readonly ValidationClass _validate = new ValidationClass();
+
         /// <summary>
-        /// Initializes static members of the <see cref="FileInputClass"/> class.
+        /// Initializes  members of the <see cref="FileInputClass"/> class.
         /// </summary>
-        static FileInputClass()
+        public FileInputClass()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null)
@@ -51,7 +53,7 @@ namespace BookList.Classes
         /// Read all authors names from authors list. Used to find the Authors file.
         /// </summary>
         /// <param name="filePath">The file path to the Authors List.</param>
-        public static void ReadAuthorsNamesFromFile(string filePath)
+        public  void ReadAuthorsNamesFromFile(string filePath)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
@@ -59,9 +61,10 @@ namespace BookList.Classes
 
             try
             { 
-                if (!ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return;
-                if (!ValidationClass.CheckForInvalidPathCharacters(filePath)) return;
-                if (!ValidationClass.ValidateFileExits(filePath)) return;
+                if (!this._validate.ValidateStringIsNotNull(filePath)) return;
+                if (!this._validate.ValidateStringHasLength(filePath)) return;
+                if (!this._validate.CheckForInvalidPathCharacters(filePath)) return;
+                if (!this._validate.ValidateFileExists(filePath)) return;
 
                 using (var sr = new StreamReader(filePath))
                 {
@@ -85,15 +88,16 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" />.</param>
         /// <returns>The <see cref="List{string}" />.</returns>
-        public static List<string> ReadAuthorNamesFromFile(string filePath)
+        public  List<string> ReadAuthorNamesFromFile(string filePath)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
             var data = new List<string>();
             try
             {
-                if (!ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return new List<string>();
-                if (!ValidationClass.CheckForInvalidPathCharacters(filePath)) return new List<string>();
-                if (!ValidationClass.ValidateFileExits(filePath)) return new List<string>();
+                if (!this._validate.ValidateStringIsNotNull(filePath)) return new List<string>();
+                if (!this._validate.ValidateStringHasLength(filePath)) return new List<string>();
+                if (!this._validate.CheckForInvalidPathCharacters(filePath)) return new List<string>();
+                if (!this._validate.ValidateFileExists(filePath)) return new List<string>();
 
                 using (var sr = new StreamReader(filePath))
                 {
@@ -120,15 +124,16 @@ namespace BookList.Classes
         /// The ReadTitlesFromFile.
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" />.</param>
-        public static void ReadTitlesFromFile(string filePath)
+        public  void ReadTitlesFromFile(string filePath)
         {
             try
             {
                 MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-                if (!ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return;
-                if (!ValidationClass.CheckForInvalidPathCharacters(filePath)) return;
-                if (!ValidationClass.ValidateFileExits(filePath)) return;
+                if (!this._validate.ValidateStringIsNotNull(filePath)) return;
+                if (!this._validate.ValidateStringHasLength(filePath)) return;
+                if (!this._validate.CheckForInvalidPathCharacters(filePath)) return;
+                if (!this._validate.ValidateFileExists(filePath)) return;
 
                 using (var sr = new StreamReader(filePath))
                 {
@@ -148,7 +153,7 @@ namespace BookList.Classes
             }
         }
 
-        public static void ReadBookDataFromFile(string filePath)
+        public  void ReadBookDataFromFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath)) return;
         }
@@ -157,15 +162,16 @@ namespace BookList.Classes
         /// The ReadUnformattedDataFromFile.
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" />.</param>
-        public static void ReadUnformattedDataFromFile(string filePath)
+        public  void ReadUnformattedDataFromFile(string filePath)
         {
             try
             {
                 MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-                if (!ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return;
-                if (!ValidationClass.CheckForInvalidPathCharacters(filePath)) return;
-                if (!ValidationClass.ValidateFileExits(filePath)) return;
+                if (!this._validate.ValidateStringIsNotNull(filePath)) return;
+                if (!this._validate.ValidateStringHasLength(filePath)) return;
+                if (!this._validate.CheckForInvalidPathCharacters(filePath)) return;
+                if (!this._validate.ValidateFileExists(filePath)) return;
 
                 using (var sr = new StreamReader(filePath))
                 {

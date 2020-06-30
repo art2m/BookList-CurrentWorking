@@ -25,6 +25,7 @@ namespace BookList.Classes
 {
     using System;
     using System.Collections.Generic;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Defines the <see cref="AuthorsTextOperations" />.
@@ -39,11 +40,16 @@ namespace BookList.Classes
         /// <returns>The <see cref="string" />.</returns>
         private static string AddDashToAuthorName(string author)
         {
-            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(author)) return string.Empty;
+            var validate = new ValidationClass();
+
+            if (!validate.ValidateStringIsNotNull(author)) return string.Empty;
+            if (!validate.ValidateStringHasLength(author)) return string.Empty;
 
             var authorName = string.Empty;
             foreach (var letter in author)
+            {
                 authorName = string.Concat(authorName, char.IsWhiteSpace(letter) ? "-" : letter.ToString());
+            }
 
             return authorName;
         }
@@ -55,10 +61,13 @@ namespace BookList.Classes
         /// <returns>The <see cref="string" />.</returns>
         private static string AddFileExtension(string author)
         {
-            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(author)) return string.Empty;
-            const string extension = ".dat";
+            var validate = new ValidationClass();
+            if (!validate.ValidateStringIsNotNull(author)) return string.Empty;
+            if (!validate.ValidateStringHasLength(author)) return string.Empty;
 
-            return string.Concat(author, extension);
+            const string Extension = ".dat";
+
+            return string.Concat(author, Extension);
         }
 
         /// <summary>
@@ -69,7 +78,9 @@ namespace BookList.Classes
         /// <returns>Return the authors name with dashes installed.</returns>
         public static string AddDashBetweenAuthorsFirstMiddleLastName(string author)
         {
-            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(author)) return string.Empty;
+            var validate = new ValidationClass();
+            if (!validate.ValidateStringIsNotNull(author)) return string.Empty;
+            if (!validate.ValidateStringHasLength(author)) return string.Empty;
 
             var authorName = AddDashToAuthorName(author.Trim());
 

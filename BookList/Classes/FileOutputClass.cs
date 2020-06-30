@@ -11,9 +11,9 @@ namespace BookList.Classes
     /// <summary>
     /// Defines the <see cref="FileOutputClass" />.
     /// </summary>
-    public static class FileOutputClass
+    public  class FileOutputClass
     {
-        static FileOutputClass()
+         public FileOutputClass()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null)
@@ -27,11 +27,14 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="filePath">Path to write file to.</param>
         /// <returns>True if file is written else false.</returns>
-        public static bool WriteArthurFileNamesToListFile(string filePath)
+        public  bool WriteArthurFileNamesToListFile(string filePath)
         {
-            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return false;
-            if (!ValidationClass.ValidateFileExits(filePath)) return false;
-            if (!ValidationClass.CheckForInvalidPathCharacters(filePath)) return false;
+            var validate = new ValidationClass();
+
+            if (!validate.ValidateStringIsNotNull(filePath)) return false;
+            if (!validate.ValidateStringHasLength(filePath)) return false;
+            if (!validate.ValidateFileExists(filePath)) return false;
+            if (!validate.CheckForInvalidPathCharacters(filePath)) return false;
 
             try
             {
@@ -76,7 +79,7 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" />.</param>
         /// <returns>True if write successful else false.</returns>
-        public static bool WriteAuthorsTitlesToFile(string filePath)
+        public  bool WriteAuthorsTitlesToFile(string filePath)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
@@ -158,7 +161,7 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="filePath">.</param>
         /// <param name="bookInfo">.</param>
-        public static bool WriteBookTitleSeriesVolumeNamesToAuthorsFile(string filePath)
+        public  bool WriteBookTitleSeriesVolumeNamesToAuthorsFile(string filePath)
         {
             try
             {

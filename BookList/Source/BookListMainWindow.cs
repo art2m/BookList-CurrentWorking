@@ -34,10 +34,13 @@ namespace BookList.Source
     /// </summary>
     public partial class BookListWindow : Form
     {
+
         public BookListWindow()
         {
+            var authorDirFile = new AuthorsDirectoryFilesClass();
+
             this.InitializeComponent();
-            AuthorsDirectoryFilesClass.UpdateAuthorsNamesWithFileNames();
+            authorDirFile.UpdateAuthorsNamesWithFileNames();
         }
 
         private void OnAddAuthorsButton_Clicked(object sender, EventArgs e)
@@ -85,8 +88,9 @@ namespace BookList.Source
         }
 
         private void OnSearchAuthorsButton_Clicked(object sender, EventArgs e)
-        {
-            FileOutputClass.WriteArthurFileNamesToListFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
+        { var fileOutput = new FileOutputClass();
+
+            fileOutput.WriteArthurFileNamesToListFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
 
             using (var win = new SearchOfBookAuthors())
             {

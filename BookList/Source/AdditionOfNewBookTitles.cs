@@ -188,11 +188,13 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="System.EventArgs" />Instance containing the event data.</param>
         private void OnSaveBookRecordButton_Clicked(object sender, EventArgs e)
         {
+            var fileOutput = new FileOutputClass();
+
             var filePath = BookListPropertiesClass.PathOfCurrentWorkingFile;
 
             if (!this.chkSeries.Checked)
             {
-                FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath);
+                fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath);
                 return;
             }
 
@@ -203,7 +205,7 @@ namespace BookList.Source
             sb.Append(")");
             sb.Append(volume);
             var bookInfo = sb.ToString();
-            FileOutputClass.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath);
+            fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath);
         }
 
         /// <summary>

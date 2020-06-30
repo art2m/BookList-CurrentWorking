@@ -77,7 +77,11 @@ namespace BookList.Source
 
         private void SearchBookTitleAllAuthors()
         {
-            AuthorsDirectoryFilesClass.GetAllAuthorFilePathsContainedInAuthorDirectory();
+            var authorDirFiles = new AuthorsDirectoryFilesClass();
+            var dirFileOp = new DirectoryFileOperationsClass();
+            var fileInput = new FileInputClass();
+
+            authorDirFiles.GetAllAuthorFilePathsContainedInAuthorDirectory(BookListPropertiesClass.PathToAuthorsDirectory);
 
             BookInfoCollection.ClearCollection();
             this.lstTiltes.Items.Clear();
@@ -86,11 +90,11 @@ namespace BookList.Source
             {
                 var fileName = AuthorsFileNamesCollection.GetItemAt(i);
                 var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
-                var filePath = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(dirAuthors,
+                var filePath = dirFileOp.CombineDirectoryPathWithFileName(dirAuthors,
                     fileName);
                 this.txtAuthorName.Text = fileName;
 
-                FileInputClass.ReadTitlesFromFile(filePath);
+                fileInput.ReadTitlesFromFile(filePath);
                 this.FindTitlesInString();
             }
 
@@ -102,15 +106,18 @@ namespace BookList.Source
 
         private void SearchBookTitleBySingleAuthor()
         {
+            var dirFileOp = new DirectoryFileOperationsClass();
+            var fileInput = new FileInputClass();
+
             var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
 
-            var filePath = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(dirAuthors,
+            var filePath = dirFileOp.CombineDirectoryPathWithFileName(dirAuthors,
                 BookListPropertiesClass.CurrentWorkingFileName);
 
             BookInfoCollection.ClearCollection();
             this.lstTiltes.Items.Clear();
 
-            FileInputClass.ReadTitlesFromFile(filePath);
+            fileInput.ReadTitlesFromFile(filePath);
 
             this.FindTitlesInString();
 

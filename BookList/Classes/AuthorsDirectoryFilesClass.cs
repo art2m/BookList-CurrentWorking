@@ -6,6 +6,7 @@ namespace BookList.Classes
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Windows.Forms;
     using BookList.Collections;
     using BookList.PropertiesClasses;
     using JetBrains.Annotations;
@@ -13,17 +14,19 @@ namespace BookList.Classes
     /// <summary>
     /// Defines the <see cref="AuthorsDirectoryFilesClass" />.
     /// </summary>
-    public static class AuthorsDirectoryFilesClass
+    public  class AuthorsDirectoryFilesClass
     {
         /// <summary>
-        /// The GetAllAuthorFilePathsContainedInAuthorDirectory.
+        /// Gets the all author file paths contained in author directory.
         /// </summary>
-        public static void GetAllAuthorFilePathsContainedInAuthorDirectory()
+        /// <param name="dirAuthorPath">The pat to the authors directory.</param>
+        public  void GetAllAuthorFilePathsContainedInAuthorDirectory(string dirAuthorPath)
         {
-            var dirApp = BookListPropertiesClass.PathToAppDataDirectory;
+            var validate = new ValidationClass();
 
-            var dirAuthorPath = DirectoryFileOperationsClass.CombineExistingDirectoryPathWithNewDirectoryPath(dirApp,
-                BookListPropertiesClass.PathToAuthorsDirectory);
+            if (validate.ValidateStringIsNotNull(dirAuthorPath)) return;
+            if (validate.ValidateStringHasLength(dirAuthorPath)) return;
+
             GetAllFileNamesContainedInAuthorsDirectory(dirAuthorPath);
         }
 
@@ -31,7 +34,7 @@ namespace BookList.Classes
         /// The GetAllFileNamesContainedInAuthorsDirectory.
         /// </summary>
         /// <param name="dirPath">The dirPath<see cref="string" />.</param>
-        private static void GetAllFileNamesContainedInAuthorsDirectory([NotNull] string dirPath)
+        private  void GetAllFileNamesContainedInAuthorsDirectory([NotNull] string dirPath)
         {
             var fileArray = Directory.GetFiles(dirPath, "*.dat");
             var fileNames = new List<string>(fileArray);
@@ -42,7 +45,7 @@ namespace BookList.Classes
         /// <summary>
         /// Make the List of author names match the FileNames.
         /// </summary>
-        private static void GetAuthorFileNamesAddToAuthorsNamesList()
+        private  void GetAuthorFileNamesAddToAuthorsNamesList()
         {
             AuthorNamesListCollection.ClearCollection();
             for (var index = 0; index < AuthorsFileNamesCollection.ItemsCount(); index++)
@@ -52,9 +55,11 @@ namespace BookList.Classes
         /// <summary>
         /// The GetAuthorFileNamesFromAuthorsList.
         /// </summary>
-        private static void GetAuthorFileNamesFromAuthorsList()
+        private  void GetAuthorFileNamesFromAuthorsList()
         {
-            FileInputClass.ReadAuthorsNamesFromFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
+            var fileInput = new FileInputClass();
+
+            fileInput.ReadAuthorsNamesFromFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
 
             AuthorNamesListCollection.SortCollection();
         }
@@ -63,50 +68,56 @@ namespace BookList.Classes
         /// <summary>
         /// The SetAllDirectoryPaths.
         /// </summary>
-        private static void SetAllDirectoryPaths()
+        private  void SetAllDirectoryPaths()
         {
-            DirectoryFileOperationsClass.GetPathToSpecialDirectoryAppDataLocal();
+            var dirFileOp = new DirectoryFileOperationsClass();
+            
+            dirFileOp.GetPathToSpecialDirectoryAppDataLocal();
 
-            var dirTopPath = DirectoryFileOperationsClass.CombineExistingDirectoryPathWithNewDirectoryPath(BookListPropertiesClass
-                .PathToAppDataDirectory, BookListPropertiesClass.PathToTopLevelDirectory);
+            var dirTopPath = dirFileOp.CombineExistingDirectoryPathWithNewDirectoryPath(
+                BookListPropertiesClass
+                    .PathToAppDataDirectory, BookListPropertiesClass.PathToTopLevelDirectory);
 
             BookListPropertiesClass.PathToAuthorsDirectory =
-                DirectoryFileOperationsClass.CombineExistingDirectoryPathWithNewDirectoryPath(
+                dirFileOp.CombineExistingDirectoryPathWithNewDirectoryPath(
                     BookListPropertiesClass.PathToTopLevelDirectory, BookListPropertiesClass.NameOfAuthorsDirectory);
 
             var dirAuthorListName = BookListPropertiesClass.NameOfAuthorsListDirectory;
             BookListPropertiesClass.PathToAuthorsListDirectory =
-                DirectoryFileOperationsClass.CombineExistingDirectoryPathWithNewDirectoryPath(
+                dirFileOp.CombineExistingDirectoryPathWithNewDirectoryPath(
                     BookListPropertiesClass.PathToAuthorsDirectory, dirAuthorListName);
 
             var dirSeriesName = BookListPropertiesClass.NameOfSeriesDirectory;
-            BookListPropertiesClass.PathToSeriesDirectory = DirectoryFileOperationsClass.CombineExistingDirectoryPathWithNewDirectoryPath
-                (BookListPropertiesClass.PathToTopLevelDirectory, dirSeriesName);
+            BookListPropertiesClass.PathToSeriesDirectory =
+                dirFileOp.CombineExistingDirectoryPathWithNewDirectoryPath
+                    (BookListPropertiesClass.PathToTopLevelDirectory, dirSeriesName);
 
             var dirTitlesName = BookListPropertiesClass.NameOfTitlesDirectory;
-            BookListPropertiesClass.PathToTitlesDirectory = DirectoryFileOperationsClass
-                .CombineExistingDirectoryPathWithNewDirectoryPath(BookListPropertiesClass.PathToTopLevelDirectory, dirTitlesName);
+            BookListPropertiesClass.PathToTitlesDirectory = dirFileOp.CombineExistingDirectoryPathWithNewDirectoryPath(BookListPropertiesClass.PathToTopLevelDirectory,
+                    dirTitlesName);
 
             var dirAuthorTitlesName = BookListPropertiesClass.NameOfTitlesAuthorsDirectory;
-            BookListPropertiesClass.PathToTitlesAuthorsDirectory = DirectoryFileOperationsClass
-                .CombineExistingDirectoryPathWithNewDirectoryPath(BookListPropertiesClass.PathToTopLevelDirectory, dirAuthorTitlesName);
+            BookListPropertiesClass.PathToTitlesAuthorsDirectory = dirFileOp.CombineExistingDirectoryPathWithNewDirectoryPath(BookListPropertiesClass.PathToTopLevelDirectory,
+                    dirAuthorTitlesName);
         }
 
         /// <summary>
         /// The SetAllFilePaths.
         /// </summary>
-        private static void SetAllFilePaths()
+        private  void SetAllFilePaths()
         {
-            var fileAuthorNamesList = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(
+            var dirFileOp = new DirectoryFileOperationsClass();
+
+            var fileAuthorNamesList = dirFileOp.CombineDirectoryPathWithFileName(
                 BookListPropertiesClass
                     .PathToAuthorsListDirectory, BookListPropertiesClass.NameOfAuthorsListFile);
             BookListPropertiesClass.PathToAuthorsNamesListFile = fileAuthorNamesList;
 
-            var fileSeriesList = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(BookListPropertiesClass
+            var fileSeriesList = dirFileOp.CombineDirectoryPathWithFileName(BookListPropertiesClass
                 .PathToSeriesDirectory, BookListPropertiesClass.NameOfSeriesDirectory);
             BookListPropertiesClass.PathToSeriesNamesListFile = fileSeriesList;
 
-            var fileTitlesList = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(BookListPropertiesClass
+            var fileTitlesList = dirFileOp.CombineDirectoryPathWithFileName(BookListPropertiesClass
                 .PathToTitlesDirectory, BookListPropertiesClass.NameOfTitlesBookListFile);
             BookListPropertiesClass.PathToTitleNamesListFile = fileTitlesList;
         }
@@ -114,20 +125,21 @@ namespace BookList.Classes
         /// <summary>
         /// The UpdateAuthorsNamesWithFileNames.
         /// </summary>
-        public static void UpdateAuthorsNamesWithFileNames()
+        public  void UpdateAuthorsNamesWithFileNames()
         {
             SetAllDirectoryPaths();
             SetAllFilePaths();
             GetAuthorFileNamesFromAuthorsList();
-            GetAllAuthorFilePathsContainedInAuthorDirectory();
+           // GetAllAuthorFilePathsContainedInAuthorDirectory(TODO);
             GetAuthorFileNamesAddToAuthorsNamesList();
         }
+
 
         /// <summary>
         /// The AddAuthorFileNamesToCollection.
         /// </summary>
         /// <param name="fileName">The fileName<see cref="string" />.</param>
-        private static void AddAuthorFileNamesToCollection(string fileName)
+        private  void AddAuthorFileNamesToCollection(string fileName)
         {
             fileName = fileName.Trim();
 
@@ -142,7 +154,7 @@ namespace BookList.Classes
         /// The GetAuthorFileNameFromPath.
         /// </summary>
         /// <param name="authorFilePaths">The authorFilePaths<see cref="IEnumerable{string}" />.</param>
-        private static void GetAuthorFileNameFromPath(List<string> authorFilePaths)
+        private  void GetAuthorFileNameFromPath(List<string> authorFilePaths)
         {
             if (authorFilePaths == null) return;
             if (!authorFilePaths.Any()) return;

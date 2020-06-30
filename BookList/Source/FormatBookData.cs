@@ -48,8 +48,10 @@ namespace BookList.Source
 
         private void GetAllAuthorsNames()
         {
+            var fileInput = new FileInputClass();
+
             var filePath = FormatBookDataProperties.PathToCurrentAuthorsFile;
-            FileInputClass.ReadAuthorsNamesFromFile(filePath);
+            fileInput.ReadAuthorsNamesFromFile(filePath);
         }
         private void DisplayRecordCountAndPosition()
         {
@@ -71,11 +73,13 @@ namespace BookList.Source
 
         private void GetUnformattedDataFrom()
         {
+            var dirFileOp = new DirectoryFileOperationsClass();
+
             var dirPath = BookListPropertiesClass.PathToAuthorsDirectory;
 
             Debug.Assert(dirPath != null, nameof(dirPath) + " != null");
             FormatBookDataProperties.PathToCurrentAuthorsFile =
-                DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(dirPath,
+                dirFileOp.CombineDirectoryPathWithFileName(dirPath,
                     BookListPropertiesClass.AuthorsNameCurrent);
 
             this.GetAuthorsName(BookListPropertiesClass.AuthorsNameCurrent);
@@ -84,13 +88,15 @@ namespace BookList.Source
 
         private void LoadUnformattedData()
         {
+            var fileInput = new FileInputClass();
+
             var dataOp = new DataStorageOperationsClass();
 
             this.GetUnformattedDataFrom();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.PathToCurrentAuthorsFile)) return;
 
-            FileInputClass.ReadTitlesFromFile(FormatBookDataProperties.PathToCurrentAuthorsFile);
+            fileInput.ReadTitlesFromFile(FormatBookDataProperties.PathToCurrentAuthorsFile);
 
             DataStorageOperationsClass.AddToBackUpList();
 
@@ -200,17 +206,19 @@ namespace BookList.Source
 
         private void OnFormatBookInformationButton_Click(object sender, EventArgs e)
         {
+            var validate = new ValidationClass();
+
             var temp = this.txtData.Text.Trim();
 
             if (string.IsNullOrEmpty(temp)) return;
 
             if (FormatBookDataProperties.BookIsSeries)
             {
-                if (ValidationClass.ValidateBookSeriesIsFormatted(this.txtData.Text)) return;
+                if (validate.ValidateBookSeriesIsFormatted(this.txtData.Text)) return;
             }
             else if (!FormatBookDataProperties.BookIsSeries)
             {
-                if (ValidationClass.ValidateBookNotSeriesIsFormatted(this.txtData.Text)) return;
+                if (validate.ValidateBookNotSeriesIsFormatted(this.txtData.Text)) return;
             }
 
             FormatBookDataProperties.UnformattedBookInformation = temp;
