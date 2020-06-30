@@ -9,8 +9,11 @@ namespace BookList.Classes
     /// </summary>
     public class DataStorageOperationsClass
     {
-       
-        public void AddToBackUpList()
+        /// <summary>
+        /// Create a backup of all unformatted data. This will allow the user to roll back
+        /// changes.
+        /// </summary>
+        public static void AddToBackUpList()
         {
             for (var index = 0; index < UnformattedDataCollection.GetItemsCount(); index++)
             {

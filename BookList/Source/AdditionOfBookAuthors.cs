@@ -21,6 +21,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using BookList.PropertiesClasses;
+
 namespace BookList.Source
 {
     using BookList.Classes;
@@ -82,11 +84,11 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnSaveRecordButton_Clicked(object sender, EventArgs e)
         {
-            var dirAuthors = AuthorsDirectoryFilesClass.GetPathToAuthorsDirectory();
+            var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
 
             var authorOp = new AuthorsTextOperations();
 
-            var fileName = authorOp.BookAuthorName(this.txtAuthor.Text);
+            var fileName = AuthorsTextOperations.AddDashBetweenAuthorsFirstMiddleLastName(this.txtAuthor.Text);
 
             if (string.IsNullOrEmpty(fileName)) return;
             if (!Directory.Exists(dirAuthors)) return;

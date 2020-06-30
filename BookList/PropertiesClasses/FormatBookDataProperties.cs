@@ -1,5 +1,6 @@
 ﻿namespace BookList.PropertiesClasses
 {
+    using System.Runtime.CompilerServices;
     using System.Windows.Forms;
 
     /// <summary>
@@ -70,7 +71,9 @@
         /// <summary>
         /// Gets the TipTxtVolume.
         /// </summary>
-        public static string TipTxtVolume { get; } = "the book volume is displayed here after selecting.";
+        public static string TipTxtVolume { get; } = "The book volume is displayed here after selecting.";
+
+        public static string TipAutoFormat { get; } = "Try to auto format book Information.";
 
         /// <summary>
         /// Gets the TipLblInfo.

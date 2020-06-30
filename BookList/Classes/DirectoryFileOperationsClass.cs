@@ -1,12 +1,12 @@
-﻿namespace BookList.Classes
+﻿using System.Runtime.CompilerServices;
+
+namespace BookList.Classes
 {
     using System;
     using System.Diagnostics;
     using System.IO;
     using System.Reflection;
-
     using BookList.PropertiesClasses;
-
     using JetBrains.Annotations;
 
     /// <summary>
@@ -127,90 +127,32 @@
         }
 
         /// <summary>
-        /// The CombineDirectoryPathFileNameCheckCreateFile.
+        /// Combine directory and file name. Check if file exists if not create it.
         /// </summary>
         /// <param name="dirPath">The dirPath<see cref="string" />.</param>
         /// <param name="fileName">The fileName<see cref="string" />.</param>
         /// <returns>The <see cref="string" />.</returns>
         public static string CombineDirectoryPathFileNameCheckCreateFile([NotNull] string dirPath, string fileName)
         {
-            try
-            {
-                MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-                var filePath = Path.Combine(dirPath, fileName);
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirPath)) return string.Empty;
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(fileName)) return string.Empty;
+            if (!ValidationClass.ValidateDirectoryExists(dirPath)) return string.Empty;
 
-                if (!File.Exists(filePath))
-                {
-                    File.Create(filePath).Dispose();
-                }
+            var filePath = CombineDirectoryPathWithFileName(dirPath, fileName);
+            if (ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return string.Empty;
 
-                return !File.Exists(filePath) ? string.Empty : filePath;
-            }
-            catch (ArgumentNullException ex)
-            {
-                MyMessagesClass.ErrorMessage = V;
+            if (ValidationClass.ValidateDirectoryExists(filePath)) return string.Empty;
 
-                MyMessagesClass.ShowErrorMessageBox();
+            File.Create(filePath).Dispose();
 
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MyMessagesClass.ErrorMessage = V1;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (PathTooLongException ex)
-            {
-                MyMessagesClass.ErrorMessage = V2;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MyMessagesClass.ErrorMessage = V3;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (NotSupportedException ex)
-            {
-                MyMessagesClass.ErrorMessage = V4;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (ArgumentException ex)
-            {
-                MyMessagesClass.ErrorMessage = V5;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
+            return filePath;
         }
 
+
         /// <summary>
-        /// The CombineDirectoryPathWithFileName.
+        /// Combine directory name and file name.
         /// </summary>
         /// <param name="dirPath">The dirPath<see cref="string" />.</param>
         /// <param name="fileName">The fileName<see cref="string" />.</param>
@@ -219,29 +161,13 @@
         {
             try
             {
+                if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirPath)) return string.Empty;
+                if (!ValidationClass.ValidateStringValueNotNullNotEmpty(fileName)) return string.Empty;
+                if (!ValidationClass.ValidateDirectoryExists(dirPath)) return string.Empty;
+
                 var filePath = Path.Combine(dirPath, fileName);
 
                 return filePath;
-            }
-            catch (ArgumentNullException ex)
-            {
-                MyMessagesClass.ErrorMessage = V6;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MyMessagesClass.ErrorMessage = V7;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
             }
             catch (PathTooLongException ex)
             {
@@ -253,167 +179,53 @@
 
                 return string.Empty;
             }
-            catch (DirectoryNotFoundException ex)
-            {
-                MyMessagesClass.ErrorMessage = V9;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (NotSupportedException ex)
-            {
-                MyMessagesClass.ErrorMessage = V10;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
-            catch (ArgumentException ex)
-            {
-                MyMessagesClass.ErrorMessage = V11;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-
-                return string.Empty;
-            }
         }
 
         /// <summary>
-        /// Combine two strings to get complete path to directory First Directory must
-        ///     all ready exist.  Check to see if directory path exists if so return path string. else
-        ///     create new directory.
+        /// Combine two strings to get complete path to directory
         /// </summary>
-        /// <param name="first">Directory name or path.</param>
-        /// <param name="second">Directory name, path or file name.</param>
+        /// <param name="dirPath">Directory name or path.</param>
+        /// <param name="dirNewPath">Directory name, path or file name.</param>
         /// <returns>Path string to directories else empty string.</returns>
-        public static string CombineStringsMakeDirectoryPath([NotNull] string first, string second)
+        public static string CombineExistingDirectoryPathWithNewDirectoryPath([NotNull] string dirPath,
+            string dirNewPath)
         {
-            try
-            {
-                MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-                var makePath = Path.Combine(first, second);
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirPath)) return string.Empty;
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirNewPath)) return string.Empty;
+            if (!ValidationClass.ValidateDirectoryExists(dirPath)) return string.Empty;
 
-                var dirPath = CheckDirectoryExistsCreateDirectory(makePath);
+            var makePath = Path.Combine(dirPath, dirNewPath);
 
-                return dirPath;
-            }
-            catch (ArgumentNullException ex)
-            {
-                MyMessagesClass.ErrorMessage = V12;
 
-                Debug.WriteLine(ex.ToString());
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return string.Empty;
-            }
-            catch (ArgumentException ex)
-            {
-                MyMessagesClass.ErrorMessage = V13;
-
-                Debug.WriteLine(ex.ToString());
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                return string.Empty;
-            }
+            return makePath;
         }
 
         /// <summary>
-        /// The CheckDirectoryExistsCreateDirectory.
+        /// Create new directory.
         /// </summary>
-        /// <param name="dirPath">The dirPath<see cref="string" />.</param>
-        /// <returns>The <see cref="string" />.</returns>
-        public static string CheckDirectoryExistsCreateDirectory([NotNull] string dirPath)
+        /// <param name="dirNewPath"></param>
+        /// <returns></returns>
+        public static bool CreateNewDirectoryReturnPath(string dirNewPath)
         {
-            try
-            {
-                MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirNewPath)) return false;
 
-                if (Directory.Exists(dirPath))
-                {
-                    return dirPath;
-                }
+            Directory.CreateDirectory(dirNewPath);
 
-                Directory.CreateDirectory(dirPath);
-
-                return dirPath;
-            }
-            catch (ArgumentNullException ex)
-            {
-                MyMessagesClass.ErrorMessage = V14;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-                return string.Empty;
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MyMessagesClass.ErrorMessage = V15;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-                return string.Empty;
-            }
-            catch (PathTooLongException ex)
-            {
-                MyMessagesClass.ErrorMessage = V16;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-                return string.Empty;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MyMessagesClass.ErrorMessage = V17;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-                return string.Empty;
-            }
-            catch (NotSupportedException ex)
-            {
-                MyMessagesClass.ErrorMessage = V18;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-                return string.Empty;
-            }
-            catch (ArgumentException ex)
-            {
-                MyMessagesClass.ErrorMessage = V19;
-
-                MyMessagesClass.ShowErrorMessageBox();
-
-                Debug.WriteLine(ex.ToString());
-                return string.Empty;
-            }
+            return ValidationClass.ValidateDirectoryExists(dirNewPath);
         }
 
         /// <summary>
         /// The GetPathToSpecialDirectoryAppDataLocal.
         /// </summary>
         /// <returns>The <see cref="string" />.</returns>
-        public static string GetPathToSpecialDirectoryAppDataLocal()
+        public static void GetPathToSpecialDirectoryAppDataLocal()
         {
             var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirPath)) return string.Empty;
-
-            return !ValidationClass.ValidateDirectoryExists(dirPath) ? string.Empty : dirPath;
+            if (!ValidationClass.ValidateStringValueNotNullNotEmpty(dirPath)) return;
+            BookListPropertiesClass.PathToAppDataDirectory = dirPath;
         }
 
         /// <summary>

@@ -33,6 +33,7 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using BookList.PropertiesClasses;
 using JetBrains.Annotations;
 
@@ -96,6 +97,7 @@ namespace BookList.Classes
             return false;
         }
 
+
         /// <summary>
         /// Validate if book is formatted all ready.
         /// So user can pick another book to be formatted.
@@ -152,19 +154,7 @@ namespace BookList.Classes
         /// <returns>.</returns>
         public static bool ValidateFileExits([NotNull] string filePath)
         {
-            string msg;
-            if (string.IsNullOrEmpty(filePath))
-            {
-                MyMessagesClass.ErrorMessage =
-                    "The file path cannot be a null pathString or an empty string." + filePath;
-                MyMessagesClass.ShowErrorMessageBox();
-                return false;
-            }
-
-            if (File.Exists(filePath)) return true;
-            MyMessagesClass.ErrorMessage = "Unable to locate file for this path. Exiting operation: " + filePath;
-            MyMessagesClass.ShowErrorMessageBox();
-            return false;
+            return ValidateStringValueNotNullNotEmpty(filePath) && File.Exists(filePath);
         }
 
         /// <summary>
@@ -251,6 +241,26 @@ namespace BookList.Classes
             MyMessagesClass.ErrorMessage = "The pathString is not valid. It is a null or empty string.";
             MyMessagesClass.ShowErrorMessageBox();
 
+            return false;
+        }
+
+        public static bool ValidateStringHasLength(string value)
+        {
+            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (value == null)
+            {
+                MyMessagesClass.ErrorMessage = "The pathString is not valid. It is a null string.";
+                MyMessagesClass.ShowErrorMessageBox();
+                return false;
+            }
+
+            value = value.Trim();
+
+            if (value.Length != 0) return true;
+
+            MyMessagesClass.ErrorMessage = "The pathString is not valid. It is a null string.";
+            MyMessagesClass.ShowErrorMessageBox();
             return false;
         }
 

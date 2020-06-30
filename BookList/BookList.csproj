@@ -58,13 +58,13 @@
     <Compile Include="Classes\AuthorsDirectoryFilesClass.cs" />
     <Compile Include="Classes\AuthorsTextOperations.cs" />
     <Compile Include="Classes\AutomaticBookInfoFormat.cs" />
-    <Compile Include="Classes\BookListOperationsClass.cs" />
+    <Compile Include="Classes\BookLIstOperationClass.cs" />
     <Compile Include="Classes\DataStorageOperationsClass.cs" />
     <Compile Include="Classes\DirectoryFileOperationsClass.cs" />
     <Compile Include="Classes\FileOutputClass.cs" />
     <Compile Include="Classes\MyMessagesClass.cs" />
     <Compile Include="Classes\FileInputClass.cs" />
-    <Compile Include="Classes\UnformattedBookOperations.cs" />
+    <Compile Include="Classes\AutoFormatClass.cs" />
     <Compile Include="Classes\ValidationClass.cs" />
     <Compile Include="Collections\AuthorNamesListCollection.cs" />
     <Compile Include="Collections\AuthorsFileNamesCollection.cs" />

@@ -92,21 +92,37 @@ namespace BookList.Source
             this.txtVolume.Enabled = false;
         }
 
+        /// <summary>
+        /// Gets the selected book volume text that user has  highlighted in the txtBookInfo text box.
+        /// Then place it in the txtVolume text box.
+        /// </summary>
         private void GetSelectedBookVolumeText()
         {
             FormatBookDataProperties.BookSeriesVolumeNumber = this.txtBookInfo.SelectedText.Trim();
         }
 
+        /// <summary>
+        /// Gets the selected series text that the user has highlighted in the textbookInfo text box.
+        /// Then place it in the txtSeries text box.
+        /// </summary>
         private void GetSelectedSeriesText()
         {
             FormatBookDataProperties.NameOfBookSeries = this.txtBookInfo.SelectedText.Trim();
         }
 
+        /// <summary>
+        /// Gets the selected title text that the user has highlighted in the textBookInfo text box.
+        /// Then place it in the txtTitle text box..
+        /// </summary>
         private void GetSelectedTitleText()
         {
             FormatBookDataProperties.ContainsBookTitle = this.txtBookInfo.SelectedText.Trim();
         }
 
+        /// <summary>
+        /// Are the series format book information. Format the series name of the book by
+        /// surrounding it with parentheses.
+        /// </summary>
         private void IsSeriesFormatBookInformation()
         {
             var sb = new StringBuilder();
@@ -167,6 +183,32 @@ namespace BookList.Source
             this.txtTitle.Text = string.Empty;
         }
 
+        /// <summary>
+        /// On auto format book information button
+        /// Attempt to automatically format the selected Book title, series and volume number.
+        /// If unable to then user must manually format the book title, series, and volume number.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">Instance containing the event data.</param>
+        public void OnAutoFormatBookInformationButton_Click(object sender, EventArgs e)
+        {
+            var autoFormat = new AutoFormatClass();
+
+            var bookInfo = this.txtBookInfo.Text.Trim();
+
+            var bookData =
+                autoFormat.LocateSeriesPartOfBookInformation(FormatBookDataProperties.PathToCurrentAuthorsFile,
+                    bookInfo);
+
+            if (bookData == null) return;
+            if (bookData.Count == 0) return;
+        }
+
+        /// <summary>
+        /// Ons the book title button_ click.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">Instance containing the event data.</param>
         private void OnBookTitleButton_Click(object sender, EventArgs e)
         {
             var len = this.txtTitle.SelectionLength;
@@ -221,7 +263,6 @@ namespace BookList.Source
 
             if (UnformattedDataCollection.GetItemsCount() < 1) return;
             if (string.IsNullOrEmpty(this.txtTitle.Text.Trim())) return;
-
 
             if (FormatBookDataProperties.BookIsSeries)
             {
@@ -327,6 +368,8 @@ namespace BookList.Source
                 tTip.SetToolTip(this.txtTitle, FormatBookDataProperties.TipTxtTitle);
 
                 tTip.SetToolTip(this.txtVolume, FormatBookDataProperties.TipTxtVolume);
+
+                tTip.SetToolTip(this.btnAutoFormat, FormatBookDataProperties.TipAutoFormat);
             }
         }
 

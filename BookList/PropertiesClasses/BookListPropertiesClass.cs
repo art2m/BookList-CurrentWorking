@@ -9,13 +9,13 @@
         /// Gets or sets the PathToAppDataDirectory
         /// Gets or sets the PathToAppDataDirectory.
         /// </summary>
-        public static string PathToAppDataDirectory { get; set; } = string.Empty;
+        public static string PathToAppDataDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets the PathToAuthorsDirectory
         /// Gets or sets the PathToAuthorsDirectory.
         /// </summary>
-        public static string PathToAuthorsDirectory { get; set; } = string.Empty;
+        public static string PathToAuthorsDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets the PathToAuthorsListDirectory

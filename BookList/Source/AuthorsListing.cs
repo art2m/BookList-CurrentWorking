@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using BookList.Collections;
 using BookList.PropertiesClasses;
@@ -15,9 +16,10 @@ namespace BookList.Source
 
         private void FillListWithAuthorsNames()
         {
-            AuthorNamesListCollection.ClearCollection();
+            //AuthorNamesListCollection.ClearCollection();
 
             this.lstAuthor.Sorted = true;
+            Debug.WriteLine(AuthorsFileNamesCollection.ItemsCount().ToString());
 
             for (var index = 0; index < AuthorsFileNamesCollection.ItemsCount(); index++)
                 this.lstAuthor.Items.Add(AuthorsFileNamesCollection.GetItemAt(index));

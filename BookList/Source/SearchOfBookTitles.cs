@@ -85,7 +85,7 @@ namespace BookList.Source
             for (var i = 0; i < AuthorsFileNamesCollection.ItemsCount(); i++)
             {
                 var fileName = AuthorsFileNamesCollection.GetItemAt(i);
-                var dirAuthors = AuthorsDirectoryFilesClass.GetPathToAuthorsDirectory();
+                var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
                 var filePath = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(dirAuthors,
                     fileName);
                 this.txtAuthorName.Text = fileName;
@@ -102,7 +102,7 @@ namespace BookList.Source
 
         private void SearchBookTitleBySingleAuthor()
         {
-            var dirAuthors = AuthorsDirectoryFilesClass.GetPathToAuthorsDirectory();
+            var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
 
             var filePath = DirectoryFileOperationsClass.CombineDirectoryPathWithFileName(dirAuthors,
                 BookListPropertiesClass.CurrentWorkingFileName);

@@ -40,11 +40,17 @@ namespace BookList.Source
         {
             this.InitializeComponent();
 
+            //this.GetAllAuthorsNames();
             this.mnuAuthors.PerformClick();
+
             this.SetAllControlsToolTips();
         }
 
-
+        private void GetAllAuthorsNames()
+        {
+            var filePath = FormatBookDataProperties.PathToCurrentAuthorsFile;
+            FileInputClass.ReadAuthorsNamesFromFile(filePath);
+        }
         private void DisplayRecordCountAndPosition()
         {
             var sb = new StringBuilder(FormatBookDataProperties.TipLblPosition);
@@ -86,7 +92,7 @@ namespace BookList.Source
 
             FileInputClass.ReadTitlesFromFile(FormatBookDataProperties.PathToCurrentAuthorsFile);
 
-            dataOp.AddToBackUpList();
+            DataStorageOperationsClass.AddToBackUpList();
 
             FormatBookDataProperties.RecordsTotalCount = UnformattedDataCollection.GetItemsCount();
         }
@@ -174,6 +180,7 @@ namespace BookList.Source
 
         private void OnDisplayAllAuthorsMenuItem_Clicked(object sender, EventArgs e)
         {
+            this.LoadUnformattedData();
             if (this._result != DialogResult.OK)
             {
                 using (var dlg = new AuthorsListing())
@@ -184,7 +191,7 @@ namespace BookList.Source
 
             if (string.IsNullOrEmpty(BookListPropertiesClass.AuthorsNameCurrent)) return;
 
-            this.LoadUnformattedData();
+
 
             this.MoveToFirstRecord();
 

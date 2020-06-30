@@ -58,7 +58,7 @@ namespace BookList.Classes
             AuthorNamesListCollection.ClearCollection();
 
             try
-            {
+            { 
                 if (!ValidationClass.ValidateStringValueNotNullNotEmpty(filePath)) return;
                 if (!ValidationClass.CheckForInvalidPathCharacters(filePath)) return;
                 if (!ValidationClass.ValidateFileExits(filePath)) return;
