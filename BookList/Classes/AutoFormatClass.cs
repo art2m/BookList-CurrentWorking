@@ -21,6 +21,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Windows.Forms;
+using BookList.PropertiesClasses;
+
 namespace BookList.Classes
 {
     using System;
@@ -32,25 +35,36 @@ namespace BookList.Classes
 
     public class AutoFormatClass
     {
-
-        private static int CheckContainsBookVolume(string bookInfo, List<string> volume, string volNameNum)
+        /// <summary>
+        /// Checks to see if book information contains a book
+        /// <paramref name="volume"/> and number. If found save to property.
+        /// </summary>
+        /// <param name="bookInfo">The book information.</param>
+        /// <param name="volume">The volume.</param>
+        /// <returns>
+        /// The index where the <paramref name="volume"/> name or number begins.
+        /// </returns>
+        private static int CheckContainsBookVolume(string bookInfo, List<string> volume)
         {
+            var validate = new ValidationClass();
+
             var index = -1;
             foreach (var name in volume.Where(bookInfo.Contains))
             {
                 index = bookInfo.IndexOf(name, StringComparison.Ordinal);
 
                 var len = bookInfo.Length;
-                if (index < len)
-                {
-                    volNameNum = bookInfo.Substring(index, len);
-                    break;
-                }
-            }
 
-            if (!string.IsNullOrEmpty(volNameNum))
-            {
-                volNameNum = volNameNum.Trim();
+                if (index <= 0 || index >= len) continue;
+
+                var volNameNum = bookInfo.Substring(index);
+
+                if (!validate.ValidateStringIsNotNull(volNameNum)) return -1;
+                if (!validate.ValidateStringHasLength(volNameNum)) return -1;
+
+                FormatBookDataProperties.BookSeriesVolumeNumber = volNameNum;
+
+                break;
             }
 
             return index;
@@ -149,16 +163,36 @@ namespace BookList.Classes
 
         private List<string> FindTitleSeries(List<string> formattedBookData)
         {
-            foreach (var val in formattedBookData)
-            {
-                for (var index = 0; index < UnformattedDataCollection.GetItemsCount(); index++)
-                {
-                }
-            }
+            FindSeriesName(formattedBookData);
+
 
             return new List<string>();
         }
 
+        private void FindSeriesName(List<string> formattedBookData)
+        {
+            for (var index = 0; index < UnformattedDataCollection.GetItemsCount(); index++)
+            {
+                foreach (var val in formattedBookData)
+                {
+                    var name = val.ToLower();
+                    var temp = UnformattedDataBackUpCollection.GetItemAt(index).ToLower();
+                    if (name.Equals(temp))
+                    {
+                          // TODO: Add code for locating words that match in series.
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Locates the series part of book information. Then title and volume.
+        /// </summary>
+        /// <param name="filePath">The file path to <see langword="this"/> book.</param>
+        /// <param name="bookInfo">The book information.</param>
+        /// <returns>
+        /// 
+        /// </returns>
         public List<string> LocateSeriesPartOfBookInformation(string filePath, string bookInfo)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
@@ -178,21 +212,33 @@ namespace BookList.Classes
             bookInfo = bookInfo.ToLower();
             var retVal = this.CheckForBookSeries(seriesInfo, bookInfo);
             var volume = FillWithPossibleVolumeNames();
-            var volNameNum = string.Empty;
-            var volIndex = CheckContainsBookVolume(bookInfo, volume, volNameNum);
-            var formattedBookData = this.SplitBookSectionsTitleSeriesVolumeNumber(bookInfo, volIndex);
+
+            var volIndex = CheckContainsBookVolume(bookInfo, volume);
+
+            var formattedBookData = this.SplitBookSectionsTitleSeries(bookInfo, volIndex);
             var TitleSeriesVol = this.FindTitleSeries(formattedBookData);
 
             return seriesInfo;
         }
 
-        private List<string> SplitBookSectionsTitleSeriesVolumeNumber(string bookInfo, int volIndex)
+        private List<string> SplitBookSectionsTitleSeries(string bookInfo, int volIndex)
         {
             var temp = bookInfo.Substring(0, volIndex);
 
             var val = temp.Split(' ');
 
             var titleSeriesList = new List<string>(val);
+
+            for (var index = 0; index < titleSeriesList.Count; index++)
+            {
+                var validate = new ValidationClass();
+
+                if (titleSeriesList[index].Length == 0)
+                {
+                    titleSeriesList.RemoveAt(index);
+                }
+            }
+
             return titleSeriesList;
         }
     }

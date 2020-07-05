@@ -1,23 +1,44 @@
-﻿using System.Runtime.CompilerServices;
+﻿// BookList
+// 
+// DirectoryFileOperationsClass.cs
+// 
+// Arthur Melanson
+// 
+// art2m
+// 
+// 07    03   2020
+// 
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+using System;
+using System.IO;
+using System.Reflection;
+using BookList.PropertiesClasses;
+using JetBrains.Annotations;
 
 namespace BookList.Classes
 {
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Reflection;
-    using PropertiesClasses;
-    using JetBrains.Annotations;
-
     /// <summary>
-    /// Class that contains code to create directories and files.
+    ///     Class that contains code to create directories and files.
     /// </summary>
-    public  class DirectoryFileOperationsClass
+    public class DirectoryFileOperationsClass
     {
         private readonly ValidationClass _validate = new ValidationClass();
 
         /// <summary>
-        /// Initializes  members of the <see cref="DirectoryFileOperationsClass"/> class.
+        ///     Initializes  members of the <see cref="DirectoryFileOperationsClass" /> class.
         /// </summary>
         public DirectoryFileOperationsClass()
         {
@@ -29,24 +50,24 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        /// Combine directory and file name. Check if file exists if not create it.
+        ///     Combine directory and file name. Check if file exists if not create it.
         /// </summary>
         /// <param name="dirPath">The dirPath<see cref="string" />.</param>
         /// <param name="fileName">The fileName<see cref="string" />.</param>
         /// <returns>The <see cref="string" />.</returns>
-        public  string CombineDirectoryPathFileNameCheckCreateFile([NotNull] string dirPath, string fileName)
+        public string CombineDirectoryPathFileNameCheckCreateFile([NotNull] string dirPath, string fileName)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!this._validate.ValidateStringIsNotNull(dirPath)) return string.Empty;
-            if (!this._validate.ValidateStringHasLength(dirPath)) return string.Empty;
-            if (!this._validate.ValidateStringIsNotNull(fileName)) return string.Empty;
-            if (!this._validate.ValidateStringHasLength(fileName)) return string.Empty;
-            if (!this._validate.ValidateDirectoryExists(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringIsNotNull(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringHasLength(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringIsNotNull(fileName)) return string.Empty;
+            if (!_validate.ValidateStringHasLength(fileName)) return string.Empty;
+            if (!_validate.ValidateDirectoryExists(dirPath)) return string.Empty;
 
-            var filePath = this.CombineDirectoryPathWithFileName(dirPath, fileName);
+            var filePath = CombineDirectoryPathWithFileName(dirPath, fileName);
 
-            if (this._validate.ValidateDirectoryExists(filePath)) return string.Empty;
+            if (_validate.ValidateDirectoryExists(filePath)) return string.Empty;
 
             File.Create(filePath).Dispose();
 
@@ -55,18 +76,18 @@ namespace BookList.Classes
 
 
         /// <summary>
-        /// Combine directory name and file name.
+        ///     Combine directory name and file name.
         /// </summary>
         /// <param name="dirPath">The dirPath<see cref="string" />.</param>
         /// <param name="fileName">The fileName<see cref="string" />.</param>
         /// <returns>The <see cref="string" />.</returns>
-        public  string CombineDirectoryPathWithFileName([NotNull] string dirPath, [NotNull] string fileName)
+        public string CombineDirectoryPathWithFileName([NotNull] string dirPath, [NotNull] string fileName)
         {
-            if (!this._validate.ValidateStringIsNotNull(dirPath)) return string.Empty;
-            if (!this._validate.ValidateStringHasLength(dirPath)) return string.Empty;
-            if (!this._validate.ValidateStringIsNotNull(fileName)) return string.Empty;
-            if (!this._validate.ValidateStringHasLength(fileName)) return string.Empty;
-            if (!this._validate.ValidateDirectoryExists(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringIsNotNull(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringHasLength(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringIsNotNull(fileName)) return string.Empty;
+            if (!_validate.ValidateStringHasLength(fileName)) return string.Empty;
+            if (!_validate.ValidateDirectoryExists(dirPath)) return string.Empty;
 
             var filePath = Path.Combine(dirPath, fileName);
 
@@ -74,21 +95,21 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        /// Combine two strings to get complete path to directory
+        ///     Combine two strings to get complete path to directory
         /// </summary>
         /// <param name="dirPath">Directory name or path.</param>
         /// <param name="dirNewPath">Directory name, path or file name.</param>
         /// <returns>Path string to directories else empty string.</returns>
-        public  string CombineExistingDirectoryPathWithNewDirectoryPath([NotNull] string dirPath,
+        public string CombineExistingDirectoryPathWithNewDirectoryPath([NotNull] string dirPath,
             string dirNewPath)
         {
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!this._validate.ValidateStringIsNotNull(dirPath)) return string.Empty;
-            if (!this._validate.ValidateStringHasLength(dirPath)) return string.Empty;
-            if (!this._validate.ValidateStringIsNotNull(dirNewPath)) return string.Empty;
-            if (!this._validate.ValidateStringHasLength(dirNewPath)) return string.Empty;
-            if (!this._validate.ValidateDirectoryExists(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringIsNotNull(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringHasLength(dirPath)) return string.Empty;
+            if (!_validate.ValidateStringIsNotNull(dirNewPath)) return string.Empty;
+            if (!_validate.ValidateStringHasLength(dirNewPath)) return string.Empty;
+            if (!_validate.ValidateDirectoryExists(dirPath)) return string.Empty;
 
             var makePath = Path.Combine(dirPath, dirNewPath);
 
@@ -96,40 +117,40 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        /// Create new directory.
+        ///     Create new directory.
         /// </summary>
         /// <param name="dirNewPath"></param>
         /// <returns></returns>
-        public  bool CreateNewDirectoryReturnPath(string dirNewPath)
+        public bool CreateNewDirectoryReturnPath(string dirNewPath)
         {
-            if (!this._validate.ValidateStringIsNotNull(dirNewPath)) return false;
-            if (!this._validate.ValidateStringHasLength(dirNewPath)) return false;
+            if (!_validate.ValidateStringIsNotNull(dirNewPath)) return false;
+            if (!_validate.ValidateStringHasLength(dirNewPath)) return false;
 
             _ = Directory.CreateDirectory(dirNewPath);
 
-            return this._validate.ValidateDirectoryExists(dirNewPath);
+            return _validate.ValidateDirectoryExists(dirNewPath);
         }
 
         /// <summary>
-        /// The GetPathToSpecialDirectoryAppDataLocal.
+        ///     The GetPathToSpecialDirectoryAppDataLocal.
         /// </summary>
         /// <returns>The <see cref="string" />.</returns>
-        public  void GetPathToSpecialDirectoryAppDataLocal()
+        public void GetPathToSpecialDirectoryAppDataLocal()
         {
             var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-            if (!this._validate.ValidateStringIsNotNull(dirPath)) return;
-            if (!this._validate.ValidateStringHasLength(dirPath)) return;
+            if (!_validate.ValidateStringIsNotNull(dirPath)) return;
+            if (!_validate.ValidateStringHasLength(dirPath)) return;
 
             BookListPropertiesClass.PathToAppDataDirectory = dirPath;
         }
 
         /// <summary>
-        /// The CreateNewFile.
+        ///     The CreateNewFile.
         /// </summary>
         /// <param name="filePath">The filePath<see cref="string" />.</param>
         /// <returns>The <see cref="bool" />.</returns>
-        public  bool CreateNewFile(string filePath)
+        public bool CreateNewFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath.Trim())) return false;
             if (File.Exists(filePath)) return true;

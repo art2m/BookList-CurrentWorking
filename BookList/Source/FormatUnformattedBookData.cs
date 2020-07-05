@@ -1,28 +1,28 @@
 ﻿// BookList
-//
+// 
 // FormatUnformattedBookData.cs
-//
-// Art2M
-//
-// art2m@live.com
-//
-// 06  22  2020
-//
-// 06  22   2020
-//
+// 
+// Arthur Melanson
+// 
+// art2m
+// 
+// 07    03   2020
+// 
+// 
 // This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -32,13 +32,20 @@ using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
+    /// <summary>
+    /// <see cref="DataFormats.Format"/> selected book information.
+    /// </summary>
     public partial class FormatUnformattedBookData : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="FormatUnformattedBookData" /> class.
+        /// </summary>
         public FormatUnformattedBookData()
         {
-            this.InitializeComponent();
-            this.SetAllControlsToolTips();
-            this.SetInitialControlState();
+            InitializeComponent();
+            SetAllControlsToolTips();
+            SetInitialControlState();
 
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null)
@@ -53,74 +60,84 @@ namespace BookList.Source
             // TODO: Allow user to edit title, series and volume text boxes to fix missing or invalid data.
         }
 
+        /// <summary>
+        /// If book is a series Set the control settings.
+        /// </summary>
         private void BookIsASeriesControlSettings()
         {
-            this.btnFormat.Enabled = false;
-            this.btnSave.Enabled = false;
-            this.btnSeries.Enabled = false;
-            this.btnTitle.Enabled = true;
-            this.btnUndo.Enabled = false;
-            this.btnVolume.Enabled = false;
-            this.txtSeries.Enabled = false;
-            this.txtTitle.Enabled = true;
-            this.txtVolume.Enabled = false;
-        }
-
-        private void BookIsNotASeriesControlSettings()
-        {
-            this.btnFormat.Enabled = false;
-            this.btnSave.Enabled = false;
-            this.btnSeries.Enabled = false;
-            this.btnTitle.Enabled = true;
-            this.btnUndo.Enabled = false;
-            this.btnVolume.Enabled = false;
-            this.txtSeries.Enabled = false;
-            this.txtTitle.Enabled = true;
-            this.txtVolume.Enabled = false;
-        }
-
-        private void ControlsStateAfterSuccessfulSave()
-        {
-            this.btnFormat.Enabled = false;
-            this.btnSave.Enabled = false;
-            this.btnSeries.Enabled = false;
-            this.btnTitle.Enabled = false;
-            this.btnUndo.Enabled = true;
-            this.btnVolume.Enabled = false;
-            this.txtSeries.Enabled = false;
-            this.txtTitle.Enabled = false;
-            this.txtVolume.Enabled = false;
+            btnFormat.Enabled = false;
+            btnSave.Enabled = false;
+            btnSeries.Enabled = false;
+            btnTitle.Enabled = true;
+            btnUndo.Enabled = false;
+            btnVolume.Enabled = false;
+            txtSeries.Enabled = false;
+            txtTitle.Enabled = true;
+            txtVolume.Enabled = false;
         }
 
         /// <summary>
-        /// Gets the selected book volume text that user has  highlighted in the txtBookInfo text box.
-        /// Then place it in the txtVolume text box.
+        /// Book is not a series set control settings.
+        /// </summary>
+        private void BookIsNotASeriesControlSettings()
+        {
+            btnFormat.Enabled = false;
+            btnSave.Enabled = false;
+            btnSeries.Enabled = false;
+            btnTitle.Enabled = true;
+            btnUndo.Enabled = false;
+            btnVolume.Enabled = false;
+            txtSeries.Enabled = false;
+            txtTitle.Enabled = true;
+            txtVolume.Enabled = false;
+        }
+
+        /// <summary>
+        /// Set the controls state after successful save.
+        /// </summary>
+        private void ControlsStateAfterSuccessfulSave()
+        {
+            btnFormat.Enabled = false;
+            btnSave.Enabled = false;
+            btnSeries.Enabled = false;
+            btnTitle.Enabled = false;
+            btnUndo.Enabled = true;
+            btnVolume.Enabled = false;
+            txtSeries.Enabled = false;
+            txtTitle.Enabled = false;
+            txtVolume.Enabled = false;
+        }
+
+        /// <summary>
+        /// Gets the selected book volume text that user has highlighted in the
+        /// text box info. Then place it in the text box Volume.
         /// </summary>
         private void GetSelectedBookVolumeText()
         {
-            FormatBookDataProperties.BookSeriesVolumeNumber = this.txtBookInfo.SelectedText.Trim();
+            FormatBookDataProperties.BookSeriesVolumeNumber = txtBookInfo.SelectedText.Trim();
         }
 
         /// <summary>
-        /// Gets the selected series text that the user has highlighted in the textbookInfo text box.
-        /// Then place it in the txtSeries text box.
+        ///     Gets the selected series text that the user has highlighted in the textbookInfo text box.
+        ///     Then place it in the series text box.
         /// </summary>
         private void GetSelectedSeriesText()
         {
-            FormatBookDataProperties.NameOfBookSeries = this.txtBookInfo.SelectedText.Trim();
+            FormatBookDataProperties.NameOfBookSeries = txtBookInfo.SelectedText.Trim();
         }
 
         /// <summary>
-        /// Gets the selected title text that the user has highlighted in the textBookInfo text box.
-        /// Then place it in the txtTitle text box..
+        ///     Gets the selected title text that the user has highlighted in the book Info text box.
+        ///     Then place it in the title text box.
         /// </summary>
         private void GetSelectedTitleText()
         {
-            FormatBookDataProperties.ContainsBookTitle = this.txtBookInfo.SelectedText.Trim();
+            FormatBookDataProperties.ContainsBookTitle = txtBookInfo.SelectedText.Trim();
         }
 
         /// <summary>
-        /// Are the series format book information. Format the series name of the book by
+        /// Are the series format book information.
+        /// <see cref="DataFormats.Format"/> the series name of the book by
         /// surrounding it with parentheses.
         /// </summary>
         private void IsSeriesFormatBookInformation()
@@ -135,7 +152,7 @@ namespace BookList.Source
             sb.Append(" ");
             sb.Append(FormatBookDataProperties.BookSeriesVolumeNumber);
 
-            this.txtBookInfo.Text = sb.ToString();
+            txtBookInfo.Text = sb.ToString();
 
             UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
             UnformattedDataCollection.AddItem(sb.ToString());
@@ -145,56 +162,59 @@ namespace BookList.Source
         }
 
         /// <summary>
-        ///  Try to find the name of book series then place it into the series text box.
+        ///     Try to find the name of book series then place it into the series text box.
         /// </summary>
         private void LocateSeriesName()
         {
             // TODO: Check  collection  for book with same part of name  to try to find books in series.
             // TODO: Once located then put that portion into the series box.
-            //BookListPropertiesClass.AuthorsNameCurrent;
-            var bookInfo = this.txtBookInfo.Text.Trim();
+            var bookInfo = txtBookInfo.Text.Trim();
         }
 
         /// <summary>
-        /// Try to find the book title then place it into the title text box.
+        ///     Try to find the book title then place it into the title text box.
         /// </summary>
         private void LocateTitleName()
         {
         }
 
         /// <summary>
-        /// Try to find the book volume number then place it into the volume number text box.
+        ///     Try to find the book volume number then place it into the volume number text box.
         /// </summary>
         private void LocateVolumeNumber()
         {
         }
 
+        /// <summary>
+        /// Book not series format title and replace original title with new
+        /// title.
+        /// </summary>
         private void NotSeriesFormatTitleOnly()
         {
             var sb = new StringBuilder();
             sb.Append(FormatBookDataProperties.ContainsBookTitle);
             sb.Append("*");
 
-            this.txtBookInfo.Text = FormatBookDataProperties.ContainsBookTitle;
+            txtBookInfo.Text = FormatBookDataProperties.ContainsBookTitle;
             UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
             UnformattedDataCollection.AddItem(sb.ToString());
             UnformattedDataCollection.SortCollection();
 
-            this.txtTitle.Text = string.Empty;
+            txtTitle.Text = string.Empty;
         }
 
         /// <summary>
-        /// On auto format book information button
-        /// Attempt to automatically format the selected Book title, series and volume number.
-        /// If unable to then user must manually format the book title, series, and volume number.
+        ///     On auto format book information button
+        ///     Attempt to automatically format the selected Book title, series and volume number.
+        ///     If unable to then user must manually format the book title, series, and volume number.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">Instance containing the event data.</param>
-        public void OnAutoFormatBookInformationButton_Click(object sender, EventArgs e)
+        private void OnAutoFormatBookInformationButton_Click(object sender, EventArgs e)
         {
             var autoFormat = new AutoFormatClass();
 
-            var bookInfo = this.txtBookInfo.Text.Trim();
+            var bookInfo = txtBookInfo.Text.Trim();
 
             var bookData =
                 autoFormat.LocateSeriesPartOfBookInformation(FormatBookDataProperties.PathToCurrentAuthorsFile,
@@ -205,58 +225,83 @@ namespace BookList.Source
         }
 
         /// <summary>
-        /// Ons the book title button_ click.
+        ///     Ons the book title button_ click.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">Instance containing the event data.</param>
         private void OnBookTitleButton_Click(object sender, EventArgs e)
         {
-            var len = this.txtTitle.SelectionLength;
+            var len = txtTitle.SelectionLength;
             if (len <= 0) return;
 
-            this.GetSelectedTitleText();
+            GetSelectedTitleText();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.ContainsBookTitle))
             {
-                this.txtTitle.Text = this.txtTitle.Text = string.Empty;
+                txtTitle.Text = txtTitle.Text = string.Empty;
             }
 
-            this.txtTitle.Enabled = true;
-            this.txtTitle.Text = FormatBookDataProperties.ContainsBookTitle;
+            txtTitle.Enabled = true;
+            txtTitle.Text = FormatBookDataProperties.ContainsBookTitle;
 
-            if (!FormatBookDataProperties.BookIsSeries) this.btnFormat.Enabled = true;
+            if (!FormatBookDataProperties.BookIsSeries) btnFormat.Enabled = true;
 
-            this.btnSeries.Enabled = true;
+            btnSeries.Enabled = true;
 
             if (FormatBookDataProperties.BookIsSeries)
             {
-                this.lblInfo.Text = MyStrings.SelectSeries;
+                lblInfo.Text = MyStrings.SelectSeries;
             }
         }
 
+        /// <summary>
+        /// Called when [close button clicked]. Close the
+        /// <see cref="DataFormats.Format"/> Unformatted Book Data windows form.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">
+        /// The <see cref="EventArgs" /> instance containing the event data.
+        /// </param>
         private void OnCloseButton_Clicked(object sender, EventArgs e)
         {
             FormatBookDataProperties.UnformattedBookInformation = string.Empty;
-            this.Close();
+            Close();
         }
 
+        /// <summary>
+        /// Called when [format book information button click].
+        /// <see cref="DataFormats.Format"/> the book information for series or
+        /// nto series.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">
+        /// The <see cref="EventArgs" /> instance containing the event data.
+        /// </param>
         private void OnFormatBookInformationButton_Click(object sender, EventArgs e)
         {
             if (UnformattedDataCollection.GetItemsCount() < 1) return;
 
-            if (string.IsNullOrEmpty(this.txtTitle.Text.Trim())) return;
+            if (string.IsNullOrEmpty(txtTitle.Text.Trim())) return;
 
             if (!FormatBookDataProperties.BookIsSeries)
             {
-                this.NotSeriesFormatTitleOnly();
-                this.btnSave.Enabled = true;
+                NotSeriesFormatTitleOnly();
+                btnSave.Enabled = true;
                 return;
             }
 
-            this.IsSeriesFormatBookInformation();
-            this.btnSave.Enabled = true;
+            IsSeriesFormatBookInformation();
+            btnSave.Enabled = true;
         }
 
+        /// <summary>
+        /// Called when [save changes button click]. Save the changes made on
+        /// the book information.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">
+        /// The <see cref="EventArgs" /> instance containing the event data.
+        /// </param>
         private void OnSaveChangesButton_Click(object sender, EventArgs e)
         {
             var fileOutput = new FileOutputClass();
@@ -266,11 +311,11 @@ namespace BookList.Source
             MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
             if (UnformattedDataCollection.GetItemsCount() < 1) return;
-            if (string.IsNullOrEmpty(this.txtTitle.Text.Trim())) return;
+            if (string.IsNullOrEmpty(txtTitle.Text.Trim())) return;
 
             if (FormatBookDataProperties.BookIsSeries)
             {
-                if (!validate.ValidateBookSeriesIsFormatted(this.txtBookInfo.Text)) return;
+                if (!validate.ValidateBookSeriesIsFormatted(txtBookInfo.Text)) return;
                 if (!fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
                     .PathToCurrentAuthorsFile))
                 {
@@ -280,7 +325,7 @@ namespace BookList.Source
                 }
             }
 
-            if (!validate.ValidateBookNotSeriesIsFormatted(this.txtBookInfo.Text)) return;
+            if (!validate.ValidateBookNotSeriesIsFormatted(txtBookInfo.Text)) return;
 
             if (!fileOutput.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
             {
@@ -289,22 +334,31 @@ namespace BookList.Source
                 return;
             }
 
-            this.ControlsStateAfterSuccessfulSave();
+            ControlsStateAfterSuccessfulSave();
         }
 
+        /// <summary>
+        /// Called when [series button click]. Set the is series property to
+        /// <see langword="true"/> for series or <see langword="false"/> for not
+        /// a series.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">
+        /// The <see cref="EventArgs" /> instance containing the event data.
+        /// </param>
         private void OnSeriesButton_Click(object sender, EventArgs e)
         {
             var validate = new ValidationClass();
 
-            var len = this.txtSeries.SelectionLength;
+            var len = txtSeries.SelectionLength;
             if (len <= 0) return;
 
-            this.GetSelectedSeriesText();
+            GetSelectedSeriesText();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.NameOfBookSeries)) return;
 
-            this.txtSeries.Enabled = true;
-            this.txtSeries.Text = FormatBookDataProperties.NameOfBookSeries;
+            txtSeries.Enabled = true;
+            txtSeries.Text = FormatBookDataProperties.NameOfBookSeries;
 
             // If the title and series name match then exit operation.
             if (validate.ValidateTitleSeriesTextDoesNotMatch())
@@ -314,28 +368,40 @@ namespace BookList.Source
                 return;
             }
 
-            this.lblInfo.Text = MyStrings.SelectVolumeNumber;
-            this.btnVolume.Enabled = true;
+            lblInfo.Text = MyStrings.SelectVolumeNumber;
+            btnVolume.Enabled = true;
         }
 
+        /// <summary>
+        /// Called when [undo changes button click]. Roll back changes made to
+        /// book information.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">
+        /// The <see cref="EventArgs" /> instance containing the event data.
+        /// </param>
         private void OnUndoChangesButton_Click(object sender, EventArgs e)
         {
             // TODO Need to add code for undoing Changes.
         }
 
+        /// <summary>Called when [volume number button click].
+        /// Check that volume test does not match title or series text. Place volume name and or number into text box.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void OnVolumeNumberButton_Click(object sender, EventArgs e)
         {
             var validate = new ValidationClass();
 
-            var len = this.txtVolume.SelectionLength;
+            var len = txtVolume.SelectionLength;
             if (len <= 0) return;
 
-            this.GetSelectedBookVolumeText();
+            GetSelectedBookVolumeText();
 
             if (string.IsNullOrEmpty(FormatBookDataProperties.BookSeriesVolumeNumber)) return;
 
-            this.txtVolume.Enabled = true;
-            this.txtVolume.Text = FormatBookDataProperties.BookSeriesVolumeNumber;
+            txtVolume.Enabled = true;
+            txtVolume.Text = FormatBookDataProperties.BookSeriesVolumeNumber;
 
             if (validate.ValidateTitleVolumeTextDoesNotMatch())
             {
@@ -351,50 +417,56 @@ namespace BookList.Source
                 return;
             }
 
-            this.btnFormat.Enabled = true;
+            btnFormat.Enabled = true;
         }
 
+        /// <summary>
+        /// Sets all controls tool tips.
+        /// </summary>
         private void SetAllControlsToolTips()
         {
             using (var tTip = new ToolTip())
 
             {
-                tTip.SetToolTip(this.txtBookInfo, FormatBookDataProperties.TipTxtData);
+                tTip.SetToolTip(txtBookInfo, FormatBookDataProperties.TipTxtData);
 
-                tTip.SetToolTip(this.btnFormat, FormatBookDataProperties.TipBtnReplace);
+                tTip.SetToolTip(btnFormat, FormatBookDataProperties.TipBtnReplace);
 
-                tTip.SetToolTip(this.btnSave, FormatBookDataProperties.TipBtnSave);
+                tTip.SetToolTip(btnSave, FormatBookDataProperties.TipBtnSave);
 
-                tTip.SetToolTip(this.btnSeries, FormatBookDataProperties.TipBtnSeries);
+                tTip.SetToolTip(btnSeries, FormatBookDataProperties.TipBtnSeries);
 
-                tTip.SetToolTip(this.btnTitle, FormatBookDataProperties.TipBtnTitle);
+                tTip.SetToolTip(btnTitle, FormatBookDataProperties.TipBtnTitle);
 
-                tTip.SetToolTip(this.btnVolume, FormatBookDataProperties.TipBtnVolume);
+                tTip.SetToolTip(btnVolume, FormatBookDataProperties.TipBtnVolume);
 
-                tTip.SetToolTip(this.txtSeries, FormatBookDataProperties.TipTxtSeries);
+                tTip.SetToolTip(txtSeries, FormatBookDataProperties.TipTxtSeries);
 
-                tTip.SetToolTip(this.txtTitle, FormatBookDataProperties.TipTxtTitle);
+                tTip.SetToolTip(txtTitle, FormatBookDataProperties.TipTxtTitle);
 
-                tTip.SetToolTip(this.txtVolume, FormatBookDataProperties.TipTxtVolume);
+                tTip.SetToolTip(txtVolume, FormatBookDataProperties.TipTxtVolume);
 
-                tTip.SetToolTip(this.btnAutoFormat, FormatBookDataProperties.TipAutoFormat);
+                tTip.SetToolTip(btnAutoFormat, FormatBookDataProperties.TipAutoFormat);
             }
         }
 
+        /// <summary>
+        /// Sets the initial state of the control.
+        /// </summary>
         private void SetInitialControlState()
         {
-            this.lblInfo.Text = MyStrings.selectTitle;
+            lblInfo.Text = MyStrings.selectTitle;
             if (FormatBookDataProperties.BookIsSeries)
             {
-                this.BookIsASeriesControlSettings();
+                BookIsASeriesControlSettings();
             }
             else
             {
-                this.BookIsNotASeriesControlSettings();
+                BookIsNotASeriesControlSettings();
             }
 
-            this.txtBookInfo.Text = FormatBookDataProperties.UnformattedBookInformation;
-            this.btnSave.DialogResult = DialogResult.OK;
+            txtBookInfo.Text = FormatBookDataProperties.UnformattedBookInformation;
+            btnSave.DialogResult = DialogResult.OK;
         }
     }
 }
