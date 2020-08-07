@@ -51,9 +51,11 @@ namespace BookList.Source
             if (string.IsNullOrEmpty(s2)) return;
             s2 = s2.ToLower();
 
-            for (var i = 0; i < BookInfoCollection.ItemsCount(); i++)
+            var coll = new BookInfoCollection();
+
+            for (var i = 0; i < coll.ItemsCount(); i++)
             {
-                var s1 = BookInfoCollection.GetItemAt(i);
+                var s1 = coll.GetItemAt(i);
                 s1 = s1.ToLower();
 
                 if (s1.Contains(s2))
@@ -78,17 +80,20 @@ namespace BookList.Source
         private void SearchBookTitleAllAuthors()
         {
             var authorDirFiles = new AuthorsDirectoryFilesClass();
-            var dirFileOp = new DirectoryFileOperationsClass();
+            var dirFileOp = new DirectoryFileClass();
             var fileInput = new FileInputClass();
 
             authorDirFiles.GetAllAuthorFilePathsContainedInAuthorDirectory(BookListPropertiesClass.PathToAuthorsDirectory);
 
-            BookInfoCollection.ClearCollection();
+            var coll = new BookInfoCollection();
+            coll.ClearCollection();
             this.lstTiltes.Items.Clear();
 
-            for (var i = 0; i < AuthorsFileNamesCollection.ItemsCount(); i++)
+            var collAuthor = new AuthorsFileNamesCollection();
+
+            for (var i = 0; i < collAuthor.ItemsCount(); i++)
             {
-                var fileName = AuthorsFileNamesCollection.GetItemAt(i);
+                var fileName = collAuthor.GetItemAt(i);
                 var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
                 var filePath = dirFileOp.CombineDirectoryPathWithFileName(dirAuthors,
                     fileName);
@@ -106,7 +111,7 @@ namespace BookList.Source
 
         private void SearchBookTitleBySingleAuthor()
         {
-            var dirFileOp = new DirectoryFileOperationsClass();
+            var dirFileOp = new DirectoryFileClass();
             var fileInput = new FileInputClass();
 
             var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
@@ -114,7 +119,9 @@ namespace BookList.Source
             var filePath = dirFileOp.CombineDirectoryPathWithFileName(dirAuthors,
                 BookListPropertiesClass.CurrentWorkingFileName);
 
-            BookInfoCollection.ClearCollection();
+            var coll = new BookInfoCollection();
+
+            coll.ClearCollection();
             this.lstTiltes.Items.Clear();
 
             fileInput.ReadTitlesFromFile(filePath);

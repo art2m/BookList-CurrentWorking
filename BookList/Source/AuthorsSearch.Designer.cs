@@ -45,18 +45,20 @@ namespace BookList.Source
             this.lstSearch.ItemHeight = 16;
             this.lstSearch.Location = new System.Drawing.Point(12, 25);
             this.lstSearch.Name = "lstSearch";
-            this.lstSearch.Size = new System.Drawing.Size(762, 452);
+            this.lstSearch.Size = new System.Drawing.Size(762, 340);
             this.lstSearch.TabIndex = 0;
             this.lstSearch.SelectedIndexChanged += new System.EventHandler(this.SelectedIndexChangedListBoxClicked);
             // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("DejaVu Sans Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(649, 579);
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(620, 505);
+            this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(125, 45);
-            this.btnClose.TabIndex = 2;
+            this.btnClose.Size = new System.Drawing.Size(150, 45);
+            this.btnClose.TabIndex = 4;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.CloseSearchBuTitleButtonClicked);
@@ -64,33 +66,37 @@ namespace BookList.Source
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(10, 504);
+            this.txtSearch.Location = new System.Drawing.Point(12, 381);
             this.txtSearch.Multiline = true;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(762, 39);
-            this.txtSearch.TabIndex = 3;
+            this.txtSearch.TabIndex = 1;
             this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSearch.Font = new System.Drawing.Font("DejaVu Sans Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(12, 549);
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(12, 426);
+            this.btnSearch.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnSearch.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(125, 45);
-            this.btnSearch.TabIndex = 4;
+            this.btnSearch.Size = new System.Drawing.Size(150, 45);
+            this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.SearchByAuthorsNameButtonClicked);
             // 
             // btnSelect
             // 
-            this.btnSelect.BackColor = System.Drawing.Color.PeachPuff;
-            this.btnSelect.Font = new System.Drawing.Font("DejaVu Sans Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.Location = new System.Drawing.Point(334, 549);
+            this.btnSelect.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.Location = new System.Drawing.Point(277, 426);
+            this.btnSelect.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnSelect.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(125, 45);
-            this.btnSelect.TabIndex = 5;
+            this.btnSelect.Size = new System.Drawing.Size(150, 45);
+            this.btnSelect.TabIndex = 3;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = false;
             this.btnSelect.Click += new System.EventHandler(this.SelectedAuthorButtonClicked);
@@ -99,13 +105,18 @@ namespace BookList.Source
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 636);
+            this.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lstSearch);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "SearchOfBookAuthors";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search By Author";

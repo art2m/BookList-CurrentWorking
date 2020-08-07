@@ -9,7 +9,7 @@ namespace BookList.Interfaces
         /// The AddItem.
         /// </summary>
         /// <param name="item">The item<see cref="string" />.</param>
-        void AddItem(string item);
+        bool AddItem(string item);
 
         /// <summary>
         /// The ClearCollection.

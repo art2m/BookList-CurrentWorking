@@ -28,7 +28,7 @@ using System.Text;
 using System.Windows.Forms;
 using BookList.Classes;
 using BookList.Collections;
-using BookList.PropertiesClasses;
+using BookListCurrent.ClassesProperties;
 
 namespace BookList.Source
 {
@@ -44,52 +44,15 @@ namespace BookList.Source
         public FormatUnformattedBookData()
         {
             InitializeComponent();
-            SetAllControlsToolTips();
             SetInitialControlState();
 
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null)
             {
-                MyMessagesClass.NameOfClass = declaringType.Name;
+                var msgBox = new MyMessageBox();
+
+                msgBox.NameOfClass = declaringType.Name;
             }
-
-            //  TODO: try to select series info programatically put in correct text box.
-            // TODO: try to select title info programatically if not a series put in text box.
-            // TODO: add button user can select if book info not right.
-            // TODO: add text to lblInfo on how user can make selection manually.
-            // TODO: Allow user to edit title, series and volume text boxes to fix missing or invalid data.
-        }
-
-        /// <summary>
-        /// If book is a series Set the control settings.
-        /// </summary>
-        private void BookIsASeriesControlSettings()
-        {
-            btnFormat.Enabled = false;
-            btnSave.Enabled = false;
-            btnSeries.Enabled = false;
-            btnTitle.Enabled = true;
-            btnUndo.Enabled = false;
-            btnVolume.Enabled = false;
-            txtSeries.Enabled = false;
-            txtTitle.Enabled = true;
-            txtVolume.Enabled = false;
-        }
-
-        /// <summary>
-        /// Book is not a series set control settings.
-        /// </summary>
-        private void BookIsNotASeriesControlSettings()
-        {
-            btnFormat.Enabled = false;
-            btnSave.Enabled = false;
-            btnSeries.Enabled = false;
-            btnTitle.Enabled = true;
-            btnUndo.Enabled = false;
-            btnVolume.Enabled = false;
-            txtSeries.Enabled = false;
-            txtTitle.Enabled = true;
-            txtVolume.Enabled = false;
         }
 
         /// <summary>
@@ -154,35 +117,13 @@ namespace BookList.Source
 
             txtBookInfo.Text = sb.ToString();
 
-            UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
-            UnformattedDataCollection.AddItem(sb.ToString());
+            var coll = new UnformattedDataCollection();
+
+            coll.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            coll.AddItem(sb.ToString());
 
             FormatBookDataProperties.NameOfBookSeries = string.Empty;
             FormatBookDataProperties.ContainsBookTitle = string.Empty;
-        }
-
-        /// <summary>
-        ///     Try to find the name of book series then place it into the series text box.
-        /// </summary>
-        private void LocateSeriesName()
-        {
-            // TODO: Check  collection  for book with same part of name  to try to find books in series.
-            // TODO: Once located then put that portion into the series box.
-            var bookInfo = txtBookInfo.Text.Trim();
-        }
-
-        /// <summary>
-        ///     Try to find the book title then place it into the title text box.
-        /// </summary>
-        private void LocateTitleName()
-        {
-        }
-
-        /// <summary>
-        ///     Try to find the book volume number then place it into the volume number text box.
-        /// </summary>
-        private void LocateVolumeNumber()
-        {
         }
 
         /// <summary>
@@ -196,33 +137,16 @@ namespace BookList.Source
             sb.Append("*");
 
             txtBookInfo.Text = FormatBookDataProperties.ContainsBookTitle;
-            UnformattedDataCollection.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
-            UnformattedDataCollection.AddItem(sb.ToString());
-            UnformattedDataCollection.SortCollection();
+
+            var coll = new UnformattedDataCollection();
+
+            coll.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            coll.AddItem(sb.ToString());
+            coll.SortCollection();
 
             txtTitle.Text = string.Empty;
         }
 
-        /// <summary>
-        ///     On auto format book information button
-        ///     Attempt to automatically format the selected Book title, series and volume number.
-        ///     If unable to then user must manually format the book title, series, and volume number.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">Instance containing the event data.</param>
-        private void OnAutoFormatBookInformationButton_Click(object sender, EventArgs e)
-        {
-            var autoFormat = new AutoFormatClass();
-
-            var bookInfo = txtBookInfo.Text.Trim();
-
-            var bookData =
-                autoFormat.LocateSeriesPartOfBookInformation(FormatBookDataProperties.PathToCurrentAuthorsFile,
-                    bookInfo);
-
-            if (bookData == null) return;
-            if (bookData.Count == 0) return;
-        }
 
         /// <summary>
         ///     Ons the book title button_ click.
@@ -279,7 +203,9 @@ namespace BookList.Source
         /// </param>
         private void OnFormatBookInformationButton_Click(object sender, EventArgs e)
         {
-            if (UnformattedDataCollection.GetItemsCount() < 1) return;
+            var coll = new UnformattedDataCollection();
+
+            if (coll.GetItemsCount() < 1) return;
 
             if (string.IsNullOrEmpty(txtTitle.Text.Trim())) return;
 
@@ -308,9 +234,14 @@ namespace BookList.Source
 
             var validate = new ValidationClass();
 
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            var msgBox = new MyMessageBox();
 
-            if (UnformattedDataCollection.GetItemsCount() < 1) return;
+
+            msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            var coll = new UnformattedDataCollection();
+
+            if (coll.GetItemsCount() < 1) return;
             if (string.IsNullOrEmpty(txtTitle.Text.Trim())) return;
 
             if (FormatBookDataProperties.BookIsSeries)
@@ -319,8 +250,10 @@ namespace BookList.Source
                 if (!fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
                     .PathToCurrentAuthorsFile))
                 {
-                    MyMessagesClass.ErrorMessage = "Failed to complete save. Check over data and try again.";
-                    MyMessagesClass.ShowErrorMessageBox();
+                    msgBox.Msg = "Failed to complete save. Check over data and try again.";
+
+                    msgBox.ShowErrorMessageBox();
+
                     return;
                 }
             }
@@ -329,8 +262,8 @@ namespace BookList.Source
 
             if (!fileOutput.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
             {
-                MyMessagesClass.ErrorMessage = "Failed to complete save. Check over data and try again.";
-                MyMessagesClass.ShowErrorMessageBox();
+                msgBox.Msg = "Failed to complete save. Check over data and try again.";
+                msgBox.ShowErrorMessageBox();
                 return;
             }
 
@@ -363,8 +296,10 @@ namespace BookList.Source
             // If the title and series name match then exit operation.
             if (validate.ValidateTitleSeriesTextDoesNotMatch())
             {
-                MyMessagesClass.ErrorMessage = "The book title name can not be the same as the book series name.";
-                MyMessagesClass.ShowErrorMessageBox();
+                var msgBox = new MyMessageBox();
+
+                msgBox.Msg = "The book title name can not be the same as the book series name.";
+                msgBox.ShowErrorMessageBox();
                 return;
             }
 
@@ -382,7 +317,7 @@ namespace BookList.Source
         /// </param>
         private void OnUndoChangesButton_Click(object sender, EventArgs e)
         {
-            // TODO Need to add code for undoing Changes.
+            throw new NotImplementedException();
         }
 
         /// <summary>Called when [volume number button click].
@@ -405,50 +340,24 @@ namespace BookList.Source
 
             if (validate.ValidateTitleVolumeTextDoesNotMatch())
             {
-                MyMessagesClass.ErrorMessage = "The book title name can not be the same as the book volume.";
-                MyMessagesClass.ShowErrorMessageBox();
+                var msgBox = new MyMessageBox();
+
+                msgBox.Msg = "The book title name can not be the same as the book volume.";
+                msgBox.ShowErrorMessageBox();
                 return;
             }
 
             if (validate.ValidateSeriesVolumeTextDoesNotMatch())
             {
-                MyMessagesClass.ErrorMessage = "The book series name can not be the same as the book volume.";
-                MyMessagesClass.ShowErrorMessageBox();
+                var msgBox = new MyMessageBox();
+                msgBox.Msg = "The book series name can not be the same as the book volume.";
+                msgBox.ShowErrorMessageBox();
                 return;
             }
 
             btnFormat.Enabled = true;
         }
 
-        /// <summary>
-        /// Sets all controls tool tips.
-        /// </summary>
-        private void SetAllControlsToolTips()
-        {
-            using (var tTip = new ToolTip())
-
-            {
-                tTip.SetToolTip(txtBookInfo, FormatBookDataProperties.TipTxtData);
-
-                tTip.SetToolTip(btnFormat, FormatBookDataProperties.TipBtnReplace);
-
-                tTip.SetToolTip(btnSave, FormatBookDataProperties.TipBtnSave);
-
-                tTip.SetToolTip(btnSeries, FormatBookDataProperties.TipBtnSeries);
-
-                tTip.SetToolTip(btnTitle, FormatBookDataProperties.TipBtnTitle);
-
-                tTip.SetToolTip(btnVolume, FormatBookDataProperties.TipBtnVolume);
-
-                tTip.SetToolTip(txtSeries, FormatBookDataProperties.TipTxtSeries);
-
-                tTip.SetToolTip(txtTitle, FormatBookDataProperties.TipTxtTitle);
-
-                tTip.SetToolTip(txtVolume, FormatBookDataProperties.TipTxtVolume);
-
-                tTip.SetToolTip(btnAutoFormat, FormatBookDataProperties.TipAutoFormat);
-            }
-        }
 
         /// <summary>
         /// Sets the initial state of the control.
@@ -456,14 +365,15 @@ namespace BookList.Source
         private void SetInitialControlState()
         {
             lblInfo.Text = MyStrings.selectTitle;
-            if (FormatBookDataProperties.BookIsSeries)
-            {
-                BookIsASeriesControlSettings();
-            }
-            else
-            {
-                BookIsNotASeriesControlSettings();
-            }
+            btnFormat.Enabled = false;
+            btnSave.Enabled = false;
+            btnSeries.Enabled = false;
+            btnTitle.Enabled = true;
+            btnUndo.Enabled = false;
+            btnVolume.Enabled = false;
+            txtSeries.Enabled = false;
+            txtTitle.Enabled = true;
+            txtVolume.Enabled = false;
 
             txtBookInfo.Text = FormatBookDataProperties.UnformattedBookInformation;
             btnSave.DialogResult = DialogResult.OK;

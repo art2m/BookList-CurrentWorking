@@ -84,13 +84,13 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnSaveRecordButton_Clicked(object sender, EventArgs e)
         {
-            var dirFileOp = new DirectoryFileOperationsClass();
+            var dirFileOp = new DirectoryFileClass();
 
             var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
 
             var authorOp = new AuthorsTextOperations();
 
-            var fileName = AuthorsTextOperations.AddDashBetweenAuthorsFirstMiddleLastName(this.txtAuthor.Text);
+            var fileName = authorOp.AddDashBetweenAuthorsFirstMiddleLastName(this.txtAuthor.Text);
 
             if (string.IsNullOrEmpty(fileName)) return;
             if (!Directory.Exists(dirAuthors)) return;
@@ -100,6 +100,9 @@ namespace BookList.Source
             dirFileOp.CreateNewFile(filePath);
         }
 
+        /// <summary>
+        /// Sets the initial state of the controls.
+        /// </summary>
         private void SetInitialControlsState()
         {
             this.btnAdd.Enabled = true;

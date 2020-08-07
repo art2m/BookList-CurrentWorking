@@ -1,5 +1,10 @@
 ﻿namespace BookList.Source
 {
+    /// <summary>
+    /// Used to format any data which was added by copy paste to the
+    /// authors file.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     partial class FormatUnformattedBookData
     {
         /// <summary>
@@ -46,28 +51,29 @@
             this.btnUndo = new System.Windows.Forms.Button();
             this.txtBookInfo = new System.Windows.Forms.TextBox();
             this.lblInfo = new System.Windows.Forms.Label();
-            this.btnAutoFormat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblSave
             // 
             this.lblSave.BackColor = System.Drawing.Color.Yellow;
-            this.lblSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSave.Location = new System.Drawing.Point(281, 283);
+            this.lblSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSave.Location = new System.Drawing.Point(281, 346);
             this.lblSave.Name = "lblSave";
-            this.lblSave.Size = new System.Drawing.Size(221, 24);
-            this.lblSave.TabIndex = 40;
-            this.lblSave.Text = "Save all changes made to file.";
+            this.lblSave.Size = new System.Drawing.Size(221, 34);
+            this.lblSave.TabIndex = 12;
+            this.lblSave.Text = "Save all changes.";
             this.lblSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnVolume
             // 
             this.btnVolume.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolume.Location = new System.Drawing.Point(602, 230);
+            this.btnVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolume.Location = new System.Drawing.Point(602, 258);
+            this.btnVolume.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnVolume.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnVolume.Name = "btnVolume";
-            this.btnVolume.Size = new System.Drawing.Size(115, 36);
-            this.btnVolume.TabIndex = 39;
+            this.btnVolume.Size = new System.Drawing.Size(150, 45);
+            this.btnVolume.TabIndex = 10;
             this.btnVolume.Text = "Volume Number";
             this.btnVolume.UseVisualStyleBackColor = false;
             this.btnVolume.Click += new System.EventHandler(this.OnVolumeNumberButton_Click);
@@ -75,32 +81,34 @@
             // txtVolume
             // 
             this.txtVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVolume.Location = new System.Drawing.Point(558, 186);
+            this.txtVolume.Location = new System.Drawing.Point(558, 214);
             this.txtVolume.Multiline = true;
             this.txtVolume.Name = "txtVolume";
             this.txtVolume.Size = new System.Drawing.Size(217, 37);
-            this.txtVolume.TabIndex = 38;
+            this.txtVolume.TabIndex = 7;
             this.txtVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblVolume
             // 
             this.lblVolume.BackColor = System.Drawing.Color.Yellow;
-            this.lblVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVolume.Location = new System.Drawing.Point(558, 155);
+            this.lblVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVolume.Location = new System.Drawing.Point(558, 171);
             this.lblVolume.Name = "lblVolume";
-            this.lblVolume.Size = new System.Drawing.Size(217, 24);
-            this.lblVolume.TabIndex = 37;
-            this.lblVolume.Text = "Get Hiighlighted Volume Number";
+            this.lblVolume.Size = new System.Drawing.Size(217, 34);
+            this.lblVolume.TabIndex = 4;
+            this.lblVolume.Text = "Get Hiighlighted Volume ";
             this.lblVolume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(339, 316);
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(339, 392);
+            this.btnSave.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnSave.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(110, 36);
-            this.btnSave.TabIndex = 36;
+            this.btnSave.Size = new System.Drawing.Size(150, 45);
+            this.btnSave.TabIndex = 15;
             this.btnSave.Text = "Save Change";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.OnSaveChangesButton_Click);
@@ -108,33 +116,35 @@
             // lblSeries
             // 
             this.lblSeries.BackColor = System.Drawing.Color.Yellow;
-            this.lblSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSeries.Location = new System.Drawing.Point(281, 155);
+            this.lblSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeries.Location = new System.Drawing.Point(281, 171);
             this.lblSeries.Name = "lblSeries";
-            this.lblSeries.Size = new System.Drawing.Size(253, 24);
-            this.lblSeries.TabIndex = 35;
+            this.lblSeries.Size = new System.Drawing.Size(253, 34);
+            this.lblSeries.TabIndex = 3;
             this.lblSeries.Text = "Get Highlighted Book Series";
             this.lblSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTitle
             // 
             this.lblTitle.BackColor = System.Drawing.Color.Yellow;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(8, 155);
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(8, 171);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(253, 24);
-            this.lblTitle.TabIndex = 34;
+            this.lblTitle.Size = new System.Drawing.Size(253, 34);
+            this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Get Highlighted Book Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnSeries
             // 
             this.btnSeries.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeries.Location = new System.Drawing.Point(339, 229);
+            this.btnSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeries.Location = new System.Drawing.Point(339, 257);
+            this.btnSeries.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnSeries.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnSeries.Name = "btnSeries";
-            this.btnSeries.Size = new System.Drawing.Size(115, 36);
-            this.btnSeries.TabIndex = 29;
+            this.btnSeries.Size = new System.Drawing.Size(150, 45);
+            this.btnSeries.TabIndex = 9;
             this.btnSeries.Text = "Book Series";
             this.btnSeries.UseVisualStyleBackColor = false;
             this.btnSeries.Click += new System.EventHandler(this.OnSeriesButton_Click);
@@ -142,11 +152,13 @@
             // btnTitle
             // 
             this.btnTitle.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTitle.Location = new System.Drawing.Point(66, 229);
+            this.btnTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTitle.Location = new System.Drawing.Point(66, 257);
+            this.btnTitle.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnTitle.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnTitle.Name = "btnTitle";
-            this.btnTitle.Size = new System.Drawing.Size(115, 36);
-            this.btnTitle.TabIndex = 28;
+            this.btnTitle.Size = new System.Drawing.Size(150, 45);
+            this.btnTitle.TabIndex = 8;
             this.btnTitle.Text = "Book Title";
             this.btnTitle.UseVisualStyleBackColor = false;
             this.btnTitle.Click += new System.EventHandler(this.OnBookTitleButton_Click);
@@ -154,42 +166,44 @@
             // txtSeries
             // 
             this.txtSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSeries.Location = new System.Drawing.Point(283, 186);
+            this.txtSeries.Location = new System.Drawing.Point(283, 214);
             this.txtSeries.Multiline = true;
             this.txtSeries.Name = "txtSeries";
             this.txtSeries.Size = new System.Drawing.Size(253, 37);
-            this.txtSeries.TabIndex = 33;
+            this.txtSeries.TabIndex = 6;
             this.txtSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtTitle
             // 
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(8, 186);
+            this.txtTitle.Location = new System.Drawing.Point(8, 214);
             this.txtTitle.Multiline = true;
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(253, 37);
-            this.txtTitle.TabIndex = 32;
+            this.txtTitle.TabIndex = 5;
             this.txtTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblReplace
             // 
             this.lblReplace.BackColor = System.Drawing.Color.Yellow;
-            this.lblReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReplace.Location = new System.Drawing.Point(8, 283);
+            this.lblReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReplace.Location = new System.Drawing.Point(8, 346);
             this.lblReplace.Name = "lblReplace";
-            this.lblReplace.Size = new System.Drawing.Size(221, 24);
-            this.lblReplace.TabIndex = 31;
-            this.lblReplace.Text = "Format selected book information";
+            this.lblReplace.Size = new System.Drawing.Size(221, 34);
+            this.lblReplace.TabIndex = 11;
+            this.lblReplace.Text = "Format book information";
             this.lblReplace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnFormat
             // 
             this.btnFormat.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnFormat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFormat.Location = new System.Drawing.Point(66, 316);
+            this.btnFormat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFormat.Location = new System.Drawing.Point(66, 392);
+            this.btnFormat.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnFormat.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnFormat.Name = "btnFormat";
-            this.btnFormat.Size = new System.Drawing.Size(110, 36);
-            this.btnFormat.TabIndex = 30;
+            this.btnFormat.Size = new System.Drawing.Size(150, 45);
+            this.btnFormat.TabIndex = 14;
             this.btnFormat.Text = "Format";
             this.btnFormat.UseVisualStyleBackColor = false;
             this.btnFormat.Click += new System.EventHandler(this.OnFormatBookInformationButton_Click);
@@ -197,11 +211,13 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(652, 375);
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(620, 505);
+            this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(110, 36);
-            this.btnClose.TabIndex = 27;
+            this.btnClose.Size = new System.Drawing.Size(150, 45);
+            this.btnClose.TabIndex = 17;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.OnCloseButton_Clicked);
@@ -209,22 +225,24 @@
             // lblUndoChange
             // 
             this.lblUndoChange.BackColor = System.Drawing.Color.Yellow;
-            this.lblUndoChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUndoChange.Location = new System.Drawing.Point(558, 283);
+            this.lblUndoChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUndoChange.Location = new System.Drawing.Point(558, 346);
             this.lblUndoChange.Name = "lblUndoChange";
-            this.lblUndoChange.Size = new System.Drawing.Size(219, 24);
-            this.lblUndoChange.TabIndex = 41;
+            this.lblUndoChange.Size = new System.Drawing.Size(219, 34);
+            this.lblUndoChange.TabIndex = 13;
             this.lblUndoChange.Text = "Undo last save changes.";
             this.lblUndoChange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnUndo
             // 
             this.btnUndo.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUndo.Location = new System.Drawing.Point(602, 316);
+            this.btnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUndo.Location = new System.Drawing.Point(602, 392);
+            this.btnUndo.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnUndo.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(110, 36);
-            this.btnUndo.TabIndex = 42;
+            this.btnUndo.Size = new System.Drawing.Size(150, 45);
+            this.btnUndo.TabIndex = 16;
             this.btnUndo.Text = "Undo changes.";
             this.btnUndo.UseVisualStyleBackColor = false;
             this.btnUndo.Click += new System.EventHandler(this.OnUndoChangesButton_Click);
@@ -238,7 +256,7 @@
             this.txtBookInfo.Name = "txtBookInfo";
             this.txtBookInfo.ReadOnly = true;
             this.txtBookInfo.Size = new System.Drawing.Size(768, 40);
-            this.txtBookInfo.TabIndex = 43;
+            this.txtBookInfo.TabIndex = 1;
             this.txtBookInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblInfo
@@ -247,28 +265,16 @@
             this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfo.Location = new System.Drawing.Point(8, 19);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(768, 27);
-            this.lblInfo.TabIndex = 44;
+            this.lblInfo.Size = new System.Drawing.Size(768, 34);
+            this.lblInfo.TabIndex = 0;
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnAutoFormat
-            // 
-            this.btnAutoFormat.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnAutoFormat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAutoFormat.Location = new System.Drawing.Point(334, 105);
-            this.btnAutoFormat.Name = "btnAutoFormat";
-            this.btnAutoFormat.Size = new System.Drawing.Size(115, 36);
-            this.btnAutoFormat.TabIndex = 45;
-            this.btnAutoFormat.Text = "Auto Format";
-            this.btnAutoFormat.UseVisualStyleBackColor = false;
-            this.btnAutoFormat.Click += new System.EventHandler(this.OnAutoFormatBookInformationButton_Click);
             // 
             // FormatUnformattedBookData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 421);
-            this.Controls.Add(this.btnAutoFormat);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(780, 557);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.txtBookInfo);
             this.Controls.Add(this.lblSave);
@@ -289,6 +295,8 @@
             this.Controls.Add(this.btnUndo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "FormatUnformattedBookData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Format Unformatted Book Data";
@@ -317,6 +325,5 @@
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.TextBox txtBookInfo;
         private System.Windows.Forms.Label lblInfo;
-        private System.Windows.Forms.Button btnAutoFormat;
     }
 }

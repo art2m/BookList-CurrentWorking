@@ -205,7 +205,7 @@ namespace BookList.Source
             sb.Append(")");
             sb.Append(volume);
             var bookInfo = sb.ToString();
-            fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(filePath);
+            fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(bookInfo);
         }
 
         /// <summary>

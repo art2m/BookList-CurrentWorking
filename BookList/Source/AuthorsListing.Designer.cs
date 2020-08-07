@@ -1,5 +1,9 @@
 ﻿namespace BookList.Source
 {
+    /// <summary>
+    /// Show a list of author files contained in the Book list directory.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     partial class AuthorsListing
     {
         /// <summary>
@@ -48,9 +52,9 @@
             // lblAuthor
             // 
             this.lblAuthor.BackColor = System.Drawing.Color.Moccasin;
-            this.lblAuthor.Location = new System.Drawing.Point(16, 457);
+            this.lblAuthor.Location = new System.Drawing.Point(12, 457);
             this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(424, 32);
+            this.lblAuthor.Size = new System.Drawing.Size(432, 32);
             this.lblAuthor.TabIndex = 1;
             // 
             // btnCancel
@@ -59,9 +63,11 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(16, 509);
+            this.btnCancel.Location = new System.Drawing.Point(12, 509);
+            this.btnCancel.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnCancel.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(94, 33);
+            this.btnCancel.Size = new System.Drawing.Size(150, 45);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -73,9 +79,11 @@
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(346, 509);
+            this.btnOK.Location = new System.Drawing.Point(294, 509);
+            this.btnOK.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnOK.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(94, 33);
+            this.btnOK.Size = new System.Drawing.Size(150, 45);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = false;
@@ -90,7 +98,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.lstAuthor);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "AuthorsListing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

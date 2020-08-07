@@ -19,14 +19,14 @@ namespace BookList.Source
         /// <summary>Fills the Author names list collection with authors names.</summary>
         private void FillListWithAuthorsNames()
         {
+            var coll = new AuthorNamesListCollection();
             this.lstAuthor.Sorted = true;
 
-            Debug.WriteLine(AuthorNamesListCollection.ItemsCount());
+            Debug.WriteLine(coll.ItemsCount());
 
-            for (var index = 0; index < AuthorNamesListCollection.ItemsCount(); index++)
-                this.lstAuthor.Items.Add(AuthorNamesListCollection.GetItemAt(index));
+            for (var index = 0; index < coll.ItemsCount(); index++)
+                this.lstAuthor.Items.Add(coll.GetItemAt(index));
 
-            
         }
 
         /// <summary>Called when [cancel operation button clicked].</summary>
@@ -42,8 +42,10 @@ namespace BookList.Source
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void OnOkButton_Clicked(object sender, EventArgs e)
         {
+            var coll = new BookInfoCollection();
+
             BookListPropertiesClass.AuthorsNameCurrent = this.lblAuthor.Text;
-            BookInfoCollection.ClearCollection();
+            coll.ClearCollection();
            // BookInfoCollection.AddItem(BookListPropertiesClass.AuthorsNameCurrent);
             //MyMessagesClass.ShowInformationMessageBox(BookListPropertiesClass.CurrentWorkingFileName,
             //   "Testing", "fum");

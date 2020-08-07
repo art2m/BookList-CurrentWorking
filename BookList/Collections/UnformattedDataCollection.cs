@@ -1,135 +1,196 @@
+// BookListCurrent
+//
+// UnformattedDataCollection.cs
+//
+// art2m
+//
+// art2m
+//
+// 07    20   2020
+//
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+using System.Collections.Generic;
+using BookList.Classes;
+using BookList.Interfaces;
+using JetBrains.Annotations;
+
 namespace BookList.Collections
 {
-    using System;
-    using System.Collections.Generic;
-    using JetBrains.Annotations;
-
     /// <summary>
-    /// Defines the <see cref="UnformattedDataCollection" />.
-    /// Used By FormattedBookData.cs To hold All The book Data that has not been formatted yet.
+    ///     Collection to hold the name 'Unformatted book information.'.
     /// </summary>
-    public static class UnformattedDataCollection
+    public class UnformattedDataCollection : IMyCollection
     {
         /// <summary>
-        /// Defines the RawData.
+        ///     List containing the Unformatted book information.
         /// </summary>
-        private static readonly List<string> RawData = new List<string>();
+        private static List<string> _coll = new List<string>();
 
         /// <summary>
-        /// The AddItem.
+        ///     Declare validation class object.
         /// </summary>
-        /// <param name="value">The value<see cref="string" />.</param>
-        public static void AddItem([NotNull] string value)
+        private readonly ValidationClass _validate = new ValidationClass();
+
+        /// <summary>
+        ///     Add new item to the collection.
+        /// </summary>
+        /// <param name="value">The string to add.</param>
+        public bool AddItem([NotNull] string value)
         {
             value = value.Trim();
 
-            if (ContainsItem(value)) return;
-            if (string.IsNullOrEmpty(value)) return;
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            if (!this._validate.ValidateStringHasLength(value)) return false;
 
-            RawData.Add(value);
+            if (this.ContainsItem(value)) return false;
+            if (string.IsNullOrEmpty(value)) return false;
+
+            _coll.Add(value);
+            return true;
         }
 
         /// <summary>
-        /// The ClearCollection.
+        /// Pass in array with all of the file names.
         /// </summary>
-        public static void ClearCollection()
+        /// <param name="fileArray"> Array of file names.</param>
+        public bool AddArray(string[] fileArray)
         {
-            RawData.Clear();
+            if (fileArray == null) return false;
+            if (fileArray.Length <= 0) return false;
+
+            _coll = null;
+            _coll = new List<string>(fileArray);
+
+            return _coll.Count > 0;
         }
 
         /// <summary>
-        /// The ContainsItem.
+        ///     Clears the collection.
         /// </summary>
-        /// <param name="value">The value<see cref="string" />.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool ContainsItem([NotNull] string value)
+        public void ClearCollection()
         {
-            return RawData.Contains(value);
+            _coll.Clear();
         }
 
         /// <summary>
-        /// The GetAllItems.
+        ///     Return all items.
         /// </summary>
-        /// <returns>The <see cref="string[]" />.</returns>
-        public static string[] GetAllItems()
+        /// <returns>
+        ///     All items contained in the collection.
+        /// </returns>
+        public bool ContainsItem([NotNull] string value)
         {
-            var count = RawData.Count;
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
+        }
 
-            // No genre Folders Found
-            if (count - 1 < 1)
-            {
-                return Array.Empty<string>();
-            }
-
-            var values = new string[count];
-
-            for (var i = 0; i < count; i++) values[i] = RawData[i];
-
-            // All OK.
-            return values;
+        string[] IMyCollection.GetAllItems()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
-        /// The GetItemAt.
+        ///     The GetAllItems.
         /// </summary>
-        /// <param name="index">The index<see cref="int" />.</param>
-        /// <returns>The <see cref="string" />.</returns>
-        public static string GetItemAt(int index)
+        /// <returns>
+        ///     The <see cref="string" /> .
+        /// </returns>
+        public List<string> GetAllItems()
         {
-            return RawData[index];
+            return _coll;
         }
 
         /// <summary>
-        /// The GetItemIndex.
+        ///     Return the value at the given position.
         /// </summary>
-        /// <param name="value">The value<see cref="string" />.</param>
-        /// <returns>The <see cref="int" />.</returns>
-        public static int GetItemIndex(string value)
+        /// <param name="index">The position of the oven.</param>
+        /// <returns>The item found at this position.</returns>
+        public string GetItemAt(int index)
         {
-            return RawData.IndexOf(value);
+            var count = _coll.Count;
+
+            return !this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)
+                ? string.Empty
+                : _coll[index];
         }
 
         /// <summary>
-        /// The GetItemsCount.
+        ///     find the position of this value.
         /// </summary>
-        /// <returns>The <see cref="int" />.</returns>
-        public static int GetItemsCount()
+        /// <param name="value">The value to search for.</param>
+        /// <returns>the position number the item is located at.</returns>
+        public int GetItemIndex(string value)
         {
-            return RawData.Count;
+            if (!this._validate.ValidateStringIsNotNull(value)) return -1;
+            if (!this._validate.ValidateStringHasLength(value)) return -1;
+            return _coll.IndexOf(value);
+        }
+
+        public int GetItemsCount()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
-        /// The RemoveItem.
+        ///     Gets the count of items contained in the collection.
         /// </summary>
-        /// <param name="value">The value<see cref="string" />.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool RemoveItem(string value)
+        /// <returns>
+        ///     Count of items contained in the collection.
+        /// </returns>
+        public int ItemsCount()
         {
-            return RawData.Remove(value);
+            return _coll.Count;
         }
 
         /// <summary>
-        /// The RemoveItemAt.
+        ///     Find this item in the collection and
+        ///     remove it.
         /// </summary>
-        /// <param name="index">The index<see cref="int" />.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool RemoveItemAt(int index)
+        /// <param name="value">The item to find.</param>
+        /// <returns>True if removed else false.</returns>
+        public bool RemoveItem(string value)
         {
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            return this._validate.ValidateStringHasLength(value) && _coll.Remove(value);
+        }
+
+        /// <summary>
+        ///     The position of the item to be removed.
+        /// </summary>
+        /// <param name="index">The position in the collection.</param>
+        /// <returns>True if removed else false.</returns>
+        public bool RemoveItemAt(int index)
+        {
+            var count = _coll.Count;
+            if (!this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)) return false;
             // Get item to be removed for check that it is gone.
-            var item = GetItemAt(index);
+            var item = this.GetItemAt(index);
 
-            RawData.RemoveAt(index);
+            _coll.RemoveAt(index);
 
             // Check to see if item is no longer in collection
-            return !ContainsItem(item);
+            return !this.ContainsItem(item);
         }
 
         /// <summary>
-        /// The SortCollection.
+        ///     The SortCollection.
         /// </summary>
-        public static void SortCollection()
+        public void SortCollection()
         {
-            RawData.Sort();
+            _coll.Sort();
         }
     }
 }

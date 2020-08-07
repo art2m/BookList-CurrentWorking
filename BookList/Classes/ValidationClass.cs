@@ -1,32 +1,30 @@
-﻿// BookList
-// 
+﻿// BookListCurrent
+//
 // ValidationClass.cs
-// 
-// Arthur Melanson
-// 
+//
 // art2m
-// 
-// 07    03   2020
-// 
-// 
+//
+// art2m
+//
+// 07    20   2020
+//
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-using System.Diagnostics.Contracts;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using BookList.PropertiesClasses;
+using BookListCurrent.ClassesProperties;
 using JetBrains.Annotations;
 
 namespace BookList.Classes
@@ -37,120 +35,128 @@ namespace BookList.Classes
     public class ValidationClass
     {
         /// <summary>
-        ///     Initializes  members of the <see cref="ValidationClass" /> class.
+        /// MessageBox Object Deceleration.
+        /// </summary>
+        private readonly MyMessageBox _msgBox = new MyMessageBox();
+
+        /// <summary>
+        /// MYMessages Object Deceleration.
+        /// </summary>
+        private readonly MyMessages _myMsg = new MyMessages();
+
+        /// <summary>
+        ///     Initializes members of the <see cref="ValidationClass" /> class.
         /// </summary>
         public ValidationClass()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
-            if (declaringType != null)
+            if (declaringType != null) this._msgBox.NameOfClass = this._myMsg.MsgInvalidFileNameCharFound;
+        }
+
+        /// <summary>
+        /// Indexes the greater than zero less then collection Count.
+        /// </summary>
+        /// <param name="index">The Index Make sure it falls into the allowed collection Count.</param>
+        /// <param name="count">The Count total number of items contained in collection.</param>
+        /// <returns>True if Index OK else False.</returns>
+        public bool IndexGreaterThanZeroLessThenCollectionCount(int index, int count)
+        {
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (index < 0)
             {
-                MyMessagesClass.NameOfClass = declaringType.Name;
+                this._msgBox.Msg = this._myMsg.MsgIndexLessThanZero;
+                this._msgBox.ShowErrorMessageBox();
+                return false;
             }
-        }
 
-        /// <summary>
-        ///     Check for invalid file name characters.
-        /// </summary>
-        /// <param name="fileName">File name to check.</param>
-        /// <returns>True if no invalid characters in file name else false.</returns>
-        public bool CheckForInvalidFileNameCharacters([NotNull] string fileName)
-        {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            if (index < count) return true;
 
-            if (!ValidateStringIsNotNull(fileName)) return false;
-            if (!ValidateStringHasLength(fileName)) return false;
-
-            // Get a list of invalid file characters.
-            var invalidFileChars = Path.GetInvalidFileNameChars();
-
-            if (invalidFileChars.Select(item => fileName.IndexOf(item)).All(index => index == -1)) return true;
-
-            MyMessagesClass.ErrorMessage = "There is an invalid character in the file name.";
-            MyMessagesClass.ShowErrorMessageBox();
-            return false;
-        }
-
-        /// <summary>
-        ///     Check for invalid path characters.
-        /// </summary>
-        /// <param name="pathString">The path string to check for invalid path characters.</param>
-        /// <returns>If no invalid path characters return true else false.</returns>
-        public bool CheckForInvalidPathCharacters([NotNull] string pathString)
-        {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
-
-            if (!ValidateStringIsNotNull(pathString)) return false;
-            if (!ValidateStringHasLength(pathString)) return false;
-
-            var invalidPathChars = Path.GetInvalidPathChars();
-
-            if (invalidPathChars.Select(item => pathString.IndexOf(item)).All(index => index == -1)) return true;
-
-            MyMessagesClass.ErrorMessage = "The path name contains invalid characters. Exiting operation:";
-            MyMessagesClass.ShowErrorMessageBox();
+            this._msgBox.Msg = this._myMsg.MsgIndexGraterThanCollectionCount;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
 
 
         /// <summary>
-        ///     Validate if book is formatted all ready.
-        ///     So user can pick another book to be formatted.
+        ///     Validate if book is formatted all ready. So user can pick another
+        ///     book to be formatted.
         /// </summary>
-        /// <param name="bookInfo">The string containing book title to be formatted.</param>
-        /// <returns>True if book is formatted else false.</returns>
+        /// <param name="bookInfo">
+        ///     The string containing book title to be formatted.
+        /// </param>
+        /// <returns>
+        ///     True if book is formatted else False.
+        /// </returns>
         public bool ValidateBookNotSeriesIsFormatted(string bookInfo)
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!ValidateStringIsNotNull(bookInfo)) return false;
-            if (!ValidateStringHasLength(bookInfo)) return false;
+            if (!this.ValidateStringIsNotNull(bookInfo)) return false;
+            if (!this.ValidateStringHasLength(bookInfo)) return false;
 
-            if (bookInfo.Contains("*")) return true;
-
-            MyMessagesClass.ErrorMessage = "This book title is all ready formatted.";
-            MyMessagesClass.ShowInformationMessageBox();
-            return false;
-        }
-
-        /// <summary>
-        ///     Check for parentheses around the book series name. If found
-        ///     the book is formatted correctly.
-        /// </summary>
-        /// <param name="bookInfo">Contains the series name to check for formatted.</param>
-        /// <returns>True if formatted else false.</returns>
-        public bool ValidateBookSeriesIsFormatted(string bookInfo)
-        {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
-
-            if (!ValidateStringIsNotNull(bookInfo)) return false;
-            if (!ValidateStringHasLength(bookInfo)) return false;
-
-            if (bookInfo.Contains("(") || bookInfo.Contains(")"))
+            // Formatted will contain '[*]'
+            if (bookInfo.Contains("[*]"))
             {
-                MyMessagesClass.ErrorMessage = "This book info is all ready formatted.";
-                MyMessagesClass.ShowInformationMessageBox();
+                this._msgBox.Msg = this._myMsg.MsgBookTitleIsAllReadyFormatted;
+                this._msgBox.ShowInformationMessageBox();
                 return true;
             }
 
+            this._msgBox.Msg = this._myMsg.MSgBookTitleIsNotFormatted;
+            this._msgBox.ShowInformationMessageBox();
             return false;
         }
 
         /// <summary>
-        ///     Validate that dirPath contains a valid directory path.
+        ///     Check for parentheses around the book series name. If found the book
+        ///     is formatted correctly.
+        /// </summary>
+        /// <param name="bookInfo">
+        ///     Contains the series name to check for formatted.
+        /// </param>
+        /// <returns>
+        ///     True if formatted else False.
+        /// </returns>
+        public bool ValidateBookSeriesIsFormatted(string bookInfo)
+        {
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (!this.ValidateStringIsNotNull(bookInfo)) return false;
+            if (!this.ValidateStringHasLength(bookInfo)) return false;
+
+            // if string contains '()' around the series name then it has all ready been formatted.
+            if (bookInfo.Contains("(") && bookInfo.Contains(")"))
+            {
+                this._msgBox.Msg = this._myMsg.MsgBookSeriesIsAllReadyFormatted;
+                this._msgBox.ShowInformationMessageBox();
+                return true;
+            }
+
+            this._msgBox.Msg = this._myMsg.MSgBookTitleIsNotFormatted;
+            this._msgBox.ShowInformationMessageBox();
+            return false;
+        }
+
+        /// <summary>
+        ///     Validate that <paramref name="dirPath" /> contains a valid directory
+        ///     path.
         /// </summary>
         /// <param name="dirPath">The directory path.</param>
-        /// <returns>If directory exists then true else false.</returns>
+        /// <returns>
+        ///     If directory exists then <see langword="true" /> else false.
+        /// </returns>
         public bool ValidateDirectoryExists([NotNull] string dirPath)
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!ValidateStringIsNotNull(dirPath)) return false;
-            if (!ValidateStringHasLength(dirPath)) return false;
+            if (!this.ValidateStringIsNotNull(dirPath)) return false;
+            if (!this.ValidateStringHasLength(dirPath)) return false;
 
             if (Directory.Exists(dirPath)) return true;
 
-            MyMessagesClass.ErrorMessage = "This Directory path does not exist:  " + dirPath;
-            MyMessagesClass.ShowErrorMessageBox();
+            this._msgBox.Msg = this._myMsg.MsgDirectoryDoesNotExist + dirPath;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
 
@@ -158,162 +164,138 @@ namespace BookList.Classes
         ///     Validates the file exists.
         /// </summary>
         /// <param name="filePath">The file path.</param>
-        /// <returns>True if exists else false.</returns>
-        public bool ValidateFileExists(string filePath)
+        /// <param name="msg">If True and file does not exist return message and False.
+        ///  Else return just False and no message.</param>
+        /// <returns>
+        ///     True if exists else False.
+        /// </returns>
+        public bool ValidateFileExists(string filePath, bool msg)
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!ValidateStringIsNotNull(filePath)) return false;
-            if (!ValidateStringHasLength(filePath)) return false;
+            if (!this.ValidateStringIsNotNull(filePath)) return false;
+            if (!this.ValidateStringHasLength(filePath)) return false;
 
             if (File.Exists(filePath)) return true;
+            // used to decide if to return message below or not.
+            if (!msg) return false;
 
-            MyMessagesClass.ErrorMessage = "This file does not exist.";
-            MyMessagesClass.ShowErrorMessageBox();
+
+            this._msgBox.Msg = this._myMsg.MsgFileDoesNotExist + filePath;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
 
-
         /// <summary>
-        ///     Validates series name does not match volume number. User could have selected same name
-        ///     for volume or series.
+        ///     Validates series name does not match volume number. User could have
+        ///     selected same name for volume or series.
         /// </summary>
-        /// <returns>True if the series name does not match volume info. else false.</returns>
+        /// <returns>
+        ///     True if the series name does not match volume info. else false.
+        /// </returns>
         public bool ValidateSeriesVolumeTextDoesNotMatch()
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!FormatBookDataProperties.BookSeriesVolumeNumber.Equals(FormatBookDataProperties.NameOfBookSeries))
-            {
+            if (!this.ValidateStringIsNotNull(FormatBookDataProperties.NameOfBookSeries)) return false;
+            if (!this.ValidateStringIsNotNull(FormatBookDataProperties.NameOfBookVolume)) return false;
+            if (!this.ValidateStringHasLength(FormatBookDataProperties.NameOfBookSeries)) return false;
+            if (!this.ValidateStringHasLength(FormatBookDataProperties.NameOfBookVolume)) return false;
+
+            if (!FormatBookDataProperties.NameOfBookSeries.Equals(FormatBookDataProperties.NameOfBookVolume))
                 return true;
-            }
 
-            MyMessagesClass.ErrorMessage =
-                "The book series number is not valid. It is the same as the name of the book series.";
-            MyMessagesClass.ShowErrorMessageBox();
+            this._msgBox.Msg = this._myMsg.MsgVolumeNumberAndSeriesNameMatch;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
 
         /// <summary>
         ///     Validates the string has length not an empty string.
         /// </summary>
-        /// <param name="value">The string to be checked..</param>
-        /// <returns>If string has length true else false.</returns>
+        /// <param name="value">The string to be Checked..</param>
+        /// <returns>
+        ///     If string has length <see langword="true" /> else false.
+        /// </returns>
         public bool ValidateStringHasLength(string value)
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!ValidateStringIsNotNull(value)) return false;
+            if (!this.ValidateStringIsNotNull(value)) return false;
 
             value = value.Trim();
 
             if (value.Length != 0) return true;
 
-            MyMessagesClass.ErrorMessage = "This can not be an empty string.";
-            MyMessagesClass.ShowErrorMessageBox();
+            this._msgBox.Msg = this._myMsg.MsgStringIsEmpty;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
 
         /// <summary>
-        ///     Check that there are only letters in the spelling word.
+        ///     Validates the string is not Null.
         /// </summary>
-        /// <param name="value">The spelling word to be checked.</param>
-        /// <returns>True if only letters in the spelling word else false.</returns>
-        public bool ValidateStringHasLettersOnly(string value)
-        {
-            Contract.Requires(!string.IsNullOrEmpty(value));
-
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
-
-            if (!ValidateStringIsNotNull(value)) return false;
-            if (!ValidateStringHasLength(value)) return false;
-
-            if (!(from letter in value
-                where !char.IsLetter(letter)
-                select letter.ToString()
-                into val
-                select "Invalid character in string:  " + val).Any())
-            {
-                return true;
-            }
-
-            MyMessagesClass.ErrorMessage = "Fond character that is not a valid letter.";
-            MyMessagesClass.ShowErrorMessageBox();
-
-            return false;
-        }
-
-        /// <summary>
-        ///     Validates the string is not null.
-        /// </summary>
-        /// <param name="value">The string to be checked for null value.</param>
-        /// <returns>True if not null else false.</returns>
+        /// <param name="value">
+        ///     The string to be <see langword="checked" /> for
+        ///     <see langword="null" /> value.
+        /// </param>
+        /// <returns>
+        ///     True if not <see langword="null" /> else false.
+        /// </returns>
         public bool ValidateStringIsNotNull(string value)
         {
             if (value != null) return true;
 
-            MyMessagesClass.ErrorMessage = "The pathString is not valid. It is a null string.";
-            MyMessagesClass.ShowErrorMessageBox();
+            this._msgBox.Msg = this._myMsg.MsgStringIsNullString;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
-
-
+        
         /// <summary>
-        ///     Check for space in pathString this will means either space in word that does not belong or
-        ///     two words instead of one spelling word.
+        ///     This checks to be sure the title name does not match the series
+        ///     name.
         /// </summary>
-        /// <param name="value">The spelling word to validate.</param>
-        /// <returns>True if no space is found else false.</returns>
-        public bool ValidateStringOneWord([NotNull] string value)
-        {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
-
-            if (!ValidateStringIsNotNull(value)) return false;
-            if (!ValidateStringHasLength(value)) return false;
-
-            var index = value.IndexOf(' ');
-
-            if (index <= -1) return true;
-            MyMessagesClass.ErrorMessage = "This string contains more than one word. must contain only one word.";
-            MyMessagesClass.ShowErrorMessageBox();
-            return false;
-        }
-
-
-        /// <summary>
-        ///     This checks to be sure the title name does not match the series name.
-        /// </summary>
-        /// <returns>True if the title name does not match the series name else false. </returns>
+        /// <returns>
+        ///     True if the title name does not match the series name else False.
+        /// </returns>
         public bool ValidateTitleSeriesTextDoesNotMatch()
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!FormatBookDataProperties.ContainsBookTitle.Equals(FormatBookDataProperties.NameOfBookSeries))
-            {
+            if (!this.ValidateStringIsNotNull(FormatBookDataProperties.NameOfBookSeries)) return false;
+            if (!this.ValidateStringHasLength(FormatBookDataProperties.NameOfBookSeries)) return false;
+            if (!this.ValidateStringIsNotNull(FormatBookDataProperties.NameOfBookTitle)) return false;
+            if (!this.ValidateStringHasLength(FormatBookDataProperties.NameOfBookTitle)) return false;
+
+            if (!FormatBookDataProperties.NameOfBookTitle.Equals(FormatBookDataProperties.NameOfBookSeries))
                 return true;
-            }
 
-            MyMessagesClass.ErrorMessage = "The title of the book can not be the same as the series name.";
-            MyMessagesClass.ShowErrorMessageBox();
+            this._msgBox.Msg = this._myMsg.MsgTheTitleNameMatchesSeriesName;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
 
         /// <summary>
         ///     Validates the title volume text does not match.
         /// </summary>
-        /// <returns>A bool.</returns>
+        /// <returns>
+        ///     True if text does not match else False.
+        /// </returns>
         public bool ValidateTitleVolumeTextDoesNotMatch()
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (!FormatBookDataProperties.BookSeriesVolumeNumber.Equals(
-                FormatBookDataProperties.ContainsBookTitle))
-            {
+            if (!this.ValidateStringIsNotNull(FormatBookDataProperties.NameOfBookVolume)) return false;
+            if (!this.ValidateStringHasLength(FormatBookDataProperties.NameOfBookVolume)) return false;
+            if (!this.ValidateStringIsNotNull(FormatBookDataProperties.NameOfBookTitle)) return false;
+            if (!this.ValidateStringHasLength(FormatBookDataProperties.NameOfBookTitle)) return false;
+
+            if (!FormatBookDataProperties.NameOfBookVolume.Equals(
+                FormatBookDataProperties.NameOfBookTitle))
                 return true;
-            }
 
-            MyMessagesClass.ErrorMessage = "The title cannot match the volume number text.";
-            MyMessagesClass.ShowErrorMessageBox();
+            this._msgBox.Msg = this._myMsg.MsgTheTitleNameMatchesTheVolumeNameNumber;
+            this._msgBox.ShowErrorMessageBox();
             return false;
         }
     }

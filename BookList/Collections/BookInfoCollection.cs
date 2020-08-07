@@ -1,156 +1,191 @@
-﻿// Art2MSpell
+﻿// BookListCurrent
 //
 // BookInfoCollection.cs
 //
-// Art2M
+// art2m
 //
-// art2m@live.com
+// art2m
 //
-// 05  20  2019
+// 07    20   2020
 //
-// 05  20   2019
 //
 // This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+using System.Collections.Generic;
+using BookList.Classes;
+using BookList.Interfaces;
 
 namespace BookList.Collections
 {
-    using System;
-    using System.Collections.Generic;
-
     /// <summary>
-    /// This contains the titles of all books read.
+    ///     This contains the titles of all books read.
     /// </summary>
-    public static class BookInfoCollection
+    public class BookInfoCollection : IMyCollection
     {
         /// <summary>
-        /// Defines the WordsList.
+        ///     Defines the coll.
         /// </summary>
-        private static readonly List<string> WordsList = new List<string>();
+        private static List<string> _coll = new List<string>();
 
         /// <summary>
-        /// The AddItem.
+        ///     Declare validation class object.
         /// </summary>
-        /// <param name="word">The word<see cref="string" />.</param>
-        public static void AddItem(string word)
-        {
-            if (ContainsItem(word))
-            {
-                return;
-            }
+        private readonly ValidationClass _validate = new ValidationClass();
 
-            WordsList.Add(word);
+        /// <summary>
+        ///     Add new item to the collection.
+        /// </summary>
+        public bool AddItem(string value)
+        {
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            if (!this._validate.ValidateStringHasLength(value)) return false;
+
+            if (this.ContainsItem(value)) return false;
+
+            _coll.Add(value);
+            return true;
         }
 
         /// <summary>
-        /// The ClearCollection.
+        /// Fill collection from an array
         /// </summary>
-        public static void ClearCollection()
+        /// <param name="fileArray"></param>
+        /// <returns>True if array filled else false.</returns>
+        public bool AddArray(string[] fileArray)
         {
-            WordsList.Clear();
+            if (fileArray == null) return false;
+            if (fileArray.Length <= 0) return false;
+
+            _coll = null;
+            _coll = new List<string>(fileArray);
+
+            return _coll.Count > 0;
         }
 
         /// <summary>
-        /// The ContainsItem.
+        ///     Clears the collection.
         /// </summary>
-        /// <param name="word">The word<see cref="string" />.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool ContainsItem(string word)
+        public void ClearCollection()
         {
-            return WordsList.Contains(word);
+            _coll.Clear();
         }
 
         /// <summary>
-        /// The GetAllItems.
+        ///     Contained in collection.
         /// </summary>
-        /// <returns>The <see cref="string[]" />.</returns>
-        public static string[] GetAllItems()
+        /// <param name="value">The string to check for.</param>
+        /// <returns>true if contained in the collection else false.</returns>
+        public bool ContainsItem(string value)
         {
-            var count = WordsList.Count;
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
+        }
 
-            // No genre Folders Found
-            if (count - 1 < 1)
-            {
-                return Array.Empty<string>();
-            }
-
-            var origPath = new string[count];
-
-            for (var i = 0; i < count; i++) origPath[i] = WordsList[i];
-
-            // All OK.
-            return origPath;
+        string[] IMyCollection.GetAllItems()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
-        /// The GetItemAt.
+        ///     Return all items.
         /// </summary>
-        /// <param name="index">The index<see cref="int" />.</param>
-        /// <returns>The <see cref="string" />.</returns>
-        public static string GetItemAt(int index)
+        /// <returns>
+        ///     All items contained in the collection.
+        /// </returns>
+        public List<string> GetAllItems()
         {
-            return WordsList[index];
+            return _coll;
         }
 
         /// <summary>
-        /// The GetItemIndex.
+        ///     Return the value at the given position.
         /// </summary>
-        /// <param name="word">The word<see cref="string" />.</param>
-        /// <returns>The <see cref="int" />.</returns>
-        public static int GetItemIndex(string word)
+        /// <param name="index">The position of the oven.</param>
+        /// <returns>The item found at this position.</returns>
+        public string GetItemAt(int index)
         {
-            return WordsList.IndexOf(word);
+            var count = _coll.Count;
+            return !this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)
+                ? string.Empty
+                : _coll[index];
         }
 
         /// <summary>
-        /// The ItemsCount.
+        ///     find the position of this value.
         /// </summary>
-        /// <returns>The <see cref="int" />.</returns>
-        public static int ItemsCount()
+        /// <param name="value">The value to search for.</param>
+        /// <returns>the position number the item is located at.</returns>
+        public int GetItemIndex(string value)
         {
-            return WordsList.Count;
+            if (!this._validate.ValidateStringIsNotNull(value)) return -1;
+            if (!this._validate.ValidateStringHasLength(value)) return -1;
+            return _coll.IndexOf(value);
+        }
+
+        public int GetItemsCount()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
-        /// The RemoveItem.
+        ///     Gets the count of items contained in the collection.
         /// </summary>
-        /// <param name="word">The word<see cref="string" />.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool RemoveItem(string word)
+        /// <returns>
+        ///     Count of items contained in the collection.
+        /// </returns>
+        public int ItemsCount()
         {
-            return WordsList.Remove(word);
+            return _coll.Count;
         }
 
         /// <summary>
-        /// The RemoveItemAt.
+        ///     Find this item in the collection and
+        ///     remove it.
         /// </summary>
-        /// <param name="index">The index<see cref="int" />.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool RemoveItemAt(int index)
+        /// <param name="value">The item to find.</param>
+        /// <returns>True if removed else false.</returns>
+        public bool RemoveItem(string value)
         {
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            return this._validate.ValidateStringHasLength(value) && _coll.Remove(value);
+        }
+
+        /// <summary>
+        ///     The position of the item to be removed.
+        /// </summary>
+        /// <param name="index">The position in the collection.</param>
+        /// <returns>True if removed else false.</returns>
+        public bool RemoveItemAt(int index)
+        {
+            var count = _coll.Count;
+
+            if (!this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)) return false;
             // Get item to be removed for check that it is gone.
-            var item = GetItemAt(index);
+            var item = this.GetItemAt(index);
 
-            WordsList.RemoveAt(index);
+            _coll.RemoveAt(index);
 
             // Check to see if item is no longer in collection
-            return !ContainsItem(item);
+            return !this.ContainsItem(item);
         }
 
         /// <summary>
-        /// The SortCollection.
+        ///     The SortCollection.
         /// </summary>
-        public static void SortCollection()
+        public void SortCollection()
         {
-            WordsList.Sort();
+            _coll.Sort();
         }
     }
 }

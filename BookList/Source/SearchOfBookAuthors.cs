@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using BookList.Classes;
 using BookList.Collections;
@@ -20,9 +21,11 @@ namespace BookList.Source
 
         private void LoadListBoxWithAuthorNames()
         {
-            for (var index = 0; index < AuthorsFileNamesCollection.ItemsCount(); index++)
+            var coll = new AuthorsFileNamesCollection();
+
+            for (var index = 0; index < coll.ItemsCount(); index++)
             {
-                var authorName = AuthorNamesListCollection.GetItemAt(index);
+                var authorName = coll.GetItemAt(index);
                 this.lstSearch.Items.Add(authorName);
             }
 
@@ -31,6 +34,9 @@ namespace BookList.Source
 
         private void SearchByAuthorsNameButtonClicked(object sender, EventArgs e)
         {
+            var msgBox = new MyMessageBox();
+            msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
             if (string.IsNullOrEmpty(this.txtSearch.Text.Trim())) return;
 
             foreach (var author in this.lstSearch.Items)
@@ -41,9 +47,11 @@ namespace BookList.Source
                 searchString = searchString.ToLower();
                 var retVal = temp.Contains(searchString);
 
+               
+
                 if (!retVal) continue;
-                MyMessagesClass.InformationMessage = V + temp;
-                MyMessagesClass.ShowInformationMessage(MyMessagesClass.InformationMessage, MethodName);
+                msgBox.Msg = V + temp;
+                msgBox.ShowInformationMessageBox();
             }
         }
 

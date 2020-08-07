@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using BookList.Classes;
 using BookList.Collections;
 using BookList.PropertiesClasses;
+using BookListCurrent.ClassesProperties;
 
 namespace BookList.Source
 {
@@ -15,6 +16,10 @@ namespace BookList.Source
     {
         private DialogResult _result;
 
+        private MyMessageBox msgBox = new MyMessageBox();
+        private MyMessages msg = new MyMessages();
+
+
         /// <summary>Initializes a new instance of the <see cref="FormatBookData" /> class.</summary>
         public FormatBookData()
         {
@@ -23,7 +28,7 @@ namespace BookList.Source
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null)
             {
-                MyMessagesClass.NameOfClass = declaringType.Name;
+                msgBox.NameOfClass = declaringType.Name;
             }
 
             mnuAuthors.PerformClick();
@@ -42,7 +47,7 @@ namespace BookList.Source
         /// <summary>Displays the record count and selected record position.</summary>
         private void DisplayRecordCountAndPosition()
         {
-            var sb = new StringBuilder(FormatBookDataProperties.TipLblPosition);
+            var sb = new StringBuilder();
             sb.Append(FormatBookDataProperties.CurrentPositionInTitlesRecords.ToString());
             sb.Append(" of ");
             sb.Append(FormatBookDataProperties.RecordsTotalCount.ToString());
@@ -54,17 +59,18 @@ namespace BookList.Source
         /// <param name="fileName">Name of the file.</param>
         private void GetAuthorsName(string fileName)
         {
-            var author = AuthorsTextOperations.SplitFileNameFormFileExtension(fileName);
+            var author = new AuthorsTextOperations();
+
+            var authorName = author.SplitFileNameFormFileExtension(fileName);
 
 
-            lblInfo.Text = string.Concat(FormatBookDataProperties.TipLblInfo, author);
         }
 
 
         /// <summary>  Get the selected authors path to the file.</summary>
         private void GetUnformattedDataFrom()
         {
-            var dirFileOp = new DirectoryFileOperationsClass();
+            var dirFileOp = new DirectoryFileClass();
 
             var dirPath = BookListPropertiesClass.PathToAuthorsDirectory;
 
@@ -88,18 +94,23 @@ namespace BookList.Source
 
             fileInput.ReadTitlesFromFile(FormatBookDataProperties.PathToCurrentAuthorsFile);
 
-            DataStorageOperationsClass.AddToBackUpList();
+           // var collUn = new UnformattedDataBackUpCollection();
+            //collUn.AddToBackUpList();
 
-            FormatBookDataProperties.RecordsTotalCount = UnformattedDataCollection.GetItemsCount();
+            var coll = new UnformattedDataCollection();
+
+            FormatBookDataProperties.RecordsTotalCount = coll.GetItemsCount();
         }
 
         /// <summary>Moves to first record.</summary>
         private void MoveToFirstRecord()
-        {
-            if (UnformattedDataCollection.GetItemsCount() <= 0) return;
+        { 
+            var coll = new UnformattedDataCollection();
+
+            if (coll.GetItemsCount() <= 0) return;
 
             FormatBookDataProperties.BookTitleRecordsCount = 0;
-            txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            txtData.Text = coll.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
 
             FormatBookDataProperties.CurrentPositionInTitlesRecords =
                 FormatBookDataProperties.BookTitleRecordsCount + 1;
@@ -110,15 +121,17 @@ namespace BookList.Source
         /// <summary>Moves to last record.</summary>
         private void MoveToLastRecord()
         {
-            if (UnformattedDataCollection.GetItemsCount() == 0) return;
+            var coll = new UnformattedDataCollection();
 
-            if (FormatBookDataProperties.BookTitleRecordsCount + 1 > UnformattedDataCollection.GetItemsCount()) return;
+            if (coll.GetItemsCount() == 0) return;
 
-            FormatBookDataProperties.BookTitleRecordsCount = UnformattedDataCollection.GetItemsCount() - 1;
+            if (FormatBookDataProperties.BookTitleRecordsCount + 1 > coll.GetItemsCount()) return;
 
-            txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            FormatBookDataProperties.BookTitleRecordsCount = coll.GetItemsCount() - 1;
 
-            FormatBookDataProperties.CurrentPositionInTitlesRecords = UnformattedDataCollection.GetItemsCount();
+            txtData.Text = coll.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+
+            FormatBookDataProperties.CurrentPositionInTitlesRecords = coll.GetItemsCount();
 
             DisplayRecordCountAndPosition();
         }
@@ -126,14 +139,16 @@ namespace BookList.Source
         /// <summary>Moves to next record.</summary>
         private void MoveToNextRecord()
         {
-            if (UnformattedDataCollection.GetItemsCount() == 0) return;
+            var coll = new UnformattedDataCollection();
+
+            if (coll.GetItemsCount() == 0) return;
 
             // pos zero based.
-            if (FormatBookDataProperties.BookTitleRecordsCount + 1 >= UnformattedDataCollection.GetItemsCount()) return;
+            if (FormatBookDataProperties.BookTitleRecordsCount + 1 >= coll.GetItemsCount()) return;
 
             FormatBookDataProperties.BookTitleRecordsCount++;
 
-            txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            txtData.Text = coll.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
 
             FormatBookDataProperties.CurrentPositionInTitlesRecords =
                 FormatBookDataProperties.BookTitleRecordsCount + 1;
@@ -144,13 +159,15 @@ namespace BookList.Source
         /// <summary>Moves to previous record.</summary>
         private void MoveToPreviousRecord()
         {
-            if (UnformattedDataCollection.GetItemsCount() == 0) return;
+            var coll = new UnformattedDataCollection();
+
+            if (coll.GetItemsCount() == 0) return;
 
             if (FormatBookDataProperties.BookTitleRecordsCount == 0) return;
 
             FormatBookDataProperties.BookTitleRecordsCount--;
 
-            txtData.Text = UnformattedDataCollection.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
+            txtData.Text = coll.GetItemAt(FormatBookDataProperties.BookTitleRecordsCount);
 
             FormatBookDataProperties.CurrentPositionInTitlesRecords =
                 FormatBookDataProperties.BookTitleRecordsCount + 1;
@@ -222,13 +239,14 @@ namespace BookList.Source
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void OnFormatBookInformationButton_Click(object sender, EventArgs e)
         {
-            MyMessagesClass.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
             var validate = new ValidationClass();
 
             if (!rbtnIsSeries.Checked && !rbtnNotSeries.Checked)
             {
-                MyMessagesClass.ErrorMessage = "You must select if book is series or not series.";
-                MyMessagesClass.ShowErrorMessageBox();
+                msgBox.Msg = "You must select if book is series or not series.";
+               msgBox.ShowErrorMessageBox();
                 return;
             }
 
@@ -302,10 +320,11 @@ namespace BookList.Source
         /// <summary>Sets all controls tool tips.</summary>
         private void SetAllControlsToolTips()
         {
-            tipTool.SetToolTip(btnFirst, FormatBookDataProperties.TipBtnFirst);
+            /*tipTool.SetToolTip(btnFirst, FormatBookDataProperties.TipBtnFirst);
             tipTool.SetToolTip(btnNext, FormatBookDataProperties.TipBtnNext);
             tipTool.SetToolTip(btnPrevious, FormatBookDataProperties.TipBtnPrevious);
-            tipTool.SetToolTip(btnLast, FormatBookDataProperties.TipBtnLast);
+            tipTool.SetToolTip(btnLast, FormatBookDataProperties.TipBtnLast);*/
         }
     }
+
 }

@@ -40,9 +40,9 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlRadioButton.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // pnlRadioButton
-            //
+            // 
             this.pnlRadioButton.BackColor = System.Drawing.Color.Plum;
             this.pnlRadioButton.Controls.Add(this.rdbSpecific);
             this.pnlRadioButton.Controls.Add(this.rdbAll);
@@ -50,116 +50,123 @@
             this.pnlRadioButton.Location = new System.Drawing.Point(83, 12);
             this.pnlRadioButton.Name = "pnlRadioButton";
             this.pnlRadioButton.Size = new System.Drawing.Size(618, 44);
-            this.pnlRadioButton.TabIndex = 2;
-            //
+            this.pnlRadioButton.TabIndex = 0;
+            // 
             // rdbSpecific
-            //
+            // 
             this.rdbSpecific.AutoSize = true;
             this.rdbSpecific.Checked = true;
-            this.rdbSpecific.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbSpecific.Location = new System.Drawing.Point(108, 15);
+            this.rdbSpecific.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSpecific.Location = new System.Drawing.Point(94, 13);
             this.rdbSpecific.Name = "rdbSpecific";
-            this.rdbSpecific.Size = new System.Drawing.Size(161, 20);
-            this.rdbSpecific.TabIndex = 2;
+            this.rdbSpecific.Size = new System.Drawing.Size(198, 22);
+            this.rdbSpecific.TabIndex = 0;
             this.rdbSpecific.TabStop = true;
             this.rdbSpecific.Text = "Search Specific Author";
             this.rdbSpecific.UseVisualStyleBackColor = true;
             this.rdbSpecific.Click += new System.EventHandler(this.OnSearchByAuthorRadioButtonClicked);
-            //
+            // 
             // rdbAll
-            //
+            // 
             this.rdbAll.AutoSize = true;
-            this.rdbAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbAll.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.rdbAll.Location = new System.Drawing.Point(382, 15);
+            this.rdbAll.Location = new System.Drawing.Point(368, 13);
             this.rdbAll.Name = "rdbAll";
-            this.rdbAll.Size = new System.Drawing.Size(135, 20);
+            this.rdbAll.Size = new System.Drawing.Size(165, 22);
             this.rdbAll.TabIndex = 1;
             this.rdbAll.Text = "Search All Authors";
             this.rdbAll.UseVisualStyleBackColor = true;
             this.rdbAll.Click += new System.EventHandler(this.OnSearchAllAuthorsRadioButtonClicked);
-            //
+            // 
             // txtAuthorName
-            //
+            // 
             this.txtAuthorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAuthorName.Location = new System.Drawing.Point(83, 62);
             this.txtAuthorName.Multiline = true;
             this.txtAuthorName.Name = "txtAuthorName";
             this.txtAuthorName.Size = new System.Drawing.Size(618, 37);
-            this.txtAuthorName.TabIndex = 3;
+            this.txtAuthorName.TabIndex = 1;
             this.txtAuthorName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            //
+            // 
             // btnSelect
-            //
-            this.btnSelect.BackColor = System.Drawing.Color.PeachPuff;
+            // 
+            this.btnSelect.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelect.Font = new System.Drawing.Font("DejaVu Sans Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSelect.Location = new System.Drawing.Point(340, 105);
+            this.btnSelect.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnSelect.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(139, 45);
-            this.btnSelect.TabIndex = 6;
+            this.btnSelect.Size = new System.Drawing.Size(150, 45);
+            this.btnSelect.TabIndex = 2;
             this.btnSelect.Text = "Select Author";
             this.btnSelect.UseVisualStyleBackColor = false;
             this.btnSelect.Click += new System.EventHandler(this.OnSelectAuthorButtonClicked);
-            //
+            // 
             // txtTitle
-            //
+            // 
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitle.Location = new System.Drawing.Point(83, 439);
             this.txtTitle.Multiline = true;
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(627, 37);
-            this.txtTitle.TabIndex = 7;
-            //
+            this.txtTitle.TabIndex = 5;
+            // 
             // lstTiltes
-            //
+            // 
             this.lstTiltes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstTiltes.FormattingEnabled = true;
             this.lstTiltes.ItemHeight = 16;
             this.lstTiltes.Location = new System.Drawing.Point(74, 167);
             this.lstTiltes.Name = "lstTiltes";
             this.lstTiltes.Size = new System.Drawing.Size(627, 212);
-            this.lstTiltes.TabIndex = 8;
-            //
+            this.lstTiltes.TabIndex = 3;
+            // 
             // lblTitle
-            //
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(74, 391);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(627, 36);
-            this.lblTitle.TabIndex = 9;
+            this.lblTitle.TabIndex = 4;
             this.lblTitle.Text = "Enter Partial or full book title.";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // btnSearch
-            //
+            // 
             this.btnSearch.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSearch.Font = new System.Drawing.Font("DejaVu Sans Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.Location = new System.Drawing.Point(340, 482);
+            this.btnSearch.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnSearch.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(125, 45);
-            this.btnSearch.TabIndex = 10;
+            this.btnSearch.Size = new System.Drawing.Size(150, 45);
+            this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.OnTitleSearchButtonClicked);
-            //
+            // 
             // btnClose
-            //
+            // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("DejaVu Sans Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(647, 504);
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(620, 505);
+            this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
+            this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(125, 45);
-            this.btnClose.TabIndex = 11;
+            this.btnClose.Size = new System.Drawing.Size(150, 45);
+            this.btnClose.TabIndex = 7;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.OnCloseSearchByAuthorsButtonClicked);
-            //
+            // 
             // SearchOfBookTitles
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.ClientSize = new System.Drawing.Size(780, 557);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.lblTitle);
@@ -168,7 +175,9 @@
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.txtAuthorName);
             this.Controls.Add(this.pnlRadioButton);
-            this.MaximumSize = new System.Drawing.Size(920, 640);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(800, 600);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "SearchOfBookTitles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
