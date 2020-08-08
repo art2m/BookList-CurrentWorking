@@ -6,7 +6,8 @@ using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
-    /// <summary>Displays the authors names so user can select which author to display book titles for.</summary>
+    /// <summary>Displays the authors names so user can select which author to
+    /// display book titles for.</summary>
     public partial class AuthorsListing : Form
     {
         /// <summary>Initializes a new instance of the <see cref="AuthorsListing" /> class.</summary>
@@ -26,7 +27,6 @@ namespace BookList.Source
 
             for (var index = 0; index < coll.ItemsCount(); index++)
                 this.lstAuthor.Items.Add(coll.GetItemAt(index));
-
         }
 
         /// <summary>Called when [cancel operation button clicked].</summary>
@@ -40,23 +40,25 @@ namespace BookList.Source
         /// <summary>Called when [ok button clicked].</summary>
         /// <param name="sender">The source of the event</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private void OnOkButton_Clicked(object sender, EventArgs e)
+        private void OnOKButton_Clicked(object sender, EventArgs e)
         {
             var coll = new BookInfoCollection();
 
-            BookListPropertiesClass.AuthorsNameCurrent = this.lblAuthor.Text;
+            BookListPaths.AuthorsNameCurrent = this.lblAuthor.Text;
             coll.ClearCollection();
-           // BookInfoCollection.AddItem(BookListPropertiesClass.AuthorsNameCurrent);
-            //MyMessagesClass.ShowInformationMessageBox(BookListPropertiesClass.CurrentWorkingFileName,
-            //   "Testing", "fum");
 
             this.Close();
         }
 
+        /// <summary>
+        /// Called when [selected index changed ListBox selected].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnSelectedIndexChangedListBox_Selected(object sender, EventArgs e)
         {
             this.lblAuthor.Text = this.lstAuthor.SelectedItem.ToString();
-            BookListPropertiesClass.CurrentWorkingFileName = this.lblAuthor.Text;
+            BookListPaths.CurrentWorkingFileName = this.lblAuthor.Text;
         }
     }
 }

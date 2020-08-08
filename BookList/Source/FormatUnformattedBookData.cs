@@ -28,7 +28,7 @@ using System.Text;
 using System.Windows.Forms;
 using BookList.Classes;
 using BookList.Collections;
-using BookListCurrent.ClassesProperties;
+using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {

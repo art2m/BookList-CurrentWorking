@@ -28,11 +28,14 @@ using JetBrains.Annotations;
 namespace BookList.Classes
 {
     /// <summary>
-    ///     This Class Contains Code for diffrent types of
+    ///     This Class Contains Code for different types of
     ///     <see cref="Message" />Boxes.
     /// </summary>
     public class MyMessageBox
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyMessageBox"/> class.
+        /// </summary>
         public MyMessageBox()
         {
         }
@@ -128,25 +131,6 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     Shows the information message.
-        /// </summary>
-        /// <param name="msg">The Information message to be displayed.</param>
-        /// <param name="methodName">The name of the method.</param>
-        /// <returns> True if message box is successfully displayed else false.</returns>
-        public bool ShowInformationMessageBpx([NotNull] string msg, [NotNull] string methodName)
-        {
-            msg = msg.Trim();
-            methodName = methodName.Trim();
-
-            if (string.IsNullOrEmpty(msg)) return false;
-            if (string.IsNullOrEmpty(methodName)) return false;
-
-            const MessageBoxButtons messageBoxButtons = MessageBoxButtons.OK;
-            MessageBox.Show(msg, methodName, messageBoxButtons, MessageBoxIcon.Information);
-            return true;
-        }
-
-        /// <summary>
         ///     Shows the information message box.
         /// </summary>
         /// <param name="msg">The Information message to be displayed.</param>
@@ -192,6 +176,24 @@ namespace BookList.Classes
             return true;
         }
 
+        /// <summary>
+        ///     Shows the information message.
+        /// </summary>
+        /// <param name="msg">The Information message to be displayed.</param>
+        /// <param name="methodName">The name of the method.</param>
+        /// <returns> True if message box is successfully displayed else false.</returns>
+        public bool ShowInformationMessageBpx([NotNull] string msg, [NotNull] string methodName)
+        {
+            msg = msg.Trim();
+            methodName = methodName.Trim();
+
+            if (string.IsNullOrEmpty(msg)) return false;
+            if (string.IsNullOrEmpty(methodName)) return false;
+
+            const MessageBoxButtons messageBoxButtons = MessageBoxButtons.OK;
+            MessageBox.Show(msg, methodName, messageBoxButtons, MessageBoxIcon.Information);
+            return true;
+        }
         /// <summary>
         ///     Shows the question message.
         /// </summary>

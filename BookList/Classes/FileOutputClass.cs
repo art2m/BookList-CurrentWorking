@@ -36,9 +36,19 @@ namespace BookList.Classes
     /// </summary>
     public class FileOutputClass
     {
+        /// <summary>
+        /// The MSG box
+        /// </summary>
         private readonly MyMessageBox _msgBox = new MyMessageBox();
+
+        /// <summary>
+        /// The validate
+        /// </summary>
         private readonly ValidationClass _validate = new ValidationClass();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileOutputClass"/> class.
+        /// </summary>
         public FileOutputClass()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
@@ -140,12 +150,10 @@ namespace BookList.Classes
             try
             {
                 var coll = new UnformattedDataCollection();
-                var validate = new ValidationClass();
 
                 // Append line to the file.
                 using (var writer = new StreamWriter(filePath, false))
                 {
-                    var count = coll.ItemsCount();
                     for (var index = 0; index < coll.ItemsCount(); index++)
 
                         writer.WriteLine(coll.GetItemAt(index));

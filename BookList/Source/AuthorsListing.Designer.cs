@@ -87,7 +87,7 @@
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = false;
-            this.btnOK.Click += new System.EventHandler(this.OnOkButton_Clicked);
+            this.btnOK.Click += new System.EventHandler(this.OnOKButton_Clicked);
             // 
             // AuthorsListing
             // 

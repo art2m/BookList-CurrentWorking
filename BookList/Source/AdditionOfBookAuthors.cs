@@ -1,84 +1,84 @@
 // BookList
-//
+// 
 // AdditionOfBookAuthors.cs
-//
-// Art2M
-//
-// art2m@live.com
-//
-// 11  09  2019
-//
-// 11  09   2019
-//
+// 
+// Arthur Melanson
+// 
+// art2m
+// 
+// 08    07   2020
+// 
+// 
 // This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+// 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+using System;
+using System.IO;
+using System.Windows.Forms;
+using BookList.Classes;
 using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
-    using BookList.Classes;
-    using System;
-    using System.IO;
-    using System.Windows.Forms;
-
     /// <summary>
-    /// Defines the <see cref="AdditionOfBookAuthors" />.
+    ///     Defines the <see cref="AdditionOfBookAuthors" />.
     /// </summary>
     public partial class AdditionOfBookAuthors : Form
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AdditionOfBookAuthors"/> class.
+        ///     Initializes a new instance of the <see cref="AdditionOfBookAuthors" /> class.
         /// </summary>
         public AdditionOfBookAuthors()
         {
-            this.InitializeComponent();
-            this.SetInitialControlsState();
+            InitializeComponent();
+            SetInitialControlsState();
         }
 
         /// <summary>
-        /// The OnAddNewBookRecordButton_Clicked.
+        ///     The OnAddNewBookRecordButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnAddNewBookRecordButton_Clicked(object sender, EventArgs e)
         {
-            this.txtAuthor.Enabled = true;
-            this.txtAuthor.Text = string.Empty;
-            this.txtAuthor.Focus();
+            txtAuthor.Enabled = true;
+            txtAuthor.Text = string.Empty;
+            txtAuthor.Focus();
         }
 
         /// <summary>
-        /// The OnCancelOperationButton_Clicked.
+        ///     The OnCancelOperationButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />.</param>
         /// <param name="e">The e<see cref="EventArgs" />.</param>
         private void OnCancelOperationButton_Clicked(object sender, EventArgs e)
         {
-            this.btnAdd.PerformClick();
+            btnAdd.PerformClick();
         }
 
         /// <summary>
-        /// The OnCloseAddingNewAuthorButton_Close.
+        ///     The OnCloseAddingNewAuthorButton_Close.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnCloseAddingNewAuthorButton_Close(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
         /// <summary>
-        /// The OnSaveRecordButton_Clicked.
+        ///     The OnSaveRecordButton_Clicked.
         /// </summary>
         /// <param name="sender">The sender<see cref="object" />The source of the event.</param>
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
@@ -86,11 +86,11 @@ namespace BookList.Source
         {
             var dirFileOp = new DirectoryFileClass();
 
-            var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
+            var dirAuthors = BookListPaths.PathToAuthorsDirectory;
 
             var authorOp = new AuthorsTextOperations();
 
-            var fileName = authorOp.AddDashBetweenAuthorsFirstMiddleLastName(this.txtAuthor.Text);
+            var fileName = authorOp.AddDashBetweenAuthorsFirstMiddleLastName(txtAuthor.Text);
 
             if (string.IsNullOrEmpty(fileName)) return;
             if (!Directory.Exists(dirAuthors)) return;
@@ -101,15 +101,15 @@ namespace BookList.Source
         }
 
         /// <summary>
-        /// Sets the initial state of the controls.
+        ///     Sets the initial state of the controls.
         /// </summary>
         private void SetInitialControlsState()
         {
-            this.btnAdd.Enabled = true;
-            this.btnSave.Enabled = false;
-            this.btnCancel.Enabled = false;
-            this.txtAuthor.Enabled = false;
-            this.lblInfo.Text = MyStrings.lblInfoAddAuthor;
+            btnAdd.Enabled = true;
+            btnSave.Enabled = false;
+            btnCancel.Enabled = false;
+            txtAuthor.Enabled = false;
+            lblInfo.Text = MyStrings.lblInfoAddAuthor;
         }
     }
 }

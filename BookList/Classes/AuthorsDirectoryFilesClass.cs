@@ -26,7 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using BookList.Collections;
-using BookListCurrent.ClassesProperties;
+using BookList.PropertiesClasses;
 using JetBrains.Annotations;
 
 namespace BookList.Classes
@@ -36,6 +36,9 @@ namespace BookList.Classes
     /// </summary>
     public class AuthorsDirectoryFilesClass
     {
+        /// <summary>
+        /// The valid
+        /// </summary>
         private readonly ValidationClass _valid = new ValidationClass();
 
         /// <summary>
@@ -43,7 +46,7 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="dirAuthorPath">The pat to the authors directory.</param>
         // ReSharper disable once MemberCanBeMadeStatic.Global
-        public bool GetAllAuthorFilePathsContainedInAuthorDirectory(string dirAuthorPath)
+        public bool GetAllAuthorFilePathsContainedInAuthorDirectory([NotNull] string dirAuthorPath)
         {
             var validate = new ValidationClass();
 
@@ -56,6 +59,15 @@ namespace BookList.Classes
         }
 
         /// <summary>
+        ///     The UpdateAuthorsNamesWithFileNames.
+        /// </summary>
+        public bool UpdateAuthorsNamesWithFileNames()
+        {
+            if (!GetAuthorFileNamesFromAuthorsList()) return false;
+            return GetAuthorFileNamesAddToAuthorsNamesList();
+        }
+
+        /// <summary>
         ///     The GetAllFileNamesContainedInAuthorsDirectory.
         /// </summary>
         /// <param name="dirPath">The dirPath<see cref="string" />.</param>
@@ -64,6 +76,32 @@ namespace BookList.Classes
             var fileArray = Directory.GetFiles(dirPath, "*.dat");
 
             return fileArray.Length != 0 && GetAuthorFileNameFromPath(fileArray);
+        }
+
+        /// <summary>
+        ///     The GetAuthorFileNameFromPath.
+        /// </summary>
+        /// <param name="authorFilePaths">The authorFilePaths<see cref="IEnumerable{string}" />.</param>
+        private static bool GetAuthorFileNameFromPath([NotNull] string[] authorFilePaths)
+        {
+            var clsAuthor = new AuthorsFileNamesCollection();
+
+            if (authorFilePaths == null) return false;
+            if (authorFilePaths.Length == 0) return false;
+
+            clsAuthor.ClearCollection();
+
+            var fileName = new string[authorFilePaths.Length];
+            for (var index = 0; index < authorFilePaths.Length; index++)
+            {
+                var filePath = authorFilePaths[index].Trim();
+
+                var temp = Path.GetFileName(filePath);
+                fileName[index] = temp;
+            }
+
+            var coll = new AuthorsFileNamesCollection();
+            return coll.AddArray(fileName);
         }
 
         /// <summary>
@@ -98,99 +136,6 @@ namespace BookList.Classes
 
             clsAuthor.SortCollection();
             return clsAuthor.ItemsCount() != 0;
-        }
-
-
-        /// <summary>
-        ///     The SetAllDirectoryPaths.
-        /// </summary>
-        private static bool SetAllDirectoryPaths()
-        {
-            var dirFileOp = new DirectoryFileClass();
-
-            if (!dirFileOp.GetPathToSpecialDirectoryAppDataLocal()) return false;
-
-            BookListPaths.PathTopLevelDirectory = dirFileOp.CombineExistingDirectoryPathWithDirectoryName(
-                BookListPaths.PathAppDataDirectory, BookListPaths.NameTopLevelDirectory);
-            if (BookListPaths.PathTopLevelDirectory == string.Empty) return false;
-
-            BookListPaths.PathAuthorsDirectory = dirFileOp.CombineExistingDirectoryPathWithDirectoryName(
-                BookListPaths.PathTopLevelDirectory, BookListPaths.NameAuthorsDirectory);
-            if (BookListPaths.PathAuthorsDirectory == String.Empty) return false;
-
-            BookListPaths.PathAuthorsListDirectory =
-                dirFileOp.CombineExistingDirectoryPathWithDirectoryName(BookListPaths.PathTopLevelDirectory,
-                    BookListPaths.NameOfAuthorsListDirectory);
-            if (BookListPaths.PathAuthorsListDirectory == String.Empty) return false;
-
-            BookListPaths.PathSeriesDirectory =
-                dirFileOp.CombineExistingDirectoryPathWithDirectoryName
-                    (BookListPaths.PathTopLevelDirectory, BookListPaths.NameSeriesDirectory);
-            if (BookListPaths.PathSeriesDirectory == String.Empty) return false;
-
-            BookListPaths.PathTitlesDirectory = dirFileOp.CombineExistingDirectoryPathWithDirectoryName(
-                BookListPaths.PathTopLevelDirectory, BookListPaths.NameTitlesDirectory);
-            if (BookListPaths.PathTitlesDirectory == String.Empty) return false;
-
-            BookListPaths.PathTitlesAuthorsDirectory =
-                dirFileOp.CombineExistingDirectoryPathWithDirectoryName(
-                    BookListPaths.PathTopLevelDirectory, BookListPaths.NameTitlesAuthorsDirectory);
-            return BookListPaths.PathTitlesAuthorsDirectory != string.Empty;
-        }
-
-        /// <summary>
-        ///     The SetAllFilePaths.
-        /// </summary>
-        private static bool SetAllFilePaths()
-        {
-            var dirFileOp = new DirectoryFileClass();
-
-            BookListPaths.PathAuthorsNamesListFile = dirFileOp.CombineDirectoryPathWithFileName(
-                BookListPaths.PathAuthorsListDirectory, BookListPaths.NameAuthorsListFile);
-            if (BookListPaths.PathAuthorsNamesListFile == string.Empty) return false;
-
-            BookListPaths.PathSeriesNamesListFile = dirFileOp.CombineDirectoryPathWithFileName(
-                BookListPaths.PathSeriesDirectory, BookListPaths.NameSeriesDirectory);
-            if (BookListPaths.PathSeriesNamesListFile == String.Empty) return false;
-
-            BookListPaths.PathTitleNamesListFile = dirFileOp.CombineDirectoryPathWithFileName(
-                BookListPaths.PathTitlesDirectory, BookListPaths.NameTitlesBookListFile);
-            return BookListPaths.PathTitleNamesListFile != String.Empty;
-        }
-
-        /// <summary>
-        ///     The UpdateAuthorsNamesWithFileNames.
-        /// </summary>
-        public bool UpdateAuthorsNamesWithFileNames()
-        {
-            if (!GetAuthorFileNamesFromAuthorsList()) return false;
-            return GetAuthorFileNamesAddToAuthorsNamesList();
-        }
-
-        /// <summary>
-        ///     The GetAuthorFileNameFromPath.
-        /// </summary>
-        /// <param name="authorFilePaths">The authorFilePaths<see cref="IEnumerable{string}" />.</param>
-        private static bool GetAuthorFileNameFromPath(string[] authorFilePaths)
-        {
-            var clsAuthor = new AuthorsFileNamesCollection();
-
-            if (authorFilePaths == null) return false;
-            if (authorFilePaths.Length == 0) return false;
-
-            clsAuthor.ClearCollection();
-
-            var fileName = new string[authorFilePaths.Length];
-            for (var index = 0; index < authorFilePaths.Length; index++)
-            {
-                var filePath = authorFilePaths[index].Trim();
-
-                var temp = Path.GetFileName(filePath);
-                fileName[index] = temp;
-            }
-
-            var coll = new AuthorsFileNamesCollection();
-            return coll.AddArray(fileName);
         }
     }
 }

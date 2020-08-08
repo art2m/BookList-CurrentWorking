@@ -36,7 +36,14 @@ namespace BookList.Classes
     /// </summary>
     public class FileInputClass
     {
+        /// <summary>
+        /// The MSG box
+        /// </summary>
         private readonly MyMessageBox _msgBox = new MyMessageBox();
+
+        /// <summary>
+        /// The validate
+        /// </summary>
         private readonly ValidationClass _validate = new ValidationClass();
 
         /// <summary>
@@ -46,6 +53,43 @@ namespace BookList.Classes
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null) this._msgBox.NameOfClass = declaringType.Name;
+        }
+
+        /// <summary>
+        ///     The ReadAuthorNamesFromFile.
+        /// </summary>
+        /// <param name="filePath">The filePath <see cref="string" /> .</param>
+        /// <returns>
+        ///     The <see cref="System.Collections.Generic.List`1" /> .
+        /// </returns>
+        public List<string> ReadAuthorNamesFromFile(string filePath)
+        {
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            var data = new List<string>();
+            try
+            {
+                if (!this._validate.ValidateStringIsNotNull(filePath)) return new List<string>();
+                if (!this._validate.ValidateStringHasLength(filePath)) return new List<string>();
+                if (!this._validate.ValidateFileExists(filePath, true)) return new List<string>();
+
+                using (var sr = new StreamReader(filePath))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null) data.Add(line);
+                }
+
+                return data;
+            }
+            catch (OutOfMemoryException ex)
+            {
+                this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
+
+                Debug.WriteLine(ex.ToString());
+
+                this._msgBox.ShowErrorMessageBox();
+
+                return new List<string>(Array.Empty<string>());
+            }
         }
 
         /// <summary>
@@ -77,56 +121,25 @@ namespace BookList.Classes
             catch (OutOfMemoryException ex)
             {
                 this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
-
+             
                 Debug.WriteLine(ex.ToString());
 
                 this._msgBox.ShowErrorMessageBox();
             }
         }
-
         /// <summary>
-        ///     The ReadAuthorNamesFromFile.
+        /// Reads the book data from file.
         /// </summary>
-        /// <param name="filePath">The filePath <see cref="string" /> .</param>
-        /// <returns>
-        ///     The <see cref="System.Collections.Generic.List`1" /> .
-        /// </returns>
-        public List<string> ReadAuthorNamesFromFile(string filePath)
+        /// <param name="filePath">The file path.</param>
+        public void ReadBookDataFromFile(string filePath)
         {
-            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
-            var data = new List<string>();
-            try
-            {
-                if (!this._validate.ValidateStringIsNotNull(filePath)) return new List<string>();
-                if (!this._validate.ValidateStringHasLength(filePath)) return new List<string>();
-                if (!this._validate.ValidateFileExists(filePath, true)) return new List<string>();
-
-                using (var sr = new StreamReader(filePath))
-                {
-                    string line;
-                    while ((line = sr.ReadLine()) != null) data.Add(line);
-                }
-
-                return data;
-            }
-            catch (OutOfMemoryException ex)
-            {
-                this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
-
-                Debug.WriteLine(ex.ToString());
-
-                this._msgBox.ShowErrorMessageBox();
-
-                return new List<string>(Array.Empty<string>());
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
         ///     The ReadTitlesFromFile.
         /// </summary>
-        /// <param name="filePath">The filePath <see cref="string" /> .</param>
+        /// <param name="filePath">The file path <see cref="string" /> .</param>
         public void ReadTitlesFromFile(string filePath)
         {
             try
@@ -148,19 +161,12 @@ namespace BookList.Classes
             catch (OutOfMemoryException ex)
             {
                 this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
 
                 Debug.WriteLine(ex.ToString());
 
                 this._msgBox.ShowErrorMessageBox();
             }
         }
-
-        public void ReadBookDataFromFile(string filePath)
-        {
-            if (string.IsNullOrEmpty(filePath)) return;
-        }
-
         /// <summary>
         ///     The ReadUnformattedDataFromFile.
         /// </summary>
@@ -186,7 +192,6 @@ namespace BookList.Classes
             catch (OutOfMemoryException ex)
             {
                 this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
 
                 Debug.WriteLine(ex.ToString());
 

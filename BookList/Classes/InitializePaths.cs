@@ -27,11 +27,11 @@ using System.Reflection;
 namespace BookList.Classes
 {
     /// <summary>
-    ///     This class makes sure the directories that are required exist. If they
+    ///     This class makes sure the directories and files that are required exist. If they
     ///     do not exist will ask user If ok to create them. If Not existing and Not
     ///     created the program will be unable to continue.
     /// </summary>
-    public class LocationDirectoryFilePaths
+    public class InitializePaths
     {
         /// <summary>
         ///     declare message box Object.
@@ -40,9 +40,9 @@ namespace BookList.Classes
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="LocationDirectoryFilePaths" /> class.
+        ///     <see cref="InitializePaths" /> class.
         /// </summary>
-        public LocationDirectoryFilePaths()
+        public InitializePaths()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null) _msgBox.NameOfClass = declaringType.Name;
@@ -95,10 +95,7 @@ namespace BookList.Classes
         {
             var cls = new LocationFilePaths();
 
-            var retVal = cls.GetSeriesFilePath();
-            if (retVal) retVal = cls.GetBookListTitlesFilePath();
-
-            if (retVal) retVal = cls.GetBookListTitlesAuthorFilesPath();
+            var retVal = cls.GetBookListTitlesFilePath();
 
             return retVal && cls.GetAuthorFileNamesListFilePath();
         }

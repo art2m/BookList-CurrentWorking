@@ -24,6 +24,7 @@
 
 using System.IO;
 using System.Reflection;
+using BookList.PropertiesClasses;
 using BookListCurrent.ClassesProperties;
 using JetBrains.Annotations;
 

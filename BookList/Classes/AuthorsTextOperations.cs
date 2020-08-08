@@ -33,7 +33,14 @@ namespace BookList.Classes
     /// </summary>
     public class AuthorsTextOperations
     {
+        /// <summary>
+        /// The MSG box
+        /// </summary>
         private readonly MyMessageBox _msgBox = new MyMessageBox();
+
+        /// <summary>
+        /// My MSG
+        /// </summary>
         private readonly MyMessages _myMsg = new MyMessages();
 
         /// <summary>
@@ -50,6 +57,66 @@ namespace BookList.Classes
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null) this._msgBox.NameOfClass = declaringType.Name;
+        }
+
+        /// <summary>
+        /// Add dash between authors first middle and last name. This allows the
+        /// program to tell where each name begins and ends.
+        /// </summary>
+        /// <param name="author">The author<see cref="string" />.</param>
+        /// <returns>Return the authors name with dashes installed.</returns>
+        public string AddDashBetweenAuthorsFirstMiddleLastName(string author)
+        {
+            var validate = new ValidationClass();
+            if (!validate.ValidateStringIsNotNull(author)) return string.Empty;
+            if (!validate.ValidateStringHasLength(author)) return string.Empty;
+
+            var authorName = AddDashToAuthorName(author.Trim());
+
+            return AddFileExtension(authorName);
+        }
+
+        /// <summary>
+        ///     Make file name from authors name.
+        /// </summary>
+        /// <param name="author">
+        ///     The author <see cref="System.String" /> .
+        /// </param>
+        /// <returns>
+        ///     Return the authors name with dashes installed.
+        /// </returns>
+        public string MakeAuthorFileName(string author)
+        {
+            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            if (!this._validate.ValidateStringIsNotNull(author)) return string.Empty;
+
+            if (!this._validate.ValidateStringHasLength(author)) return string.Empty;
+
+            var authorName = this.AddDash(author.Trim());
+            var fileName = this.AddFileExtension(authorName);
+
+            if (this.CheckFileNameHasExtension(fileName)) return fileName;
+
+            this._msgBox.Msg = this._myMsg.MsgUnableToCreateAuthorFileName;
+            this._msgBox.ShowErrorMessageBox();
+            return string.Empty;
+        }
+
+        /// <summary>
+        ///     Return the author name and the .dat extension.
+        /// </summary>
+        /// <param name="fileName">
+        ///     The fileName <see cref="System.String" /> .
+        /// </param>
+        /// <returns>
+        ///     The <see cref="System.String" /> .
+        /// </returns>
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        public string SplitFileNameFormFileExtension(string fileName)
+        {
+            if (!this._validate.ValidateStringIsNotNull(fileName)) return string.Empty;
+            return !this._validate.ValidateStringHasLength(fileName) ? string.Empty : Path.GetExtension(fileName);
         }
 
         /// <summary>
@@ -96,26 +163,6 @@ namespace BookList.Classes
 
             return authorName;
         }
-
-
-        /// <summary>
-        /// Add dash between authors first middle and last name. This allows the
-        /// program to tell where each name begins and ends.
-        /// </summary>
-        /// <param name="author">The author<see cref="string" />.</param>
-        /// <returns>Return the authors name with dashes installed.</returns>
-        public string AddDashBetweenAuthorsFirstMiddleLastName(string author)
-        {
-            var validate = new ValidationClass();
-            if (!validate.ValidateStringIsNotNull(author)) return string.Empty;
-            if (!validate.ValidateStringHasLength(author)) return string.Empty;
-
-            var authorName = AddDashToAuthorName(author.Trim());
-
-            return AddFileExtension(authorName);
-        }
-
-
         /// <summary>
         ///     Add the file extension '.dat' to the file name.
         /// </summary>
@@ -130,34 +177,6 @@ namespace BookList.Classes
 
             return string.Concat(author, extension);
         }
-
-        /// <summary>
-        ///     Make file name from authors name.
-        /// </summary>
-        /// <param name="author">
-        ///     The author <see cref="System.String" /> .
-        /// </param>
-        /// <returns>
-        ///     Return the authors name with dashes installed.
-        /// </returns>
-        public string MakeAuthorFileName(string author)
-        {
-            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
-
-            if (!this._validate.ValidateStringIsNotNull(author)) return string.Empty;
-
-            if (!this._validate.ValidateStringHasLength(author)) return string.Empty;
-
-            var authorName = this.AddDash(author.Trim());
-            var fileName = this.AddFileExtension(authorName);
-
-            if (this.CheckFileNameHasExtension(fileName)) return fileName;
-
-            this._msgBox.Msg = this._myMsg.MsgUnableToCreateAuthorFileName;
-            this._msgBox.ShowErrorMessageBox();
-            return string.Empty;
-        }
-
         /// <summary>
         ///     Check to see if file name contains extension '.dat'.
         /// </summary>
@@ -169,22 +188,6 @@ namespace BookList.Classes
             var extension = Path.GetExtension(fileName);
 
             return extension.Contains("dat");
-        }
-
-        /// <summary>
-        ///     Return the author name and the .dat extension.
-        /// </summary>
-        /// <param name="fileName">
-        ///     The fileName <see cref="System.String" /> .
-        /// </param>
-        /// <returns>
-        ///     The <see cref="System.String" /> .
-        /// </returns>
-        // ReSharper disable once MemberCanBeMadeStatic.Global
-        public string SplitFileNameFormFileExtension(string fileName)
-        {
-            if (!this._validate.ValidateStringIsNotNull(fileName)) return string.Empty;
-            return !this._validate.ValidateStringHasLength(fileName) ? string.Empty : Path.GetExtension(fileName);
         }
     }
 }

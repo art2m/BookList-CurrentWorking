@@ -1,5 +1,9 @@
 ﻿namespace BookList.Source
 {
+    /// <summary>
+    /// Designer for search book titles.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     partial class SearchOfBookTitles
     {
         /// <summary>
@@ -56,7 +60,7 @@
             // 
             this.rdbSpecific.AutoSize = true;
             this.rdbSpecific.Checked = true;
-            this.rdbSpecific.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbSpecific.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.rdbSpecific.Location = new System.Drawing.Point(94, 13);
             this.rdbSpecific.Name = "rdbSpecific";
             this.rdbSpecific.Size = new System.Drawing.Size(198, 22);
@@ -69,7 +73,7 @@
             // rdbAll
             // 
             this.rdbAll.AutoSize = true;
-            this.rdbAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.rdbAll.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rdbAll.Location = new System.Drawing.Point(368, 13);
             this.rdbAll.Name = "rdbAll";
@@ -81,7 +85,7 @@
             // 
             // txtAuthorName
             // 
-            this.txtAuthorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAuthorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtAuthorName.Location = new System.Drawing.Point(83, 62);
             this.txtAuthorName.Multiline = true;
             this.txtAuthorName.Name = "txtAuthorName";
@@ -93,7 +97,7 @@
             // 
             this.btnSelect.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnSelect.Location = new System.Drawing.Point(340, 105);
             this.btnSelect.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnSelect.MinimumSize = new System.Drawing.Size(150, 45);
@@ -106,7 +110,7 @@
             // 
             // txtTitle
             // 
-            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtTitle.Location = new System.Drawing.Point(83, 439);
             this.txtTitle.Multiline = true;
             this.txtTitle.Name = "txtTitle";
@@ -115,7 +119,7 @@
             // 
             // lstTiltes
             // 
-            this.lstTiltes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstTiltes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lstTiltes.FormattingEnabled = true;
             this.lstTiltes.ItemHeight = 16;
             this.lstTiltes.Location = new System.Drawing.Point(74, 167);
@@ -125,7 +129,7 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblTitle.Location = new System.Drawing.Point(74, 391);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(627, 36);
@@ -136,7 +140,7 @@
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnSearch.Location = new System.Drawing.Point(340, 482);
             this.btnSearch.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnSearch.MinimumSize = new System.Drawing.Size(150, 45);
@@ -145,12 +149,12 @@
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.OnTitleSearchButtonClicked);
+            this.btnSearch.Click += new System.EventHandler(this.OnTitleSearchButton_Clicked);
             // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnClose.Location = new System.Drawing.Point(620, 505);
             this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
@@ -166,7 +170,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(780, 557);
+            this.ClientSize = new System.Drawing.Size(790, 567);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.lblTitle);
@@ -186,8 +190,7 @@
             this.pnlRadioButton.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-        } 
+        }
 
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSearch;

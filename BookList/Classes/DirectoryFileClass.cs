@@ -25,7 +25,7 @@
 using System;
 using System.IO;
 using System.Reflection;
-using BookListCurrent.ClassesProperties;
+using BookList.PropertiesClasses;
 using JetBrains.Annotations;
 
 namespace BookList.Classes
@@ -35,7 +35,14 @@ namespace BookList.Classes
     /// </summary>
     public class DirectoryFileClass
     {
+        /// <summary>
+        /// The MSG box
+        /// </summary>
         private readonly MyMessageBox _msgBox = new MyMessageBox();
+
+        /// <summary>
+        /// The validate
+        /// </summary>
         private readonly ValidationClass _validate = new ValidationClass();
 
         /// <summary>
@@ -143,31 +150,9 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        ///     The GetPathToSpecialDirectoryAppDataLocal.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="string" /> .
-        /// </returns>
-        // ReSharper disable once MemberCanBeMadeStatic.Global
-        public bool GetPathToSpecialDirectoryAppDataLocal()
-        {
-            var validate = new ValidationClass();
-            var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            if (!validate.ValidateStringIsNotNull(dirPath))
-            {
-                dirPath = string.Empty;
-                return false;
-            }
-
-            BookListPaths.PathAppDataDirectory = dirPath;
-
-            return true;
-        }
-
-        /// <summary>
         ///     The CreateNewFile.
         /// </summary>
-        /// <param name="filePath">The filePath <see cref="string" /> .</param>
+        /// <param name="filePath">The file path <see cref="string" /> .</param>
         /// <returns>
         ///     The <see cref="bool" /> .
         /// </returns>
@@ -182,6 +167,27 @@ namespace BookList.Classes
             if (!File.Exists(filePath)) return false;
 
             BookListPaths.PathOfCurrentWorkingFile = filePath;
+
+            return true;
+        }
+
+        /// <summary>
+        ///     The GetPathToSpecialDirectoryAppDataLocal.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="string" /> .
+        /// </returns>
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        public bool GetPathToSpecialDirectoryAppDataLocal()
+        {
+            var validate = new ValidationClass();
+            var dirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            if (!validate.ValidateStringIsNotNull(dirPath))
+            {
+                return false;
+            }
+
+            BookListPaths.PathAppDataDirectory = dirPath;
 
             return true;
         }

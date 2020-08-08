@@ -7,18 +7,35 @@ using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
+    /// <summary>
+    /// Search for book authors that the user has read. These are files holding
+    /// all book titles by that author.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class SearchOfBookAuthors : Form
     {
-        private const string V = "List contains this author name. ";
-        private const string MethodName = "Search";
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchOfBookAuthors"/> class.
+        /// </summary>
         public SearchOfBookAuthors()
         {
             this.InitializeComponent();
             this.LoadListBoxWithAuthorNames();
         }
 
+        /// <summary>
+        /// Closes the search bu title button clicked.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void CloseSearchBuTitleButtonClicked(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        /// <summary>
+        /// Loads the List Box with author names.
+        /// </summary>
         private void LoadListBoxWithAuthorNames()
         {
             var coll = new AuthorsFileNamesCollection();
@@ -32,6 +49,11 @@ namespace BookList.Source
             if (this.lstSearch != null) this.lstSearch.Sorted = true;
         }
 
+        /// <summary>
+        /// Searches the by authors name button clicked.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void SearchByAuthorsNameButtonClicked(object sender, EventArgs e)
         {
             var msgBox = new MyMessageBox();
@@ -47,18 +69,19 @@ namespace BookList.Source
                 searchString = searchString.ToLower();
                 var retVal = temp.Contains(searchString);
 
-               
 
                 if (!retVal) continue;
-                msgBox.Msg = V + temp;
+                msgBox.Msg = "List contains this author name. " + temp;
                 msgBox.ShowInformationMessageBox();
             }
         }
 
-        private void SelectedIndexChangedListBoxClicked(object sender, EventArgs e)
-        {
-        }
 
+        /// <summary>
+        /// Get item selected in list box place in text box.
+        /// </summary>
+        /// <param name="sender">The source of the event..</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void SelectedAuthorButtonClicked(object sender, EventArgs e)
         {
             this.txtSearch.Text = this.txtSearch.Text.Trim();
@@ -66,14 +89,20 @@ namespace BookList.Source
             if (string.IsNullOrEmpty(this.txtSearch.Text)) return;
 
             this.txtSearch.Text = this.lstSearch.SelectedItem.ToString();
-            BookListPropertiesClass.AuthorsNameCurrent = this.txtSearch.Text;
+            BookListPaths.AuthorsNameCurrent = this.txtSearch.Text;
 
             this.btnClose.PerformClick();
         }
 
-        private void CloseSearchBuTitleButtonClicked(object sender, EventArgs e)
+        /// <summary>
+        /// Get the item selected by the user.
+        /// </summary>
+        /// <param name="sender">The source of thg event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void SelectedIndexChangedListBoxClicked(object sender, EventArgs e)
         {
-            this.Close();
+            throw new NotImplementedException();
         }
     }
 }

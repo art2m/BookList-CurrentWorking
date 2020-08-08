@@ -23,6 +23,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 using System.Windows.Forms;
+using BookList.PropertiesClasses;
 using BookListCurrent.ClassesProperties;
 
 namespace BookList.Classes
@@ -178,6 +179,11 @@ namespace BookList.Classes
             return true;
         }
 
+        /// <summary>
+        /// Creates the new author directory.
+        /// </summary>
+        /// <param name="dirPath">The directory path.</param>
+        /// <returns></returns>
         private bool CreateNewAuthorDirectory(string dirPath)
         {
             var dirFileOp = new DirectoryFileClass();
@@ -217,12 +223,7 @@ namespace BookList.Classes
         {
             var validate = new ValidationClass();
 
-            if (validate.ValidateStringHasLength(dirPath))
-            {
-                if (validate.ValidateDirectoryExists(dirPath)) return true;
-            }
-
-            return false;
+            return validate.ValidateStringHasLength(dirPath) && validate.ValidateDirectoryExists(dirPath);
         }
     }
 }

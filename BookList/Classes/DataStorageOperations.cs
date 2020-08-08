@@ -29,7 +29,7 @@ namespace BookList.Classes
     /// <summary>
     ///     Defines the <see cref="DataStorageOperations" /> .
     /// </summary>
-    public class DataStorageOperations
+    public static class DataStorageOperations
     {
         /// <summary>
         ///     Create a backup of all unformatted data. This will allow the user to

@@ -43,58 +43,53 @@ namespace BookList.Source
         public BookListWindow()
         {
             var authorDirFile = new AuthorsDirectoryFilesClass();
-            var locDir = new LocationDirectoryFilePaths();
+            var locDir = new InitializePaths();
 
             InitializeComponent();
             locDir.InitializeDirectoryPath();
             locDir.InitializeFilePaths();
             authorDirFile.UpdateAuthorsNamesWithFileNames();
-
         }
 
         /// <summary>
-        ///     Called when /[add authors button clicked]. Display form for adding
+        ///     Called when /[add authors button click]. Display form for adding
         ///     new author file to the book list.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddAuthorsButton_Clicked(object sender, EventArgs e)
+        private void OnAddAuthorsButton_Click(object sender, EventArgs e)
         {
-            using (var win = new AdditionOfBookAuthors())
-            {
-                win.ShowDialog();
-            }
+          
+
+           AllWindows.DisplayAddNewAuthorForm();
         }
 
         /// <summary>
-        ///     Called when /[add authors menu clicked]. Display form for adding new
+        ///     Called when /[add authors menu click]. Display form for adding new
         ///     author file to the book list.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddAuthorsMenu_Clicked(object sender, EventArgs e)
+        private void OnAddAuthorsMenu_Click(object sender, EventArgs e)
         {
             btnAddAuthors.PerformClick();
         }
 
         /// <summary>
-        ///     Called when /[add titles button clicked]. Display form for adding
+        ///     Called when /[add titles button click]. Display form for adding
         ///     new book title to author file.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddTitlesButton_Clicked(object sender, EventArgs e)
+        private void OnAddTitlesButton_Click(object sender, EventArgs e)
         {
-            using (var win = new AdditionOfNewBookTitles())
-            {
-                win.ShowDialog();
-            }
+           AllWindows.DisplayAddNewBookTitleForm();
         }
 
         /// <summary>
@@ -105,7 +100,7 @@ namespace BookList.Source
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddTitlesMenu_Clicked(object sender, EventArgs e)
+        private void OnAddTitlesMenu_Click(object sender, EventArgs e)
         {
             btnAddTitles.PerformClick();
         }
@@ -120,10 +115,8 @@ namespace BookList.Source
         /// </param>
         private void OnEditAuthorsButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new EditingOfBookAuthor())
-            {
-                win.ShowDialog();
-            }
+            AllWindows.DisplayEditAuthorForm();
+            
         }
 
         /// <summary>
@@ -150,7 +143,7 @@ namespace BookList.Source
         /// <exception cref="NotImplementedException" />
         private void OnEditTitlesButton_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            AllWindows.DisplayEditBookTitlesForm();
         }
 
         /// <summary>
@@ -189,10 +182,7 @@ namespace BookList.Source
         /// </param>
         private void OnFormatDataButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new FormatBookData())
-            {
-                win.ShowDialog();
-            }
+            AllWindows.DisplayFormatBookData();
         }
 
         /// <summary>
@@ -233,12 +223,9 @@ namespace BookList.Source
         {
             var fileOutput = new FileOutputClass();
 
-            fileOutput.WriteArthurFileNamesToListFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
+            fileOutput.WriteArthurFileNamesToListFile(BookListPaths.PathAuthorsNamesListFile);
 
-            using (var win = new SearchOfBookAuthors())
-            {
-                win.ShowDialog();
-            }
+            AllWindows.DisplayAuthorSearchForm();
         }
 
         /// <summary>
@@ -264,10 +251,7 @@ namespace BookList.Source
         /// </param>
         private void OnSearchTitlesButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new SearchOfBookTitles())
-            {
-                win.ShowDialog();
-            }
+            AllWindows.DisplayBookTitleSearchForm();
         }
 
         /// <summary>

@@ -22,30 +22,57 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-namespace BookListCurrent.ClassesProperties
+namespace BookList.PropertiesClasses
 {
-    using System;
-
     /// <summary>
     ///     Defines the <see cref="FormatBookDataProperties" /> .
     /// </summary>
-    public class FormatBookDataProperties
+    public static class FormatBookDataProperties
     {
         /// <summary>
-        ///     True if this book is part of a series else false.
+        ///     True if This book is part of a series else False.
         /// </summary>
         public static bool BookIsSeries { get; set; }
 
-        public static int CurrentPositionInTitlesRecords { get; set; }
-
+        /// <summary>
+        /// Gets or sets the book series volume number.
+        /// </summary>
+        /// <value>
+        /// The book series volume number.
+        /// </value>
         public static string BookSeriesVolumeNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the book title records count.
+        /// </summary>
+        /// <value>
+        /// The book title records count.
+        /// </value>
         public static int BookTitleRecordsCount { get; set; }
 
-        public static bool CheckTitleSeriesVolumeAreNotTheSame { get; set; }
-
+        /// <summary>
+        /// Gets or sets the contains book title.
+        /// </summary>
+        /// <value>
+        /// The contains book title.
+        /// </value>
         public static string ContainsBookTitle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name of the current author.
+        /// </summary>
+        /// <value>
+        /// The name of the current author.
+        /// </value>
+        public static string CurrentAuthorName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current position in titles records.
+        /// </summary>
+        /// <value>
+        /// The current position in titles records.
+        /// </value>
+        public static int CurrentPositionInTitlesRecords { get; set; }
         /// <summary>
         ///     Holds the series name that user selected from the book information
         ///     text box.
@@ -64,10 +91,28 @@ namespace BookListCurrent.ClassesProperties
         /// </summary>
         public static string NameOfBookVolume { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Gets or sets the path to current authors file.
+        /// </summary>
+        /// <value>
+        /// The path to current authors file.
+        /// </value>
         public static string PathToCurrentAuthorsFile { get; set; }
 
+        /// <summary>
+        /// Gets or sets the records total count.
+        /// </summary>
+        /// <value>
+        /// The records total count.
+        /// </value>
         public static int RecordsTotalCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the unformatted book information.
+        /// </summary>
+        /// <value>
+        /// The unformatted book information.
+        /// </value>
         public static string UnformattedBookInformation { get; set; } = string.Empty;
     }
 }

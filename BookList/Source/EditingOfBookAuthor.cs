@@ -20,7 +20,7 @@ namespace BookList.Source
         /// Called when /[close adding new author button close].
         /// Close window.
         /// </summary>
-        /// <param name="sender">The sender.</param>
+        /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         private void OnCloseAddingNewAuthorButton_Close(object sender, System.EventArgs e)
         {

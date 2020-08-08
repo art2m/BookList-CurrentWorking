@@ -76,12 +76,12 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnAddExistingAuthorButton_Clicked(object sender, EventArgs e)
         {
-            using (var dlg = new AuthorsListing())
-            {
-                dlg.ShowDialog();
-            }
+            
 
-            this.lblAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent.Trim();
+            AllWindows.DisplayAddExistingAuthorForm();
+           
+
+            this.lblAuthor.Text = BookListPaths.AuthorsNameCurrent.Trim();
             this.SetAddingNewBookControlsState();
         }
 
@@ -93,12 +93,9 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnAddNewAuthorButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new AdditionOfBookAuthors())
-            {
-                win.ShowDialog();
-            }
+            AllWindows.DisplayAddNewAuthorForm();
 
-            this.lblAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent;
+            this.lblAuthor.Text = BookListPaths.AuthorsNameCurrent;
             this.SetAddingNewBookControlsState();
         }
 
@@ -111,7 +108,7 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="System.EventArgs" />Instance containing the event data.</param>
         private void OnAddNewBookRecordButton_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(BookListPropertiesClass.AuthorsNameCurrent)) return;
+            if (string.IsNullOrEmpty(BookListPaths.AuthorsNameCurrent)) return;
 
             this.txtTitle.Enabled = true;
             this.txtTitle.Focus();
@@ -190,7 +187,7 @@ namespace BookList.Source
         {
             var fileOutput = new FileOutputClass();
 
-            var filePath = BookListPropertiesClass.PathOfCurrentWorkingFile;
+            var filePath = BookListPaths.PathOfCurrentWorkingFile;
 
             if (!this.chkSeries.Checked)
             {

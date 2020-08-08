@@ -23,6 +23,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 using System.Windows.Forms;
+using BookList.PropertiesClasses;
 using BookListCurrent.ClassesProperties;
 
 namespace BookList.Classes
@@ -34,9 +35,20 @@ namespace BookList.Classes
     /// </summary>
     public class LocationFilePaths
     {
+        /// <summary>
+        /// The MSG box
+        /// </summary>
         private readonly MyMessageBox _msgBox = new MyMessageBox();
+
+        /// <summary>
+        /// My MSG
+        /// </summary>
         private readonly MyMessages _myMsg = new MyMessages();
 
+        /// <summary>
+        /// Gets the author file names list file path.
+        /// </summary>
+        /// <returns></returns>
         public bool GetAuthorFileNamesListFilePath()
         {
             var dirFileOp = new DirectoryFileClass();
@@ -49,125 +61,23 @@ namespace BookList.Classes
             var filePath = dirFileOp.CombineDirectoryPathWithFileName(
                 dirPath, fileName);
 
-            var fileExists = validate.ValidateFileExists(filePath, true);
-
-            if (!fileExists)
-            {
-                var dlgResult = this._msgBox.ShowQuestionMessageBox();
-
-                // Create directory if it does not exist.
-                if (dlgResult == DialogResult.Yes)
-                {
-                    dirFileOp.CreateNewFile(filePath);
-
-                    if (validate.ValidateFileExists(filePath, true))
-                    {
-                        BookListPaths.PathAuthorsNamesListFile = filePath;
-                        return true;
-                    }
-                    else
-                    {
-                        // return no directory created.
-                        BookListPaths.PathAuthorsNamesListFile = string.Empty;
-                        return false;
-                    }
-                }
-                else
-                {
-                    // return user does not want to create the directory.
-                    BookListPaths.PathAuthorsNamesListFile = string.Empty;
-                    return false;
-                }
-            }
-            else
+            if (validate.ValidateFileExists(filePath, true))
             {
                 BookListPaths.PathAuthorsNamesListFile = filePath;
                 return true;
             }
+
+            if (!GetPermissionToCreateFile(dirPath)) return false;
+
+            BookListPaths.PathAuthorsNamesListFile = filePath;
+            return true;
+
         }
 
         /// <summary>
-        ///     <para>
-        ///         Get the path to the Series.dat file. It is contained in the Series
-        ///         directory. If Exists Set DefaultDirectoryAndFilesExist.PathSeriesOk
-        ///         = true. Set BookListPaths.Series = Path to Title directory.
-        ///     </para>
-        ///     <para>
-        ///         If the directory does not exist ask user if ok to be created as it
-        ///         is a required directory.
-        ///     </para>
-        ///     <para>
-        ///         if Not exist and Not created set
-        ///         DefaultDirectoryAndFilesExist.Series.dat = false. Set
-        ///         BookListPaths.PathSeriesDirectory = string.Empty.
-        ///     </para>
+        /// Get book list titles file path.
         /// </summary>
-        public bool GetSeriesFilePath()
-        {
-            var dirFileOp = new DirectoryFileClass();
-            var validate = new ValidationClass();
-
-            var dirPath = BookListPaths.PathSeriesDirectory;
-
-            var fileName = BookListPaths.NameSeriesFile;
-
-            var filePath = dirFileOp.CombineDirectoryPathWithFileName(
-                dirPath, fileName);
-
-            var fileExists = validate.ValidateFileExists(filePath, true);
-
-            if (!fileExists)
-            {
-                var dlgResult = this._msgBox.ShowQuestionMessageBox();
-
-                // Create directory if it does not exist.
-                if (dlgResult == DialogResult.Yes)
-                {
-                    dirFileOp.CreateNewFile(filePath);
-
-                    if (validate.ValidateFileExists(filePath, true))
-                    {
-                        BookListPaths.PathSeriesDirectory = filePath;
-                        return true;
-                    }
-                    else
-                    {
-                        // return no directory created.
-                        BookListPaths.PathSeriesDirectory = string.Empty;
-                        return false;
-                    }
-                }
-                else
-                {
-                    // return user does not want to create the directory.
-                    BookListPaths.PathSeriesDirectory = string.Empty;
-                    return false;
-                }
-            }
-            else
-            {
-                BookListPaths.PathSeriesDirectory = filePath;
-                return true;
-            }
-        }
-
-        /// <summary>
-        ///     <para>
-        ///         Get the path to the BookListTitles.dat file. It is contained in the
-        ///         Titles-Author directory. If Exists Set
-        ///         DefaultDirectoryAndFilesExist.PathBookListTitlesFilesOk = true. Set
-        ///         BookListPaths.Titles = Path to Title directory.
-        ///     </para>
-        ///     <para>
-        ///         If the directory does not exist ask user if ok to be created as it
-        ///         is a required directory.
-        ///     </para>
-        ///     <para>
-        ///         if Not exist and Not created set
-        ///         DefaultDirectoryAndFilesExist.BookListTitleAuthor.dat = false. Set
-        ///         BookListPaths.PathTitleNamesListFile = string.Empty.
-        ///     </para>
-        /// </summary>
+        /// <returns>True if path found else False.</returns>
         public bool GetBookListTitlesFilePath()
         {
             var dirFileOp = new DirectoryFileClass();
@@ -180,107 +90,38 @@ namespace BookList.Classes
             var filePath = dirFileOp.CombineDirectoryPathWithFileName(
                 dirPath, fileName);
 
-            var fileExists = validate.ValidateFileExists(filePath, true);
-
-            if (!fileExists)
-            {
-                var dlgResult = this._msgBox.ShowQuestionMessageBox();
-
-                // Create directory if it does not exist.
-                if (dlgResult == DialogResult.Yes)
-                {
-                    dirFileOp.CreateNewFile(filePath);
-
-                    if (validate.ValidateFileExists(filePath, true))
-                    {
-                        BookListPaths.PathTitleNamesListFile = filePath;
-                        return true;
-                    }
-                    else
-                    {
-                        // return no directory created.
-                        BookListPaths.PathTitleNamesListFile = string.Empty;
-                        return false;
-                    }
-                }
-                else
-                {
-                    // return user does not want to create the directory.
-                    BookListPaths.PathTitleNamesListFile = string.Empty;
-                    return false;
-                }
-            }
-            else
+            if (validate.ValidateFileExists(filePath, true))
             {
                 BookListPaths.PathTitleNamesListFile = filePath;
                 return true;
             }
+
+            if (!GetPermissionToCreateFile(filePath)) return false;
+
+            BookListPaths.PathTitleNamesListFile = filePath;
+            return true;
         }
 
         /// <summary>
-        ///     <para>
-        ///         Get the path to the BookListTitleAuthor.dat file. It is contained in
-        ///         the AuthorsNamesList directory. If Exists Set
-        ///         DefaultDirectoryAndFilesExist.PathBookListTitleAuthorFilesOk = true.
-        ///         Set BookListPaths.TitlesAuthors = Path to TitleAuthors directory.
-        ///     </para>
-        ///     <para>
-        ///         If the directory does not exist ask user if ok to be created as it
-        ///         is a required directory.
-        ///     </para>
-        ///     <para>
-        ///         if Not exist and Not created set
-        ///         DefaultDirectoryAndFilesExist.BookListTitleAuthor.dat = false. Set
-        ///         BookListPaths.PathBookListTitleAuthorFile = string.Empty.
-        ///     </para>
+        /// Get permission to create the required file.
         /// </summary>
-        public bool GetBookListTitlesAuthorFilesPath()
+        /// <param name="filePath">The file path to the required file.</param>
+        /// <returns>True if exists or is created else False.</returns>
+        private bool GetPermissionToCreateFile(string filePath)
         {
             var dirFileOp = new DirectoryFileClass();
-            var validate = new ValidationClass();
 
-            var dirPath = BookListPaths.PathTitlesAuthorsDirectory;
+            var dlgResult = this._msgBox.ShowQuestionMessageBox();
 
-            var fileName = BookListPaths.NameAuthorsTitlesBookListFile;
+            if (dlgResult == DialogResult.No) return false;
 
-            var filePath = dirFileOp.CombineDirectoryPathWithFileName(
-                dirPath, fileName);
-
-            var fileExists = validate.ValidateFileExists(filePath, true);
-
-            if (!fileExists)
+            if (dirFileOp.CreateNewFile(filePath))
             {
-                var dlgResult = this._msgBox.ShowQuestionMessageBox();
-
-                // Create directory if it does not exist.
-                if (dlgResult == DialogResult.Yes)
-                {
-                    dirFileOp.CreateNewFile(filePath);
-
-                    if (validate.ValidateFileExists(filePath, true))
-                    {
-                        BookListPaths.PathBookListTitleAuthorFile = filePath;
-                        return true;
-                    }
-                    else
-                    {
-                        // return no directory created.
-                        BookListPaths.PathBookListTitleAuthorFile = string.Empty;
-                        return false;
-                    }
-                }
-                else
-                {
-                    // return user does not want to create the directory.
-                    BookListPaths.PathBookListTitleAuthorFile = string.Empty;
-                    return false;
-                }
-            }
-            else
-            {
-                BookListPaths.PathBookListTitleAuthorFile = filePath;
+                BookListPaths.PathAuthorsNamesListFile = filePath;
                 return true;
             }
+
+            return false;
         }
     }
 }

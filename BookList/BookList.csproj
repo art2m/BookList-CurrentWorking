@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AllWindows.cs" />
     <Compile Include="Classes\AuthorsDirectoryFilesClass.cs" />
     <Compile Include="Classes\AuthorsTextOperations.cs" />
     <Compile Include="Classes\DataStorageOperations.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Classes\FileInputClass.cs" />
     <Compile Include="Classes\FileOutputClass.cs" />
     <Compile Include="Classes\LocationAuthorDirectoryPath.cs" />
-    <Compile Include="Classes\LocationDirectoryFilePaths.cs" />
+    <Compile Include="Classes\InitializePaths.cs" />
     <Compile Include="Classes\LocationFilePaths.cs" />
     <Compile Include="Classes\MyMessageBox.cs" />
     <Compile Include="Classes\ValidationClass.cs" />
@@ -78,8 +79,6 @@
       <DependentUpon>MyStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="PropertiesClasses\BookListPaths.cs" />
-    <Compile Include="PropertiesClasses\BookListPropertiesClass.cs" />
-    <Compile Include="PropertiesClasses\ControlsValues.cs" />
     <Compile Include="PropertiesClasses\FormatBookDataProperties.cs" />
     <Compile Include="PropertiesClasses\MyMessages.cs" />
     <Compile Include="Source\AdditionOfBookAuthors.cs">
