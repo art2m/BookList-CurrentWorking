@@ -46,7 +46,7 @@ namespace BookList.Source
             // 
             // txtAuthor
             // 
-            this.txtAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtAuthor.Location = new System.Drawing.Point(85, 243);
             this.txtAuthor.Multiline = true;
             this.txtAuthor.Name = "txtAuthor";
@@ -56,7 +56,7 @@ namespace BookList.Source
             // lblAuthor
             // 
             this.lblAuthor.BackColor = System.Drawing.Color.Yellow;
-            this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblAuthor.Location = new System.Drawing.Point(85, 203);
             this.lblAuthor.Name = "lblAuthor";
             this.lblAuthor.Size = new System.Drawing.Size(615, 32);
@@ -67,7 +67,7 @@ namespace BookList.Source
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnClose.Location = new System.Drawing.Point(620, 505);
             this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
@@ -81,7 +81,7 @@ namespace BookList.Source
             // lblInfo
             // 
             this.lblInfo.BackColor = System.Drawing.Color.Yellow;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblInfo.Location = new System.Drawing.Point(12, 69);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(760, 32);
@@ -91,7 +91,7 @@ namespace BookList.Source
             // btnAdd
             // 
             this.btnAdd.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnAdd.Location = new System.Drawing.Point(85, 303);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(150, 45);
@@ -102,7 +102,7 @@ namespace BookList.Source
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnCancel.Location = new System.Drawing.Point(317, 303);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(150, 45);
@@ -113,7 +113,7 @@ namespace BookList.Source
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnSave.Location = new System.Drawing.Point(549, 303);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(150, 45);
@@ -126,7 +126,7 @@ namespace BookList.Source
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Aquamarine;
-            this.ClientSize = new System.Drawing.Size(780, 557);
+            this.ClientSize = new System.Drawing.Size(790, 567);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -143,17 +143,16 @@ namespace BookList.Source
             this.Text = "Adding New Authors";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-        #endregion
-
-        private System.Windows.Forms.TextBox txtAuthor;
-        private System.Windows.Forms.Label lblAuthor;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label lblAuthor;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.TextBox txtAuthor;
+
+        #endregion
     }
 }

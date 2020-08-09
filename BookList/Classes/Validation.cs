@@ -1,6 +1,6 @@
 ﻿// BookListCurrent
 //
-// ValidationClass.cs
+// Validation.cs
 //
 // art2m
 //
@@ -24,6 +24,7 @@
 
 using System.IO;
 using System.Reflection;
+using BookList.PropertiesClasses;
 using BookListCurrent.ClassesProperties;
 using JetBrains.Annotations;
 
@@ -32,7 +33,7 @@ namespace BookList.Classes
     /// <summary>
     ///     Validates data.
     /// </summary>
-    public class ValidationClass
+    public class Validation
     {
         /// <summary>
         /// MessageBox Object Deceleration.
@@ -45,9 +46,9 @@ namespace BookList.Classes
         private readonly MyMessages _myMsg = new MyMessages();
 
         /// <summary>
-        ///     Initializes members of the <see cref="ValidationClass" /> class.
+        ///     Initializes members of the <see cref="Validation" /> class.
         /// </summary>
-        public ValidationClass()
+        public Validation()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null) this._msgBox.NameOfClass = this._myMsg.MsgInvalidFileNameCharFound;
@@ -250,7 +251,7 @@ namespace BookList.Classes
             this._msgBox.ShowErrorMessageBox();
             return false;
         }
-        
+
         /// <summary>
         ///     This checks to be sure the title name does not match the series
         ///     name.

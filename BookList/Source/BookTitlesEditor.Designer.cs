@@ -6,7 +6,7 @@ namespace BookList.Source
     /// Edit the book title.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
-    partial class EditingOfBookTitles
+    partial class BookTitlesEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,7 @@ namespace BookList.Source
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnClose.Location = new System.Drawing.Point(620, 505);
             this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
@@ -57,7 +57,7 @@ namespace BookList.Source
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(790, 567);
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -67,11 +67,10 @@ namespace BookList.Source
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditingOfBookTitles";
             this.ResumeLayout(false);
-
         }
 
-        #endregion
-
         private System.Windows.Forms.Button btnClose;
+
+        #endregion
     }
 }

@@ -6,12 +6,12 @@ namespace BookList.Source
     /// Edit the book author.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class EditingOfBookAuthor : Form
+    public partial class BookAuthorEditor : Form
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EditingOfBookAuthor"/> class.
+        /// Initializes a new instance of the <see cref="BookAuthorEditor"/> class.
         /// </summary>
-        public EditingOfBookAuthor()
+        public BookAuthorEditor()
         {
             this.InitializeComponent();
         }

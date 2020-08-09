@@ -1,6 +1,6 @@
 // BookListCurrent
 //
-// FileOutputClass.cs
+// Output.cs
 //
 // art2m
 //
@@ -32,14 +32,14 @@ using BookList.Collections;
 namespace BookList.Classes
 {
     /// <summary>
-    ///     Defines the <see cref="FileOutputClass" /> .
+    ///     Defines the <see cref="Output" /> .
     /// </summary>
-    public class FileOutputClass
+    public class Output
     {
         private readonly MyMessageBox _msgBox = new MyMessageBox();
-        private readonly ValidationClass _validate = new ValidationClass();
+        private readonly Validation _validate = new Validation();
 
-        public FileOutputClass()
+        public Output()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
             if (declaringType != null) this._msgBox.NameOfClass = declaringType.Name;
@@ -60,7 +60,7 @@ namespace BookList.Classes
 
             try
             {
-                var coll = new AuthorNamesListCollection();
+                var coll = new AuthorNamesList();
 
                 using (var streamWriter = new StreamWriter(filePath, false))
                 {
@@ -139,8 +139,8 @@ namespace BookList.Classes
 
             try
             {
-                var coll = new UnformattedDataCollection();
-                var validate = new ValidationClass();
+                var coll = new BookData();
+                var validate = new Validation();
 
                 // Append line to the file.
                 using (var writer = new StreamWriter(filePath, false))
@@ -225,7 +225,7 @@ namespace BookList.Classes
                 if (string.IsNullOrEmpty(filePath)) return false;
                 if (!File.Exists(filePath)) return false;
 
-                var coll = new UnformattedDataCollection();
+                var coll = new BookData();
 
                 using (var writer = new StreamWriter(filePath, true))
                 {

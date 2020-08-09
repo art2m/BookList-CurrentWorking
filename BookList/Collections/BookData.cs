@@ -1,6 +1,6 @@
 // BookListCurrent
 //
-// UnformattedDataCollection.cs
+// BookData.cs
 //
 // art2m
 //
@@ -32,7 +32,7 @@ namespace BookList.Collections
     /// <summary>
     ///     Collection to hold the name 'Unformatted book information.'.
     /// </summary>
-    public class UnformattedDataCollection : IMyCollection
+    public class BookData : IMyCollection
     {
         /// <summary>
         ///     List containing the Unformatted book information.
@@ -42,7 +42,7 @@ namespace BookList.Collections
         /// <summary>
         ///     Declare validation class object.
         /// </summary>
-        private readonly ValidationClass _validate = new ValidationClass();
+        private readonly Validation _validate = new Validation();
 
         /// <summary>
         ///     Add new item to the collection.

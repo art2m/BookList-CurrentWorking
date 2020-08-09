@@ -1,6 +1,6 @@
-// BookListCurrent
+﻿// BookListCurrent
 //
-// AuthorsFileNamesCollection.cs
+// AuthorNamesList.cs
 //
 // art2m
 //
@@ -29,38 +29,36 @@ using BookList.Interfaces;
 namespace BookList.Collections
 {
     /// <summary>
-    ///     Collection to hold the name author file names.
+    ///     This Contains a collection of all book authors in the file.
     /// </summary>
-    public class AuthorsFileNamesCollection : IMyCollection
+    public class AuthorNamesList : IMyCollection
     {
         /// <summary>
-        ///     Contains collection of Book titles..
+        ///     Defines the AuthorNamesList.
         /// </summary>
-        private static List<string> _coll = new List<string>();
+        private static  List<string> _coll = new List<string>();
 
         /// <summary>
         ///     Declare validation class object.
         /// </summary>
-        private readonly ValidationClass _validate = new ValidationClass();
+        private readonly Validation _validate = new Validation();
 
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
-        /// <param name="value">The value <see cref="string" /> .</param>
         public bool AddItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             if (!this._validate.ValidateStringHasLength(value)) return false;
 
-            if (this.ContainsItem(value))
-                return false;
+            if (this.ContainsItem(value)) return false;
 
             _coll.Add(value);
             return true;
         }
 
         /// <summary>
-        /// Pass in array with all of the file names.
+        /// Pass in array with all of the author names.
         /// </summary>
         /// <param name="fileArray"> Array of file names.</param>
         public bool AddArray(string[] fileArray)
@@ -90,7 +88,9 @@ namespace BookList.Collections
         public bool ContainsItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
+            if (!this._validate.ValidateStringHasLength(value)) return false;
+
+            return _coll.Contains(value);
         }
 
         string[] IMyCollection.GetAllItems()
@@ -158,10 +158,8 @@ namespace BookList.Collections
         /// <returns>True if removed else false.</returns>
         public bool RemoveItem(string value)
         {
-            if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            if (!this._validate.ValidateStringHasLength(value)) return false;
-
-            return _coll.Remove(value);
+            if (this._validate.ValidateStringIsNotNull(value)) return false;
+            return !this._validate.ValidateStringHasLength(value) && _coll.Remove(value);
         }
 
         /// <summary>
@@ -174,12 +172,9 @@ namespace BookList.Collections
             var count = _coll.Count;
 
             if (!this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)) return false;
-            // Get item to be removed for check that it is gone.
+
             var item = this.GetItemAt(index);
-
             _coll.RemoveAt(index);
-
-            // Check to see if item is no longer in collection
             return !this.ContainsItem(item);
         }
 

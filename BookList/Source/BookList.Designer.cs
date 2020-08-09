@@ -6,7 +6,7 @@ namespace BookList.Source
     /// Designer
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
-    partial class BookListWindow
+    partial class BookList
     {
         /// <summary>
         /// Required designer variable.
@@ -358,7 +358,7 @@ namespace BookList.Source
             this.lblFormat.Text = "Format";
             this.lblFormat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // BookListWindow
+            // BookList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -380,7 +380,7 @@ namespace BookList.Source
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(150, 45);
-            this.Name = "BookListWindow";
+            this.Name = "BookList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Book List Main Window";
             this.pnlSearch.ResumeLayout(false);

@@ -1,6 +1,6 @@
-﻿// BookListCurrent
+// BookListCurrent
 //
-// BookInfoCollection.cs
+// AuthorsFileNames.cs
 //
 // art2m
 //
@@ -29,39 +29,40 @@ using BookList.Interfaces;
 namespace BookList.Collections
 {
     /// <summary>
-    ///     This contains the titles of all books read.
+    ///     Collection to hold the name author file names.
     /// </summary>
-    public class BookInfoCollection : IMyCollection
+    public class AuthorsFileNames : IMyCollection
     {
         /// <summary>
-        ///     Defines the coll.
+        ///     Contains collection of Book titles..
         /// </summary>
         private static List<string> _coll = new List<string>();
 
         /// <summary>
         ///     Declare validation class object.
         /// </summary>
-        private readonly ValidationClass _validate = new ValidationClass();
+        private readonly Validation _validate = new Validation();
 
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
+        /// <param name="value">The value <see cref="string" /> .</param>
         public bool AddItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             if (!this._validate.ValidateStringHasLength(value)) return false;
 
-            if (this.ContainsItem(value)) return false;
+            if (this.ContainsItem(value))
+                return false;
 
             _coll.Add(value);
             return true;
         }
 
         /// <summary>
-        /// Fill collection from an array
+        /// Pass in array with all of the file names.
         /// </summary>
-        /// <param name="fileArray"></param>
-        /// <returns>True if array filled else false.</returns>
+        /// <param name="fileArray"> Array of file names.</param>
         public bool AddArray(string[] fileArray)
         {
             if (fileArray == null) return false;
@@ -158,7 +159,9 @@ namespace BookList.Collections
         public bool RemoveItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            return this._validate.ValidateStringHasLength(value) && _coll.Remove(value);
+            if (!this._validate.ValidateStringHasLength(value)) return false;
+
+            return _coll.Remove(value);
         }
 
         /// <summary>
@@ -181,7 +184,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The SortCollection.
+        ///     Sort the collection.
         /// </summary>
         public void SortCollection()
         {

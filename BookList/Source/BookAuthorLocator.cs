@@ -3,16 +3,17 @@ using System.Reflection;
 using System.Windows.Forms;
 using BookList.Classes;
 using BookList.Collections;
-using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
-    public partial class SearchOfBookAuthors : Form
+    using BookListCurrent.ClassesProperties;
+
+    public partial class BookAuthorLocator : Form
     {
         private const string V = "List contains this author name. ";
         private const string MethodName = "Search";
 
-        public SearchOfBookAuthors()
+        public BookAuthorLocator()
         {
             this.InitializeComponent();
             this.LoadListBoxWithAuthorNames();
@@ -21,7 +22,7 @@ namespace BookList.Source
 
         private void LoadListBoxWithAuthorNames()
         {
-            var coll = new AuthorsFileNamesCollection();
+            var coll = new AuthorsFileNames();
 
             for (var index = 0; index < coll.ItemsCount(); index++)
             {
@@ -47,7 +48,7 @@ namespace BookList.Source
                 searchString = searchString.ToLower();
                 var retVal = temp.Contains(searchString);
 
-               
+
 
                 if (!retVal) continue;
                 msgBox.Msg = V + temp;
@@ -66,7 +67,7 @@ namespace BookList.Source
             if (string.IsNullOrEmpty(this.txtSearch.Text)) return;
 
             this.txtSearch.Text = this.lstSearch.SelectedItem.ToString();
-            BookListPropertiesClass.AuthorsNameCurrent = this.txtSearch.Text;
+            BookListPaths.AuthorsNameCurrent = this.txtSearch.Text;
 
             this.btnClose.PerformClick();
         }

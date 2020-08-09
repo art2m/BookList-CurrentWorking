@@ -6,7 +6,7 @@ namespace BookList.Source
     /// Add book titles to the author record.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
-    partial class AdditionOfNewBookTitles
+    partial class BookTitleNames
     {
         /// <summary>
         /// Required designer variable.
@@ -56,7 +56,7 @@ namespace BookList.Source
             // chkSeries
             // 
             this.chkSeries.BackColor = System.Drawing.Color.Orange;
-            this.chkSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.chkSeries.Location = new System.Drawing.Point(304, 22);
             this.chkSeries.Name = "chkSeries";
             this.chkSeries.Size = new System.Drawing.Size(172, 36);
@@ -68,7 +68,7 @@ namespace BookList.Source
             // 
             // txtVolume
             // 
-            this.txtVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtVolume.Location = new System.Drawing.Point(140, 367);
             this.txtVolume.Multiline = true;
             this.txtVolume.Name = "txtVolume";
@@ -79,7 +79,7 @@ namespace BookList.Source
             // lblVolume
             // 
             this.lblVolume.BackColor = System.Drawing.Color.Yellow;
-            this.lblVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblVolume.Location = new System.Drawing.Point(140, 325);
             this.lblVolume.Name = "lblVolume";
             this.lblVolume.Size = new System.Drawing.Size(500, 32);
@@ -89,7 +89,7 @@ namespace BookList.Source
             // 
             // txtSeries
             // 
-            this.txtSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtSeries.Location = new System.Drawing.Point(407, 256);
             this.txtSeries.Multiline = true;
             this.txtSeries.Name = "txtSeries";
@@ -99,7 +99,7 @@ namespace BookList.Source
             // lblSeries
             // 
             this.lblSeries.BackColor = System.Drawing.Color.Yellow;
-            this.lblSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeries.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblSeries.Location = new System.Drawing.Point(407, 215);
             this.lblSeries.Name = "lblSeries";
             this.lblSeries.Size = new System.Drawing.Size(362, 32);
@@ -109,7 +109,7 @@ namespace BookList.Source
             // 
             // txtTitle
             // 
-            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtTitle.Location = new System.Drawing.Point(15, 256);
             this.txtTitle.Multiline = true;
             this.txtTitle.Name = "txtTitle";
@@ -119,7 +119,7 @@ namespace BookList.Source
             // lblTitle
             // 
             this.lblTitle.BackColor = System.Drawing.Color.Yellow;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblTitle.Location = new System.Drawing.Point(15, 215);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(362, 32);
@@ -130,7 +130,7 @@ namespace BookList.Source
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnClose.Location = new System.Drawing.Point(620, 505);
             this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
@@ -144,7 +144,7 @@ namespace BookList.Source
             // btnNew
             // 
             this.btnNew.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnNew.Location = new System.Drawing.Point(207, 125);
             this.btnNew.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnNew.MinimumSize = new System.Drawing.Size(150, 45);
@@ -159,7 +159,7 @@ namespace BookList.Source
             // btnExisting
             // 
             this.btnExisting.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnExisting.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExisting.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnExisting.Location = new System.Drawing.Point(423, 125);
             this.btnExisting.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnExisting.MinimumSize = new System.Drawing.Size(150, 45);
@@ -174,7 +174,7 @@ namespace BookList.Source
             // lblAuthor
             // 
             this.lblAuthor.BackColor = System.Drawing.Color.Yellow;
-            this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblAuthor.Location = new System.Drawing.Point(96, 82);
             this.lblAuthor.Name = "lblAuthor";
             this.lblAuthor.Size = new System.Drawing.Size(588, 33);
@@ -183,7 +183,7 @@ namespace BookList.Source
             // btnAdd
             // 
             this.btnAdd.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnAdd.Location = new System.Drawing.Point(140, 422);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(150, 45);
@@ -194,7 +194,7 @@ namespace BookList.Source
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnCancel.Location = new System.Drawing.Point(315, 422);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(150, 45);
@@ -205,7 +205,7 @@ namespace BookList.Source
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnSave.Location = new System.Drawing.Point(490, 422);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(150, 45);
@@ -218,7 +218,7 @@ namespace BookList.Source
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Aquamarine;
-            this.ClientSize = new System.Drawing.Size(780, 557);
+            this.ClientSize = new System.Drawing.Size(790, 567);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -242,24 +242,24 @@ namespace BookList.Source
             this.Text = "Add Book Information To Existing Author";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-        #endregion
-        private System.Windows.Forms.CheckBox chkSeries;
-        private System.Windows.Forms.TextBox txtVolume;
-        private System.Windows.Forms.Label lblVolume;
-        private System.Windows.Forms.TextBox txtSeries;
-        private System.Windows.Forms.Label lblSeries;
-        private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.Button btnExisting;
-        private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnExisting;
+        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.CheckBox chkSeries;
+        private System.Windows.Forms.Label lblAuthor;
+        private System.Windows.Forms.Label lblSeries;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblVolume;
         private System.Windows.Forms.ToolTip tTip;
+        private System.Windows.Forms.TextBox txtSeries;
+        private System.Windows.Forms.TextBox txtTitle;
+        private System.Windows.Forms.TextBox txtVolume;
+
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿// BookListCurrent
 //
-// FileInputClass.cs
+// Input.cs
 //
 // art2m
 //
@@ -32,20 +32,20 @@ using BookList.Collections;
 namespace BookList.Classes
 {
     /// <summary>
-    ///     Defines the <see cref="FileInputClass" /> .
+    ///     Defines the <see cref="Input" /> .
     /// </summary>
-    public class FileInputClass
+    public class Input
     {
         private readonly MyMessageBox _msgBox = new MyMessageBox();
-        private readonly ValidationClass _validate = new ValidationClass();
+        private readonly Validation _validate = new Validation();
 
         /// <summary>
-        ///     Initializes members of the <see cref="FileInputClass" /> class.
+        ///     Initializes members of the <see cref="Input" /> class.
         /// </summary>
-        public FileInputClass()
+        public Input()
         {
             var declaringType = MethodBase.GetCurrentMethod().DeclaringType;
-            if (declaringType != null) this._msgBox.NameOfClass = declaringType.Name;
+            if (declaringType != null) _msgBox.NameOfClass = declaringType.Name;
         }
 
         /// <summary>
@@ -55,17 +55,17 @@ namespace BookList.Classes
         /// <param name="filePath">The file path to the Authors List.</param>
         public void ReadAuthorsNamesFromFile(string filePath)
         {
-            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            var coll = new AuthorNamesListCollection();
+            var coll = new AuthorNamesList();
             coll.ClearCollection();
 
 
             try
             {
-                if (!this._validate.ValidateStringIsNotNull(filePath)) return;
-                if (!this._validate.ValidateStringHasLength(filePath)) return;
-                if (!this._validate.ValidateFileExists(filePath, true)) return;
+                if (!_validate.ValidateStringIsNotNull(filePath)) return;
+                if (!_validate.ValidateStringHasLength(filePath)) return;
+                if (!_validate.ValidateFileExists(filePath, true)) return;
 
                 using (var sr = new StreamReader(filePath))
                 {
@@ -76,12 +76,11 @@ namespace BookList.Classes
             }
             catch (OutOfMemoryException ex)
             {
-                this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
+                _msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
 
                 Debug.WriteLine(ex.ToString());
 
-                this._msgBox.ShowErrorMessageBox();
+                _msgBox.ShowErrorMessageBox();
             }
         }
 
@@ -90,17 +89,17 @@ namespace BookList.Classes
         /// </summary>
         /// <param name="filePath">The filePath <see cref="string" /> .</param>
         /// <returns>
-        ///     The <see cref="System.Collections.Generic.List`1" /> .
+        ///    list containing the author names read from file.
         /// </returns>
         public List<string> ReadAuthorNamesFromFile(string filePath)
         {
-            this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+            _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
             var data = new List<string>();
             try
             {
-                if (!this._validate.ValidateStringIsNotNull(filePath)) return new List<string>();
-                if (!this._validate.ValidateStringHasLength(filePath)) return new List<string>();
-                if (!this._validate.ValidateFileExists(filePath, true)) return new List<string>();
+                if (!_validate.ValidateStringIsNotNull(filePath)) return new List<string>();
+                if (!_validate.ValidateStringHasLength(filePath)) return new List<string>();
+                if (!_validate.ValidateFileExists(filePath, true)) return new List<string>();
 
                 using (var sr = new StreamReader(filePath))
                 {
@@ -112,12 +111,11 @@ namespace BookList.Classes
             }
             catch (OutOfMemoryException ex)
             {
-                this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
+                _msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
 
                 Debug.WriteLine(ex.ToString());
 
-                this._msgBox.ShowErrorMessageBox();
+                _msgBox.ShowErrorMessageBox();
 
                 return new List<string>(Array.Empty<string>());
             }
@@ -131,12 +129,12 @@ namespace BookList.Classes
         {
             try
             {
-                var coll = new UnformattedDataCollection();
-                this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+                var coll = new BookData();
+                _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-                if (!this._validate.ValidateStringIsNotNull(filePath)) return;
-                if (!this._validate.ValidateStringHasLength(filePath)) return;
-                if (!this._validate.ValidateFileExists(filePath, true)) return;
+                if (!_validate.ValidateStringIsNotNull(filePath)) return;
+                if (!_validate.ValidateStringHasLength(filePath)) return;
+                if (!_validate.ValidateFileExists(filePath, true)) return;
 
                 using (var sr = new StreamReader(filePath))
                 {
@@ -147,12 +145,11 @@ namespace BookList.Classes
             }
             catch (OutOfMemoryException ex)
             {
-                this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
+                _msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
 
                 Debug.WriteLine(ex.ToString());
 
-                this._msgBox.ShowErrorMessageBox();
+                _msgBox.ShowErrorMessageBox();
             }
         }
 
@@ -169,13 +166,13 @@ namespace BookList.Classes
         {
             try
             {
-                this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+                _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-                if (!this._validate.ValidateStringIsNotNull(filePath)) return;
-                if (!this._validate.ValidateStringHasLength(filePath)) return;
-                if (!this._validate.ValidateFileExists(filePath, true)) return;
+                if (!_validate.ValidateStringIsNotNull(filePath)) return;
+                if (!_validate.ValidateStringHasLength(filePath)) return;
+                if (!_validate.ValidateFileExists(filePath, true)) return;
 
-                var coll = new UnformattedDataCollection();
+                var coll = new BookData();
                 using (var sr = new StreamReader(filePath))
                 {
                     string line;
@@ -185,12 +182,11 @@ namespace BookList.Classes
             }
             catch (OutOfMemoryException ex)
             {
-                this._msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
-                ;
+                _msgBox.Msg = "Not enough memory to continue. Try closing other windows.";
 
                 Debug.WriteLine(ex.ToString());
 
-                this._msgBox.ShowErrorMessageBox();
+                _msgBox.ShowErrorMessageBox();
             }
         }
     }

@@ -55,22 +55,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AuthorsDirectoryFilesClass.cs" />
-    <Compile Include="Classes\AuthorsTextOperations.cs" />
-    <Compile Include="Classes\DataStorageOperations.cs" />
-    <Compile Include="Classes\DirectoryFileClass.cs" />
-    <Compile Include="Classes\FileInputClass.cs" />
-    <Compile Include="Classes\FileOutputClass.cs" />
-    <Compile Include="Classes\LocationAuthorDirectoryPath.cs" />
-    <Compile Include="Classes\LocationDirectoryFilePaths.cs" />
-    <Compile Include="Classes\LocationFilePaths.cs" />
+    <Compile Include="Classes\AuthorsOperations.cs" />
+    <Compile Include="Classes\BackUP.cs" />
+    <Compile Include="Classes\Paths.cs" />
+    <Compile Include="Classes\Input.cs" />
+    <Compile Include="Classes\Output.cs" />
     <Compile Include="Classes\MyMessageBox.cs" />
-    <Compile Include="Classes\ValidationClass.cs" />
-    <Compile Include="Collections\AuthorNamesListCollection.cs" />
-    <Compile Include="Collections\AuthorsFileNamesCollection.cs" />
-    <Compile Include="Collections\BookInfoCollection.cs" />
-    <Compile Include="Collections\UnformattedDataBackUpCollection.cs" />
-    <Compile Include="Collections\UnformattedDataCollection.cs" />
+    <Compile Include="Classes\Validation.cs" />
+    <Compile Include="Collections\AuthorNamesList.cs" />
+    <Compile Include="Collections\AuthorsFileNames.cs" />
+    <Compile Include="Collections\BookInformation.cs" />
+    <Compile Include="Collections\DataBackUp.cs" />
+    <Compile Include="Collections\BookData.cs" />
     <Compile Include="Interfaces\IMyCollection.cs" />
     <Compile Include="MyStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -78,39 +74,35 @@
       <DependentUpon>MyStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="PropertiesClasses\BookListPaths.cs" />
-    <Compile Include="PropertiesClasses\BookListPropertiesClass.cs" />
-    <Compile Include="PropertiesClasses\ControlsValues.cs" />
     <Compile Include="PropertiesClasses\FormatBookDataProperties.cs" />
     <Compile Include="PropertiesClasses\MyMessages.cs" />
-    <Compile Include="Source\AdditionOfBookAuthors.cs">
+    <Compile Include="Source\BookAuthorNames.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\AdditionOfNewBookTitles.cs">
+    <Compile Include="Source\BookTitleNames.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\AdditionOfNewBookTitles.Designer.cs">
-      <DependentUpon>AdditionOfNewBookTitles.cs</DependentUpon>
+    <Compile Include="Source\BookTitleNames.Designer.cs">
+      <DependentUpon>BookTitleNames.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\AuthorsAdding.Designer.cs">
-      <DependentUpon>AdditionOfBookAuthors.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Source\BookAuthorNames.Designer.cs" />
     <Compile Include="Source\AuthorsListing.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\AuthorsListing.Designer.cs">
       <DependentUpon>AuthorsListing.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\EditingOfBookAuthor.cs">
+    <Compile Include="Source\BookAuthorEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\AuthorsModify.Designer.cs">
-      <DependentUpon>EditingOfBookAuthor.cs</DependentUpon>
+      <DependentUpon>BookAuthorEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\EditingOfBookTitles.cs">
+    <Compile Include="Source\BookTitlesEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\EditingOfBookTitles.Designer.cs">
-      <DependentUpon>EditingOfBookTitles.cs</DependentUpon>
+    <Compile Include="Source\BookTitlesEditor.Designer.cs">
+      <DependentUpon>BookTitlesEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Source\FormatBookData.cs">
       <SubType>Form</SubType>
@@ -118,31 +110,31 @@
     <Compile Include="Source\FormatBookData.Designer.cs">
       <DependentUpon>FormatBookData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\FormatUnformattedBookData.cs">
+    <Compile Include="Source\UnformattedBookData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\FormatUnformattedBookData.Designer.cs">
-      <DependentUpon>FormatUnformattedBookData.cs</DependentUpon>
+    <Compile Include="Source\UnformattedBookData.Designer.cs">
+      <DependentUpon>UnformattedBookData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\SearchOfBookAuthors.cs">
+    <Compile Include="Source\BookAuthorLocator.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\AuthorsSearch.Designer.cs">
-      <DependentUpon>SearchOfBookAuthors.cs</DependentUpon>
+      <DependentUpon>BookAuthorLocator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\BookListMainWindow.cs">
+    <Compile Include="Source\BookList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\BookListMainWindow.Designer.cs">
-      <DependentUpon>BookListMainWindow.cs</DependentUpon>
+    <Compile Include="Source\BookList.Designer.cs">
+      <DependentUpon>BookList.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\SearchOfBookTitles.cs">
+    <Compile Include="Source\BookTitleLocator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\SearchOfBookTitles.Designer.cs">
-      <DependentUpon>SearchOfBookTitles.cs</DependentUpon>
+    <Compile Include="Source\BookTitleLocator.Designer.cs">
+      <DependentUpon>BookTitleLocator.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MyStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -159,35 +151,33 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Source\AdditionOfBookAuthors.resx">
-      <DependentUpon>AdditionOfBookAuthors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\AdditionOfNewBookTitles.resx">
-      <DependentUpon>AdditionOfNewBookTitles.cs</DependentUpon>
+    <EmbeddedResource Include="Source\BookAuthorNames.resx" />
+    <EmbeddedResource Include="Source\BookTitleNames.resx">
+      <DependentUpon>BookTitleNames.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\AuthorsListing.resx">
       <DependentUpon>AuthorsListing.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\BookListMainWindow.resx">
-      <DependentUpon>BookListMainWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Source\BookList.resx">
+      <DependentUpon>BookList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\EditingOfBookAuthor.resx">
-      <DependentUpon>EditingOfBookAuthor.cs</DependentUpon>
+    <EmbeddedResource Include="Source\BookAuthorEditor.resx">
+      <DependentUpon>BookAuthorEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\EditingOfBookTitles.resx">
-      <DependentUpon>EditingOfBookTitles.cs</DependentUpon>
+    <EmbeddedResource Include="Source\BookTitlesEditor.resx">
+      <DependentUpon>BookTitlesEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\FormatUnformattedBookData.resx">
-      <DependentUpon>FormatUnformattedBookData.cs</DependentUpon>
+    <EmbeddedResource Include="Source\UnformattedBookData.resx">
+      <DependentUpon>UnformattedBookData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\SearchOfBookAuthors.resx">
-      <DependentUpon>SearchOfBookAuthors.cs</DependentUpon>
+    <EmbeddedResource Include="Source\BookAuthorLocator.resx">
+      <DependentUpon>BookAuthorLocator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\FormatBookData.resx">
       <DependentUpon>FormatBookData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\SearchOfBookTitles.resx">
-      <DependentUpon>SearchOfBookTitles.cs</DependentUpon>
+    <EmbeddedResource Include="Source\BookTitleLocator.resx">
+      <DependentUpon>BookTitleLocator.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

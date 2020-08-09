@@ -1,6 +1,6 @@
-// BookListCurrent
+﻿// BookListCurrent
 //
-// UnformattedDataBackUpCollection.cs
+// BookInformation.cs
 //
 // art2m
 //
@@ -25,37 +25,33 @@
 using System.Collections.Generic;
 using BookList.Classes;
 using BookList.Interfaces;
-using JetBrains.Annotations;
 
 namespace BookList.Collections
 {
     /// <summary>
-    ///     Collection to hold backup book information data before being changed.
+    ///     This contains the titles of all books read.
     /// </summary>
-    public class UnformattedDataBackUpCollection : IMyCollection
+    public class BookInformation : IMyCollection
     {
         /// <summary>
-        ///     List containing the data before being changed.
+        ///     Defines the coll.
         /// </summary>
-        private static  List<string> _coll = new List<string>();
+        private static List<string> _coll = new List<string>();
 
         /// <summary>
         ///     Declare validation class object.
         /// </summary>
-        private readonly ValidationClass _validate = new ValidationClass();
+        private readonly Validation _validate = new Validation();
 
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
-        public bool AddItem([NotNull] string value)
+        public bool AddItem(string value)
         {
-            value = value.Trim();
-
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             if (!this._validate.ValidateStringHasLength(value)) return false;
 
             if (this.ContainsItem(value)) return false;
-            if (string.IsNullOrEmpty(value)) return false;
 
             _coll.Add(value);
             return true;
@@ -93,8 +89,7 @@ namespace BookList.Collections
         public bool ContainsItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            if (!this._validate.ValidateStringHasLength(value)) return false;
-            return _coll.Contains(value);
+            return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
         }
 
         string[] IMyCollection.GetAllItems()
@@ -186,7 +181,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Sort the collection.
+        ///     The SortCollection.
         /// </summary>
         public void SortCollection()
         {

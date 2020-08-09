@@ -18,7 +18,7 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BookListWindow());
+            Application.Run(new BookList());
         }
     }
 }

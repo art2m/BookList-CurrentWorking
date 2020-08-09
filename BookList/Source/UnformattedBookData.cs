@@ -1,24 +1,24 @@
 ﻿// BookList
-// 
+//
 // FormatUnformattedBookData.cs
-// 
+//
 // Arthur Melanson
-// 
+//
 // art2m
-// 
+//
 // 07    03   2020
-// 
-// 
+//
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
@@ -28,6 +28,7 @@ using System.Text;
 using System.Windows.Forms;
 using BookList.Classes;
 using BookList.Collections;
+using BookList.PropertiesClasses;
 using BookListCurrent.ClassesProperties;
 
 namespace BookList.Source
@@ -35,13 +36,13 @@ namespace BookList.Source
     /// <summary>
     /// <see cref="DataFormats.Format"/> selected book information.
     /// </summary>
-    public partial class FormatUnformattedBookData : Form
+    public partial class UnformattedBookData : Form
     {
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="FormatUnformattedBookData" /> class.
         /// </summary>
-        public FormatUnformattedBookData()
+        public UnformattedBookData()
         {
             InitializeComponent();
             SetInitialControlState();
@@ -117,7 +118,7 @@ namespace BookList.Source
 
             txtBookInfo.Text = sb.ToString();
 
-            var coll = new UnformattedDataCollection();
+            var coll = new BookData();
 
             coll.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
             coll.AddItem(sb.ToString());
@@ -138,7 +139,7 @@ namespace BookList.Source
 
             txtBookInfo.Text = FormatBookDataProperties.ContainsBookTitle;
 
-            var coll = new UnformattedDataCollection();
+            var coll = new BookData();
 
             coll.RemoveItemAt(FormatBookDataProperties.BookTitleRecordsCount);
             coll.AddItem(sb.ToString());
@@ -203,7 +204,7 @@ namespace BookList.Source
         /// </param>
         private void OnFormatBookInformationButton_Click(object sender, EventArgs e)
         {
-            var coll = new UnformattedDataCollection();
+            var coll = new BookData();
 
             if (coll.GetItemsCount() < 1) return;
 
@@ -230,16 +231,16 @@ namespace BookList.Source
         /// </param>
         private void OnSaveChangesButton_Click(object sender, EventArgs e)
         {
-            var fileOutput = new FileOutputClass();
+            var fileOutput = new Output();
 
-            var validate = new ValidationClass();
+            var validate = new Validation();
 
             var msgBox = new MyMessageBox();
 
 
             msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            var coll = new UnformattedDataCollection();
+            var coll = new BookData();
 
             if (coll.GetItemsCount() < 1) return;
             if (string.IsNullOrEmpty(txtTitle.Text.Trim())) return;
@@ -247,7 +248,7 @@ namespace BookList.Source
             if (FormatBookDataProperties.BookIsSeries)
             {
                 if (!validate.ValidateBookSeriesIsFormatted(txtBookInfo.Text)) return;
-                if (!fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(FormatBookDataProperties
+                if (!fileOutput.WriteBookTitleSeriesVolumeNamesToAuthorsFile(BookListPaths
                     .PathToCurrentAuthorsFile))
                 {
                     msgBox.Msg = "Failed to complete save. Check over data and try again.";
@@ -260,7 +261,7 @@ namespace BookList.Source
 
             if (!validate.ValidateBookNotSeriesIsFormatted(txtBookInfo.Text)) return;
 
-            if (!fileOutput.WriteAuthorsTitlesToFile(FormatBookDataProperties.PathToCurrentAuthorsFile))
+            if (!fileOutput.WriteAuthorsTitlesToFile(BookListPaths.PathToCurrentAuthorsFile))
             {
                 msgBox.Msg = "Failed to complete save. Check over data and try again.";
                 msgBox.ShowErrorMessageBox();
@@ -281,7 +282,7 @@ namespace BookList.Source
         /// </param>
         private void OnSeriesButton_Click(object sender, EventArgs e)
         {
-            var validate = new ValidationClass();
+            var validate = new Validation();
 
             var len = txtSeries.SelectionLength;
             if (len <= 0) return;
@@ -326,7 +327,7 @@ namespace BookList.Source
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void OnVolumeNumberButton_Click(object sender, EventArgs e)
         {
-            var validate = new ValidationClass();
+            var validate = new Validation();
 
             var len = txtVolume.SelectionLength;
             if (len <= 0) return;

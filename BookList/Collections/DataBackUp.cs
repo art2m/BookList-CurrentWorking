@@ -1,6 +1,6 @@
-﻿// BookListCurrent
+// BookListCurrent
 //
-// AuthorNamesListCollection.cs
+// DataBackUp.cs
 //
 // art2m
 //
@@ -25,42 +25,47 @@
 using System.Collections.Generic;
 using BookList.Classes;
 using BookList.Interfaces;
+using JetBrains.Annotations;
 
 namespace BookList.Collections
 {
     /// <summary>
-    ///     This Contains a collection of all book authors in the file.
+    ///     Collection to hold backup book information data before being changed.
     /// </summary>
-    public class AuthorNamesListCollection : IMyCollection
+    public class DataBackUp : IMyCollection
     {
         /// <summary>
-        ///     Defines the AuthorNamesList.
+        ///     List containing the data before being changed.
         /// </summary>
         private static  List<string> _coll = new List<string>();
 
         /// <summary>
         ///     Declare validation class object.
         /// </summary>
-        private readonly ValidationClass _validate = new ValidationClass();
+        private readonly Validation _validate = new Validation();
 
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
-        public bool AddItem(string value)
+        public bool AddItem([NotNull] string value)
         {
+            value = value.Trim();
+
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             if (!this._validate.ValidateStringHasLength(value)) return false;
 
             if (this.ContainsItem(value)) return false;
+            if (string.IsNullOrEmpty(value)) return false;
 
             _coll.Add(value);
             return true;
         }
 
         /// <summary>
-        /// Pass in array with all of the author names.
+        /// Fill collection from an array
         /// </summary>
-        /// <param name="fileArray"> Array of file names.</param>
+        /// <param name="fileArray"></param>
+        /// <returns>True if array filled else false.</returns>
         public bool AddArray(string[] fileArray)
         {
             if (fileArray == null) return false;
@@ -89,7 +94,6 @@ namespace BookList.Collections
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             if (!this._validate.ValidateStringHasLength(value)) return false;
-
             return _coll.Contains(value);
         }
 
@@ -158,8 +162,8 @@ namespace BookList.Collections
         /// <returns>True if removed else false.</returns>
         public bool RemoveItem(string value)
         {
-            if (this._validate.ValidateStringIsNotNull(value)) return false;
-            return !this._validate.ValidateStringHasLength(value) && _coll.Remove(value);
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            return this._validate.ValidateStringHasLength(value) && _coll.Remove(value);
         }
 
         /// <summary>
@@ -172,9 +176,12 @@ namespace BookList.Collections
             var count = _coll.Count;
 
             if (!this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)) return false;
-
+            // Get item to be removed for check that it is gone.
             var item = this.GetItemAt(index);
+
             _coll.RemoveAt(index);
+
+            // Check to see if item is no longer in collection
             return !this.ContainsItem(item);
         }
 

@@ -1,6 +1,6 @@
 ﻿// BookList
 //
-// SearchOfBookTitles.cs
+// BookTitleLocator.cs
 //
 // Art2M
 //
@@ -25,17 +25,18 @@ using System;
 using System.Windows.Forms;
 using BookList.Classes;
 using BookList.Collections;
-using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
-    public partial class SearchOfBookTitles : Form
+    using BookListCurrent.ClassesProperties;
+
+    public partial class BookTitleLocator : Form
     {
-        public SearchOfBookTitles()
+        public BookTitleLocator()
         {
             this.InitializeComponent();
             this.btnSelect.Enabled = true;
-            BookListPropertiesClass.AuthorsNameCurrent = string.Empty;
+            BookListPaths.AuthorsNameCurrent = string.Empty;
         }
 
         private void OnCloseSearchByAuthorsButtonClicked(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace BookList.Source
             if (string.IsNullOrEmpty(s2)) return;
             s2 = s2.ToLower();
 
-            var coll = new BookInfoCollection();
+            var coll = new BookInformation();
 
             for (var i = 0; i < coll.ItemsCount(); i++)
             {
@@ -65,7 +66,7 @@ namespace BookList.Source
             }
         }
 
-        private void OnTitleSearchButtonClicked(object sender, EventArgs e)
+        private void OnTitleSearchButton_Click(object sender, EventArgs e)
         {
             if (this.rdbSpecific.Checked) this.SearchBookTitleBySingleAuthor();
 
@@ -79,22 +80,22 @@ namespace BookList.Source
 
         private void SearchBookTitleAllAuthors()
         {
-            var authorDirFiles = new AuthorsDirectoryFilesClass();
-            var dirFileOp = new DirectoryFileClass();
-            var fileInput = new FileInputClass();
+            var authorOp = new AuthorsOperations();
+            var dirFileOp = new Paths();
+            var fileInput = new Input();
 
-            authorDirFiles.GetAllAuthorFilePathsContainedInAuthorDirectory(BookListPropertiesClass.PathToAuthorsDirectory);
+            authorOp.GetAllAuthorFilePathsContainedInAuthorDirectory(BookListPaths.PathAuthorsDirectory);
 
-            var coll = new BookInfoCollection();
+            var coll = new BookInformation();
             coll.ClearCollection();
             this.lstTiltes.Items.Clear();
 
-            var collAuthor = new AuthorsFileNamesCollection();
+            var collAuthor = new AuthorsFileNames();
 
             for (var i = 0; i < collAuthor.ItemsCount(); i++)
             {
                 var fileName = collAuthor.GetItemAt(i);
-                var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
+                var dirAuthors = BookListPaths.PathAuthorsDirectory;
                 var filePath = dirFileOp.CombineDirectoryPathWithFileName(dirAuthors,
                     fileName);
                 this.txtAuthorName.Text = fileName;
@@ -111,15 +112,15 @@ namespace BookList.Source
 
         private void SearchBookTitleBySingleAuthor()
         {
-            var dirFileOp = new DirectoryFileClass();
-            var fileInput = new FileInputClass();
+            var dirFileOp = new Paths();
+            var fileInput = new Input();
 
-            var dirAuthors = BookListPropertiesClass.PathToAuthorsDirectory;
+            var dirAuthors = BookListPaths.PathAuthorsDirectory;
 
             var filePath = dirFileOp.CombineDirectoryPathWithFileName(dirAuthors,
-                BookListPropertiesClass.CurrentWorkingFileName);
+                BookListPaths.CurrentWorkingFileName);
 
-            var coll = new BookInfoCollection();
+            var coll = new BookInformation();
 
             coll.ClearCollection();
             this.lstTiltes.Items.Clear();
@@ -134,20 +135,20 @@ namespace BookList.Source
             }
         }
 
-        private void OnSearchByAuthorRadioButtonClicked(object sender, EventArgs e)
+        private void OnAuthorSearchRadioButton_Click(object sender, EventArgs e)
         {
             this.btnSelect.Enabled = true;
         }
 
-        private void OnSelectAuthorButtonClicked(object sender, EventArgs e)
+        private void OnSelectAuthorButton_Click(object sender, EventArgs e)
         {
             using (var win = new AuthorsListing())
             {
                 win.ShowDialog();
             }
 
-            if (string.IsNullOrEmpty(BookListPropertiesClass.AuthorsNameCurrent)) return;
-            this.txtAuthorName.Text = BookListPropertiesClass.AuthorsNameCurrent;
+            if (string.IsNullOrEmpty(BookListPaths.AuthorsNameCurrent)) return;
+            this.txtAuthorName.Text = BookListPaths.AuthorsNameCurrent;
         }
     }
 }

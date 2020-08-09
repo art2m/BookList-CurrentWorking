@@ -24,32 +24,33 @@
 using System;
 using System.Windows.Forms;
 using BookList.Classes;
-using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
+    using BookListCurrent.ClassesProperties;
+
     /// <summary>
     ///     Select operation type to be performed on the records contained in list
     ///     books. Display all records contained in the list books data.
     /// </summary>
-    public partial class BookListWindow : Form
+    public partial class BookList : Form
     {
         /// <summary>
         ///     <para>
-        ///         Initializes a new instance of the <see cref="BookListWindow" />
+        ///         Initializes a new instance of the <see cref="BookList" />
         ///     </para>
         ///     <para>class.</para>
         /// </summary>
-        public BookListWindow()
+        public BookList()
         {
-            var authorDirFile = new AuthorsDirectoryFilesClass();
-            var locDir = new LocationDirectoryFilePaths();
+            var authorOp = new AuthorsOperations();
+
+            var dirFile = new Paths();
 
             InitializeComponent();
-            locDir.InitializeDirectoryPath();
-            locDir.InitializeFilePaths();
-            authorDirFile.UpdateAuthorsNamesWithFileNames();
-
+            dirFile.InitializeDirectoryPath();
+            dirFile.InitializeFilePaths();
+            authorOp.UpdateAuthorsNamesWithFileNames();
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace BookList.Source
         /// </param>
         private void OnAddTitlesButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new AdditionOfNewBookTitles())
+            using (var win = new BookTitleNames())
             {
                 win.ShowDialog();
             }
@@ -120,7 +121,7 @@ namespace BookList.Source
         /// </param>
         private void OnEditAuthorsButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new EditingOfBookAuthor())
+            using (var win = new BookAuthorEditor())
             {
                 win.ShowDialog();
             }
@@ -231,11 +232,11 @@ namespace BookList.Source
         /// </param>
         private void OnSearchAuthorsButton_Clicked(object sender, EventArgs e)
         {
-            var fileOutput = new FileOutputClass();
+            var fileOutput = new Output();
 
-            fileOutput.WriteArthurFileNamesToListFile(BookListPropertiesClass.PathToAuthorsNamesListFile);
+            fileOutput.WriteArthurFileNamesToListFile(BookListPaths.PathAuthorsNamesListFile);
 
-            using (var win = new SearchOfBookAuthors())
+            using (var win = new BookAuthorLocator())
             {
                 win.ShowDialog();
             }
@@ -264,7 +265,7 @@ namespace BookList.Source
         /// </param>
         private void OnSearchTitlesButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new SearchOfBookTitles())
+            using (var win = new BookTitleLocator())
             {
                 win.ShowDialog();
             }

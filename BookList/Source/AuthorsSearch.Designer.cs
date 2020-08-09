@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace BookList.Source
 {
-    partial class SearchOfBookAuthors
+    partial class BookAuthorLocator
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@ namespace BookList.Source
             // 
             // lstSearch
             // 
-            this.lstSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lstSearch.FormattingEnabled = true;
             this.lstSearch.ItemHeight = 16;
             this.lstSearch.Location = new System.Drawing.Point(12, 25);
@@ -52,7 +52,7 @@ namespace BookList.Source
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.LightCoral;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnClose.Location = new System.Drawing.Point(620, 505);
             this.btnClose.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnClose.MinimumSize = new System.Drawing.Size(150, 45);
@@ -65,7 +65,7 @@ namespace BookList.Source
             // 
             // txtSearch
             // 
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtSearch.Location = new System.Drawing.Point(12, 381);
             this.txtSearch.Multiline = true;
             this.txtSearch.Name = "txtSearch";
@@ -76,7 +76,7 @@ namespace BookList.Source
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnSearch.Location = new System.Drawing.Point(12, 426);
             this.btnSearch.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnSearch.MinimumSize = new System.Drawing.Size(150, 45);
@@ -90,7 +90,7 @@ namespace BookList.Source
             // btnSelect
             // 
             this.btnSelect.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btnSelect.Location = new System.Drawing.Point(277, 426);
             this.btnSelect.MaximumSize = new System.Drawing.Size(150, 45);
             this.btnSelect.MinimumSize = new System.Drawing.Size(150, 45);
@@ -106,13 +106,13 @@ namespace BookList.Source
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(790, 567);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lstSearch);
-            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 600);
@@ -122,15 +122,14 @@ namespace BookList.Source
             this.Text = "Search By Author";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-        #endregion
-
-        private System.Windows.Forms.ListBox lstSearch;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.ListBox lstSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+
+        #endregion
     }
 }

@@ -25,17 +25,18 @@ using System;
 using System.Text;
 using System.Windows.Forms;
 using BookList.Classes;
-using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
+    using BookListCurrent.ClassesProperties;
+
     /// <summary>
-    ///     Defines the <see cref="AdditionOfNewBookTitles" />
+    ///     Defines the <see cref="BookTitleNames" />
     ///     Add New Book Information to Authors File.
     ///     Added items book title only if not series.
     ///     Added items for series book title, series name, volume number.
     /// </summary>
-    public partial class AdditionOfNewBookTitles : Form
+    public partial class BookTitleNames : Form
     {
         /// <summary>
         ///     Defines the isBookSeries.
@@ -44,9 +45,9 @@ namespace BookList.Source
         private bool _isBookSeries;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AdditionOfNewBookTitles" /> class.
+        ///     Initializes a new instance of the <see cref="BookTitleNames" /> class.
         /// </summary>
-        public AdditionOfNewBookTitles()
+        public BookTitleNames()
         {
             this.InitializeComponent();
             this.InitializeControlsState();
@@ -81,7 +82,7 @@ namespace BookList.Source
                 dlg.ShowDialog();
             }
 
-            this.lblAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent.Trim();
+            this.lblAuthor.Text = BookListPaths.AuthorsNameCurrent.Trim();
             this.SetAddingNewBookControlsState();
         }
 
@@ -93,12 +94,12 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="EventArgs" />Instance containing the event data.</param>
         private void OnAddNewAuthorButton_Clicked(object sender, EventArgs e)
         {
-            using (var win = new AdditionOfBookAuthors())
+            using (var win = new BookTitleNames())
             {
                 win.ShowDialog();
             }
 
-            this.lblAuthor.Text = BookListPropertiesClass.AuthorsNameCurrent;
+            this.lblAuthor.Text = BookListPaths.AuthorsNameCurrent;
             this.SetAddingNewBookControlsState();
         }
 
@@ -111,7 +112,7 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="System.EventArgs" />Instance containing the event data.</param>
         private void OnAddNewBookRecordButton_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(BookListPropertiesClass.AuthorsNameCurrent)) return;
+            if (string.IsNullOrEmpty(BookListPaths.AuthorsNameCurrent)) return;
 
             this.txtTitle.Enabled = true;
             this.txtTitle.Focus();
@@ -188,9 +189,9 @@ namespace BookList.Source
         /// <param name="e">The e<see cref="System.EventArgs" />Instance containing the event data.</param>
         private void OnSaveBookRecordButton_Clicked(object sender, EventArgs e)
         {
-            var fileOutput = new FileOutputClass();
+            var fileOutput = new Output();
 
-            var filePath = BookListPropertiesClass.PathOfCurrentWorkingFile;
+            var filePath = BookListPaths.PathOfCurrentWorkingFile;
 
             if (!this.chkSeries.Checked)
             {
