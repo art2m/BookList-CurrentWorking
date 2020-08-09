@@ -166,7 +166,7 @@ namespace BookList.Source
             this.btnAddTitles.TabIndex = 1;
             this.btnAddTitles.Text = "Book Titles";
             this.btnAddTitles.UseVisualStyleBackColor = false;
-            this.btnAddTitles.Click += new System.EventHandler(this.OnAddTitlesButton_Clicked);
+            this.btnAddTitles.Click += new System.EventHandler(this.OnAddTitlesButton_Click);
             // 
             // btnAddAuthors
             // 
@@ -178,7 +178,7 @@ namespace BookList.Source
             this.btnAddAuthors.TabIndex = 0;
             this.btnAddAuthors.Text = "Authors";
             this.btnAddAuthors.UseVisualStyleBackColor = false;
-            this.btnAddAuthors.Click += new System.EventHandler(this.OnAddAuthorsButton_Clicked);
+            this.btnAddAuthors.Click += new System.EventHandler(this.OnAddAuthorsButton_Click);
             // 
             // lblEdit
             // 
@@ -282,14 +282,14 @@ namespace BookList.Source
             this.mnuAddAuthor.Name = "mnuAddAuthor";
             this.mnuAddAuthor.Size = new System.Drawing.Size(152, 24);
             this.mnuAddAuthor.Text = "Author";
-            this.mnuAddAuthor.Click += new System.EventHandler(this.OnAddAuthorsMenu_Clicked);
+            this.mnuAddAuthor.Click += new System.EventHandler(this.OnAddAuthorsMenu_Click);
             // 
             // mnuAddTitles
             // 
             this.mnuAddTitles.Name = "mnuAddTitles";
             this.mnuAddTitles.Size = new System.Drawing.Size(152, 24);
             this.mnuAddTitles.Text = "Book Titles";
-            this.mnuAddTitles.Click += new System.EventHandler(this.OnAddTitlesMenu_Clicked);
+            this.mnuAddTitles.Click += new System.EventHandler(this.OnAddTitlesMenu_Click);
             // 
             // mnuEditTop
             // 
