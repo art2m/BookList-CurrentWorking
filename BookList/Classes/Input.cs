@@ -36,7 +36,14 @@ namespace BookList.Classes
     /// </summary>
     public class Input
     {
+        /// <summary>
+        /// Deceleration Message box _object.
+        /// </summary>
         private readonly MyMessageBox _msgBox = new MyMessageBox();
+
+        /// <summary>
+        /// Deceleration Message _object
+        /// </summary>
         private readonly Validation _validate = new Validation();
 
         /// <summary>
@@ -87,7 +94,7 @@ namespace BookList.Classes
         /// <summary>
         ///     The ReadAuthorNamesFromFile.
         /// </summary>
-        /// <param name="filePath">The filePath <see cref="string" /> .</param>
+        /// <param name="filePath">The FilePath <see cref="string" /> .</param>
         /// <returns>
         ///    list containing the author names read from file.
         /// </returns>
@@ -124,7 +131,7 @@ namespace BookList.Classes
         /// <summary>
         ///     The ReadTitlesFromFile.
         /// </summary>
-        /// <param name="filePath">The filePath <see cref="string" /> .</param>
+        /// <param name="filePath">The FilePath <see cref="string" /> .</param>
         public void ReadTitlesFromFile(string filePath)
         {
             try
@@ -153,15 +160,19 @@ namespace BookList.Classes
             }
         }
 
+        /// <summary>
+        /// Reads the book data from file.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
         public void ReadBookDataFromFile(string filePath)
         {
-            if (string.IsNullOrEmpty(filePath)) return;
+            throw new NotImplementedException();
         }
 
         /// <summary>
         ///     The ReadUnformattedDataFromFile.
         /// </summary>
-        /// <param name="filePath">The filePath <see cref="string" /> .</param>
+        /// <param name="filePath">The FilePath <see cref="string" /> .</param>
         public void ReadUnformattedDataFromFile(string filePath)
         {
             try

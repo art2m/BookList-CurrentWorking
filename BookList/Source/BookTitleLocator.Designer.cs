@@ -1,5 +1,9 @@
 ﻿namespace BookList.Source
 {
+    /// <summary>
+    /// Designer 
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     partial class BookTitleLocator
     {
         /// <summary>

@@ -30,8 +30,15 @@ namespace BookList.Source
 {
     using BookListCurrent.ClassesProperties;
 
+    /// <summary>
+    /// Used to check if This book title has been read.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class BookTitleLocator : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BookTitleLocator"/> class.
+        /// </summary>
         public BookTitleLocator()
         {
             this.InitializeComponent();
@@ -39,12 +46,20 @@ namespace BookList.Source
             BookListPaths.AuthorsNameCurrent = string.Empty;
         }
 
+        /// <summary>
+        /// Called when [close search by authors button clicked].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnCloseSearchByAuthorsButtonClicked(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        /// <summary>
+        /// Finds the titles in string.
+        /// </summary>
         private void FindTitlesInString()
         {
             var s2 = this.txtTitle.Text.Trim();
@@ -66,6 +81,11 @@ namespace BookList.Source
             }
         }
 
+        /// <summary>
+        /// Called when [title search button click].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnTitleSearchButton_Click(object sender, EventArgs e)
         {
             if (this.rdbSpecific.Checked) this.SearchBookTitleBySingleAuthor();
@@ -73,18 +93,26 @@ namespace BookList.Source
             if (this.rdbAll.Checked) this.SearchBookTitleAllAuthors();
         }
 
+        /// <summary>
+        /// Called when [search all authors RadioButton clicked].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnSearchAllAuthorsRadioButtonClicked(object sender, EventArgs e)
         {
             this.btnSelect.Enabled = false;
         }
 
+        /// <summary>
+        /// Searches the book title all authors.
+        /// </summary>
         private void SearchBookTitleAllAuthors()
         {
             var authorOp = new AuthorsOperations();
             var dirFileOp = new Paths();
             var fileInput = new Input();
 
-            authorOp.GetAllAuthorFilePathsContainedInAuthorDirectory(BookListPaths.PathAuthorsDirectory);
+            authorOp.GetAllAuthorFilePathsContainedInAuthorDirectory();
 
             var coll = new BookInformation();
             coll.ClearCollection();
@@ -110,6 +138,9 @@ namespace BookList.Source
             }
         }
 
+        /// <summary>
+        /// Searches the book title by single author.
+        /// </summary>
         private void SearchBookTitleBySingleAuthor()
         {
             var dirFileOp = new Paths();
@@ -135,11 +166,21 @@ namespace BookList.Source
             }
         }
 
+        /// <summary>
+        /// Called when [author search radio button click].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnAuthorSearchRadioButton_Click(object sender, EventArgs e)
         {
             this.btnSelect.Enabled = true;
         }
 
+        /// <summary>
+        /// Called when [select author button click].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnSelectAuthorButton_Click(object sender, EventArgs e)
         {
             using (var win = new AuthorsListing())

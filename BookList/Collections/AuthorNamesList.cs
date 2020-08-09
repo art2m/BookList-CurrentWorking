@@ -34,26 +34,26 @@ namespace BookList.Collections
     public class AuthorNamesList : IMyCollection
     {
         /// <summary>
-        ///     Defines the AuthorNamesList.
+        ///     Defines the Author Names list.
         /// </summary>
         private static  List<string> _coll = new List<string>();
 
         /// <summary>
-        ///     Declare validation class object.
+        ///     Declare validation class Object.
         /// </summary>
         private readonly Validation _validate = new Validation();
 
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
-        public bool AddItem(string value)
+        public bool AddItem(string item)
         {
-            if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            if (!this._validate.ValidateStringHasLength(value)) return false;
+            if (!this._validate.ValidateStringIsNotNull(item)) return false;
+            if (!this._validate.ValidateStringHasLength(item)) return false;
 
-            if (this.ContainsItem(value)) return false;
+            if (this.ContainsItem(item)) return false;
 
-            _coll.Add(value);
+            _coll.Add(item);
             return true;
         }
 
@@ -65,9 +65,8 @@ namespace BookList.Collections
         {
             if (fileArray == null) return false;
             if (fileArray.Length <= 0) return false;
-
-            _coll = null;
-            _coll = new List<string>(fileArray);
+            
+           _coll = new List<string>(fileArray);
 
             return _coll.Count > 0;
         }
@@ -84,36 +83,30 @@ namespace BookList.Collections
         ///     Contained in collection.
         /// </summary>
         /// <param name="value">The string to check for.</param>
-        /// <returns>true if contained in the collection else false.</returns>
+        /// <returns>True if contained in the collection else False.</returns>
         public bool ContainsItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            if (!this._validate.ValidateStringHasLength(value)) return false;
-
-            return _coll.Contains(value);
+            return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
         }
 
-        string[] IMyCollection.GetAllItems()
+        /// <summary>
+        /// The GetAllItems.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string[]" />.
+        /// </returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public string[] GetAllItems()
         {
             throw new System.NotImplementedException();
         }
-
+        
         /// <summary>
-        ///     Return all items.
-        /// </summary>
-        /// <returns>
-        ///     All items contained in the collection.
-        /// </returns>
-        public List<string> GetAllItems()
-        {
-            return _coll;
-        }
-
-        /// <summary>
-        ///     Return the value at the given position.
+        ///     Return the item at the given position.
         /// </summary>
         /// <param name="index">The position of the oven.</param>
-        /// <returns>The item found at this position.</returns>
+        /// <returns>The item found at This position.</returns>
         public string GetItemAt(int index)
         {
             var count = _coll.Count;
@@ -123,9 +116,9 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     find the position of this value.
+        ///     find the position of this item.
         /// </summary>
-        /// <param name="value">The value to search for.</param>
+        /// <param name="value">The item to search for.</param>
         /// <returns>the position number the item is located at.</returns>
         public int GetItemIndex(string value)
         {
@@ -134,6 +127,12 @@ namespace BookList.Collections
             return _coll.IndexOf(value);
         }
 
+        /// <summary>Get item count.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int" />.
+        /// </returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public int GetItemsCount()
         {
             throw new System.NotImplementedException();
@@ -151,11 +150,11 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Find this item in the collection and
+        ///     Find This item in the collection and
         ///     remove it.
         /// </summary>
         /// <param name="value">The item to find.</param>
-        /// <returns>True if removed else false.</returns>
+        /// <returns>True if removed else False.</returns>
         public bool RemoveItem(string value)
         {
             if (this._validate.ValidateStringIsNotNull(value)) return false;
@@ -166,7 +165,7 @@ namespace BookList.Collections
         ///     The position of the item to be removed.
         /// </summary>
         /// <param name="index">The position in the collection.</param>
-        /// <returns>True if removed else false.</returns>
+        /// <returns>True if removed else False.</returns>
         public bool RemoveItemAt(int index)
         {
             var count = _coll.Count;

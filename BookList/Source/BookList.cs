@@ -61,7 +61,7 @@ namespace BookList.Source
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddAuthorsButton_Clicked(object sender, EventArgs e)
+        private void OnAddAuthorsButton_Click(object sender, EventArgs e)
         {
             using (var win = new AdditionOfBookAuthors())
             {
@@ -77,7 +77,7 @@ namespace BookList.Source
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddAuthorsMenu_Clicked(object sender, EventArgs e)
+        private void OnAddAuthorsMenu_Click(object sender, EventArgs e)
         {
             btnAddAuthors.PerformClick();
         }
@@ -90,7 +90,7 @@ namespace BookList.Source
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddTitlesButton_Clicked(object sender, EventArgs e)
+        private void OnAddTitlesButton_Click(object sender, EventArgs e)
         {
             using (var win = new BookTitleNames())
             {
@@ -106,7 +106,7 @@ namespace BookList.Source
         /// <param name="e">
         ///     The <see cref="EventArgs" /> instance containing the event data.
         /// </param>
-        private void OnAddTitlesMenu_Clicked(object sender, EventArgs e)
+        private void OnAddTitlesMenu_Click(object sender, EventArgs e)
         {
             btnAddTitles.PerformClick();
         }

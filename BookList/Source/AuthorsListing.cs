@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using BookList.Collections;
-using BookList.PropertiesClasses;
+using BookListCurrent.ClassesProperties;
 
 namespace BookList.Source
 {
@@ -19,7 +19,7 @@ namespace BookList.Source
         /// <summary>Fills the Author names list collection with authors names.</summary>
         private void FillListWithAuthorsNames()
         {
-            var coll = new AuthorNamesListCollection();
+            var coll = new AuthorNamesList();
             this.lstAuthor.Sorted = true;
 
             Debug.WriteLine(coll.ItemsCount());
@@ -40,11 +40,11 @@ namespace BookList.Source
         /// <summary>Called when [ok button clicked].</summary>
         /// <param name="sender">The source of the event</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private void OnOkButton_Clicked(object sender, EventArgs e)
+        private void OnOKButton_Clicked(object sender, EventArgs e)
         {
-            var coll = new BookInfoCollection();
+            var coll = new BookInformation();;
 
-            BookListPropertiesClass.AuthorsNameCurrent = this.lblAuthor.Text;
+            BookListPaths.AuthorsNameCurrent = this.lblAuthor.Text;
             coll.ClearCollection();
            // BookInfoCollection.AddItem(BookListPropertiesClass.AuthorsNameCurrent);
             //MyMessagesClass.ShowInformationMessageBox(BookListPropertiesClass.CurrentWorkingFileName,
@@ -56,7 +56,7 @@ namespace BookList.Source
         private void OnSelectedIndexChangedListBox_Selected(object sender, EventArgs e)
         {
             this.lblAuthor.Text = this.lstAuthor.SelectedItem.ToString();
-            BookListPropertiesClass.CurrentWorkingFileName = this.lblAuthor.Text;
+            BookListPaths.CurrentWorkingFileName = this.lblAuthor.Text;
         }
     }
 }
