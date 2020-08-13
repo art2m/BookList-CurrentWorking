@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace BookList.Source
 {
-    partial class BookAuthorLocator
+    partial class BookAuthorLocatorWin
     {
         /// <summary>
         /// Required designer variable.
@@ -101,7 +101,7 @@ namespace BookList.Source
             this.btnSelect.UseVisualStyleBackColor = false;
             this.btnSelect.Click += new System.EventHandler(this.SelectedAuthorButtonClicked);
             // 
-            // SearchOfBookAuthors
+            // BookAuthorLocator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -117,7 +117,7 @@ namespace BookList.Source
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 600);
             this.MinimumSize = new System.Drawing.Size(800, 600);
-            this.Name = "SearchOfBookAuthors";
+            this.Name = "BookAuthorLocator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search By Author";
             this.ResumeLayout(false);

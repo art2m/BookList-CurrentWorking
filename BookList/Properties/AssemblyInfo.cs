@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BookList")]
+[assembly: AssemblyTitle("BookListMainWin")]
 [assembly: AssemblyDescription("Track books read from kindle unlimited")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Art2m")]
-[assembly: AssemblyProduct("BookList")]
+[assembly: AssemblyProduct("BookListMainWin")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

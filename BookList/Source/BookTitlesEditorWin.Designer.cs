@@ -3,10 +3,10 @@ using System.ComponentModel;
 namespace BookList.Source
 {
     /// <summary>
-    /// Edit the author name.
+    /// Edit the book title.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
-    partial class BookAuthorEditorWin
+    partial class BookTitlesEditorWin
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,7 @@ namespace BookList.Source
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.OnCloseAddingNewAuthorButton_Close);
             // 
-            // BookAuthorEditor
+            // BookTitlesEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -63,9 +63,9 @@ namespace BookList.Source
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 600);
             this.MinimumSize = new System.Drawing.Size(800, 600);
-            this.Name = "BookAuthorEditor";
+            this.Name = "BookTitlesEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EditingOfBookAuthor";
+            this.Text = "EditingOfBookTitles";
             this.ResumeLayout(false);
         }
 

@@ -1,6 +1,6 @@
 // BookListCurrent
 //
-// BookData.cs
+// BookDataProperties.cs
 //
 // art2m
 //
@@ -23,8 +23,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 using System.Collections.Generic;
+
 using BookList.Classes;
 using BookList.Interfaces;
+
 using JetBrains.Annotations;
 
 namespace BookList.Collections
@@ -42,7 +44,7 @@ namespace BookList.Collections
         /// <summary>
         ///     Declare validation class object.
         /// </summary>
-        private readonly Validation _validate = new Validation();
+        private readonly ValidationClass _validate = new ValidationClass();
 
         /// <summary>
         ///     Add new item to the collection.
@@ -122,7 +124,7 @@ namespace BookList.Collections
         {
             var count = _coll.Count;
 
-            return !this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)
+            return !this._validate.ValidateIndex(index, count)
                 ? string.Empty
                 : _coll[index];
         }
@@ -175,7 +177,7 @@ namespace BookList.Collections
         public bool RemoveItemAt(int index)
         {
             var count = _coll.Count;
-            if (!this._validate.IndexGreaterThanZeroLessThenCollectionCount(index, count)) return false;
+            if (!this._validate.ValidateIndex(index, count)) return false;
             // Get item to be removed for check that it is gone.
             var item = this.GetItemAt(index);
 
