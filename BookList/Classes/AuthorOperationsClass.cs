@@ -132,7 +132,7 @@ namespace BookList.Classes
             if (string.IsNullOrEmpty(fileName)) return;
             if (string.IsNullOrWhiteSpace(fileName)) return;
 
-            var coll = new AuthorsFileNames();
+            var coll = new AuthorsFileNamesCollection();
 
             if (coll.ContainsItem(fileName)) return;
             coll.AddItem(fileName);
@@ -145,11 +145,11 @@ namespace BookList.Classes
         {
             _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            var collList = new AuthorNamesList();
-            var collFile = new AuthorsFileNames();
+            var collList = new AuthorNamesCollection();
+            var collFile = new AuthorsFileNamesCollection();
 
             collList.ClearCollection();
-            for (var index = 0; index < collFile.ItemsCount(); index++)
+            for (var index = 0; index < collFile.GetItemsCount(); index++)
                 collList.AddItem(collFile.GetItemAt(index));
         }
 

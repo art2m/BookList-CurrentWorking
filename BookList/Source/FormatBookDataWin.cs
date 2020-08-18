@@ -19,19 +19,19 @@ namespace BookList.Source
         private DialogResult _result;
 
         /// <summary>
-        /// decleration of message box object.
+        /// declaration of message box object.
         /// </summary>
         private readonly MyMessageBoxClass _msgBox = new MyMessageBoxClass();
 
         /// <summary>
         /// The position in the record.
         /// </summary>
-        private int position;
+        private int _position;
 
         /// <summary>
         /// The total count of records.
         /// </summary>
-        private int totalCount;
+        private int _totalCount;
 
 
         /// <summary>Initializes a new instance of the <see cref="FormatBookDataWin" /> class.</summary>
@@ -60,9 +60,9 @@ namespace BookList.Source
         private void DisplayRecordCountAndPosition()
         {
             var sb = new StringBuilder();
-            sb.Append(position.ToString());
+            sb.Append(_position.ToString());
             sb.Append(" of ");
-            sb.Append(totalCount.ToString());
+            sb.Append(_totalCount.ToString());
 
             this.lblPosition.Text = sb.ToString();
         }
@@ -104,24 +104,24 @@ namespace BookList.Source
 
             if (string.IsNullOrEmpty(BookListPathsProperties.PathToCurrentAuthorsFile)) return;
 
-            fileInput.ReadTitlesFromFile(BookListPathsProperties.PathToCurrentAuthorsFile);
+            fileInput.ReadTitlesFromFileLoop(BookListPathsProperties.PathToCurrentAuthorsFile);
 
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
-            totalCount = coll.GetItemsCount();
+            _totalCount = coll.GetItemsCount();
         }
 
         /// <summary>Moves to first record.</summary>
         private void MoveToFirstRecord()
         {
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             if (coll.GetItemsCount() <= 0) return;
 
             BookDataProperties.NumberOfItems = 0;
             this.txtData.Text = coll.GetItemAt(BookDataProperties.NumberOfItems);
 
-            position = BookDataProperties.NumberOfItems + 1;
+            _position = BookDataProperties.NumberOfItems + 1;
 
             this.DisplayRecordCountAndPosition();
         }
@@ -129,7 +129,7 @@ namespace BookList.Source
         /// <summary>Moves to last record.</summary>
         private void MoveToLastRecord()
         {
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             if (coll.GetItemsCount() == 0) return;
 
@@ -139,7 +139,7 @@ namespace BookList.Source
 
             this.txtData.Text = coll.GetItemAt(BookDataProperties.NumberOfItems);
 
-            position = coll.GetItemsCount();
+            _position = coll.GetItemsCount();
 
             this.DisplayRecordCountAndPosition();
         }
@@ -147,7 +147,7 @@ namespace BookList.Source
         /// <summary>Moves to next record.</summary>
         private void MoveToNextRecord()
         {
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             if (coll.GetItemsCount() == 0) return;
 
@@ -158,7 +158,7 @@ namespace BookList.Source
 
             this.txtData.Text = coll.GetItemAt(BookDataProperties.NumberOfItems);
 
-            position = BookDataProperties.NumberOfItems + 1;
+            _position = BookDataProperties.NumberOfItems + 1;
 
             this.DisplayRecordCountAndPosition();
         }
@@ -166,7 +166,7 @@ namespace BookList.Source
         /// <summary>Moves to previous record.</summary>
         private void MoveToPreviousRecord()
         {
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             if (coll.GetItemsCount() == 0) return;
 
@@ -176,7 +176,7 @@ namespace BookList.Source
 
             this.txtData.Text = coll.GetItemAt(BookDataProperties.NumberOfItems);
 
-            position = BookDataProperties.NumberOfItems + 1;
+            _position = BookDataProperties.NumberOfItems + 1;
 
             this.DisplayRecordCountAndPosition();
         }

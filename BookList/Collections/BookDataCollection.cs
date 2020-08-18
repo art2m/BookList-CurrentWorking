@@ -34,7 +34,7 @@ namespace BookList.Collections
     /// <summary>
     ///     Collection to hold the name 'Unformatted book information.'.
     /// </summary>
-    public class BookData : IMyCollection
+    public class BookDataCollection : IMyCollection
     {
         /// <summary>
         ///     List containing the Unformatted book information.
@@ -135,18 +135,13 @@ namespace BookList.Collections
             return _coll.IndexOf(value);
         }
 
-        public int GetItemsCount()
-        {
-            throw new System.NotImplementedException();
-        }
-
         /// <summary>
         ///     Gets the count of items contained in the collection.
         /// </summary>
         /// <returns>
         ///     Count of items contained in the collection.
         /// </returns>
-        public int ItemsCount()
+        public int GetItemsCount()
         {
             return _coll.Count;
         }

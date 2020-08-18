@@ -34,7 +34,7 @@ namespace BookList.Collections
     /// <summary>
     ///     Collection to hold backup book information data before being changed.
     /// </summary>
-    public class DataBackUp : IMyCollection
+    public class DataBackUpCollection : IMyCollection
     {
         /// <summary>
         ///     List containing the data before being changed.

@@ -66,17 +66,11 @@
     <Compile Include="Classes\SeriesOperationsClass.cs" />
     <Compile Include="Classes\TitlesOperationClass.cs" />
     <Compile Include="Classes\ValidationClass.cs" />
-    <Compile Include="Collections\AuthorNamesList.cs" />
-    <Compile Include="Collections\AuthorsFileNames.cs" />
-    <Compile Include="Collections\BookInformation.cs" />
-    <Compile Include="Collections\DataBackUp.cs" />
-    <Compile Include="Collections\BookData.cs" />
+    <Compile Include="Collections\AuthorNamesCollection.cs" />
+    <Compile Include="Collections\AuthorsFileNamesCollection.cs" />
+    <Compile Include="Collections\DataBackUpCollection.cs" />
+    <Compile Include="Collections\BookDataCollection.cs" />
     <Compile Include="Interfaces\IMyCollection.cs" />
-    <Compile Include="MyStrings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyStrings.resx</DependentUpon>
-    </Compile>
     <Compile Include="PropertiesClasses\BookListPathsProperties.cs" />
     <Compile Include="PropertiesClasses\BookDataProperties.cs" />
     <Compile Include="Source\BookAuthorAddingWin.cs">
@@ -108,6 +102,12 @@
     </Compile>
     <Compile Include="Source\BookTitlesEditorWin.Designer.cs">
       <DependentUpon>BookTitlesEditorWin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Source\DisplayAuthorTitlesResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\DisplayAuthorTitlesResults.Designer.cs">
+      <DependentUpon>DisplayAuthorTitlesResults.cs</DependentUpon>
     </Compile>
     <Compile Include="Source\FormatBookDataWin.cs">
       <SubType>Form</SubType>
@@ -141,11 +141,6 @@
     <Compile Include="Source\BookTitleLocatorWin.Designer.cs">
       <DependentUpon>BookTitleLocatorWin.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MyStrings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MyStrings.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -170,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\BookTitlesEditorWin.resx">
       <DependentUpon>BookTitlesEditorWin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\DisplayAuthorTitlesResults.resx">
+      <DependentUpon>DisplayAuthorTitlesResults.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\UnformattedBookDataWin.resx">
       <DependentUpon>UnformattedBookDataWin.cs</DependentUpon>

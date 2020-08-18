@@ -1,152 +1,327 @@
-﻿// BookListMainWin
+﻿// BookList
 //
 // BookTitleLocatorWin.cs
 //
-// Art2M
+// Arthur Melanson
 //
-// art2m@live.com
+// art2m
 //
-// 05  26  2020
+// 08    12   2020
 //
-// 05  26   2020
 //
 // This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
+// it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Forms;
-
 using BookList.Classes;
 using BookList.Collections;
+using BookList.PropertiesClasses;
 
 namespace BookList.Source
 {
-    using PropertiesClasses;
-
     /// <summary>
-    /// Used to check if This book title has been read.
+    ///     Used to check if This book title has been read.
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class BookTitleLocatorWin : Form
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BookTitleLocatorWin"/> class.
+        ///     Declaration of MyMessageBoxClass object;
+        /// </summary>
+        private readonly MyMessageBoxClass _msgBox = new MyMessageBoxClass();
+
+        /// <summary>
+        ///     Declaration of ValidationClass object.
+        /// </summary>
+        private readonly ValidationClass _valid = new ValidationClass();
+
+        /// <summary>
+        /// All authors when true is used to show what type of searc to perform.
+        /// </summary>
+        private bool _setAllAuthorsSearch;
+
+        /// <summary>
+        /// The single author when true is used to show what type of search
+        /// to perform.
+        /// </summary>
+        private bool _setSingleAuthorSearch;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BookTitleLocatorWin" /> class.
         /// </summary>
         public BookTitleLocatorWin()
         {
-            this.InitializeComponent();
-            this.btnSelect.Enabled = true;
+            InitializeComponent();
+            btnSelect.Enabled = true;
             BookListPathsProperties.AuthorsNameCurrent = string.Empty;
+
+            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
         }
 
         /// <summary>
-        /// Called when [close search by authors button clicked].
+        /// true if Searching all authors and all titles else false.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnCloseSearchByAuthorsButtonClicked(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+        private bool SearchAllAuthors { get; set; } = false;
 
         /// <summary>
-        /// Finds the titles in string.
+        /// Gets or sets a value indicating whether [set all authors search].
         /// </summary>
-        private void FindTitlesInString()
+        /// <value>
+        ///   <c>true</c> if [set all authors search]; otherwise, <c>false</c>.
+        /// </value>
+        private bool SetAllAuthorsSearch
         {
-            var s2 = this.txtTitle.Text.Trim();
+            get => _setAllAuthorsSearch;
+            set => _setAllAuthorsSearch = value;
+        }
 
-            if (string.IsNullOrEmpty(s2)) return;
-            s2 = s2.ToLower();
+        /// <summary>
+        /// Gets or sets a value indicating whether [set single author search].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [set single author search]; otherwise, <c>false</c>.
+        /// </value>
+        private bool SetSingleAuthorSearch
+        {
+            get => _setSingleAuthorSearch;
+            set => _setSingleAuthorSearch = value;
+        }
 
-            var coll = new BookInformation();
+        /// <summary>
+        /// Loop threw all authors.
+        /// </summary>
+        private void AllAuthorsLoop()
+        {
+            var coll = new AuthorNamesCollection();
 
-            for (var i = 0; i < coll.ItemsCount(); i++)
+            var totalCount = coll.GetItemsCount();
+
+            if (totalCount == 0) return;
+
+            Debug.AutoFlush = true;
+            Debug.Indent();
+            Debug.WriteLine("All Authors loop - Authors Count  " + coll.GetItemsCount().ToString());
+            Debug.Unindent();
+
+            for (int index = 0; index < totalCount; index++)
+            {
+                if (!_valid.ValidateStringIsNotNull(coll.GetItemAt(index))) continue;
+
+                var author = coll.GetItemAt(index).Trim();
+
+                if (!_valid.ValidateStringIsNotNull(author)) continue;
+
+                BookListPathsProperties.CurrentWorkingFileName = coll.GetItemAt(index);
+
+                SearchBookTitleBySingleAuthor();
+            }
+        }
+
+        /// <summary>
+        ///     Authors the names search loop.
+        /// </summary>
+        private void AuthorNamesSearchLoop()
+        {
+            _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            var fileInput = new InputClass();
+
+            var clsInput = new InputClass();
+
+            var collAuthor = new AuthorsFileNamesCollection();
+
+            var totalCount = collAuthor.GetItemsCount();
+
+            for (var i = 0; i < totalCount; i++)
+            {
+                var fileName = collAuthor.GetItemAt(i);
+
+                var dirAuthors = BookListPathsProperties.PathAuthorsDirectory;
+
+                var cls = new CombinePathsClass();
+
+                var filePath = cls.CombineDirectoryPathWithFileName(dirAuthors, fileName);
+
+                lblAuthor.Text = fileName;
+
+                fileInput.ReadTitlesFromFileLoop(filePath);
+
+                FindTitlesInString();
+            }
+        }
+
+        /// <summary>
+        ///     Books the titles search loop.
+        /// </summary>
+        private void BookTitlesSearchLoop(string search)
+        {
+            _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            var coll = new BookDataCollection();
+
+            for (var i = 0; i < coll.GetItemsCount(); i++)
             {
                 var s1 = coll.GetItemAt(i);
                 s1 = s1.ToLower();
 
-                if (s1.Contains(s2))
+                if (s1.Contains(search))
                 {
-                    this.lstTiltes.Items.Add(s1);
+                    lstTiltes.Items.Add(s1);
                 }
             }
         }
-
         /// <summary>
-        /// Called when [title search button click].
+        /// Search all authors titles.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnTitleSearchButton_Click(object sender, EventArgs e)
+        /// <param name="search">The book title to search for.</param>
+        private void BookTitlesSearchLoopAllAuthors(string search)
         {
-            if (this.rdbSpecific.Checked) this.SearchBookTitleBySingleAuthor();
+            _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            if (this.rdbAll.Checked) this.SearchBookTitleAllAuthors();
+            var coll = new BookDataCollection();
+            var cnt = coll.GetItemsCount();
+
+            Debug.AutoFlush = true;
+            Debug.Indent();
+            Debug.WriteLine("BookTitlesSearchLoopAllAuthors  " + coll.GetItemsCount().ToString());
+            Debug.Unindent();
+
+            for (var i = 0; i < coll.GetItemsCount(); i++)
+            {
+                var s1 = coll.GetItemAt(i);
+                s1 = s1.ToLower();
+
+                if (s1.Contains(search))
+                {
+                    lstTiltes.Items.Add(s1);
+                }
+            }
+
+
         }
 
-        /// <summary>
-        /// Called when [search all authors RadioButton clicked].
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnSearchAllAuthorsRadioButtonClicked(object sender, EventArgs e)
+        /// <summary>Fills the Author names list collection with authors names.</summary>
+        private void FillListWithAuthorsNames()
         {
-            this.btnSelect.Enabled = false;
-        }
+            var coll = new AuthorNamesCollection();
+            var clsInput = new InputClass();
 
-        /// <summary>
-        /// Searches the book title all authors.
-        /// </summary>
-        private void SearchBookTitleAllAuthors()
-        {
-            var authorOp = new AuthorOperationsClass();
-            var clsFile = new FileClass();
-            var fileInput = new InputClass();
-
-            clsFile.GetAllAuthorFilePathsContainedInAuthorDirectory();
-
-            var coll = new BookInformation();
             coll.ClearCollection();
-            this.lstTiltes.Items.Clear();
 
-            var collAuthor = new AuthorsFileNames();
+            clsInput.ReadAuthorsNamesFromFile(BookListPathsProperties.PathAuthorsNamesListFile);
 
-            for (var i = 0; i < collAuthor.ItemsCount(); i++)
+            coll.SortCollection();
+        }
+
+        /// <summary>
+        ///     Finds the titles in string.
+        /// </summary>
+        private void FindTitlesInString()
+        {
+            var search = txtTitle.Text.Trim();
+
+            if (string.IsNullOrEmpty(search)) return;
+            search = search.ToLower();
+
+            lstTiltes.Items.Clear();
+
+            if (SearchAllAuthors)
             {
-                var fileName = collAuthor.GetItemAt(i);
-                var dirAuthors = BookListPathsProperties.PathAuthorsDirectory;
-
-                var cls = new CombinePathsClass();
-                var filePath = cls.CombineDirectoryPathWithFileName(dirAuthors,
-                    fileName);
-                this.txtAuthorName.Text = fileName;
-
-                fileInput.ReadTitlesFromFile(filePath);
-                this.FindTitlesInString();
+                BookTitlesSearchLoopAllAuthors(search);
             }
-
-            if (this.lstTiltes.Items.Count < 1)
+            else
             {
-                this.lstTiltes.Items.Add("No titles with this search criteria were found.");
+                BookTitlesSearchLoop(search);
+            }
+        }
+
+
+        /// <summary>
+        ///     Called when [close search by authors button clicked].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void OnCloseButton_Clicked(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        /// <summary>
+        ///     Called when [search enter key press text box clicked].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="KeyPressEventArgs" /> instance containing the event data.</param>
+        private void OnSearchEnterKeyPressTextBox_Clicked(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char) Keys.Enter)
+            {
+                btnSearch.PerformClick();
             }
         }
 
         /// <summary>
-        /// Searches the book title by single author.
+        /// Called when [select all authors button clicked].
         /// </summary>
-        private void SearchBookTitleBySingleAuthor()
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnSelectAllAuthorsButton_Clicked(object sender, EventArgs e)
         {
-            var dirFileOp = new FileClass();
+            SetAllAuthorsSearch = true;
+            SetSingleAuthorSearch = false;
+
+            SearchAllAuthors = true;
+            
+
+            FillListWithAuthorsNames();
+
+            AllAuthorsLoop();
+        }
+        /// <summary>
+        ///     Called when [select author button click].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void OnSelectSingleAuthorButton_Click(object sender, EventArgs e)
+        {
+            using (var win = new AuthorsListingWin())
+            {
+                win.ShowDialog();
+            }
+
+            if (!_valid.ValidateStringHasLength(BookListPathsProperties.AuthorsNameCurrent)) return;
+
+            lblAuthor.Text = BookListPathsProperties.AuthorsNameCurrent;
+
+            SearchAllAuthors = false;
+
+            SetSingleAuthorSearch = true;
+            SetAllAuthorsSearch = false;
+
+            txtTitle.Select();
+        }
+
+        /// <summary>
+        ///     Called when [show all titles for author button clicked].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void OnShowAllTitlesSingleAuthorButton_Clicked(object sender, EventArgs e)
+        {
+            lstTiltes.Items.Clear();
+
             var fileInput = new InputClass();
 
             var dirAuthors = BookListPathsProperties.PathAuthorsDirectory;
@@ -155,45 +330,109 @@ namespace BookList.Source
             var filePath = cls.CombineDirectoryPathWithFileName(dirAuthors,
                 BookListPathsProperties.CurrentWorkingFileName);
 
-            var coll = new BookInformation();
+            var coll = new BookDataCollection();
 
             coll.ClearCollection();
-            this.lstTiltes.Items.Clear();
+            lstTiltes.Items.Clear();
 
-            fileInput.ReadTitlesFromFile(filePath);
+            fileInput.ReadTitlesFromFileLoop(filePath);
 
-            this.FindTitlesInString();
+            ShowAllBookTitlesBySingleAuthorLoop();
+        }
 
-            if (this.lstTiltes.Items.Count < 1)
+        /// <summary>
+        ///     Called when [title search button click].
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        private void OnTitleSearchSingleAuthorButton_Click(object sender, EventArgs e)
+        {
+            if (SetSingleAuthorSearch) SearchBookTitleBySingleAuthor();
+
+            else if (SetAllAuthorsSearch) SearchBookAuthorAllTitles();
+        }
+
+        /// <summary>
+        ///     Searches the book title all authors.
+        /// </summary>
+        private void SearchBookAuthorAllTitles()
+        {
+            var clsFile = new FileClass();
+
+            clsFile.GetAllAuthorFilePathsContainedInAuthorDirectory();
+
+            var coll = new BookDataCollection();
+            coll.ClearCollection();
+            lstTiltes.Items.Clear();
+
+            // FindTitlesInString();
+
+            AuthorNamesSearchLoop();
+
+
+            if (lstTiltes.Items.Count < 1)
             {
-                this.lstTiltes.Items.Add("No titles with this search criteria were found.");
+                lstTiltes.Items.Add("No titles with this search criteria were found.");
             }
         }
 
         /// <summary>
-        /// Called when [author search radio button click].
+        ///     Searches the book title by single author.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnAuthorSearchRadioButton_Click(object sender, EventArgs e)
+        private void SearchBookTitleBySingleAuthor()
         {
-            this.btnSelect.Enabled = true;
+            var fileInput = new InputClass();
+
+            var dirAuthors = BookListPathsProperties.PathAuthorsDirectory;
+
+            var cls = new CombinePathsClass();
+
+
+            var filePath = cls.CombineDirectoryPathWithFileName(dirAuthors,
+                BookListPathsProperties.CurrentWorkingFileName);
+
+            var coll = new BookDataCollection();
+
+            coll.ClearCollection();
+            lstTiltes.Items.Clear();
+
+            fileInput.ReadTitlesFromFileLoop(filePath);
+
+            FindTitlesInString();
+
+            if (lstTiltes.Items.Count < 1)
+            {
+                lstTiltes.Items.Add("No titles with this search criteria were found.");
+                SearchAllAuthors = false;
+            }
+        }
+        /// <summary>
+        ///     Shows all book titles by single author loop.
+        /// </summary>
+        private void ShowAllBookTitlesBySingleAuthorLoop()
+        {
+            _msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
+
+            var coll = new BookDataCollection();
+
+            var totalCount = coll.GetItemsCount();
+
+            for (var i = 0; i < coll.GetItemsCount(); i++)
+            {
+                var s1 = coll.GetItemAt(i);
+
+                if (!_valid.ValidateStringIsNotNull(s1)) return;
+
+                s1 = s1.Trim();
+                if (!_valid.ValidateStringHasLength(s1)) return;
+
+                lstTiltes.Items.Add(s1);
+            }
         }
 
-        /// <summary>
-        /// Called when [select author button click].
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OnSelectAuthorButton_Click(object sender, EventArgs e)
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
-            using (var win = new AuthorsListingWin())
-            {
-                win.ShowDialog();
-            }
 
-            if (string.IsNullOrEmpty(BookListPathsProperties.AuthorsNameCurrent)) return;
-            this.txtAuthorName.Text = BookListPathsProperties.AuthorsNameCurrent;
         }
     }
 }

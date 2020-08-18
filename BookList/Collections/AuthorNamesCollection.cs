@@ -33,7 +33,7 @@ namespace BookList.Collections
     /// <summary>
     ///     This Contains a collection of all book authorsNames in the file.
     /// </summary>
-    public class AuthorNamesList : IMyCollection
+    public class AuthorNamesCollection : IMyCollection
     {
         /// <summary>
         ///     Defines the Author Names list.

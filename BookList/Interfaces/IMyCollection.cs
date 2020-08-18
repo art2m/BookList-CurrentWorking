@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace BookList.Interfaces
 {
     /// <summary>
@@ -24,10 +26,10 @@ namespace BookList.Interfaces
         bool ContainsItem(string value);
 
         /// <summary>
-        /// The GetAllItems.
+        /// Gets all items.
         /// </summary>
-        /// <returns>The <see cref="string[]" />.</returns>
-        string[] GetAllItems();
+        /// <returns></returns>
+        List<string> GetAllItems();
 
         /// <summary>
         /// The GetItemAt.

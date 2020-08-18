@@ -63,7 +63,7 @@ namespace BookList.Classes
 
             try
             {
-                var coll = new AuthorNamesList();
+                var coll = new AuthorNamesCollection();
 
                 using (var streamWriter = new StreamWriter(filePath, false))
                 {
@@ -145,14 +145,14 @@ namespace BookList.Classes
 
             try
             {
-                var coll = new BookData();
+                var coll = new BookDataCollection();
                 var validate = new ValidationClass();
 
                 // Append line to the file.
                 using (var writer = new StreamWriter(filePath, false))
                 {
-                    var count = coll.ItemsCount();
-                    for (var index = 0; index < coll.ItemsCount(); index++)
+                    var count = coll.GetItemsCount();
+                    for (var index = 0; index < coll.GetItemsCount(); index++)
 
                         writer.WriteLine(coll.GetItemAt(index));
 
@@ -255,11 +255,11 @@ namespace BookList.Classes
                 if (string.IsNullOrEmpty(filePath)) return false;
                 if (!File.Exists(filePath)) return false;
 
-                var coll = new BookData();
+                var coll = new BookDataCollection();
 
                 using (var writer = new StreamWriter(filePath, true))
                 {
-                    for (var i = 0; i < coll.ItemsCount(); i++)
+                    for (var i = 0; i < coll.GetItemsCount(); i++)
                         writer.WriteLine(coll.GetItemAt(i));
                 }
 

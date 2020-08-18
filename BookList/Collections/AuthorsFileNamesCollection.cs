@@ -32,7 +32,7 @@ namespace BookList.Collections
     /// <summary>
     ///     Collection to hold the name author file names.
     /// </summary>
-    public class AuthorsFileNames : IMyCollection
+    public class AuthorsFileNamesCollection : IMyCollection
     {
         /// <summary>
         ///     Contains collection of Book titles..
@@ -132,18 +132,13 @@ namespace BookList.Collections
             return _coll.IndexOf(value);
         }
 
-        public int GetItemsCount()
-        {
-            throw new System.NotImplementedException();
-        }
-
         /// <summary>
-        ///     Gets the count of items contained in the collection.
+        /// The GetItemsCount.
         /// </summary>
         /// <returns>
-        ///     Count of items contained in the collection.
+        /// The <see cref="int" />.
         /// </returns>
-        public int ItemsCount()
+        public int GetItemsCount()
         {
             return _coll.Count;
         }

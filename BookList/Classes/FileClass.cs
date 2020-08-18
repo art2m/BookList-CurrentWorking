@@ -222,7 +222,7 @@ namespace BookList.Classes
         /// <param name="authorFilePaths">The author file paths<see cref="IEnumerable{string}" />.</param>
         public void GetAuthorFileNameFromPath(IEnumerable<string> authorFilePaths)
         {
-            var collFile = new AuthorsFileNames();
+            var collFile = new AuthorsFileNamesCollection();
 
             collFile.ClearCollection();
 
@@ -270,7 +270,7 @@ namespace BookList.Classes
         /// </summary>
         public void GetAuthorFileNamesFromAuthorsList()
         {
-            var coll = new AuthorNamesList();
+            var coll = new AuthorNamesCollection();
             var input = new InputClass();
 
             var authorNames = input.ReadAuthorNamesFromFile(BookListPathsProperties.PathAuthorsNamesListFile);

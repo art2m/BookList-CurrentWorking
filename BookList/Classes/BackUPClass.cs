@@ -37,9 +37,9 @@ namespace BookList.Classes
         /// </summary>
         public static void AddToBackUpList()
         {
-            var coll = new DataBackUp();
-            var collData = new BookData();
-            for (var index = 0; index < collData.ItemsCount(); index++) coll.AddItem(collData.GetItemAt(index));
+            var coll = new DataBackUpCollection();
+            var collData = new BookDataCollection();
+            for (var index = 0; index < collData.GetItemsCount(); index++) coll.AddItem(collData.GetItemAt(index));
         }
     }
 }

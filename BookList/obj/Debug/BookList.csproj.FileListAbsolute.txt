@@ -248,7 +248,6 @@ C:/Users/art2m/OneDrive/Documents/RiderWorking/BookList-CurrentWorking/BookList/
 /home/art2m/RiderProjects/BookList-CurrentWorking/BookList/obj/Debug/BookList.Source.EditingOfBookAuthor.resources
 /home/art2m/RiderProjects/BookList-CurrentWorking/BookList/obj/Debug/BookList.Source.EditingOfBookTitles.resources
 C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.csprojAssemblyReference.cache
-C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.MyStrings.resources
 C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.Properties.Resources.resources
 C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.csproj.GenerateResource.cache
 C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.csproj.CoreCompileInputs.cache
@@ -269,3 +268,4 @@ C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.
 C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.Source.FormatBookDataWin.resources
 C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.Source.BookTitleLocatorWin.resources
 C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.Source.BookTitleAddingWin.resources
+C:\Users\art2m\source\repos\BookList-CurrentWorking\BookList\obj\Debug\BookList.Source.DisplayAuthorTitlesResults.resources

@@ -117,7 +117,7 @@ namespace BookList.Source
 
             txtBookInfo.Text = sb.ToString();
 
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             coll.RemoveItemAt(BookDataProperties.NumberOfItems);
             coll.AddItem(sb.ToString());
@@ -138,7 +138,7 @@ namespace BookList.Source
 
             txtBookInfo.Text = BookDataProperties.BookTitleName;
 
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             coll.RemoveItemAt(BookDataProperties.NumberOfItems);
             coll.AddItem(sb.ToString());
@@ -174,7 +174,7 @@ namespace BookList.Source
 
             if (BookDataProperties.BookSeries)
             {
-                lblInfo.Text = MyStrings.SelectSeries;
+                lblInfo.Text = "SelectSeries";
             }
         }
 
@@ -203,7 +203,7 @@ namespace BookList.Source
         /// </param>
         private void OnFormatBookInformationButton_Click(object sender, EventArgs e)
         {
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             if (coll.GetItemsCount() < 1) return;
 
@@ -239,7 +239,7 @@ namespace BookList.Source
 
             msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            var coll = new global::BookList.Collections.BookData();
+            var coll = new global::BookList.Collections.BookDataCollection();
 
             if (coll.GetItemsCount() < 1) return;
             if (string.IsNullOrEmpty(txtTitle.Text.Trim())) return;
@@ -303,7 +303,7 @@ namespace BookList.Source
                 return;
             }
 
-            lblInfo.Text = MyStrings.SelectVolumeNumber;
+            lblInfo.Text = "SelectVolumeNumber";
             btnVolume.Enabled = true;
         }
 
@@ -364,7 +364,7 @@ namespace BookList.Source
         /// </summary>
         private void SetInitialControlState()
         {
-            lblInfo.Text = MyStrings.selectTitle;
+            lblInfo.Text = "selectTitle";
             btnFormat.Enabled = false;
             btnSave.Enabled = false;
             btnSeries.Enabled = false;

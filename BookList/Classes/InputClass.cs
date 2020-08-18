@@ -27,7 +27,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-
 using BookList.Collections;
 
 namespace BookList.Classes
@@ -65,7 +64,7 @@ namespace BookList.Classes
         {
             this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
-            var coll = new AuthorNamesList();
+            var coll = new AuthorNamesCollection();
             coll.ClearCollection();
 
 
@@ -130,17 +129,17 @@ namespace BookList.Classes
         }
 
         /// <summary>
-        /// Read the book title from file add to <see cref="BookData"/>
+        /// Read the book title from file add to <see cref="BookDataCollection"/>
         /// collection.
         /// </summary>
         /// <param name="filePath">The path to the authors file. <see cref="String" /> .</param>
-        public void ReadTitlesFromFile(string filePath)
+        public void ReadTitlesFromFileLoop(string filePath)
         {
             this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
 
             try
             {
-                var coll = new BookData();
+                var coll = new BookDataCollection();
 
 
                 if (!this._validate.ValidateStringIsNotNull(filePath)) return;
@@ -187,7 +186,7 @@ namespace BookList.Classes
                 if (!this._validate.ValidateStringHasLength(filePath)) return;
                 if (!this._validate.ValidateFileExists(filePath, true)) return;
 
-                var coll = new BookData();
+                var coll = new BookDataCollection();
                 using (var sr = new StreamReader(filePath))
                 {
                     string line;
@@ -211,7 +210,6 @@ namespace BookList.Classes
         /// file.
         /// </summary>
         /// <param name="filePath"> The path to authors file to be read from.</param>
-        /// <param name="bookInfo">The book title to see if the artist file all ready contains it.</param>
         public List<string> ReadAllBookTitlesFromAuthorsFile(string filePath)
         {
             this._msgBox.NameOfMethod = MethodBase.GetCurrentMethod().Name;
