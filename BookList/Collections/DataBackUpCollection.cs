@@ -1,6 +1,6 @@
-﻿// BookListCurrent
+// BookListCurrent
 //
-// BookInformation.cs
+// DataBackUp.cs
 //
 // art2m
 //
@@ -27,17 +27,19 @@ using System.Collections.Generic;
 using BookList.Classes;
 using BookList.Interfaces;
 
+using JetBrains.Annotations;
+
 namespace BookList.Collections
 {
     /// <summary>
-    ///     This contains the titles of all books read.
+    ///     Collection to hold backup book information data before being changed.
     /// </summary>
-    public class BookInformation : IMyCollection
+    public class DataBackUp : IMyCollection
     {
         /// <summary>
-        ///     Defines the coll.
+        ///     List containing the data before being changed.
         /// </summary>
-        private static List<string> _coll = new List<string>();
+        private static  List<string> _coll = new List<string>();
 
         /// <summary>
         ///     Declare validation class object.
@@ -47,12 +49,15 @@ namespace BookList.Collections
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
-        public bool AddItem(string value)
+        public bool AddItem([NotNull] string value)
         {
+            value = value.Trim();
+
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             if (!this._validate.ValidateStringHasLength(value)) return false;
 
             if (this.ContainsItem(value)) return false;
+            if (string.IsNullOrEmpty(value)) return false;
 
             _coll.Add(value);
             return true;
@@ -61,15 +66,16 @@ namespace BookList.Collections
         /// <summary>
         /// Fill collection from an array
         /// </summary>
-        /// <param name="fileArray"></param>
-        /// <returns>True if array filled else false.</returns>
-        public bool AddArray(string[] fileArray)
+        /// <param name="fileList"></param>
+        /// <returns>True if list filled else false.</returns>
+        public bool AddList(List<string> fileList)
         {
-            if (fileArray == null) return false;
-            if (fileArray.Length <= 0) return false;
+            if (fileList == null) return false;
+            if (fileList.Count < 1) return false;
 
-            _coll = null;
-            _coll = new List<string>(fileArray);
+            _coll.Clear();
+
+            _coll = new List<string>(fileList);
 
             return _coll.Count > 0;
         }
@@ -90,12 +96,8 @@ namespace BookList.Collections
         public bool ContainsItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
-        }
-
-        string[] IMyCollection.GetAllItems()
-        {
-            throw new System.NotImplementedException();
+            if (!this._validate.ValidateStringHasLength(value)) return false;
+            return _coll.Contains(value);
         }
 
         /// <summary>
@@ -182,7 +184,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     The SortCollection.
+        ///     Sort the collection.
         /// </summary>
         public void SortCollection()
         {

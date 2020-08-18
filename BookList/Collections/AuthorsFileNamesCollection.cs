@@ -61,16 +61,18 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        /// Pass in array with all of the file names.
+        /// Adds the list.
         /// </summary>
-        /// <param name="fileArray"> Array of file names.</param>
-        public bool AddArray(string[] fileArray)
+        /// <param name="authorNames">The author names.</param>
+        /// <returns>true if list added else false.</returns>
+        public bool AddList(List<string> authorNames)
         {
-            if (fileArray == null) return false;
-            if (fileArray.Length <= 0) return false;
+            if (authorNames == null) return false;
+            if (authorNames.Count <= 1) return false;
 
-            _coll = null;
-            _coll = new List<string>(fileArray);
+            _coll.Clear();
+
+            _coll = new List<string>(authorNames);
 
             return _coll.Count > 0;
         }
@@ -92,11 +94,6 @@ namespace BookList.Collections
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
-        }
-
-        string[] IMyCollection.GetAllItems()
-        {
-            throw new System.NotImplementedException();
         }
 
         /// <summary>

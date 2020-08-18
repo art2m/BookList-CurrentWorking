@@ -1,6 +1,6 @@
 // BookListCurrent
 //
-// DataBackUp.cs
+// BookDataProperties.cs
 //
 // art2m
 //
@@ -32,14 +32,14 @@ using JetBrains.Annotations;
 namespace BookList.Collections
 {
     /// <summary>
-    ///     Collection to hold backup book information data before being changed.
+    ///     Collection to hold the name 'Unformatted book information.'.
     /// </summary>
-    public class DataBackUp : IMyCollection
+    public class BookData : IMyCollection
     {
         /// <summary>
-        ///     List containing the data before being changed.
+        ///     List containing the Unformatted book information.
         /// </summary>
-        private static  List<string> _coll = new List<string>();
+        private static List<string> _coll = new List<string>();
 
         /// <summary>
         ///     Declare validation class object.
@@ -49,6 +49,7 @@ namespace BookList.Collections
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
+        /// <param name="value">The string to add.</param>
         public bool AddItem([NotNull] string value)
         {
             value = value.Trim();
@@ -64,17 +65,17 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        /// Fill collection from an array
+        /// Pass in array with all of the file names.
         /// </summary>
-        /// <param name="fileArray"></param>
-        /// <returns>True if array filled else false.</returns>
-        public bool AddArray(string[] fileArray)
+        /// <param name="booksData"> lsit of file names.</param>
+        public bool AddList(string[] booksData)
         {
-            if (fileArray == null) return false;
-            if (fileArray.Length <= 0) return false;
+            if (booksData == null) return false;
+            if (booksData.Length <= 1) return false;
 
-            _coll = null;
-            _coll = new List<string>(fileArray);
+            _coll.Clear();
+
+            _coll = new List<string>(booksData);
 
             return _coll.Count > 0;
         }
@@ -88,27 +89,22 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Contained in collection.
-        /// </summary>
-        /// <param name="value">The string to check for.</param>
-        /// <returns>true if contained in the collection else false.</returns>
-        public bool ContainsItem(string value)
-        {
-            if (!this._validate.ValidateStringIsNotNull(value)) return false;
-            if (!this._validate.ValidateStringHasLength(value)) return false;
-            return _coll.Contains(value);
-        }
-
-        string[] IMyCollection.GetAllItems()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        /// <summary>
         ///     Return all items.
         /// </summary>
         /// <returns>
         ///     All items contained in the collection.
+        /// </returns>
+        public bool ContainsItem([NotNull] string value)
+        {
+            if (!this._validate.ValidateStringIsNotNull(value)) return false;
+            return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
+        }
+
+        /// <summary>
+        ///     The GetAllItems.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="string" /> .
         /// </returns>
         public List<string> GetAllItems()
         {
@@ -123,9 +119,8 @@ namespace BookList.Collections
         public string GetItemAt(int index)
         {
             var count = _coll.Count;
-            return !this._validate.ValidateIndex(index, count)
-                ? string.Empty
-                : _coll[index];
+
+            return !this._validate.ValidateIndex(index, count) ? string.Empty : _coll[index];
         }
 
         /// <summary>
@@ -176,7 +171,6 @@ namespace BookList.Collections
         public bool RemoveItemAt(int index)
         {
             var count = _coll.Count;
-
             if (!this._validate.ValidateIndex(index, count)) return false;
             // Get item to be removed for check that it is gone.
             var item = this.GetItemAt(index);
@@ -188,7 +182,7 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Sort the collection.
+        ///     The SortCollection.
         /// </summary>
         public void SortCollection()
         {

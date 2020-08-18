@@ -1,6 +1,6 @@
-// BookListCurrent
+﻿// BookListCurrent
 //
-// BookDataProperties.cs
+// BookInformation.cs
 //
 // art2m
 //
@@ -27,17 +27,15 @@ using System.Collections.Generic;
 using BookList.Classes;
 using BookList.Interfaces;
 
-using JetBrains.Annotations;
-
 namespace BookList.Collections
 {
     /// <summary>
-    ///     Collection to hold the name 'Unformatted book information.'.
+    ///     This contains the titles of all books read.
     /// </summary>
-    public class BookData : IMyCollection
+    public class BookInformation : IMyCollection
     {
         /// <summary>
-        ///     List containing the Unformatted book information.
+        ///     Defines the coll.
         /// </summary>
         private static List<string> _coll = new List<string>();
 
@@ -49,32 +47,29 @@ namespace BookList.Collections
         /// <summary>
         ///     Add new item to the collection.
         /// </summary>
-        /// <param name="value">The string to add.</param>
-        public bool AddItem([NotNull] string value)
+        public bool AddItem(string value)
         {
-            value = value.Trim();
-
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             if (!this._validate.ValidateStringHasLength(value)) return false;
 
             if (this.ContainsItem(value)) return false;
-            if (string.IsNullOrEmpty(value)) return false;
 
             _coll.Add(value);
             return true;
         }
 
         /// <summary>
-        /// Pass in array with all of the file names.
+        /// Fill collection from an array
         /// </summary>
-        /// <param name="fileArray"> Array of file names.</param>
-        public bool AddArray(string[] fileArray)
+        /// <param name="fileList"></param>
+        /// <returns>True if list filled else false.</returns>
+        public bool AddList(List<string> fileList)
         {
-            if (fileArray == null) return false;
-            if (fileArray.Length <= 0) return false;
+            if (fileList == null) return false;
+            if (fileList.Count < 1) return false;
+            _coll.Clear();
 
-            _coll = null;
-            _coll = new List<string>(fileArray);
+            _coll = new List<string>(fileList);
 
             return _coll.Count > 0;
         }
@@ -88,27 +83,21 @@ namespace BookList.Collections
         }
 
         /// <summary>
-        ///     Return all items.
+        ///     Contained in collection.
         /// </summary>
-        /// <returns>
-        ///     All items contained in the collection.
-        /// </returns>
-        public bool ContainsItem([NotNull] string value)
+        /// <param name="value">The string to check for.</param>
+        /// <returns>true if contained in the collection else false.</returns>
+        public bool ContainsItem(string value)
         {
             if (!this._validate.ValidateStringIsNotNull(value)) return false;
             return this._validate.ValidateStringHasLength(value) && _coll.Contains(value);
         }
 
-        string[] IMyCollection.GetAllItems()
-        {
-            throw new System.NotImplementedException();
-        }
-
         /// <summary>
-        ///     The GetAllItems.
+        ///     Return all items.
         /// </summary>
         /// <returns>
-        ///     The <see cref="string" /> .
+        ///     All items contained in the collection.
         /// </returns>
         public List<string> GetAllItems()
         {
@@ -123,7 +112,6 @@ namespace BookList.Collections
         public string GetItemAt(int index)
         {
             var count = _coll.Count;
-
             return !this._validate.ValidateIndex(index, count)
                 ? string.Empty
                 : _coll[index];
@@ -177,6 +165,7 @@ namespace BookList.Collections
         public bool RemoveItemAt(int index)
         {
             var count = _coll.Count;
+
             if (!this._validate.ValidateIndex(index, count)) return false;
             // Get item to be removed for check that it is gone.
             var item = this.GetItemAt(index);
