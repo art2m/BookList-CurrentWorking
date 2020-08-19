@@ -68,6 +68,7 @@
     <Compile Include="Classes\ValidationClass.cs" />
     <Compile Include="Collections\AuthorNamesCollection.cs" />
     <Compile Include="Collections\AuthorsFileNamesCollection.cs" />
+    <Compile Include="Collections\BookTitlesCollection.cs" />
     <Compile Include="Collections\DataBackUpCollection.cs" />
     <Compile Include="Collections\BookDataCollection.cs" />
     <Compile Include="Interfaces\IMyCollection.cs" />

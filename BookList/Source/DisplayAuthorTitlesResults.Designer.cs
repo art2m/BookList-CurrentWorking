@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.lstTiltes = new System.Windows.Forms.ListBox();
+            this.lblAuthor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lstTiltes
@@ -36,16 +37,28 @@
             this.lstTiltes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstTiltes.FormattingEnabled = true;
             this.lstTiltes.ItemHeight = 18;
-            this.lstTiltes.Location = new System.Drawing.Point(79, 170);
+            this.lstTiltes.Location = new System.Drawing.Point(12, 74);
             this.lstTiltes.Name = "lstTiltes";
-            this.lstTiltes.Size = new System.Drawing.Size(627, 220);
+            this.lstTiltes.Size = new System.Drawing.Size(760, 400);
             this.lstTiltes.TabIndex = 4;
+            // 
+            // lblAuthor
+            // 
+            this.lblAuthor.BackColor = System.Drawing.Color.Yellow;
+            this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuthor.Location = new System.Drawing.Point(12, 28);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(760, 32);
+            this.lblAuthor.TabIndex = 9;
+            this.lblAuthor.Text = "Authors Name.";
+            this.lblAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DisplayAuthorTitlesResults
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.lstTiltes);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 600);
@@ -59,5 +72,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox lstTiltes;
+        private System.Windows.Forms.Label lblAuthor;
     }
 }

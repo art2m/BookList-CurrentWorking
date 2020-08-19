@@ -83,5 +83,29 @@ namespace BookList.PropertiesClasses
         /// The unformatted book information.
         /// </value>
         public static string UnformattedBookInformation { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether /[set all authors search].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [set all authors search]; otherwise, <c>false</c>.
+        /// </value>
+        public static bool SetAllAuthorsSearch { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [set single author search].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [set single author search]; otherwise, <c>false</c>.
+        /// </value>
+        public static bool SetSingleAuthorSearch { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the set book title search string.
+        /// </summary>
+        /// <value>
+        /// The set book title search string.
+        /// </value>
+        public static string SetBookTitleSearchString { get; set; } = string.Empty;
     }
 }
